@@ -69,9 +69,9 @@ namespace OwLib
                     kwItems2[availableItems[key].Innercode] = availableItems[key];
                     sb.Append(key + "," + availableItems[key].Name + "\r\n");
                 }
-                File.WriteAllText(Application.StartupPath + "\\codes.txt", sb.ToString(), Encoding.Default);
+                CFileA.Write(Application.StartupPath + "\\codes.txt", sb.ToString());
                 EMSecurityService.KwItems = availableItems;
-                File.WriteAllText(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems), Encoding.Default);
+                CFileA.Write(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems));
             }
             else
             {
@@ -95,7 +95,7 @@ namespace OwLib
             for (int i = 0; i < itemsSize; i++)
             {
                 KwItem item = items[i];
-                if (item.Type == 1 || item.Type == 3)
+                if (item.Type == 1 || item.Type == 2)
                 {
                     availableItems[item.Code] = item;
                 }
@@ -562,7 +562,7 @@ namespace OwLib
                     {
                         sb.AppendLine(items3[i].ToString());
                     }
-                    //File.WriteAllText(Application.StartupPath+"\\details\\"+ marketCode + ".txt", sb.ToString());
+                    //CFileA.Write(Application.StartupPath+"\\details\\"+ marketCode + ".txt", sb.ToString());
                 }
                 else
                 {

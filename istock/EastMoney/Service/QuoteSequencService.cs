@@ -95,7 +95,12 @@ namespace OwLib
                             {
                                 code = code.Substring(code.IndexOf(".") + 1) + code.Substring(0, code.IndexOf("."));
                             }
-                            saveFilePath = String.Format("{0}{1}{2}{3}", "D:\\owchart\\quotenew\\data\\day", "\\fdata\\", code, ".txt");
+                            String dir = DataCenter.GetAppPath() + "\\day\\";
+                            if (!CFileA.IsDirectoryExist(dir))
+                            {
+                                CFileA.CreateDirectory(dir);
+                            }
+                            saveFilePath = dir + code + ".txt";
                             StringBuilder sbResult = new StringBuilder();
                             sbResult.AppendLine(item.Code + " " + item.Name + " 日线 前复权");
                             sbResult.AppendLine("      日期	    开盘	    最高	    最低	    收盘	    成交量	    成交额");
@@ -104,7 +109,7 @@ namespace OwLib
                                 sbResult.AppendLine(FormatStockInfo(pair.Value, ","));
                             }
                             sbResult.AppendLine("OWCHART荣誉出品");
-                            File.WriteAllText(saveFilePath, sbResult.ToString());
+                            CFileA.Write(saveFilePath, sbResult.ToString());
                             sbResult = null;
                         }
                     }

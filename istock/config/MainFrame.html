@@ -5,19 +5,13 @@
     </script>
   </head>
   <body>
-    <div type="tabcontrol" dock="fill">
+    <div type="tabcontrol" dock="fill" selectedindex="0">
       <div name="TabPage" text="股票列表" type="tabpage">
         <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
           <div name="Div">
             <label name="Label" text="选择股票" location="11,15" size="60,17" />
             <input type="text" name="txtCode" location="78,12" size="126,20" />
             <input type="button" name="btnAdd" text="添加" location="219,12" size="70,20" />
-            <select name="cbType" location="300,12" selectedindex="0">
-                <option text="自选股"></option>
-                <option text="涨停"></option>
-                <option text="跌停"></option>
-                <option text="停牌"></option>
-            </select>
           </div>
           <table name="gridUserSecurities" dock="fill">
             <tr>
@@ -34,6 +28,9 @@
             </tr>
           </table>
         </div>
+      </div>
+      <div name="TabPage2" text="数据落地" type="tabpage">
+        <input type="button" name="btnMergeHistoryDatas" text="当天数据合并到日线" location="19,18" size="134,20" />
       </div>
     </div>
   </body>

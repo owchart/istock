@@ -218,7 +218,7 @@ namespace OwLib
             }
             foreach(String code in m_codedMap.Keys)
             {
-                String fileName = DataCenter.GetAppPath() + "\\data\\day\\fdata\\" + code + ".txt";
+                String fileName = DataCenter.GetAppPath() + "\\day\\" + code + ".txt";
                 if (File.Exists(fileName))
                 {
                     StreamReader sra = new StreamReader(fileName, Encoding.Default);
@@ -816,7 +816,7 @@ namespace OwLib
                     temp3.Add(nSecurityData);
                 }
             }
-            String outputFileTemplate = DataCenter.GetAppPath() + "\\data\\day\\fdata\\{0}.txt";
+            String outputFileTemplate = DataCenter.GetAppPath() + "\\day\\{0}.txt";
             String fileInfo = "{0} {1} 日线 前复权\r\n";
             String title = "      日期	    开盘	    最高	    最低	    收盘	    成交量	    成交额\r\n";
             String lineTemp = "{0},{1},{2},{3},{4},{5},{6}\r\n";
@@ -893,24 +893,6 @@ namespace OwLib
                 }
             }
             return ret;
-        }
-
-        /// <summary>
-        /// 定时策略
-        /// </summary>
-        public static void TimeStrategy()
-        {
-            //long today = (long)DateTime.Now.Subtract(DateTime.Parse("1970-1-1")).TotalMilliseconds / 86400000;
-            long dayOfNineHalfAM = 0;//上午9点半
-            long dayOfElvHalfAM = 0;//上午11半
-            long dayOfOnePM = 0;//下午1点
-            long dayOfThreePM = 0;//下午3点
-            long minOfDay = (long)DateTime.Now.Subtract(DateTime.Parse("1970-1-1")).TotalMilliseconds / 8640000;
-            long eveyWeekend = 0;
-            if ((minOfDay > dayOfNineHalfAM && minOfDay < dayOfElvHalfAM) || (minOfDay > dayOfOnePM && minOfDay < dayOfThreePM))
-            {
-                //在这个时间拉取股票//but how does weekend
-            }
         }
         #endregion
     }

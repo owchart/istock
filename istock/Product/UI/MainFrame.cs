@@ -141,6 +141,10 @@ namespace OwLib
                         m_gridUserSecurities.OnRowEditEnd();
                     }
                 }
+                else if (name == "btnMergeHistoryDatas")
+                {
+                    SecurityService.Start3();
+                }
             }
         }
 
@@ -149,6 +153,16 @@ namespace OwLib
         /// </summary>
         public override void Dispose()
         {
+        }
+
+        /// <summary>
+        /// 下载证券
+        /// </summary>
+        /// <param name="args"></param>
+        private void DownloadHistoryDatas(object args)
+        {
+            int index = (int)args;
+            QuoteSequencService.DownAllStockHistory(index);
         }
 
         /// <summary>
@@ -249,6 +263,22 @@ namespace OwLib
         {
             MessageBox.Show(text, caption);
             return 1;
+        }
+
+        /// <summary>
+        /// 开始下载历史数据
+        /// </summary>
+        public void StartDownloadHistoryDatas()
+        {
+            DataCenter dc = new DataCenter();
+            Dictionary<String, KwItem> availableItems = EMSecurityService.KwItems;
+            int availableItemsSize = availableItems.Count;
+            int size = availableItemsSize / 50;
+            for (int i = 0; i <= size; i++)
+            {
+                Thread thread = new Thread(new ParameterizedThreadStart(DownloadHistoryDatas));
+                thread.Start(i);
+            }
         }
 
         /// <summary>

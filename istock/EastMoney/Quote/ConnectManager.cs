@@ -10,14 +10,11 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 using EmCore;
-using EmQComm;
 using EmSerDataService;
 using EmSocketClient;
 using Timer = System.Timers.Timer;
-using EastMoney.FM.Web.Data;
-using EmQDataCore;
 
-namespace EmQTCP
+namespace OwLib
 {
     /// <summary>
     /// 连接方式，http方式和socket方式

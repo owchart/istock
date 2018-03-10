@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using EmCore;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 using System.Web;
-using EastMoney.FM.Web.Data.Model;
 
-namespace dataquery.Web
+namespace OwLib
 {
     /// <summary>
     /// 期货深度资料类

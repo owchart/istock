@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using  EmReportWatch.SpecialCommon;
-using  EmReportWatch.SpecialEntity.Entity;
 using System.IO;
 using EmCore;
-using dataquery;
 
-namespace EmReportWatch.Data
+namespace OwLib
 {
     /// <summary>
     /// 数据请求处理类
@@ -195,9 +192,9 @@ namespace EmReportWatch.Data
             //}
             try
             {
-                if (EmReportWatch.SpecialCommon.CommonService.ISCLIENT == ClientType.Config)
+                if (CommonService.ISCLIENT == ClientType.Config)
                 {
-                    return SpecialCommon.DataHelper.QueryData("MOD_MAXREPORTDATE").Tables[0];
+                    return DataHelper.QueryData("MOD_MAXREPORTDATE").Tables[0];
                 }
                 //定义文件夹
                 string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_MAXREPORTDATE";
@@ -211,7 +208,7 @@ namespace EmReportWatch.Data
             }
             catch
             {
-                return SpecialCommon.DataHelper.QueryData("MOD_MAXREPORTDATE").Tables[0];
+                return DataHelper.QueryData("MOD_MAXREPORTDATE").Tables[0];
             }
         }
 

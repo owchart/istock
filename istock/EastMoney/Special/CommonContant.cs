@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using  EmReportWatch.SpecialEntity.Entity;
 using EmCore;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace EmReportWatch.SpecialCommon
+namespace OwLib
 {
     /// <summary>
     /// 公用变量类

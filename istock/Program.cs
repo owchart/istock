@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using node.gs;
 using OwLib;
 
-namespace LordStrategy
+namespace OwLib
 {
     static class Program
     {

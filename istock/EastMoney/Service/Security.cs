@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 股票代码

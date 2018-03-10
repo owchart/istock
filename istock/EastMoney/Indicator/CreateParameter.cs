@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using EmCore;
-using dataquery;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class ParameterTypeCompare : IComparer<ParameterType>
     {

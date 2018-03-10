@@ -9,9 +9,8 @@ using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using dataquery.Web;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 股票新闻

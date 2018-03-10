@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace  EmReportWatch.Util
+namespace OwLib
 {
     /// <summary>
     /// 格式化方法类

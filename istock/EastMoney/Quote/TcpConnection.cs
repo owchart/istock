@@ -8,9 +8,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using EmCore;
-using EmQComm;
 
-namespace EmQTCP
+namespace OwLib
 {
     /// <summary>
     /// 发送数据和接收数据的TCP底层类.

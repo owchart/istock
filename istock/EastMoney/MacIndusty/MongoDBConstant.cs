@@ -1,6 +1,5 @@
-﻿namespace EmMacIndustry.Model.Constant
+﻿namespace OwLib
 {
-    using EmMacIndustry.Model.Enum;
     using System;
     using System.Collections.Generic;
 

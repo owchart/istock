@@ -7,12 +7,9 @@ using System.IO;
 using System.Text;
 using EmSerDSComm;
 using EmSerDataService;
-using EmQDS.Data;
-using dataquery;
 using Newtonsoft.Json;
-using EmQDataCore;
 
-namespace EmQComm
+namespace OwLib
 {
 
     #region 实时

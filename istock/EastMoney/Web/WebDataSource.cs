@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EastMoney.FM.Web.Models.Enum
+namespace OwLib
 {
     /// <summary>
     /// 数据源

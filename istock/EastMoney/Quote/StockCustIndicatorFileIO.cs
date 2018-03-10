@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using EmQComm;
 using System.IO;
 
-namespace EmQComm
+namespace OwLib
 {
     /* Sample of the confige file.
 ==============================================================================     

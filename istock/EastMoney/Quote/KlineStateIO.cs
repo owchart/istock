@@ -1,11 +1,11 @@
-﻿using EmQComm;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace EmQDataIO
+namespace OwLib
 {
     public class KlineStateIO
     {

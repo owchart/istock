@@ -5,7 +5,7 @@ using System.IO;
 using EmCore.Utils;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class CustomIndicatorDataPacket : DataPacketBase
     {

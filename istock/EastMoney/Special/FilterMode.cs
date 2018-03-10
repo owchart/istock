@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace  EmReportWatch.SpecialEntity.Entity
+namespace OwLib
 {
     /// <summary>
     /// 过滤条件类

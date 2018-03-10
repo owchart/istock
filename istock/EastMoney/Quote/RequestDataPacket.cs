@@ -7,7 +7,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace EmQComm
+namespace OwLib
 {
     #region 财富通实时接口
     /// <summary>

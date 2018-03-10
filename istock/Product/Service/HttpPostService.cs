@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using OwLib;
 
-namespace node.gs
+namespace OwLib
 {
     /// <summary>
     /// HTTPµÄPOST·þÎñ

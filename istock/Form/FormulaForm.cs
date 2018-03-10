@@ -6,14 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using EmQComm.Formula;
-using EmQComm;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
-using EmQDS.Data;
-using EmQInd;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 自选股窗体
@@ -144,7 +140,7 @@ namespace dataquery
                 for (int n = 0; n < output.outputCount; n++)
                 {
                     if (output.fmOutput[n].normaloutput.ToInt64() != 0)
-                        GetNormalFormulaOutput(indicator, output, nlen, n, 0, EmQComm.Formula.MarketType.MARKET_SZ, KLineCycle.CycleDay);
+                        GetNormalFormulaOutput(indicator, output, nlen, n, 0, MarketType2.MARKET_SZ, KLineCycle.CycleDay);
                     else
                         GetFunctionFormulaOutput(indicator, output, nlen, n, 0);
                 }
@@ -181,7 +177,7 @@ namespace dataquery
 
         private static void GetNormalFormulaOutput(Indicator indicator, FmFormulaOutput output,
            int dataCount, int index, int selectIndex,
-           EmQComm.Formula.MarketType Market, KLineCycle KLineCycle)
+           MarketType2 Market, KLineCycle KLineCycle)
         {
             string nameTemp = output.fmOutput[index].name.Trim('\0');
             List<float> outputList = new List<float>(0);
@@ -555,9 +551,9 @@ namespace dataquery
         private void btnQuery_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 //财富通历史数据
                 OneStockHisKLineData oneStockHisKLineData = new OneStockHisKLineData(innerCode,

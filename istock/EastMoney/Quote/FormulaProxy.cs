@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 
-namespace EmQComm.Formula {
+namespace OwLib {
     /// <summary>
     /// 
     /// </summary>

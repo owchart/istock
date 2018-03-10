@@ -1,4 +1,4 @@
-﻿namespace EmReportWatch.Entity
+﻿namespace OwLib
 {
     using System;
 

@@ -5,9 +5,8 @@ using EmSerDataService;
 using System.Threading;
 using EmCore;
 using EmSocketClient;
-using dataquery;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class ConnectManager
     {
@@ -157,7 +156,7 @@ namespace dataquery.indicator
 
                             case RequestType.IndicatorData:
                                 {
-                                    IndicatorDataPacket packet = base2 as IndicatorDataPacket;
+                                    IndicatorDataPacket2 packet = base2 as IndicatorDataPacket2;
                                     List<String> list = new List<String>();
                                     foreach (IndicatorEntity entity in packet.IndicatorList)
                                     {

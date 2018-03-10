@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace  EmReportWatch.SpecialAttribute
+namespace OwLib
 {
     /// <summary>
     /// 对数据源行数和列数进行限制，防止数据量太大图形无法显示。

@@ -9,7 +9,7 @@ using System.IO;
 using System.Threading;
 using OwLib;
 
-namespace LordStrategy
+namespace OwLib
 {
     /// <summary>
     /// ´°Ìו

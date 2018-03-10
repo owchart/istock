@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using EmCore;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 
-namespace dataquery.Web
+namespace OwLib
 {
     /// <summary>
     /// 新股数据类

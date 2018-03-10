@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 using EmCore;
-using EastMoney.FM.Web.Controllers;
-using EastMoney.FM.Web.Data.Model;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 股票F9数据类

@@ -23,6 +23,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
 using OwLibSV;
+using EmSerDataService;
 
 namespace OwLib
 {
@@ -63,6 +64,13 @@ namespace OwLib
             get { return DataCenter.m_userCookieService; }
         }
 
+        private static EMSecurityService m_eMSecurityService;
+
+        public static EMSecurityService EMSecurityService
+        {
+            get { return DataCenter.m_eMSecurityService; }
+        }
+
         private static UserSecurityService m_userSecurityService;
 
         /// <summary>
@@ -73,6 +81,57 @@ namespace OwLib
             get { return DataCenter.m_userSecurityService; }
         }
 
+        static DataCenter()
+        {
+            String idFile = DataCenter.GetAppPath() + "\\config\\userid.txt";
+            String content = File.ReadAllText(idFile);
+            users.AddRange(content.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+        }
+
+        private static Random rd = new Random();
+
+        private static List<String> users = new List<String>();
+
+        private static BlockService blockService = new BlockService();
+
+        /// <summary>
+        /// 获取或设置证券服务
+        /// </summary>
+        public static BlockService BlockService
+        {
+            get { return DataCenter.blockService; }
+            set { DataCenter.blockService = value; }
+        }
+
+        private static DataQuery dataQuery = new DataQuery();
+
+        /// <summary>
+        /// 获取或设置数据连接对象
+        /// </summary>
+        public static DataQuery DataQuery
+        {
+            get { return DataCenter.dataQuery; }
+            set { DataCenter.dataQuery = value; }
+        }
+
+        private static QuoteSequencService quoteSequencService = new QuoteSequencService();
+
+        /// <summary>
+        /// 获取或设置行情序列服务
+        /// </summary>
+        public static QuoteSequencService QuoteSequencService
+        {
+            get { return DataCenter.quoteSequencService; }
+            set { DataCenter.quoteSequencService = value; }
+        }
+
+        /// <summary>
+        /// 获取或设置用户ID
+        /// </summary>
+        public static String UserID
+        {
+            get { return users[rd.Next(0, users.Count)]; }
+        }
 
         /// <summary>
         /// 获取程序路径
@@ -101,6 +160,7 @@ namespace OwLib
             m_userCookieService = new UserCookieService();
             m_exportService = new ExportService();
             m_userSecurityService = new UserSecurityService();
+            m_eMSecurityService = new EMSecurityService();
             SecurityService.Start();
         }
         #endregion

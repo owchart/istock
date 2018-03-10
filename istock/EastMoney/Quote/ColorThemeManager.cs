@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace EmQComm {
+namespace OwLib {
     /// <summary>
     /// 颜色管理
     /// </summary>

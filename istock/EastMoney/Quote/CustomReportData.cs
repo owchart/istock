@@ -5,11 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 using EmCore;
-using EmQComm;
 using Timer = System.Timers.Timer;
-using EmQDataCore;
 
-namespace EmQDS.Data
+namespace OwLib
 {
     public class CustomReportData : QuoteDataBase
     {
@@ -99,7 +97,7 @@ namespace EmQDS.Data
         {
         }
 
-        protected override void _cm_DoCMReceiveData(object sender, EmQTCP.CMRecvDataEventArgs e)
+        protected override void _cm_DoCMReceiveData(object sender, CMRecvDataEventArgs e)
         {
             if (e.DataPacket is ResCustomReportOrgDataPacket)
             {

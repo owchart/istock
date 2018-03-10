@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmReportWatch.SpecialEntity.Entity
+namespace OwLib
 {
     /// <summary>
     /// 过滤条件运算规则枚举

@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using EmCore;
-using EmReportWatch.SpecialAttribute;
-using EmReportWatch.SpecialCommon;
-using EmReportWatch.Business;
-using EmReportWatch.SpecialEntity.Entity;
 using System.Data;
 using System.Xml;
 using System.IO;
-using EmReportWatch.Util;
 
-
-namespace EmReportWatch.Data
+namespace OwLib
 {
     /// <summary>
     /// 文件下载完成委托

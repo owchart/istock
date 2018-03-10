@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace EmQComm.Formula {
+namespace OwLib {
     /// <summary>
     /// 
     /// </summary>
@@ -159,7 +159,7 @@ namespace EmQComm.Formula {
     /// <summary>
     /// 
     /// </summary>
-	public enum MarketType {
+	public enum MarketType2 {
 
 		/// MARKET_SZ -> 0
 		MARKET_SZ = 0,

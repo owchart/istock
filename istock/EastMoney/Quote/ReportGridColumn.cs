@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace EmQComm
+namespace OwLib
 {
     /// <summary>
     /// 排序枚举
@@ -46,7 +46,7 @@ namespace EmQComm
     /// <summary>
     /// 
     /// </summary>
-    public class GridColumn
+    public class RGridColumn
     {
         private bool _Frozen = false;
         private bool _Display = true;
@@ -185,11 +185,11 @@ namespace EmQComm
             }
         }
 
-        private List<GridColumn> _subColumns;
+        private List<RGridColumn> _subColumns;
         /// <summary>
         /// 子列
         /// </summary>
-        public List<GridColumn> SubColumns
+        public List<RGridColumn> SubColumns
         {
             get { return _subColumns; }
             set { this._subColumns = value; }
@@ -342,9 +342,9 @@ namespace EmQComm
         /// GridColumn对象的深拷贝
         /// </summary>
         /// <returns></returns>
-        public GridColumn DeepClone()
+        public RGridColumn DeepClone()
         {
-            GridColumn replica = new GridColumn();
+            RGridColumn replica = new RGridColumn();
             replica.Name = this.Name;
             replica.Caption = this.Caption;
             replica.Frozen = this.Frozen;
@@ -373,9 +373,9 @@ namespace EmQComm
 
             if (this.ContainSubColumns)
             {
-                replica.SubColumns = new List<GridColumn>(this.SubColumns.Count);
+                replica.SubColumns = new List<RGridColumn>(this.SubColumns.Count);
 
-                foreach (GridColumn item in this.SubColumns)
+                foreach (RGridColumn item in this.SubColumns)
                 {
                     replica.SubColumns.Add(item.DeepClone());
                 }
@@ -388,7 +388,7 @@ namespace EmQComm
     /// <summary>
     /// 行
     /// </summary>
-    public class GridRow
+    public class RGridRow
     {
         private int _rowIndex;
         /// <summary>

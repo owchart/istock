@@ -11,7 +11,7 @@ using ICSharpCode.SharpZipLib.GZip;
 using System.Data;
 
 
-namespace EmQComm
+namespace OwLib
 {
     #region 枚举值
     public class ReqLogonCftDataPacket : RealTimeDataPacket

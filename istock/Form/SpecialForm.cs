@@ -6,16 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using dataquery.indicator;
-using EmReportWatch.Data;
 using System.IO;
 using EmCore;
-using EmReportWatch.Entity;
 using System.Xml;
-using EastMoney.FM.Web.Data;
 using Newtonsoft.Json;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 专题统计窗体
@@ -110,7 +106,7 @@ namespace dataquery
 
         public string QuerySpecialCodeInfos(string id)
         {
-            byte[] bytes = EastMoney.FM.Web.Data.DataAccess.IDataQuery.NewQueryGlobalData("1009◎UID◎SpecialService◎◎◎5,-1," + id) as byte[];
+            byte[] bytes = DataAccess.IDataQuery.NewQueryGlobalData("1009◎UID◎SpecialService◎◎◎5,-1," + id) as byte[];
             string result = Encoding.UTF8.GetString(bytes);
             return result;
         }
@@ -122,7 +118,7 @@ namespace dataquery
             path = path + pid + ".xml";
             try
             {
-                object obj2 = EastMoney.FM.Web.Data.DataAccess.IDataQuery.NewQueryGlobalData("1006◎UID◎SpecialService◎◎◎2," + version + "," + pid);
+                object obj2 = DataAccess.IDataQuery.NewQueryGlobalData("1006◎UID◎SpecialService◎◎◎2," + version + "," + pid);
                 string data = Encoding.UTF8.GetString(obj2 as byte[]);
                 if (!data.Trim().StartsWith("<"))
                 {
@@ -166,7 +162,7 @@ namespace dataquery
             path = path + pid;
             try
             {
-                object obj2 = EastMoney.FM.Web.Data.DataAccess.IDataQuery.NewQueryGlobalData("1005◎UID◎SpecialService◎◎◎1," + pid);
+                object obj2 = DataAccess.IDataQuery.NewQueryGlobalData("1005◎UID◎SpecialService◎◎◎1," + pid);
                 string data = Encoding.UTF8.GetString(obj2 as byte[]);
                 //WriteXMlFile(path, null, data);
                 return data;

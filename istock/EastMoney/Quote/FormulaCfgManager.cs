@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 
-namespace EmQComm.Formula {
+namespace OwLib {
     /// <summary>
     /// 公式配置文件管理
     /// </summary>

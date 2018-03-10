@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace EmQComm
+namespace OwLib
 {
     /// <summary>
     /// 
@@ -230,7 +230,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsLocked)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
                         gridCol.Frozen = true;
 
                         result.ColSelected.Add(gridCol);
@@ -240,7 +240,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsSelected)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
 
                         result.ColSelected.Add(gridCol);
                     }
@@ -249,7 +249,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsExpand)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
 
                         result.ColExpand.Add(gridCol);
                     }
@@ -299,7 +299,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsLocked)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
                         gridCol.Frozen = true;
 
                         result.ColSelected.Add(gridCol);
@@ -309,7 +309,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsSelected)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
 
                         result.ColSelected.Add(gridCol);
                     }
@@ -318,7 +318,7 @@ namespace EmQComm
                 {
                     foreach (ReportField rf in repCfg.FieldsExpand)
                     {
-                        GridColumn gridCol = BuildGridColumnByReportField(rf);
+                        RGridColumn gridCol = BuildGridColumnByReportField(rf);
 
                         result.ColExpand.Add(gridCol);
                     }
@@ -398,7 +398,7 @@ namespace EmQComm
                         {
                             foreach (ReportField rf in repCfg.FieldsLocked)
                             {
-                                GridColumn gridCol = BuildGridColumnByReportField(rf);
+                                RGridColumn gridCol = BuildGridColumnByReportField(rf);
                                 gridCol.Frozen = true;
 
                                 result.ColSelected.Add(gridCol);
@@ -427,7 +427,7 @@ namespace EmQComm
 
                             if (rf != null)
                             {
-                                GridColumn gridCol = BuildGridColumnByReportField(rf);
+                                RGridColumn gridCol = BuildGridColumnByReportField(rf);
                                 gridCol.Frozen = false;
                                 gridCol.ColumnWidth = custCfg.ShowColumns[columnStr];
 
@@ -437,7 +437,7 @@ namespace EmQComm
                         }
                         foreach (ReportField rf in rfPool)
                         {
-                            GridColumn gridCol = BuildGridColumnByReportField(rf);
+                            RGridColumn gridCol = BuildGridColumnByReportField(rf);
                             gridCol.Frozen = false;
 
                             result.ColExpand.Add(gridCol);
@@ -500,7 +500,7 @@ namespace EmQComm
                             custCfg.ShowColumns.Clear();
                         }
 
-                        foreach (GridColumn item in reportConfig.ColSelected)
+                        foreach (RGridColumn item in reportConfig.ColSelected)
                         {
                             if (!item.Frozen)
                             {
@@ -530,9 +530,9 @@ namespace EmQComm
 
             return result;
         }
-        private GridColumn BuildGridColumnByReportField(ReportField rf)
+        private RGridColumn BuildGridColumnByReportField(ReportField rf)
         {
-            GridColumn gridCol = new GridColumn();
+            RGridColumn gridCol = new RGridColumn();
             gridCol.Name = rf.Name;
             gridCol.Caption = rf.Caption;
             gridCol.BindIndex = rf.MapName;
@@ -555,13 +555,13 @@ namespace EmQComm
 
             if (rf.ContainsSubField)
             {
-                gridCol.SubColumns = new List<GridColumn>();
+                gridCol.SubColumns = new List<RGridColumn>();
 
                 for (int subIndex = 0; subIndex < rf.SubFields.Count; subIndex++)
                 {
                     ReportField subRF = rf.SubFields[subIndex];
 
-                    GridColumn subCol = new GridColumn();
+                    RGridColumn subCol = new RGridColumn();
                     subCol.Name = subRF.Name;
                     subCol.Caption = subRF.Caption;
                     subCol.BindIndex = subRF.MapName;
@@ -594,8 +594,8 @@ namespace EmQComm
     /// </summary>
     public class ReportGridConfigAdapter
     {
-        private List<GridColumn> _ColSelected;
-        private List<GridColumn> _ColExpand;
+        private List<RGridColumn> _ColSelected;
+        private List<RGridColumn> _ColExpand;
 
         private string _reportName;
         /// <summary>
@@ -675,14 +675,14 @@ namespace EmQComm
         /// <summary>
         /// 显示列
         /// </summary>
-        public List<GridColumn> ColSelected
+        public List<RGridColumn> ColSelected
         {
             get { return _ColSelected; }
         }
         /// <summary>
         /// 备选列
         /// </summary>
-        public List<GridColumn> ColExpand
+        public List<RGridColumn> ColExpand
         {
             get { return _ColExpand; }
         }
@@ -693,16 +693,16 @@ namespace EmQComm
         {
             ReportName = reportName;
             ReportType = reportType;
-            _ColSelected = new List<GridColumn>();
-            _ColExpand = new List<GridColumn>();
+            _ColSelected = new List<RGridColumn>();
+            _ColExpand = new List<RGridColumn>();
         }
         /// <summary>
         /// 
         /// </summary>
-        public void SetGridColumn(List<GridColumn> colSelected, List<GridColumn> colUnselected)
+        public void SetGridColumn(List<RGridColumn> colSelected, List<RGridColumn> colUnselected)
         {
-            List<GridColumn> colFrozen = new List<GridColumn>();
-            foreach (GridColumn item in _ColSelected)
+            List<RGridColumn> colFrozen = new List<RGridColumn>();
+            foreach (RGridColumn item in _ColSelected)
             {
                 if (item.Frozen)
                     colFrozen.Add(item);
@@ -716,7 +716,7 @@ namespace EmQComm
             _ColExpand.AddRange(colUnselected);
 
             bool noOrderIndex = true;
-            foreach (GridColumn item in _ColSelected)
+            foreach (RGridColumn item in _ColSelected)
             {
                 if (item.Name == SortCol)
                 {
@@ -737,7 +737,7 @@ namespace EmQComm
         {
             bool result = false;
 
-            foreach (GridColumn item in _ColSelected)
+            foreach (RGridColumn item in _ColSelected)
             {
                 if (item.BindIndex == FieldIndex.InfoMine)
                 {

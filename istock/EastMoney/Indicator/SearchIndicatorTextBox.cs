@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using dataquery;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     /// 查询指标的回调
     /// </summary>

@@ -8,14 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using  EmReportWatch.SpecialEntity.Entity;
 using EmCore;
 using EmSerDataService;
-using EmReportWatch.SpecialAttribute;
-using EmReportWatch.Data;
 
-
-namespace EmReportWatch.SpecialCommon
+namespace OwLib
 {
     /// <summary>
     /// 公用方法集合类
@@ -517,12 +513,12 @@ namespace EmReportWatch.SpecialCommon
         /// </summary>
         /// <param name="filters">数据列</param>
         /// <returns></returns>
-        public static List<GridColumn> Clone(GridColumn[] filters)
+        public static List<EMGridColumn> Clone(EMGridColumn[] filters)
         {
             if (filters == null)
                 return null;
-            List<GridColumn> result = new List<GridColumn>();
-            foreach (GridColumn filter in filters)
+            List<EMGridColumn> result = new List<EMGridColumn>();
+            foreach (EMGridColumn filter in filters)
             {
                 if (filter != null)
                     result.Add(Clone(filter));
@@ -535,10 +531,10 @@ namespace EmReportWatch.SpecialCommon
         /// </summary>
         /// <param name="filters"></param>
         /// <returns></returns>
-        public static List<GridColumn> Clone(List<GridColumn> filters)
+        public static List<EMGridColumn> Clone(List<EMGridColumn> filters)
         {
-            List<GridColumn> result = new List<GridColumn>();
-            foreach (GridColumn filter in filters)
+            List<EMGridColumn> result = new List<EMGridColumn>();
+            foreach (EMGridColumn filter in filters)
             {
                 if (filter != null)
                     result.Add(Clone(filter));
@@ -594,10 +590,10 @@ namespace EmReportWatch.SpecialCommon
         /// </summary>
         /// <param name="gridColumn"></param>
         /// <returns></returns>
-        public static GridColumn Clone(GridColumn gridColumn)
+        public static EMGridColumn Clone(EMGridColumn gridColumn)
         {
 
-            return (GridColumn) gridColumn.Clone();
+            return (EMGridColumn)gridColumn.Clone();
         }
 
         /// <summary>

@@ -4,9 +4,8 @@ using System.Text;
 using System.Data;
 using EmSerDataService;
 using System.Diagnostics;
-using dataquery;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class DataServiceHelper
     {

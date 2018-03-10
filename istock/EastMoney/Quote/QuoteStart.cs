@@ -4,17 +4,12 @@ using System.Diagnostics;
  
 using System.Text;
 using EmCore;
-using EmQComm;
-using EmQTCP;
 using System.Threading;
-using dataquery;
-using EmQDS.Data;
 using EmSocketClient;
 using System.Net;
 using System.Net.Sockets;
-using EastMoney.FM.Web.Data;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// 程序启动时，行情需要执行的动作

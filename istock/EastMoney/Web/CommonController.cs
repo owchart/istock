@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Data;
-using EastMoney.FM.Web.Data;
 using EmCore;
-using EastMoney.FM.Web.Models.Enum;
 using System.Collections;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
@@ -12,10 +10,9 @@ using Newtonsoft.Json;
 using System.Drawing;
 using System.Text;
 using System.IO;
-using dataquery;
 using System.Linq;
 
-namespace EastMoney.FM.Web.Controllers
+namespace OwLib
 {
     public class CommonController
     {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
- 
 using System.Net;
 using System.Text;
 using System.Threading;
 using EmCore;
-using EmQComm;
 
-namespace EmQTCP
+namespace OwLib
 {
     /// <summary>
     /// http连接下用来收发数据的类

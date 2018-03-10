@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EmQComm;
-using EmQInd;
-using EmQComm.Formula;
 using System.Runtime.InteropServices;
-using MarketType = EmQComm.MarketType;
 using System.Drawing;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// 提供K线相关数据的接口
@@ -47,7 +43,7 @@ namespace EmQDataCore
         /// <param name="market">市场类型</param>
         /// <param name="divideType">复权类型</param>
         /// <returns>K线数据列表</returns>
-        public static List<OneDayDataRec> GetKlineDataAfterDeal(int code, EmQComm.MarketType market,
+        public static List<OneDayDataRec> GetKlineDataAfterDeal(int code, MarketType market,
             KLineCycle cycle, IsDivideRightType divideType)
         {
             List<OneDayDataRec> result;
@@ -697,7 +693,7 @@ namespace EmQDataCore
         /// <param name="cycle"></param>
         /// <param name="divideType"></param>
         /// <returns></returns>
-        private static List<OneDayDataRec> GetDevidedKLineData(int code, EmQComm.MarketType market, KLineCycle cycle,
+        private static List<OneDayDataRec> GetDevidedKLineData(int code, MarketType market, KLineCycle cycle,
             IsDivideRightType divideType)
         {
             //1、获取对应周期的复权数据
@@ -738,7 +734,7 @@ namespace EmQDataCore
         /// <param name="originalKLineList">原始K线复权数据（复权日所在周期未处理）</param>
         /// <param name="dayCycleKLinelist">日K线复权数据</param>
         /// <param name="factors">复权因子</param>
-        private static void CombineData(int code, EmQComm.MarketType market, KLineCycle kLineCycle,
+        private static void CombineData(int code, MarketType market, KLineCycle kLineCycle,
             List<List<OneDivideRightBase>> divideData, IsDivideRightType divideType,
            List<OneDayDataRec> originalKLineList, List<OneDayDataRec> dayCycleKLinelist, float[] factors)
         {

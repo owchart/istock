@@ -17,7 +17,7 @@ using System.IO;
 using System.IO.Compression;
 using OwLib;
 
-namespace node.gs
+namespace OwLib
 {
     /// <summary>
     /// HTTPµÄGET·þÎñ

@@ -6,7 +6,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using OwLibSV;
-using node.gs;
 
 namespace OwLib
 {

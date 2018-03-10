@@ -1,21 +1,16 @@
-﻿namespace EmMacIndustry.DAL
-{
-    using EmCore;
-    using EmMacIndustry.Entity;
-    using EmMacIndustry.Model.Constant;
-    using EmMacIndustry.Model.Enum;
-    using EmSerDataService;
-    using EmSocketClient;
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Windows.Forms;
-    using System.Xml;
-using EastMoney.FM.Web.Data;
-    using dataquery;
+﻿using EmCore;
+using EmSerDataService;
+using EmSocketClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
+namespace OwLib
+{
     public sealed class MongoRetriver
     {
         internal static readonly DataQuery _uniqueQuery = DataAccess.IDataQuery;

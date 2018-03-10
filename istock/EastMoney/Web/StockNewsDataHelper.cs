@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using EmCore;
 using System.Data;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 using System.Xml;
 using Newtonsoft.Json;
 using System.Net;
 using System.Web;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 资讯新通道数据请求model

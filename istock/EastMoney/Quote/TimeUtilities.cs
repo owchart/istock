@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Runtime.InteropServices;
-using dataquery;
 
-namespace EmQComm
+namespace OwLib
 {
     public class TrendTimeUtility
     {
@@ -76,7 +75,7 @@ namespace EmQComm
     public class OneMarketTradeDateDataRec
     {
         public byte DstStatus;
-        public EmQComm.TypeCode MarketTypeCode;
+        public TypeCode MarketTypeCode;
         public List<TradeDateStruct> TradeDateDict = new List<TradeDateStruct>();
         public List<int> TradeDateList = new List<int>(1);
 
@@ -169,7 +168,7 @@ namespace EmQComm
         public static int ServerTime = 0;
         public static SummerTimeEventHandler SummerTimeChangeEvent;
         public static int TradeDate = 0;
-        public static Dictionary<EmQComm.TypeCode, OneMarketTradeDateDataRec> TypeCodeTradeDate;
+        public static Dictionary<TypeCode, OneMarketTradeDateDataRec> TypeCodeTradeDate;
 
         static TimeUtilities()
         {
@@ -560,7 +559,7 @@ namespace EmQComm
                 MarketStatus.Add(MarketType.HKOptionLev2, _hsiWholeMarketTime);
                 MarketStatus.Add(MarketType.HKLev2, _hkHalfMarketTime);
                 MarketStatus.Add(MarketType.HSIforMTime, _hkWholeMarketTime);
-                TypeCodeTradeDate = new Dictionary<EmQComm.TypeCode, OneMarketTradeDateDataRec>();
+                TypeCodeTradeDate = new Dictionary<TypeCode, OneMarketTradeDateDataRec>();
             }
             catch (Exception exception)
             {
@@ -705,7 +704,7 @@ namespace EmQComm
                     case MarketType.HSINDEX:
                     case MarketType.HK:
                     case MarketType.SHHK:
-                        TypeCodeTradeDate.TryGetValue(EmQComm.TypeCode.TC_HK, out rec);
+                        TypeCodeTradeDate.TryGetValue(TypeCode.TC_HK, out rec);
                         if (rec != null)
                         {
                             return rec.TradeDateDict;
@@ -1551,54 +1550,54 @@ namespace EmQComm
             return type;
         }
 
-        public static void SetSummerFlag(EmQComm.TypeCode typeCode, byte flag)
+        public static void SetSummerFlag(TypeCode typeCode, byte flag)
         {
             switch (typeCode)
             {
-                case EmQComm.TypeCode.TC_CMX:
+                case TypeCode.TC_CMX:
                     OsCBOTIsSummerTime = flag;
                     OsFutureSummerTime = flag;
                     return;
 
-                case (EmQComm.TypeCode.TC_COptionSell | EmQComm.TypeCode.TC_Norway):
-                case EmQComm.TypeCode.TC_SG:
-                case (EmQComm.TypeCode.TC_NewZealand | EmQComm.TypeCode.TC_SH):
+                case (TypeCode.TC_COptionSell | TypeCode.TC_Norway):
+                case TypeCode.TC_SG:
+                case (TypeCode.TC_NewZealand | TypeCode.TC_SH):
                     break;
 
-                case EmQComm.TypeCode.TC_LMEELEC:
+                case TypeCode.TC_LMEELEC:
                     OsVenueIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_LME:
+                case TypeCode.TC_LME:
                     OsLMEElecIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_FXInterWinterSummer:
+                case TypeCode.TC_FXInterWinterSummer:
                     ForexIsSummerTime = flag;
                     break;
 
-                case EmQComm.TypeCode.TC_US:
+                case TypeCode.TC_US:
                     UsIsSummerTime = flag;
                     IxicIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_NewZealand:
+                case TypeCode.TC_NewZealand:
                     NewZealandIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_DutchAEX:
+                case TypeCode.TC_DutchAEX:
                     DutchIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_Austria:
+                case TypeCode.TC_Austria:
                     AustriaIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_Norway:
+                case TypeCode.TC_Norway:
                     NorwayIsSummerTime = flag;
                     return;
 
-                case EmQComm.TypeCode.TC_AUS:
+                case TypeCode.TC_AUS:
                     AXATIsSummerTime = flag;
                     return;
 

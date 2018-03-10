@@ -20,11 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
-using  EmReportWatch.SpecialEntity.Entity;
 
 #endregion
 
-namespace  EmReportWatch.SpecialAttribute
+namespace OwLib
 {
 	/// <summary>
 	/// 保存用户对数据源的配置。

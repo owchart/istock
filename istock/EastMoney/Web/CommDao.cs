@@ -5,7 +5,7 @@ using Winista.Text.HtmlParser;
 using Winista.Text.HtmlParser.Filters;
 using Winista.Text.HtmlParser.Util;
 
-namespace dataquery
+namespace OwLib
 {
     public class CommDao
     {

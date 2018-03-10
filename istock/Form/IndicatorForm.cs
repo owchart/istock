@@ -6,12 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using dataquery.indicator;
 using System.IO;
 using EmCore.Utils;
 using Newtonsoft.Json;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// Êý¾Ýä¯ÀÀÆ÷´°Ìå
@@ -178,10 +177,10 @@ namespace dataquery
                     codesMap[subStrs[0] + idStr] = subStrs[0];
                 }
                 IndicatorDataCore.SetCustomerIndicatorEntity((int)entity.ID, entity);
-                IndicatorDataPacket indicatorDataPacket = new IndicatorDataPacket(CommonEnumerators.IndicatorRequestType.Fun, stocks, ids);
+                IndicatorDataPacket2 indicatorDataPacket = new IndicatorDataPacket2(CommonEnumerators.IndicatorRequestType.Fun, stocks, ids);
                 if (blockType == "Block")
                 {
-                    indicatorDataPacket = new IndicatorDataPacket(CommonEnumerators.IndicatorRequestType.Blk, stocks, ids);
+                    indicatorDataPacket = new IndicatorDataPacket2(CommonEnumerators.IndicatorRequestType.Blk, stocks, ids);
                 }
                 ConnectManager.CreateInstance().Request(indicatorDataPacket);
                 int tick = 0;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class FieldValueEntity<T> : IComparable<FieldValueEntity<T>>
     {

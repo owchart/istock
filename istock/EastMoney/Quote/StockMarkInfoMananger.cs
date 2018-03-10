@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace EmQComm
+namespace OwLib
 {
     /// <summary>
     /// 股票标记信息

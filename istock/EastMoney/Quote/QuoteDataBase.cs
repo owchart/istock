@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmQTCP;
-using EmQDataCore;
 
-
-namespace EmQDS.Data
+namespace OwLib
 {
     /// <summary>
     /// QuoteDataBase

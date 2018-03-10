@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 using System.Xml;
 using System.IO;
 using System.Drawing;
 
-using EmQComm;
-
-namespace EmQDataIO {
+namespace OwLib {
     /// <summary>
     /// 右边信息栏配置文件读取
     /// </summary>

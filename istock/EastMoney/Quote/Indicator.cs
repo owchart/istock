@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using EmQComm.Formula;
 using System.Drawing.Drawing2D;
 
-namespace EmQInd {
+namespace OwLib {
 	/// <summary>
 	/// 指标基类
 	/// </summary>

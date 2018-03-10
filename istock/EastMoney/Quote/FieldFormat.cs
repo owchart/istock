@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using EmQComm;
-using EmQDataIO;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// 字段格式

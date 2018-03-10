@@ -6,7 +6,7 @@ using EmCore.Utils;
 using System.Runtime.InteropServices;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class CustomerIndicatorDataHelper
     {

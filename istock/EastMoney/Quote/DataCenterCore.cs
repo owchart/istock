@@ -8,20 +8,13 @@ using System.Timers;
 using System.Windows.Forms.VisualStyles;
 using EmCore;
 using EmCore.Data.Entity;
-using EmQComm;
-using EmQComm.Formula;
-using EmQTCP;
 using EmSocketClient;
 using Timer = System.Timers.Timer;
 using System.Diagnostics;
-using UserInfo = EmQComm.UserInfo;
 using System.Drawing;
-using MarketType = EmQComm.MarketType;
-using EmQDataIO;
-using dataquery;
 
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// DataCenterCore
@@ -952,7 +945,7 @@ namespace EmQDataCore
         private void ReadCodeNameFiles()
         {
             //设置码表
-            Dictionary<String, KwItem> items = SecurityService.KwItems;
+            Dictionary<String, KwItem> items = EMSecurityService.KwItems;
             foreach (KwItem item in items.Values)
             {
                 DetailData.SetStockBasicField(item.Innercode, item.Code, item.Type, item.Name);
@@ -5079,7 +5072,7 @@ namespace EmQDataCore
         public  List<StockIndicatorLeftItem> GetIndicatorLeftReport(int code)
         {
             List<StockIndicatorLeftItem> result = new List<StockIndicatorLeftItem>();
-            EmQComm.HashSet<string> macroIds;
+            HashSet<string> macroIds;
             IndicatorDataTable dataTable = (IndicatorDataTable)_dataTableCollecion["indicator"];
             if (dataTable.DicLeftIndicatorOfStock.TryGetValue(code, out macroIds))
             {
@@ -5105,7 +5098,7 @@ namespace EmQDataCore
         public  List<StockIndicatorRightItem> GetIndicatorRightReport(int code)
         {
             List<StockIndicatorRightItem> result = new List<StockIndicatorRightItem>();
-            EmQComm.HashSet<string> macroIds;
+            HashSet<string> macroIds;
             IndicatorDataTable dataTable = (IndicatorDataTable)_dataTableCollecion["indicator"];
             if (dataTable.DicRightIndicatorOfStock.TryGetValue(code, out macroIds))
             {

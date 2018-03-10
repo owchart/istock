@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Data;
 using EmSerDSComm;
 
-namespace EmQComm
+namespace OwLib
 {
     #region 类型 
     /// <summary>
@@ -2803,31 +2803,31 @@ namespace EmQComm
         /// <summary>
         /// DDX指标
         /// </summary>
-        public static Formula.Formula FDDX = new Formula.Formula();
+        public static Formula FDDX = new Formula();
         /// <summary>
         /// DDY指标
         /// </summary>
-        public static Formula.Formula FDDY = new Formula.Formula();
+        public static Formula FDDY = new Formula();
         /// <summary>
         /// DDZ指标
         /// </summary>
-        public static Formula.Formula FDDZ = new Formula.Formula();
+        public static Formula FDDZ = new Formula();
         /// <summary>
         /// 资金博弈
         /// </summary>
-        public static Formula.Formula FFinancialGame = new Formula.Formula();
+        public static Formula FFinancialGame = new Formula();
         /// <summary>
         /// 资金趋势
         /// </summary>
-        public static Formula.Formula FFinancialTrend = new Formula.Formula();
+        public static Formula FFinancialTrend = new Formula();
         /// <summary>
         /// 分时DDX指标
         /// </summary>
-        public static Formula.Formula FTrendDDX = new Formula.Formula();
+        public static Formula FTrendDDX = new Formula();
         /// <summary>
         /// 分时博弈
         /// </summary>
-        public static Formula.Formula FTrendFinancialGame = new Formula.Formula();
+        public static Formula FTrendFinancialGame = new Formula();
         /// <summary>
         /// 指数品种
         /// </summary>

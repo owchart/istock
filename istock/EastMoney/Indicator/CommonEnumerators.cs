@@ -4,7 +4,7 @@ using System.Text;
 using EmCore.Utils;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public static class CommonEnumerators
     {

@@ -4,12 +4,11 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using EmCore;
-using EmQComm;
 using EmSerDataService;
 using EmSocketClient;
 using System.Data;
 
-namespace EmQTCP
+namespace OwLib
 {
     /// <summary>
     /// 宏观指标请求通道

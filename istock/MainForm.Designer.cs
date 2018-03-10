@@ -1,4 +1,4 @@
-﻿namespace LordStrategy
+﻿namespace OwLib
 {
     partial class MainForm
     {

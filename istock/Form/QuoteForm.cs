@@ -6,14 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using EmQDS.Data;
-using EmQComm;
-using EmQTCP;
-using EmQDataCore;
 using Newtonsoft.Json;
 using EmSocketClient;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 行情窗体
@@ -36,9 +32,9 @@ namespace dataquery
         private void btnOneDayHis_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 //财富通历史数据
                 OneStockHisKLineData oneStockHisKLineData = new OneStockHisKLineData(innerCode,
@@ -56,7 +52,7 @@ namespace dataquery
         private void btnIndexDetail_Click(object sender, EventArgs e)
         {
             List<int> codes = new List<int>();
-            codes.Add(SecurityService.KwItems["000001.SH"].Innercode);
+            codes.Add(EMSecurityService.KwItems["000001.SH"].Innercode);
             IndexDetailData indexDetailData = new IndexDetailData(codes);
             indexDetailData.Start();
         }
@@ -80,9 +76,9 @@ namespace dataquery
         private void btnTrendLine_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 TrendData trendData = new TrendData();
                 trendData.Code = innerCode;
@@ -98,9 +94,9 @@ namespace dataquery
         private void btnN_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 ReqNOrderStockDetailLevel2DataPacket req = new ReqNOrderStockDetailLevel2DataPacket();
                 req.Code = innerCode;
@@ -175,9 +171,9 @@ namespace dataquery
         private void btnLv2Details_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 OneStockDetailData detailDate = new OneStockDetailData();
                 detailDate.Code = innerCode;
@@ -193,9 +189,9 @@ namespace dataquery
         private void btnN100_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 ReqAllOrderStockDetailLev2DataPacket req = new ReqAllOrderStockDetailLev2DataPacket();
                 req.Code = innerCode;
@@ -211,9 +207,9 @@ namespace dataquery
         private void btnLv1_Click(object sender, EventArgs e)
         {
             String code = txtCode.Text;
-            if (SecurityService.KwItems.ContainsKey(code))
+            if (EMSecurityService.KwItems.ContainsKey(code))
             {
-                KwItem item = SecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 OneStockDetailData detailDate = new OneStockDetailData();
                 detailDate.Code = innerCode;
@@ -260,7 +256,7 @@ namespace dataquery
             reqCustom.FieldIndexList.Add(0x1f6c);
             reqCustom.CustomCodeList = new List<int>();
             int count = 0;
-            foreach (int key in SecurityService.KwItems2.Keys)
+            foreach (int key in EMSecurityService.KwItems2.Keys)
             {
                 reqCustom.CustomCodeList.Add(key);
                 count++;

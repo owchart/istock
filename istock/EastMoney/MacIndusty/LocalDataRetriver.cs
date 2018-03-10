@@ -1,14 +1,12 @@
-﻿namespace EmMacIndustry.DAL
-{
-    using EmCore;
-    using EmMacIndustry.Model.Constant;
-    using EmMacIndustry.Model.Enum;
-    using System;
-    using System.Data;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Windows.Forms;
+﻿using EmCore;
+using System;
+using System.Data;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
+namespace OwLib
+{
     public static class LocalDataRetriver
     {
         public static bool _isReadSuccess = true;

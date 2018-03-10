@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms.VisualStyles;
-using EmQComm;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// TrendDataTable

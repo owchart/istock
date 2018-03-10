@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 using EmCore;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 交易信息数据类

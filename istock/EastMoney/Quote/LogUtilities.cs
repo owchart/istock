@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using EmCore;
 
-namespace EmQComm
+namespace OwLib
 {
     /// <summary>
     /// 日志

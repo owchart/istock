@@ -7,12 +7,8 @@ using EmSerDataService;
 using EmSocketClient;
 using System.Text;
 using System.IO;
-using EmReportWatch.SpecialEntity.Entity;
-using EmReportWatch.Business;
-using EastMoney.FM.Web.Data;
-using dataquery;
 
-namespace  EmReportWatch.SpecialCommon
+namespace OwLib
 {
     /// <summary>
     /// 数据处理类
@@ -512,7 +508,7 @@ namespace  EmReportWatch.SpecialCommon
 							
 						} else if (queryHandle!=null)
 						{
-                            string threadid;
+                            string threadid = "";
 						    dq.QueryStatics(dt,out threadid,queryHandle);
                             CommonService.Log("开始执行QueryHandler ID:" + threadid);
                             CommonContant.QueryThreadIds.Add(threadid);
@@ -555,7 +551,7 @@ namespace  EmReportWatch.SpecialCommon
 							if (startindex == 0)
 							//dq.Query(requests, handler);
 							{
-                                string threadid;
+                                string threadid = "";
 								dq.QueryForPagging(dt,out threadid,handler);
                                 CommonContant.QueryThreadIds.Add(threadid);
                                 CommonService.Log(string.Format("发起数据请求: {0}", threadid));

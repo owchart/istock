@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dataquery.indicator
+namespace OwLib
 {
-    public class DelegateMgr
+    public class DelegateMgr2
     {
         public delegate void BlockTreeDataChangedHandler(String sysBlockTreeStr, String userBlockTreeStr, String categorys);
 

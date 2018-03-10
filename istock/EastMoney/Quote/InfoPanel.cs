@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace EmQComm {
+namespace OwLib {
 
 	/// <summary>
 	/// 信息栏布局类

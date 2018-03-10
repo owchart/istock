@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EastMoney.FM.Web.Data.Model
+namespace OwLib
 {
     public class FinancingIndexParam
     {

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using node;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 板块服务
     /// </summary>
-    public class BlockService : HttpEasyService
+    public class BlockService :HttpEasyService
     {
         /// <summary>
         /// 创建板块服务
@@ -205,37 +204,6 @@ namespace dataquery
                 blocks = DataCenter.BlockService.GetBlockItems();
                 blockDetails = DataCenter.BlockService.GetBlockDetailItems();
                 blocks.Sort(new DMBlockItemCompre());
-            }
-        }
-        
-        /// <summary>
-        /// 接收数据方法
-        /// </summary>
-        /// <param name="data">数据</param>
-        public override void OnReceive(HttpData data)
-        {
-            //在这里处理请求
-            if (data.m_method == "GET")
-            {
-                string modulename = data.m_parameters["modulename"].ToLower();//键盘精灵
-                //板块
-                if (modulename == "getblocktree")
-                {
-                    //http://localhost:1445/?modulename=getblocktree&blockID=001001
-                    data.m_resStr = BlockTreesToString();
-                }else if (modulename == "updateblocktree")
-                {
-                    //http://localhost:1445/?modulename=updateblocktree&blockID=001001
-                }
-                else if (modulename == "getblockdetails")
-                {
-                    //http://localhost:1445/?modulename=getblockdetails&blockID=001001
-                    data.m_resStr = BlockDetailsToString();
-                }
-                else if (modulename == "updateblockdetails")
-                {
-                    //http://localhost:1445/?modulename=updateblockdetails&blockID=001001
-                }
             }
         }
 

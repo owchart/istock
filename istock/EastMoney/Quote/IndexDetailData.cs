@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using EmQComm;
-using EmQDataCore;
 
-namespace EmQDS.Data {
+namespace OwLib {
     /// <summary>
     /// IndexDetailData
     /// </summary>
@@ -46,7 +44,7 @@ namespace EmQDS.Data {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void _cm_DoCMReceiveData(object sender, EmQTCP.CMRecvDataEventArgs e) {
+        protected override void _cm_DoCMReceiveData(object sender, CMRecvDataEventArgs e) {
             if (e.DataPacket is ResIndexDetailDataPacket) {
                 SendDataReceived((e.DataPacket as ResIndexDetailDataPacket).Codes);
             }

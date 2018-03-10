@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 using System.Text;
 
-namespace EmQComm {
+namespace OwLib {
     /// <summary>
     /// 绘图管理
     /// </summary>

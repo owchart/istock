@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace  EmReportWatch.SpecialEntity.Entity
+namespace OwLib
 {
     /// <summary>
     /// 时间对象实体

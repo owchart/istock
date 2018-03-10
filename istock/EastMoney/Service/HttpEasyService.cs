@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using node;
 using Newtonsoft.Json;
-using dataquery.Web;
 using System.IO;
 using System.Data;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// HTTP简单服务
@@ -642,25 +640,6 @@ namespace dataquery
                 str = str.Substring(0, str.Length - 1);
             }
             return str;
-        }
-
-        /// <summary>
-        /// 接收数据方法
-        /// </summary>
-        /// <param name="data">数据</param>
-        public virtual void OnReceive(HttpData data)
-        {
-            string servicename = data.m_parameters["servicename"].ToLower();
-            //键盘精灵
-            if (servicename == "securityservice")
-            {
-                DataCenter.SecurityService.OnReceive(data);
-            }
-            //板块
-            else if (servicename == "blockservice")
-            {
-                DataCenter.BlockService.OnReceive(data);
-            }
         }
     }
 }

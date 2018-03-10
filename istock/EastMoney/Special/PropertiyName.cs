@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace  EmReportWatch.SpecialAttribute
+namespace OwLib
 {
 	/// <summary>
 	/// 属性名，包括名称和标题

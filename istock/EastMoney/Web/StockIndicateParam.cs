@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EastMoney.FM.Web.Data.Model
+namespace OwLib
 {
     /// <summary>
     /// 1.美股分红派息 testCmd = @"$-rpt\r\n$name=USDivdendReport\r\n$secucode=COG.N\r\n$\r\n";

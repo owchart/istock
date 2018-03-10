@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using EmCore;
 using System.Data;
-using EastMoney.FM.Web.Data;
-using EastMoney.FM.Web.Models.Enum;
 using System.Web;
 
-namespace dataquery.Web
+namespace OwLib
 {
     public class EcomomyDataHelper
     {

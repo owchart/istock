@@ -1,6 +1,6 @@
-﻿using EmQComm;
+﻿
 
-namespace EmQDS.Data
+namespace OwLib
 {
     /// <summary>
     /// TrendData
@@ -52,7 +52,7 @@ namespace EmQDS.Data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void _cm_DoCMReceiveData(object sender, EmQTCP.CMRecvDataEventArgs e)
+        protected override void _cm_DoCMReceiveData(object sender, CMRecvDataEventArgs e)
         {
             if(e.DataPacket is ResStockTrendDataPacket)
             {

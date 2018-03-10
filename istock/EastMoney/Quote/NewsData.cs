@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Timers;
-using EmQComm;
 
-namespace EmQDS.Data
+namespace OwLib
 {
     /// <summary>
     /// 新闻数据接口
@@ -113,7 +112,7 @@ namespace EmQDS.Data
             RequestData();
         }
 
-        protected override void _cm_DoCMReceiveData(object sender, EmQTCP.CMRecvDataEventArgs e)
+        protected override void _cm_DoCMReceiveData(object sender, CMRecvDataEventArgs e)
         {
             if (e.DataPacket.MsgId != CurrentMsgId)
                 return;

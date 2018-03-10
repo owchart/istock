@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class TableContextMenu : IDisposable
     {

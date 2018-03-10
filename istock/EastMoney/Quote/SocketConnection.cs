@@ -7,11 +7,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using EmCore;
-using EmQComm;
 using EmSerDataService;
 using EmSocketClient;
 
-namespace EmQTCP
+namespace OwLib
 {
     public class SocketConnection
     {

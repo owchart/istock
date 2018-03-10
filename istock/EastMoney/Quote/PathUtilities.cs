@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
- 
 using System.Text;
-using dataquery;
 
-
-namespace EmQComm
+namespace OwLib
 {
     /// <summary>
     /// 路径

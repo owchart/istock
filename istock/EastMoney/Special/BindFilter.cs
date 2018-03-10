@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace  EmReportWatch.SpecialEntity.Entity
+namespace OwLib
 {
     /// <summary>
     /// 绑定过去条件

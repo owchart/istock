@@ -1,4 +1,4 @@
-﻿namespace EmQComm
+﻿namespace OwLib
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
 
     public class ReqMarketTradeDateDataPacket : OrgDataPacket
     {
-        public List<EmQComm.TypeCode> TypeCodeList;
+        public List<TypeCode> TypeCodeList;
 
         public ReqMarketTradeDateDataPacket()
         {
@@ -18,10 +18,10 @@
             base.Coding(bw);
             if ((this.TypeCodeList == null) || (this.TypeCodeList.Count < 1))
             {
-                this.TypeCodeList = new List<EmQComm.TypeCode>(1);
-                foreach (EmQComm.TypeCode code in Enum.GetValues(typeof(EmQComm.TypeCode)))
+                this.TypeCodeList = new List<TypeCode>(1);
+                foreach (TypeCode code in Enum.GetValues(typeof(TypeCode)))
                 {
-                    if (code != EmQComm.TypeCode.Na)
+                    if (code != TypeCode.Na)
                     {
                         this.TypeCodeList.Add(code);
                     }

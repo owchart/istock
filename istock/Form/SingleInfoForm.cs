@@ -10,9 +10,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using dataquery.Web;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 个股资讯

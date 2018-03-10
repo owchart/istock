@@ -11,9 +11,8 @@ using EmCore;
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using dataquery;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class DataCore
     {
@@ -27,7 +26,7 @@ namespace dataquery.indicator
         private static readonly object _treeLockObj = new object();
         private Dictionary<String, object> _waitHandlerDataDict = new Dictionary<String, object>();
         private EventHandler<BlockElementsEventArgs> blockElementsDataReceived;
-        private DelegateMgr.BlockTreeDataChangedHandler blockTreeDataChanged;
+        private DelegateMgr2.BlockTreeDataChangedHandler blockTreeDataChanged;
         private EventHandler<IndicatorEntityEventArgs> customerIndicatorEntityGenerated;
         private EventHandler<BlockElementsEventArgs> filterBlockElementsCompleted;
         private Action<FileUploadEventArgs> pictureUploadCompleted;
@@ -63,29 +62,29 @@ namespace dataquery.indicator
             }
         }
 
-        public event DelegateMgr.BlockTreeDataChangedHandler BlockTreeDataChanged
+        public event DelegateMgr2.BlockTreeDataChangedHandler BlockTreeDataChanged
         {
             add
             {
-                DelegateMgr.BlockTreeDataChangedHandler handler2;
-                DelegateMgr.BlockTreeDataChangedHandler blockTreeDataChanged = this.blockTreeDataChanged;
+                DelegateMgr2.BlockTreeDataChangedHandler handler2;
+                DelegateMgr2.BlockTreeDataChangedHandler blockTreeDataChanged = this.blockTreeDataChanged;
                 do
                 {
                     handler2 = blockTreeDataChanged;
-                    DelegateMgr.BlockTreeDataChangedHandler handler3 = (DelegateMgr.BlockTreeDataChangedHandler) Delegate.Combine(handler2, value);
-                    blockTreeDataChanged = Interlocked.CompareExchange<DelegateMgr.BlockTreeDataChangedHandler>(ref this.blockTreeDataChanged, handler3, handler2);
+                    DelegateMgr2.BlockTreeDataChangedHandler handler3 = (DelegateMgr2.BlockTreeDataChangedHandler) Delegate.Combine(handler2, value);
+                    blockTreeDataChanged = Interlocked.CompareExchange<DelegateMgr2.BlockTreeDataChangedHandler>(ref this.blockTreeDataChanged, handler3, handler2);
                 }
                 while (blockTreeDataChanged != handler2);
             }
             remove
             {
-                DelegateMgr.BlockTreeDataChangedHandler handler2;
-                DelegateMgr.BlockTreeDataChangedHandler blockTreeDataChanged = this.blockTreeDataChanged;
+                DelegateMgr2.BlockTreeDataChangedHandler handler2;
+                DelegateMgr2.BlockTreeDataChangedHandler blockTreeDataChanged = this.blockTreeDataChanged;
                 do
                 {
                     handler2 = blockTreeDataChanged;
-                    DelegateMgr.BlockTreeDataChangedHandler handler3 = (DelegateMgr.BlockTreeDataChangedHandler) Delegate.Remove(handler2, value);
-                    blockTreeDataChanged = Interlocked.CompareExchange<DelegateMgr.BlockTreeDataChangedHandler>(ref this.blockTreeDataChanged, handler3, handler2);
+                    DelegateMgr2.BlockTreeDataChangedHandler handler3 = (DelegateMgr2.BlockTreeDataChangedHandler) Delegate.Remove(handler2, value);
+                    blockTreeDataChanged = Interlocked.CompareExchange<DelegateMgr2.BlockTreeDataChangedHandler>(ref this.blockTreeDataChanged, handler3, handler2);
                 }
                 while (blockTreeDataChanged != handler2);
             }
@@ -1142,7 +1141,7 @@ namespace dataquery.indicator
 
         public void GetMainBrokersAsync(String id, int type)
         {
-            DelegateMgr.QueryAllBrokersHandler handle = new DelegateMgr.QueryAllBrokersHandler(this.GetMainBrokers);
+            DelegateMgr2.QueryAllBrokersHandler handle = new DelegateMgr2.QueryAllBrokersHandler(this.GetMainBrokers);
             handle.BeginInvoke(type, delegate (IAsyncResult ar) {
                 try
                 {
@@ -1512,7 +1511,7 @@ namespace dataquery.indicator
             return list5;
         }
 
-        public void QueryTradeDateAsync(BlockIndicatorParams blockParams, DelegateMgr.CommonDataReceiveHandler handler)
+        public void QueryTradeDateAsync(BlockIndicatorParams blockParams, DelegateMgr2.CommonDataReceiveHandler handler)
         {
             EmSocketClient.DelegateMgr.SendBackHandle handle = null;
             try

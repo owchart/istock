@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EastMoney.FM.Web.Data.Model
+namespace OwLib
 {
     
     //$-edbrpt\r\n$rpt(name=report01|columns=A,B|sdate=2000-1-1|edate=2010-1-1|top=3)\r\n

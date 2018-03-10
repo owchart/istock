@@ -1,10 +1,9 @@
-﻿namespace EmQComm
-{
-    using System;
-    using System.IO;
-    using System.Text;
-    using EmQDataCore;
+﻿using System;
+using System.IO;
+using System.Text;
 
+namespace OwLib
+{
     public class ReqLimitedPriceDataPacket : RealTimeDataPacket
     {
         private int _code;

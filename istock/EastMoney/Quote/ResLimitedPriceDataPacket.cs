@@ -1,10 +1,8 @@
-﻿namespace EmQComm
-{
-    using System;
-    using System.IO;
-    using EmQDataCore;
-    using dataquery;
+﻿using System;
+using System.IO;
 
+namespace OwLib
+{
     public class ResLimitedPriceDataPacket : RealTimeDataPacket
     {
         public int Code;

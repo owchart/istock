@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace EmQComm
+namespace OwLib
 {
     #region 枚举
     /// <summary>

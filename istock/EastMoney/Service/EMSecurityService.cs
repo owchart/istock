@@ -16,20 +16,18 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data;
 using Newtonsoft.Json;
-using node;
-using dataquery.Web;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 证券服务
     /// </summary>
-    public class SecurityService : HttpEasyService
+    public class EMSecurityService : HttpEasyService
     {
         /// <summary>
         /// 创建证券服务
         /// </summary>
-        public SecurityService()
+        public EMSecurityService()
         {
         }
 
@@ -39,8 +37,8 @@ namespace dataquery
         /// </summary>
         public static Dictionary<String, KwItem> KwItems
         {
-            get { return SecurityService.kwItems; }
-            set { SecurityService.kwItems = value; }
+            get { return EMSecurityService.kwItems; }
+            set { EMSecurityService.kwItems = value; }
         }
 
         private static Dictionary<int, KwItem> kwItems2 = new Dictionary<int, KwItem>();
@@ -50,8 +48,8 @@ namespace dataquery
         /// </summary>
         public static Dictionary<int, KwItem> KwItems2
         {
-            get { return SecurityService.kwItems2; }
-            set { SecurityService.kwItems2 = value; }
+            get { return EMSecurityService.kwItems2; }
+            set { EMSecurityService.kwItems2 = value; }
         }
 
         /// <summary>
@@ -63,8 +61,8 @@ namespace dataquery
             String sPath = Application.StartupPath + "\\securities.txt";
             if (loadAll || !File.Exists(sPath))
             {
-                List<KwItem> items = DataCenter.SecurityService.GetKwItems();
-                Dictionary<String, KwItem> availableItems = SecurityService.GetAvailableItems(items);
+                List<KwItem> items = DataCenter.EMSecurityService.GetKwItems();
+                Dictionary<String, KwItem> availableItems = EMSecurityService.GetAvailableItems(items);
                 StringBuilder sb = new StringBuilder();
                 foreach (String key in availableItems.Keys)
                 {
@@ -72,13 +70,13 @@ namespace dataquery
                     sb.Append(key + "," + availableItems[key].Name + "\r\n");
                 }
                 File.WriteAllText(Application.StartupPath + "\\codes.txt", sb.ToString());
-                SecurityService.KwItems = availableItems;
-                File.WriteAllText(sPath, JsonConvert.SerializeObject(SecurityService.KwItems), Encoding.Default);
-                //File.WriteAllText(sPath, DataCenter.SecurityService.KwItemsToString(), Encoding.Default);
+                EMSecurityService.KwItems = availableItems;
+                File.WriteAllText(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems), Encoding.Default);
+                //File.WriteAllText(sPath, DataCenter.EMSecurityService.KwItemsToString(), Encoding.Default);
             }
             else
             {
-                SecurityService.KwItems = JsonConvert.DeserializeObject<Dictionary<String, KwItem>>(File.ReadAllText(sPath, Encoding.Default));
+                EMSecurityService.KwItems = JsonConvert.DeserializeObject<Dictionary<String, KwItem>>(File.ReadAllText(sPath, Encoding.Default));
                 foreach (String key in KwItems.Keys)
                 {
                     kwItems2[KwItems[key].Innercode] = KwItems[key];
@@ -586,117 +584,6 @@ namespace dataquery
             Console.WriteLine("1");
             return items;
         }
-        
-        /// <summary>
-        /// 接收数据方法
-        /// </summary>
-        /// <param name="data">数据</param>
-        public override void OnReceive(HttpData data)
-        {
-            //在这里处理请求
-            if (data.m_method == "GET")
-            {
-                string modulename = data.m_parameters["modulename"];//键盘精灵
-                if (modulename == "getsecurity")
-                {
-                    //http://localhost:1445/?modulename=getsecurity
-                    data.m_resStr = KwItemsToString();
-                }
-                //重新拉取键盘精灵
-                else if (modulename == "updatesecurity")
-                {
-                    //http://localhost:1445/?modulename=updatesecurity
-                    List<KwItem> items = DataCenter.SecurityService.GetKwItems();
-                    Dictionary<String, KwItem> availableItems = SecurityService.GetAvailableItems(items);
-                    SecurityService.KwItems = availableItems;
-                }
-                //指标
-                else if (modulename == "30000")
-                {
-                    //http://localhost:1445/?moduleid=30000&indicatorCode=100000000000870&blockType=STOCK&blockID=001001
-                    String indicatorCode = data.m_parameters["indicatorcode"];
-                    String blockType = data.m_parameters["blocktype"];
-                    String blockID = data.m_parameters["blockid"];
-                    if (BlockService.BlockDetails.ContainsKey(blockID))
-                    {
-                        List<DMBlockDetailItem> items = BlockService.BlockDetails[blockID];
-                        String codes = "";
-                        for (int i = 0; i < items.Count; i++)
-                        {
-                            codes += items[i].code;
-                            if (i != items.Count - 1)
-                            {
-                                codes += ",";
-                            }
-                        }
-                        data.m_resStr = JsonConvert.SerializeObject(IndicatorForm.GetIndicatorData(indicatorCode, blockType, codes));
-                    }
-                }
-                //专题
-                else if (modulename == "40000")
-                {
-                    //http://localhost:1445?moduleid=40000&specialCode=100000000025921
-                    String specialCode = data.m_parameters["specialcode"];
-                    data.m_resStr = JsonConvert.SerializeObject(SpecialForm.QuerySpecialIndicator(specialCode));
-                }
-                //宏观
-                else if (modulename == "50000")
-                {
-                    //http://localhost:1445?moduleid=50000&macCode=EMM00000004&macType=China
-                    String macCode = data.m_parameters["maccode"];
-                    String macType = data.m_parameters["mactype"];
-                    data.m_resStr = JsonConvert.SerializeObject(MacIndustyForm.GetMacIndustyData(macCode, macType));
-                }
-                //个股新闻公告研报明细文字
-                else if (modulename == "60000")
-                {
-                    //http://localhost:1445?moduleid=60000&infocode=NW20170401725887367&infotype=1
-                    String infoCode = data.m_parameters["infocode"];
-                    String infoType = data.m_parameters["infotype"];
-                    if (infoType == "1")
-                    {
-                        data.m_resStr = StockNewsDataHelper.GetRealTimeInfoByCode(infoCode);
-                    }
-                    else if (infoType == "2")
-                    {
-                        data.m_resStr = NoticeDataHelper.GetRealTimeInfoByCode(infoCode);
-                    }
-                    else if (infoType == "3")
-                    {
-                        data.m_resStr = ReportDataHelper.GetRealTimeInfoByCode(infoCode);
-                    }
-                }
-                //个股资讯列表
-                else if (modulename == "70000")
-                {
-                    //http://localhost:1445?moduleid=70000&codes=601857.SH
-                    String codes = data.m_parameters["codes"];
-                    //取列表
-                    data.m_resStr = JsonConvert.SerializeObject(SingleInfoForm.GetSingleInfos(codes));
-                }
-                //全部新闻
-                else if (modulename == "80000")
-                {
-                    //http://localhost:1445?moduleid=80000&id=S888005001
-                    String id = data.m_parameters["id"];
-                    data.m_resStr = StockNewsDataHelper.GetNewsById(id, "0", "100", "desc", "").ToString();
-                }
-                //全部公告
-                else if (modulename == "90000")
-                {
-                    //http://localhost:1445?moduleid=90000&id=S004009
-                    String id = data.m_parameters["id"];
-                    data.m_resStr = NoticeDataHelper.GetNoticeById(id, "0", "100", "desc", "").ToString();
-                }
-                //全部研报
-                else if (modulename == "100000")
-                {
-                    //http://localhost:1445?moduleid=100000&id=S103001
-                    String id = data.m_parameters["id"];
-                    data.m_resStr = ReportDataHelper.GetReportByTreeNode("", "", id, "0", "100", "desc", "", "");
-                }
-            }
-        }
 
         /// <summary>
         /// 键盘精灵数据转换成字符串
@@ -705,7 +592,7 @@ namespace dataquery
         public String KwItemsToString()
         {
             StringBuilder sb = new StringBuilder(1024000);
-            foreach (KeyValuePair<String, KwItem> item in SecurityService.KwItems)
+            foreach (KeyValuePair<String, KwItem> item in EMSecurityService.KwItems)
             {
                 sb.AppendLine(item.Value.ToString());
             }

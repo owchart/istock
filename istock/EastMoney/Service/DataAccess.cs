@@ -7,11 +7,8 @@ using EmCore;
 using EmSerDataService;
 using System.Net;
 using System.IO;
-using EastMoney.FM.Web.Models.Enum;
-using EastMoney.FM.Web.Data.Model;
 
-
-namespace EastMoney.FM.Web.Data
+namespace OwLib
 {
     public class DataAccess
     {

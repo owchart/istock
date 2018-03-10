@@ -294,14 +294,11 @@
     <Compile Include="EastMoney\Quote\TypeDefine.cs" />
     <Compile Include="EastMoney\Service\BlockService.cs" />
     <Compile Include="EastMoney\Service\DataAccess.cs" />
-    <Compile Include="EastMoney\Service\DataCenter.cs" />
     <Compile Include="EastMoney\Service\DataSourceService.cs" />
     <Compile Include="EastMoney\Service\HttpEasyService.cs" />
-    <Compile Include="EastMoney\Service\NodeService.cs" />
     <Compile Include="EastMoney\Service\QuoteSequencService.cs" />
     <Compile Include="EastMoney\Service\Security.cs" />
-    <Compile Include="EastMoney\Service\SecurityService.cs" />
-    <Compile Include="EastMoney\Service\UserSecurityService.cs" />
+    <Compile Include="EastMoney\Service\EMSecurityService.cs" />
     <Compile Include="EastMoney\Special\BindFilter.cs" />
     <Compile Include="EastMoney\Special\CommonContant.cs" />
     <Compile Include="EastMoney\Special\CommonService.cs" />
@@ -336,23 +333,11 @@
     <Compile Include="EastMoney\Web\StockNewsDataHelper.cs" />
     <Compile Include="EastMoney\Web\TradeInfoDataHelper.cs" />
     <Compile Include="EastMoney\Web\WebDataSource.cs" />
-    <Compile Include="Form\EcomomyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\EcomomyForm.designer.cs">
-      <DependentUpon>EcomomyForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\FormulaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\FormulaForm.designer.cs">
       <DependentUpon>FormulaForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FutureF9Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FutureF9Form.designer.cs">
-      <DependentUpon>FutureF9Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\IndicatorForm.cs">
       <SubType>Form</SubType>
@@ -366,41 +351,17 @@
     <Compile Include="Form\MacIndustyForm.designer.cs">
       <DependentUpon>MacIndustyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\MainForm.designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\NewStockForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\NewStockForm.designer.cs">
-      <DependentUpon>NewStockForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\NoticeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\NoticeForm.designer.cs">
       <DependentUpon>NoticeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\OtherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\OtherForm.Designer.cs">
-      <DependentUpon>OtherForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\ReportForm.designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\SecurityForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\SecurityForm.designer.cs">
-      <DependentUpon>SecurityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\SingleInfoForm.cs">
       <SubType>Form</SubType>
@@ -414,23 +375,11 @@
     <Compile Include="Form\SpecialForm.designer.cs">
       <DependentUpon>SpecialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\StockF9Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\StockF9Form.designer.cs">
-      <DependentUpon>StockF9Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\StockNewsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\StockNewsForm.designer.cs">
       <DependentUpon>StockNewsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\TradeInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\TradeInfoForm.designer.cs">
-      <DependentUpon>TradeInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -471,14 +420,8 @@
     <Compile Include="Form\QuoteForm.Designer.cs">
       <DependentUpon>QuoteForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form\EcomomyForm.resx">
-      <DependentUpon>EcomomyForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormulaForm.resx">
       <DependentUpon>FormulaForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FutureF9Form.resx">
-      <DependentUpon>FutureF9Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\IndicatorForm.resx">
       <DependentUpon>IndicatorForm.cs</DependentUpon>
@@ -486,23 +429,11 @@
     <EmbeddedResource Include="Form\MacIndustyForm.resx">
       <DependentUpon>MacIndustyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\NewStockForm.resx">
-      <DependentUpon>NewStockForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\NoticeForm.resx">
       <DependentUpon>NoticeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\OtherForm.resx">
-      <DependentUpon>OtherForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\SecurityForm.resx">
-      <DependentUpon>SecurityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SingleInfoForm.resx">
       <DependentUpon>SingleInfoForm.cs</DependentUpon>
@@ -510,14 +441,8 @@
     <EmbeddedResource Include="Form\SpecialForm.resx">
       <DependentUpon>SpecialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\StockF9Form.resx">
-      <DependentUpon>StockF9Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\StockNewsForm.resx">
       <DependentUpon>StockNewsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\TradeInfoForm.resx">
-      <DependentUpon>TradeInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

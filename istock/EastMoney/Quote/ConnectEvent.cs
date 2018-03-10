@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
- 
 using System.Text;
 using EmCore;
-using EmQComm;
 using EmSocketClient;
 
-namespace EmQTCP
+namespace OwLib
 {
     /// <summary>
     /// 收到数据后的发生事件的参数,ConnectManager中用到

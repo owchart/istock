@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
-using  EmReportWatch.SpecialAttribute;
 
-namespace  EmReportWatch.SpecialEntity.Entity
+namespace OwLib
 {
     /// <summary>
     /// 表格列
     /// </summary>
     [Serializable]
-    public class GridColumn : IComparable, ICloneable
+    public class EMGridColumn : IComparable, ICloneable
     {
         /// <summary>
         /// 日期控件值
@@ -393,7 +392,7 @@ namespace  EmReportWatch.SpecialEntity.Entity
         public int CompareTo(object obj)
         {
 
-            GridColumn o = obj as GridColumn;
+            EMGridColumn o = obj as EMGridColumn;
             if (o == null)
                 return 0;
             if (VisibleIndex < o.VisibleIndex)
@@ -407,7 +406,7 @@ namespace  EmReportWatch.SpecialEntity.Entity
         /// 拷贝
         /// </summary>
         /// <param name="column">数据列</param>
-        public void CopyTo(ref GridColumn column)
+        public void CopyTo(ref EMGridColumn column)
         {
             column.SourceName = SourceName;
             column.Caption = Caption;
@@ -456,7 +455,7 @@ namespace  EmReportWatch.SpecialEntity.Entity
         /// <returns></returns>
         public object Clone()
         {
-            GridColumn column = new GridColumn
+            EMGridColumn column = new EMGridColumn
                                     {
                                         UrlCaptionCol =this.UrlCaptionCol ,
                                         UrlShowName =this.UrlShowName ,

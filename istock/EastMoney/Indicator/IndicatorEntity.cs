@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     [Serializable]
     public class IndicatorEntity

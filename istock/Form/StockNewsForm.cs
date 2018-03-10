@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// 股票新闻

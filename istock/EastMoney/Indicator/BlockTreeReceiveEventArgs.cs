@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     /// <summary>
     /// 板块重新加载成功回调委托

@@ -1,4 +1,4 @@
-﻿namespace EmMacIndustry.Model.Enum
+﻿namespace OwLib
 {
     using System;
 

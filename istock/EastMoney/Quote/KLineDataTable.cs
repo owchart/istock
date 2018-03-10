@@ -2,10 +2,9 @@
 using System.Collections.Generic;
  
 using System.Text;
-using EmQComm;
 using System.Collections;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// KLineDataTable

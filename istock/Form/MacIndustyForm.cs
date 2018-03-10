@@ -6,15 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using dataquery.indicator;
 using System.IO;
 using EmCore.Utils;
 using Newtonsoft.Json;
-using EastMoney.FM.Web.Data;
-using EmMacIndustry.Model.Enum;
-using EmMacIndustry.DAL;
 
-namespace dataquery
+namespace OwLib
 {
     /// <summary>
     /// ºê¹ÛÊý¾Ý

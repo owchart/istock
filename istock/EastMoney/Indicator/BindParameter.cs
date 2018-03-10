@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     [Serializable]
     public class BindParamter

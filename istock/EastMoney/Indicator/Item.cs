@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class Item
     {

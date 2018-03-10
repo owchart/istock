@@ -1,6 +1,5 @@
-﻿namespace EmMacIndustry.Entity
+﻿namespace OwLib
 {
-    using EmMacIndustry.Model.Enum;
     using System;
 
     public class FindIndicator

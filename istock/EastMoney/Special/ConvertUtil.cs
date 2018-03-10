@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace  EmReportWatch.Util
+namespace OwLib
 {
     /// <summary>
     /// 转换类

@@ -1,4 +1,4 @@
-﻿namespace dataquery
+﻿namespace OwLib
 {
     partial class NoticeForm
     {

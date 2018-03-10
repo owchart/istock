@@ -4,11 +4,10 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using EmCore;
-using EmQComm;
 using EmSerDataService;
 using EmSocketClient;
 
-namespace EmQTCP
+namespace OwLib
 {
     public class SendPacket
     {

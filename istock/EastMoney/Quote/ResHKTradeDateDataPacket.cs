@@ -1,4 +1,4 @@
-﻿namespace EmQComm
+﻿namespace OwLib
 {
     using System;
     using System.IO;
@@ -12,9 +12,9 @@
             {
                 short num3 = br.ReadInt16();
                 OneMarketTradeDateDataRec rec = new OneMarketTradeDateDataRec();
-                rec.MarketTypeCode = (EmQComm.TypeCode) num3;
+                rec.MarketTypeCode = (TypeCode) num3;
                 rec.DstStatus = br.ReadByte();
-                TimeUtilities.SetSummerFlag((EmQComm.TypeCode) num3, rec.DstStatus);
+                TimeUtilities.SetSummerFlag((TypeCode) num3, rec.DstStatus);
                 byte num4 = br.ReadByte();
                 for (byte j = 0; j < num4; j = (byte) (j + 1))
                 {
@@ -23,7 +23,7 @@
                     item.Type = br.ReadByte();
                     rec.TradeDateDict.Add(item);
                 }
-                TimeUtilities.TypeCodeTradeDate[(EmQComm.TypeCode) num3] = rec;
+                TimeUtilities.TypeCodeTradeDate[(TypeCode) num3] = rec;
             }
             return true;
         }

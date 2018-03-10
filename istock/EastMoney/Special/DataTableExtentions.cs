@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace EmReportWatch.Business
+namespace OwLib
 {
     /// <summary>
     /// 数据表逻辑处理
@@ -61,7 +61,7 @@ namespace EmReportWatch.Business
             target.AcceptChanges();
             // target.EndLoadData();
  
-            SpecialCommon.CommonService.DisposeDataTable(Source);
+            CommonService.DisposeDataTable(Source);
 
         }
 

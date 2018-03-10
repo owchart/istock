@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using EmCore;
-using EastMoney.FM.Web.Data;
 
-namespace dataquery.Service
+namespace OwLib
 {
     public class DataSourceService
     {

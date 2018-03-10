@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
- 
 using System.Text;
-using EmQComm;
-using EmQTCP;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// DataTableBase

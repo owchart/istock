@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
-    public class IndicatorDataPacket : DataPacketBase
+    public class IndicatorDataPacket2 : DataPacketBase
     {
         private Dictionary<int, List<String>> _categoryStockCodeDict = new Dictionary<int, List<String>>();
         private List<int> _customerIndicatorIdList;
@@ -13,7 +13,7 @@ namespace dataquery.indicator
         private CommonEnumerators.IndicatorRequestType _requestDataType;
         private List<StockEntity> _stockList;
 
-        public IndicatorDataPacket(CommonEnumerators.IndicatorRequestType requestDatType, List<StockEntity> stockList, List<int> customerIndicatorIdList)
+        public IndicatorDataPacket2(CommonEnumerators.IndicatorRequestType requestDatType, List<StockEntity> stockList, List<int> customerIndicatorIdList)
         {
             base.RequestId = RequestType.IndicatorData;
             this._requestDataType = requestDatType;
@@ -99,7 +99,7 @@ namespace dataquery.indicator
                 }
                 this._categoryStockCodeDict[entity2.CategoryCode].Add(entity2.StockCode);
             }
-            if (_requestDataType != dataquery.indicator.CommonEnumerators.IndicatorRequestType.Blk)
+            if (_requestDataType != CommonEnumerators.IndicatorRequestType.Blk)
             {
                 List<String> list5 = new List<String>();
                 foreach (KeyValuePair<int, List<String>> pair in this._categoryStockCodeDict)

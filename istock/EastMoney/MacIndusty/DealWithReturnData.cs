@@ -1,4 +1,4 @@
-﻿namespace EmMacIndustry.DAL
+﻿namespace OwLib
 {
     using System;
     using System.Data;

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EastMoney.FM.Web.Data;
 using Newtonsoft.Json;
 using System.Web;
 using System.Net;
 
-namespace dataquery.Web
+namespace OwLib
 {
     /// <summary>
     /// 基础数据请求模板

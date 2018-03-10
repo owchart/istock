@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using EmCore;
 
-namespace dataquery.indicator
+namespace OwLib
 {
     public class IndicatorEntityDataPacket : DataPacketBase
     {

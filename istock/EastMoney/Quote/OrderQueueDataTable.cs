@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
- 
 using System.Text;
-using EmQComm;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// OrderQueueDataTable

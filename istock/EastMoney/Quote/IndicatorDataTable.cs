@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using EmQComm;
 
-namespace EmQDataCore
+namespace OwLib
 {
     /// <summary>
     /// 行业指标面板需求
@@ -17,8 +16,8 @@ namespace EmQDataCore
         {
             AllLeftItems = new Dictionary<string, StockIndicatorLeftItem>();
             AllRightItems = new Dictionary<string, StockIndicatorRightItem>();
-            DicLeftIndicatorOfStock = new Dictionary<int, EmQComm.HashSet<string>>();
-            DicRightIndicatorOfStock = new Dictionary<int, EmQComm.HashSet<string>>();
+            DicLeftIndicatorOfStock = new Dictionary<int, HashSet<string>>();
+            DicRightIndicatorOfStock = new Dictionary<int, HashSet<string>>();
         }
 
         /// <summary>
@@ -36,12 +35,12 @@ namespace EmQDataCore
         /// Cache of the left-side macro-indicator Id list belong to the stock.
         /// ( Key is the stock id, value is macro-indicator Id list.)
         /// </summary>
-        public Dictionary<int, EmQComm.HashSet<string>> DicLeftIndicatorOfStock;
+        public Dictionary<int, HashSet<string>> DicLeftIndicatorOfStock;
         /// <summary>
         /// Cache of the right-side macro-indicator Id list belong to the stock.
         /// ( Key is the stock id, value is macro-indicator Id list.)
         /// </summary> 
-        public Dictionary<int, EmQComm.HashSet<string>> DicRightIndicatorOfStock;
+        public Dictionary<int, HashSet<string>> DicRightIndicatorOfStock;
 
         /// <summary>
         /// Cache of the macro-indicator value list.

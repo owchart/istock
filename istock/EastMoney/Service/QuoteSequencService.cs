@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.IO;
 
-namespace dataquery
+namespace OwLib
 {
     public class QuoteSequencService
     {
@@ -62,7 +62,7 @@ namespace dataquery
         public static void DownAllStockHistory(int index)
         {
             List<KwItem> availableItems = new List<KwItem>();
-            foreach (KwItem item in SecurityService.KwItems.Values)
+            foreach (KwItem item in EMSecurityService.KwItems.Values)
             {
                 availableItems.Add(item);
             }

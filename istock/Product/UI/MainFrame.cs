@@ -124,7 +124,7 @@ namespace OwLib
                 if (name == "btnAdd")
                 {
                     String code = FindControl("txtCode").Text;
-                    Security security = new Security();
+                    GSecurity security = new GSecurity();
                     if (SecurityService.GetSecurityByCode(code, ref security) > 0)
                     {
                         AddUserSecurity(code);
@@ -216,6 +216,7 @@ namespace OwLib
             m_gridUserSecurities.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             m_gridUserSecurities.RegisterEvent(new ControlTimerEvent(TimerEvent), EVENTID.TIMER);
             m_gridUserSecurities.StartTimer(m_timerID, 1000);
+            ChartEx chartEx = new ChartEx(this);
         }
 
         /// <summary>
@@ -296,7 +297,7 @@ namespace OwLib
                 {
                     GridRow row = rows[i];
                     String code = row.GetCell("colP1").GetString();
-                    Security security = new Security();
+                    GSecurity security = new GSecurity();
                     row.GetCell("colP1").Style.ForeColor = COLOR.ARGB(255, 255, 255);
                     SecurityLatestData latestData = new SecurityLatestData();
                     SecurityService.GetSecurityByCode(code, ref security);

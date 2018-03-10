@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OwLibSV
+namespace OwLib
 {
     /// <summary>
     /// 股票信息
     /// </summary>
-    public class Security
+    public class GSecurity
     {
         #region Lord 2016/4/20
         /// <summary>
         /// 创建键盘精灵
         /// </summary>
-        public Security()
+        public GSecurity()
         {
         }
 
@@ -119,6 +119,26 @@ namespace OwLibSV
         public double m_amount;
 
         /// <summary>
+        /// 委买总量
+        /// </summary>
+        public double m_allBuyVol;
+
+        /// <summary>
+        /// 委卖总量
+        /// </summary>
+        public double m_allSellVol;
+
+        /// <summary>
+        /// 加权平均委卖价格
+        /// </summary>
+        public double m_avgBuyPrice;
+
+        /// <summary>
+        /// 加权平均委卖价格
+        /// </summary>
+        public double m_avgSellPrice;
+
+        /// <summary>
         /// 买一量
         /// </summary>
         public int m_buyVolume1;
@@ -144,6 +164,31 @@ namespace OwLibSV
         public int m_buyVolume5;
 
         /// <summary>
+        /// 买五量
+        /// </summary>
+        public int m_buyVolume6;
+
+        /// <summary>
+        /// 买五量
+        /// </summary>
+        public int m_buyVolume7;
+
+        /// <summary>
+        /// 买五量
+        /// </summary>
+        public int m_buyVolume8;
+
+        /// <summary>
+        /// 买五量
+        /// </summary>
+        public int m_buyVolume9;
+
+        /// <summary>
+        /// 买五量
+        /// </summary>
+        public int m_buyVolume10;
+
+        /// <summary>
         /// 买一价
         /// </summary>
         public double m_buyPrice1;
@@ -167,6 +212,31 @@ namespace OwLibSV
         /// 买五价
         /// </summary>
         public double m_buyPrice5;
+
+        /// <summary>
+        /// 买一价
+        /// </summary>
+        public double m_buyPrice6;
+
+        /// <summary>
+        /// 买二价
+        /// </summary>
+        public double m_buyPrice7;
+
+        /// <summary>
+        /// 买三价
+        /// </summary>
+        public double m_buyPrice8;
+
+        /// <summary>
+        /// 买四价
+        /// </summary>
+        public double m_buyPrice9;
+
+        /// <summary>
+        /// 买五价
+        /// </summary>
+        public double m_buyPrice10;
 
         /// <summary>
         /// 当前价格
@@ -244,6 +314,31 @@ namespace OwLibSV
         public int m_sellVolume5;
 
         /// <summary>
+        /// 卖一量
+        /// </summary>
+        public int m_sellVolume6;
+
+        /// <summary>
+        /// 卖二量
+        /// </summary>
+        public int m_sellVolume7;
+
+        /// <summary>
+        /// 卖三量
+        /// </summary>
+        public int m_sellVolume8;
+
+        /// <summary>
+        /// 卖四量
+        /// </summary>
+        public int m_sellVolume9;
+
+        /// <summary>
+        /// 卖五量
+        /// </summary>
+        public int m_sellVolume10;
+
+        /// <summary>
         /// 卖一价
         /// </summary>
         public double m_sellPrice1;
@@ -267,6 +362,31 @@ namespace OwLibSV
         /// 卖五价
         /// </summary>
         public double m_sellPrice5;
+
+        /// <summary>
+        /// 卖一价
+        /// </summary>
+        public double m_sellPrice6;
+
+        /// <summary>
+        /// 卖二价
+        /// </summary>
+        public double m_sellPrice7;
+
+        /// <summary>
+        /// 卖三价
+        /// </summary>
+        public double m_sellPrice8;
+
+        /// <summary>
+        /// 卖四价
+        /// </summary>
+        public double m_sellPrice9;
+
+        /// <summary>
+        /// 卖五价
+        /// </summary>
+        public double m_sellPrice10;
 
         /// <summary>
         /// 期货结算价
@@ -374,5 +494,166 @@ namespace OwLibSV
             return false;
         }
         #endregion
+    }
+
+    /// <summary>
+    /// 历史数据信息
+    /// </summary>
+    public class HistoryDataInfo
+    {
+        #region Lord 2016/3/27
+        /// <summary>
+        /// 周期
+        /// </summary>
+        public int m_cycle;
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public double m_endDate;
+
+        /// <summary>
+        /// 是否需要推送数据
+        /// </summary>
+        public bool m_pushData;
+
+        /// <summary>
+        /// 股票代码
+        /// </summary>
+        public String m_securityCode;
+
+        /// <summary>
+        /// 数据条数
+        /// </summary>
+        public int m_size;
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public double m_startDate;
+
+        /// <summary>
+        /// 复权模式
+        /// </summary>
+        public int m_subscription;
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public int m_type;
+        #endregion
+    }
+
+    /// <summary>
+    /// 最新数据信息
+    /// </summary>
+    public class LatestDataInfo
+    {
+        #region Lord 2016/5/18
+        /// <summary>
+        /// 代码
+        /// </summary>
+        public String m_codes = "";
+
+        /// <summary>
+        /// 格式
+        /// </summary>
+        public int m_formatType;
+
+        /// <summary>
+        /// 是否包含LV2
+        /// </summary>
+        public int m_lv2;
+
+        /// <summary>
+        /// 数据条数
+        /// </summary>
+        public int m_size;
+        #endregion
+    }
+
+    /// <summary>
+    /// 公共字段
+    /// </summary>
+    public class KeyFields
+    {
+        #region Lord 2016/10/03
+        /// <summary>
+        /// 收盘价
+        /// </summary>
+        public const String CLOSE = "CLOSE";
+        /// <summary>
+        /// 最高价
+        /// </summary>
+        public const String HIGH = "HIGH";
+        /// <summary>
+        /// 最低价
+        /// </summary>
+        public const String LOW = "LOW";
+        /// <summary>
+        /// 开盘价
+        /// </summary>
+        public const String OPEN = "OPEN";
+        /// <summary>
+        /// 成交量
+        /// </summary>
+        public const String VOL = "VOL";
+        /// <summary>
+        /// 成交额
+        /// </summary>
+        public const String AMOUNT = "AMOUNT";
+
+        /// <summary>
+        /// 平均价格
+        /// </summary>
+        public const String AVGPRICE = "AVGPRICE";
+
+        /// <summary>
+        /// 收盘价字段
+        /// </summary>
+        public const int CLOSE_INDEX = 0;
+        /// <summary>
+        /// 最高价字段
+        /// </summary>
+        public const int HIGH_INDEX = 1;
+        /// <summary>
+        /// 最低价字段
+        /// </summary>
+        public const int LOW_INDEX = 2;
+        /// <summary>
+        /// 开盘价字段
+        /// </summary>
+        public const int OPEN_INDEX = 3;
+        /// <summary>
+        /// 成交量字段
+        /// </summary>
+        public const int VOL_INDEX = 4;
+        /// <summary>
+        /// 成交额字段
+        /// </summary>
+        public const int AMOUNT_INDEX = 5;
+
+        /// <summary>
+        /// 平均价格字段
+        /// </summary>
+        public const int AVGPRICE_INDEX = 6;
+        #endregion
+    }
+
+    /// <summary>
+    /// 指标数据
+    /// </summary>
+    public class IndicatorData
+    {
+        /// <summary>
+        /// 参数
+        /// </summary>
+        public String m_parameters;
+
+        /// <summary>
+        /// 脚本
+        /// </summary>
+        public String m_script;
+
     }
 }

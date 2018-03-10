@@ -54,6 +54,19 @@ namespace OwLib
             set { DataCenter.m_isAppAlive = value; }
         }
 
+        /// <summary>
+        /// 画线工具
+        /// </summary>
+        private static Dictionary<String, String> m_plots = new Dictionary<String, String>();
+
+        /// <summary>
+        /// 获取画线工具
+        /// </summary>
+        public static Dictionary<String, String> Plots
+        {
+            get { return m_plots; }
+        }
+
         private static UserCookieService m_userCookieService;
 
         /// <summary>
@@ -152,11 +165,47 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 读取所有的画线工具
+        /// </summary>
+        private static void ReadPlots()
+        {
+            String xmlPath = Path.Combine(GetAppPath(), "config\\Plots.xml");
+            m_plots.Clear();
+            if (File.Exists(xmlPath))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(xmlPath);
+                XmlNode rootNode = xmlDoc.DocumentElement;
+                foreach (XmlNode node in rootNode.ChildNodes)
+                {
+                    if (node.Name.ToUpper() == "PLOT")
+                    {
+                        String name = String.Empty;
+                        String text = String.Empty;
+                        foreach (XmlNode childeNode in node.ChildNodes)
+                        {
+                            if (childeNode.Name.ToUpper() == "NAME")
+                            {
+                                name = childeNode.InnerText;
+                            }
+                            else if (childeNode.Name.ToUpper() == "TEXT")
+                            {
+                                text = childeNode.InnerText;
+                            }
+                        }
+                        m_plots[name] = text;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 启动服务
         /// </summary>
         /// <param name="fileName">文件名</param>
         public static void StartService()
         {
+            ReadPlots();
             m_userCookieService = new UserCookieService();
             m_exportService = new ExportService();
             m_userSecurityService = new UserSecurityService();

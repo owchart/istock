@@ -19,7 +19,7 @@ namespace OwLib
         /// <summary>
         /// 代码表字典
         /// </summary>
-        public static Dictionary<String, Security> m_codedMap = new Dictionary<String, Security>();
+        public static Dictionary<String, GSecurity> m_codedMap = new Dictionary<String, GSecurity>();
 
         /// <summary>
         /// 昨日数据
@@ -49,7 +49,7 @@ namespace OwLib
         /// <summary>
         /// 股票列表
         /// </summary>
-        private static List<Security> m_securities = new List<Security>();
+        private static List<GSecurity> m_securities = new List<GSecurity>();
 
         /// <summary>
         /// 今日时间
@@ -100,7 +100,7 @@ namespace OwLib
         /// </summary>
         /// <param name="code">合约代码</param>
         /// <param name="sd">out 股票基本信息</param>
-        public static int GetSecurityByCode(String code, ref Security security)
+        public static int GetSecurityByCode(String code, ref GSecurity security)
         {
             int ret = 0;
             foreach (String key in m_codedMap.Keys)
@@ -133,7 +133,7 @@ namespace OwLib
                 String pCode = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[0];
                 String code = CStrA.ConvertFileCodeToMemoryCode(pCode);
                 String cName = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[1];
-                Security security =  new Security();
+                GSecurity security =  new GSecurity();
                 security.m_code = code;
                 security.m_name = cName;
                 m_codedMap[code] = security;
@@ -385,7 +385,7 @@ namespace OwLib
             SecurityService.GetCodes(codes);
             foreach (String code in codes)
             {
-                Security security = new Security();
+                GSecurity security = new GSecurity();
                 if (SecurityService.GetSecurityByCode(code, ref security) == 1)
                 {
                     if (security.m_name.IndexOf("ST") == 0)
@@ -406,7 +406,7 @@ namespace OwLib
             SecurityService.GetCodes(codes);
             foreach (String code in codes)
             {
-                Security security = new Security();
+                GSecurity security = new GSecurity();
                 if (SecurityService.GetSecurityByCode(code, ref security) == 1)
                 {
                     if (security.m_name.IndexOf("*ST") == 0)
@@ -646,7 +646,7 @@ namespace OwLib
                 for (int i = 0; i < strs.Length; i++)
                 {
                     String[] subStrs = strs[i].Split(',');
-                    Security security = new Security();
+                    GSecurity security = new GSecurity();
                     security.m_code = CStrA.ConvertFileCodeToMemoryCode(subStrs[0]);
                     security.m_name = subStrs[1];
                     lock (m_securities)

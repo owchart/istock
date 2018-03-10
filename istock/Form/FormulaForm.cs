@@ -24,7 +24,7 @@ namespace OwLib
             InitializeComponent();
         }
 
-        private static IList<Indicator> indicators = new List<Indicator>();
+        private static IList<EMIndicator> indicators = new List<EMIndicator>();
 
         /// <summary>
         /// 析构函数
@@ -36,7 +36,7 @@ namespace OwLib
             int formulasSize = formulas.Count;
             for (int i = 0; i < formulasSize; i++)
             {
-                indicators.Add(new Indicator(formulas[i]));
+                indicators.Add(new EMIndicator(formulas[i]));
             }
         }
 
@@ -92,7 +92,7 @@ namespace OwLib
             {
                 List<OneDayDataRec> list = JsonConvert.DeserializeObject<List<OneDayDataRec>>(hisData);
                 int listSize = list.Count;
-                Indicator indicator = indicators[lbFormula.SelectedIndex];
+                EMIndicator indicator = indicators[lbFormula.SelectedIndex];
                 indicator.QuoteData.Clear();
                 FORMULA_TIME begin, end;
                 begin = new FORMULA_TIME();
@@ -175,7 +175,7 @@ namespace OwLib
             }
         }
 
-        private static void GetNormalFormulaOutput(Indicator indicator, FmFormulaOutput output,
+        private static void GetNormalFormulaOutput(EMIndicator indicator, FmFormulaOutput output,
            int dataCount, int index, int selectIndex,
            MarketType2 Market, KLineCycle KLineCycle)
         {
@@ -281,7 +281,7 @@ namespace OwLib
             return result;
         }
 
-        private void GetFunctionFormulaOutput(Indicator indicator, FmFormulaOutput output, int dataCount, int index, int selectIndex)
+        private void GetFunctionFormulaOutput(EMIndicator indicator, FmFormulaOutput output, int dataCount, int index, int selectIndex)
         {
             QuoteDataStru quoteDataStru = new QuoteDataStru();
             string nameTemp = output.fmOutput[index].name.Trim('\0');
@@ -525,7 +525,7 @@ namespace OwLib
             int indicatorsSize = indicators.Count;
             for (int i = 0; i < indicatorsSize; i++)
             {
-                Indicator indicator = indicators[i];
+                EMIndicator indicator = indicators[i];
                 lbFormula.Items.Add(indicator.Formula.des.Trim() + "(" + indicator.IndicatorName + ")");
             }
         }

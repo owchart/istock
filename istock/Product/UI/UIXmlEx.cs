@@ -49,6 +49,18 @@ namespace OwLib
             {
                 return new BarrageDiv();
             }
+            else if (type == "floatdiv")
+            {
+                return new FloatDiv();
+            }
+            else if (type == "klinediv")
+            {
+                return new ChartA();
+            }
+            else if (type == "latestdiv")
+            {
+                return new LatestDiv();
+            }
             else if (type == "column" || type == "th")
             {
                 return new GridColumnEx();

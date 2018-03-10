@@ -8,7 +8,7 @@ namespace OwLib {
 	/// <summary>
 	/// 指标基类
 	/// </summary>
-	public class Indicator
+	public class EMIndicator
     {
 	    private bool _flagIndicatorSelected;
 	    private Formulatype _formtype;
@@ -124,7 +124,7 @@ namespace OwLib {
 	    /// <summary>
         /// 构造函数
         /// </summary>
-        public Indicator(Formulatype formtype, string indicatorName)
+        public EMIndicator(Formulatype formtype, string indicatorName)
         {
             IndicatorRegion = new Region();
             QuoteData=new List<QuoteDataStru>();
@@ -135,7 +135,7 @@ namespace OwLib {
             Formula = tempFormla;
         }
 
-        public Indicator(Formula f)
+        public EMIndicator(Formula f)
         {
             Formula = f;
             IndicatorRegion = new Region();
@@ -145,7 +145,7 @@ namespace OwLib {
             PicLoc = (PicLocationType)f.drawtype;
         }
 
-        public Indicator()
+        public EMIndicator()
         {
             IndicatorRegion = new Region();
             QuoteData = new List<QuoteDataStru>();

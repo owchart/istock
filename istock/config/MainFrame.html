@@ -6,7 +6,7 @@
   </head>
   <body>
     <div type="tabcontrol" dock="fill" selectedindex="0">
-      <div name="TabPage" text="股票列表" type="tabpage">
+      <div name="TabPage" text="报价列表" type="tabpage">
         <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
           <div name="Div">
             <label name="Label" text="选择股票" location="11,15" size="60,17" />
@@ -29,9 +29,60 @@
           </table>
         </div>
       </div>
-      <div name="TabPage2" text="数据落地" type="tabpage">
+      <div name="TabPage2" text="K线图" type="tabpage">
+      <div type="splitlayout" name="chartdiv" dock="fill" backcolor="empty" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
+        <!--实时报价-->
+        <input type="usercontrol" cid="latestdiv" name="divLatest"/>
+        <!--K线图-->
+        <input type="usercontrol" cid="klinediv" name="divKLine"/>
+      </div>
+      </div>
+      <div name="TabPage3" text="数据落地" type="tabpage">
         <input type="button" name="btnMergeHistoryDatas" text="当天数据合并到日线" location="19,18" size="134,20" />
       </div>
     </div>
+    <!--浮动数据-->
+    <usercontrol cid="floatdiv" name="divFloat" allowdrag="true" location="85,20" size="85,300" visible="false"/>
+    <!--右键菜单-->
+    <menu name="rightMenu" popup="true" size="200,225" visible="false">
+      <item text="主图类型">
+        <item name="CANDLE_STANDARD" checked="true" text="标准"/>
+        <item name="CANDLE_AMERICAN" text="美国线"/>
+        <item name="CANDLE_TOWER" text="宝塔线"/>
+        <item name="CANDLE_CLOSE" text="收盘线"/>
+      </item>
+      <item text="坐标轴类型">
+        <item name="SCALE_STANDARD" text="普通坐标系"/>
+        <item name="SCALE_LOG" text="对数坐标系"/>
+        <item name="SCALE_DIFF" text="等差坐标"/>
+        <item name="SCALE_EQUALRATIO" text="等比坐标"/>
+        <item name="SCALE_DIVIDE" text="等分坐标"/>
+        <item name="SCALE_PERCENT" text="百分比坐标"/>
+        <item name="SCALE_GOLDENRATIO" text="黄金分割坐标"/>
+        <item name="SCALE_REVERSEH" text="翻转横坐标"/>
+        <item name="SCALE_REVERSEV" text="翻转纵坐标"/>
+      </item>
+      <item text="分析周期">
+        <item name="CYCLE_MINUTELINE" text="分时线"/>
+        <item name="CYCLE_1MINUTE" text="1分钟线"/>
+        <item name="CYCLE_5MINUTE" text="5分钟线"/>
+        <item name="CYCLE_15MINUTE" text="15分钟线"/>
+        <item name="CYCLE_30MINUTE" text="30分钟线"/>
+        <item name="CYCLE_60MINUTE" text="60分钟线"/>
+        <item name="CYCLE_DAY" checked="true" text="日线"/>
+        <item name="CYCLE_WEEK" text="周线"/>
+        <item name="CYCLE_MONTH" text="月线"/>
+      </item>
+      <item text="复权处理">
+        <item name="SUBSCRIPTION_NONE" text="不复权"/>
+        <item name="SUBSCRIPTION_FRONT" checked="true" text="前复权"/>
+        <item name="SUBSCRIPTION_BACK" text="后复权"/>
+      </item>
+      <item name="ADDPLOT" text="画线工具"/>
+    </menu>
+    <!--画线工具的右键菜单-->
+    <menu name="plotRightMenu" popup="true" size="200,25" visible="false">
+      <item name="PLOT_DELETEPLOT" text="删除画线"/>
+    </menu>
   </body>
 </html>

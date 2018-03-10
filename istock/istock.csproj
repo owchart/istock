@@ -407,6 +407,11 @@
     <Compile Include="Product\UI\CDraw.cs" />
     <Compile Include="Product\UI\GdiPlusPaintEx.cs" />
     <Compile Include="Product\UI\MainFrame.cs" />
+    <Compile Include="Product\UI\Quote\FloatDiv.cs" />
+    <Compile Include="Product\UI\Quote\LatestDiv.cs" />
+    <Compile Include="Product\UI\Quote\Chart.cs" />
+    <Compile Include="Product\UI\Quote\SearchDiv.cs" />
+    <Compile Include="Product\UI\Quote\SecurityDataHelper.cs" />
     <Compile Include="Product\UI\RibbonButton.cs" />
     <Compile Include="Product\UI\UIXmlEx.cs" />
     <Compile Include="Product\UI\WindowButton.cs" />
@@ -473,6 +478,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="config\ParameterType.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Plots.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="config\ServerListPort.xml">

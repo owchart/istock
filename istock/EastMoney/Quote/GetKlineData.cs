@@ -112,13 +112,13 @@ namespace OwLib
         /// <param name="IndexCycle">指标周期</param>
         /// <param name="trendCaptialFlowDataRecs">财务数据</param>
         public static void GetIndicatorData(int code, KLineCycle cycle, MarketType market, IsDivideRightType divideType,
-             Indicator indicator, List<OneDayDataRec> kLineDataList, KLINEPERIOD indexCycle)
+             EMIndicator indicator, List<OneDayDataRec> kLineDataList, KLINEPERIOD indexCycle)
         {
             indicator.QuoteData.Clear();
             CalculateIndicatorDataByName(code, indicator, kLineDataList, divideType, indexCycle, market, cycle);
         }
 
-        public static void GetFinancialIndicatorData(int code, KLineCycle cycle, MarketType market,Indicator indicator, TrendCaptialFlowDataRec[] trendCaptialFlowDataRecs) 
+        public static void GetFinancialIndicatorData(int code, KLineCycle cycle, MarketType market, EMIndicator indicator, TrendCaptialFlowDataRec[] trendCaptialFlowDataRecs) 
         {
             CalculateFinancialIndicatorDataByName(code,cycle, indicator,market, trendCaptialFlowDataRecs);
         }
@@ -126,7 +126,7 @@ namespace OwLib
 
         #region 私有方法
         private static void CalculateFinancialIndicatorDataByName(int code, KLineCycle cycle,
-            Indicator indicator,MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRecs)
+            EMIndicator indicator, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRecs)
         {           
             try
             {
@@ -308,8 +308,8 @@ namespace OwLib
             return result;
         }
 
-        private static void CalculateDDX(int Code, KLineCycle cycle, 
-            Indicator indicator, int selectIndex,MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
+        private static void CalculateDDX(int Code, KLineCycle cycle,
+            EMIndicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
         {
             FM_FORMULA_EXTRA_CONST[] paraArr = new FM_FORMULA_EXTRA_CONST[4];
             paraArr[0] = new FM_FORMULA_EXTRA_CONST();
@@ -376,7 +376,7 @@ namespace OwLib
         }
 
         private static void CalculateDDY(int Code, KLineCycle cycle,
-            Indicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
+            EMIndicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
         {
             FM_FORMULA_EXTRA_CONST[] paraArr = new FM_FORMULA_EXTRA_CONST[6];
             paraArr[0] = new FM_FORMULA_EXTRA_CONST();
@@ -461,7 +461,7 @@ namespace OwLib
         }
 
         private static void CalculateDDZ(int Code, KLineCycle cycle,
-            Indicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
+            EMIndicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
         {
             FM_FORMULA_EXTRA_CONST[] paraArr = new FM_FORMULA_EXTRA_CONST[5];
             paraArr[0] = new FM_FORMULA_EXTRA_CONST();
@@ -525,7 +525,7 @@ namespace OwLib
         }
 
         private static void CalculateZJQS(int Code, KLineCycle cycle,
-            Indicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
+            EMIndicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
         {
             FM_FORMULA_EXTRA_CONST[] paraArr = new FM_FORMULA_EXTRA_CONST[1];
             paraArr[0] = new FM_FORMULA_EXTRA_CONST();
@@ -557,7 +557,7 @@ namespace OwLib
         }
 
         private static void CalculateZJBY(int Code, KLineCycle cycle,
-            Indicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
+            EMIndicator indicator, int selectIndex, MarketType market, TrendCaptialFlowDataRec[] trendCaptialFlowDataRec)
         {
             FM_FORMULA_EXTRA_CONST[] paraArr = new FM_FORMULA_EXTRA_CONST[9];
             paraArr[0] = new FM_FORMULA_EXTRA_CONST();
@@ -971,7 +971,7 @@ namespace OwLib
             }
         }
 
-        private static void CalculateIndicatorDataByName(int Code, Indicator indicator,
+        private static void CalculateIndicatorDataByName(int Code, EMIndicator indicator,
             List<OneDayDataRec> DrawKlineDataStruList,
             IsDivideRightType DivideType, KLINEPERIOD IndexCycle, MarketType market, KLineCycle cycle)
         {
@@ -1048,7 +1048,7 @@ namespace OwLib
             }
         }
 
-        private static void GetFunctionFormulaOutput(Indicator indicator, FmFormulaOutput output,
+        private static void GetFunctionFormulaOutput(EMIndicator indicator, FmFormulaOutput output,
             int dataCount, int index, int selectIndex)
         {
             using (QuoteDataStru quoteDataStru = new QuoteDataStru())
@@ -1446,7 +1446,7 @@ namespace OwLib
             return result;
         }
 
-        private static void GetNormalFormulaOutput(Indicator indicator, FmFormulaOutput output, 
+        private static void GetNormalFormulaOutput(EMIndicator indicator, FmFormulaOutput output, 
             int dataCount, int index, int selectIndex,
             MarketType Market, KLineCycle KLineCycle)
         {

@@ -22,7 +22,7 @@ namespace OwLib
     /// <summary>
     /// 证券服务
     /// </summary>
-    public class EMSecurityService : HttpEasyService
+    public class EMSecurityService : EMGlobalDataService
     {
         /// <summary>
         /// 创建证券服务
@@ -69,10 +69,9 @@ namespace OwLib
                     kwItems2[availableItems[key].Innercode] = availableItems[key];
                     sb.Append(key + "," + availableItems[key].Name + "\r\n");
                 }
-                File.WriteAllText(Application.StartupPath + "\\codes.txt", sb.ToString());
+                File.WriteAllText(Application.StartupPath + "\\codes.txt", sb.ToString(), Encoding.Default);
                 EMSecurityService.KwItems = availableItems;
                 File.WriteAllText(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems), Encoding.Default);
-                //File.WriteAllText(sPath, DataCenter.EMSecurityService.KwItemsToString(), Encoding.Default);
             }
             else
             {
@@ -96,20 +95,10 @@ namespace OwLib
             for (int i = 0; i < itemsSize; i++)
             {
                 KwItem item = items[i];
-                availableItems[item.Code] = item;
-                //if (item.Type == 0 || item.Type == 2)
-                //{
-                //    availableItems[item.Code] = item;
-                //}
-                //else if (item.Type == 11 || item.Type == 12 || item.Type == 50 || item.Type == 51
-                //    || item.Type == 52 || item.Type == 68 || item.Type == 80 || item.Type == 81)
-                //{
-                //    availableItems.Add(item);
-                //}
-                //else if (item.Type == 28 || item.Type == 31)
-                //{
-                //    availableItems.Add(item);
-                //}
+                if (item.Type == 1 || item.Type == 3)
+                {
+                    availableItems[item.Code] = item;
+                }
             }
             return availableItems;
         }
@@ -167,51 +156,51 @@ namespace OwLib
                     break;
                 }
             }
-            code = "";
-            time = 0;
-            while (true)
-            {
-                DMRetOutput dm1 = UpdateKeySpriteData(time, code, 0, false);
-                KwItem lastItem = null;
-                using (MemoryStream ms = new MemoryStream(dm1.ptr))
-                {
-                    using (BinaryReader br = new BinaryReader(ms))
-                    {
-                        int size = dm1.size;
-                        for (int i = 0; i < size; i++)
-                        {
-                            KwItem item = new KwItem();
-                            item.Code = GetBytesString(br, 20);
-                            item.Name = GetBytesString(br, 100);
-                            item.Pingyin = GetBytesString(br, 100);
-                            item.Marketcode = GetBytesString(br, 40);
-                            item.State = br.ReadInt32();
-                            item.Innercode = br.ReadInt32();
-                            item.Type = br.ReadInt32();
-                            item.Timestamp = br.ReadInt64();
-                            items.Add(item);
-                            if (!items2.ContainsKey(item.Type.ToString()))
-                            {
-                                items2[item.Type.ToString()] = new List<KwItem>();
-                            }
-                            items2[item.Type.ToString()].Add(item);
-                            lastItem = item;
-                        }
-                    }
-                }
-                if (!dm1.last)
-                {
-                    if (lastItem != null)
-                    {
-                        code = lastItem.Code;
-                        time = lastItem.Timestamp;
-                    }
-                }
-                if (dm1.last)
-                {
-                    break;
-                }
-            }
+            //code = "";
+            //time = 0;
+            //while (true)
+            //{
+            //    DMRetOutput dm1 = UpdateKeySpriteData(time, code, 0, false);
+            //    KwItem lastItem = null;
+            //    using (MemoryStream ms = new MemoryStream(dm1.ptr))
+            //    {
+            //        using (BinaryReader br = new BinaryReader(ms))
+            //        {
+            //            int size = dm1.size;
+            //            for (int i = 0; i < size; i++)
+            //            {
+            //                KwItem item = new KwItem();
+            //                item.Code = GetBytesString(br, 20);
+            //                item.Name = GetBytesString(br, 100);
+            //                item.Pingyin = GetBytesString(br, 100);
+            //                item.Marketcode = GetBytesString(br, 40);
+            //                item.State = br.ReadInt32();
+            //                item.Innercode = br.ReadInt32();
+            //                item.Type = br.ReadInt32();
+            //                item.Timestamp = br.ReadInt64();
+            //                items.Add(item);
+            //                if (!items2.ContainsKey(item.Type.ToString()))
+            //                {
+            //                    items2[item.Type.ToString()] = new List<KwItem>();
+            //                }
+            //                items2[item.Type.ToString()].Add(item);
+            //                lastItem = item;
+            //            }
+            //        }
+            //    }
+            //    if (!dm1.last)
+            //    {
+            //        if (lastItem != null)
+            //        {
+            //            code = lastItem.Code;
+            //            time = lastItem.Timestamp;
+            //        }
+            //    }
+            //    if (dm1.last)
+            //    {
+            //        break;
+            //    }
+            //}
             DataTable dt = AnalysisDMRetOutput(UpdateTypeFile(0));
             foreach (DataRow row in dt.Rows)
             {
@@ -573,7 +562,7 @@ namespace OwLib
                     {
                         sb.AppendLine(items3[i].ToString());
                     }
-                    File.WriteAllText(Application.StartupPath+"\\details\\"+ marketCode + ".txt", sb.ToString());
+                    //File.WriteAllText(Application.StartupPath+"\\details\\"+ marketCode + ".txt", sb.ToString());
                 }
                 else
                 {

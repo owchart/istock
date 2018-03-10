@@ -579,7 +579,7 @@ namespace OwLib
                     + JsonConvert.SerializeObject(fieldSingle) + JsonConvert.SerializeObject(fieldDouble);
                 //DataPacket.CalcBondAi(this.Code, true, amount, volume);
             }
-            QuoteForm.SetData(FuncTypeRealTime.StockDetailLev2, text);
+            CFTService.CallBack(FuncTypeRealTime.StockDetailLev2, text);
             return true;
         }
     }
@@ -679,7 +679,7 @@ namespace OwLib
                 }
                 this.OrderDetailData.Add(item);
             }
-            QuoteForm.SetData(FuncTypeRealTime.AllOrderStockDetailLevel2, JsonConvert.SerializeObject(OrderDetailData));
+            CFTService.CallBack(FuncTypeRealTime.AllOrderStockDetailLevel2, JsonConvert.SerializeObject(OrderDetailData));
             return true;
         }
     }
@@ -952,7 +952,7 @@ namespace OwLib
                         }
                     }
                 }
-                QuoteForm.SetData(FuncTypeRealTime.NOrderStockDetailLevel2, JsonConvert.SerializeObject(OrderDetailData));
+                CFTService.CallBack(FuncTypeRealTime.NOrderStockDetailLevel2, JsonConvert.SerializeObject(OrderDetailData));
                 this.SetStockDetailPacket(this);
             }
             catch (Exception exception2)
@@ -1303,7 +1303,7 @@ namespace OwLib
                     fieldSingle[FieldIndex.DifferRange] = fieldSingle[FieldIndex.Difference] /
                                                           fieldSingle[FieldIndex.PreClose];
                 }
-                QuoteForm.SetData(FuncTypeRealTime.IndexDetail, JsonConvert.SerializeObject(fieldSingle));
+                CFTService.CallBack(FuncTypeRealTime.IndexDetail, JsonConvert.SerializeObject(fieldSingle));
             }
             return true;
         }
@@ -1485,7 +1485,7 @@ namespace OwLib
                         }
                     }
                 }
-                QuoteForm.SetData(FuncTypeRealTime.StockTrend, JsonConvert.SerializeObject(TrendData.MintDatas));
+                CFTService.CallBack(FuncTypeRealTime.StockTrend, JsonConvert.SerializeObject(TrendData.MintDatas));
             }
             catch (Exception exception)
             {
@@ -3719,7 +3719,7 @@ namespace OwLib
                 br.ReadByte();
                 this.ShortLineData.Add(item);
             }
-            QuoteForm.SetData(FuncTypeRealTime.ShortLineStrategy, JsonConvert.SerializeObject(ShortLineData));
+            CFTService.CallBack(FuncTypeRealTime.ShortLineStrategy, JsonConvert.SerializeObject(ShortLineData));
             return true;
         }
     }
@@ -4143,7 +4143,7 @@ namespace OwLib
                 KLineDataRec.OneDayDataList.Add(oneDayData);
             }
             FormulaForm.SetData(FuncTypeRealTime.HisKLine, JsonConvert.SerializeObject(KLineDataRec.OneDayDataList));
-            QuoteForm.SetData(FuncTypeRealTime.HisKLine,JsonConvert.SerializeObject(KLineDataRec.OneDayDataList));
+            CFTService.CallBack(FuncTypeRealTime.HisKLine, JsonConvert.SerializeObject(KLineDataRec.OneDayDataList));
             return true;
         }
     }
@@ -4822,7 +4822,7 @@ namespace OwLib
             }
             list.Clear();
             list = null;
-            QuoteForm.SetData(FuncTypeRealTime.CustomReport, JsonConvert.SerializeObject(DetailData.FieldIndexDataSingle));
+            CFTService.CallBack(FuncTypeRealTime.CustomReport, JsonConvert.SerializeObject(DetailData.FieldIndexDataSingle));
             return true;
         }
 

@@ -10,7 +10,7 @@ namespace OwLib
     /// <summary>
     /// HTTP简单服务
     /// </summary>
-    public class HttpEasyService
+    public class EMGlobalDataService
     {
         public const int SDATA_TYPE_KEYSPRITE_IMPORTANT = 101;//证券代码表(重要)
         public const int SDATA_TYPE_KEYSPRITE_DELETE_IMPT = 102;//证券代码删除表(重要)

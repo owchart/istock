@@ -161,6 +161,14 @@ namespace OwLib
             m_exportService = new ExportService();
             m_userSecurityService = new UserSecurityService();
             m_eMSecurityService = new EMSecurityService();
+            bool loadAll = true;
+            if (MessageBox.Show("是否刷新东财数据?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                loadAll = false;
+            }
+            EMSecurityService.Load(loadAll);
+            BlockService.Load(loadAll);
+            CFTService.Start();
             SecurityService.Start();
         }
         #endregion

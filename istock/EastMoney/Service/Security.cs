@@ -278,7 +278,7 @@ namespace OwLib
             {
                 sendBytes[i] = buffer[i];
             }
-            byte[] result = HttpEasyService.RequestGlobalData(sendBytes);
+            byte[] result = EMGlobalDataService.RequestGlobalData(sendBytes);
             return result;
         }
 

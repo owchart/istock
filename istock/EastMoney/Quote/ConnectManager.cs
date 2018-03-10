@@ -323,7 +323,7 @@ namespace OwLib
                                             break;
                                         case FuncTypeRealTime.Heart:
                                             byte[] bytes = new byte[] {0x00,0x00,0x00,0x00,0x01,0x02,0x14,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-                                            QuoteStart.Send(TcpService.SSHQ, bytes);
+                                            CFTService.Send(TcpService.SSHQ, bytes);
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             _dataQuery.QueryQuote(TcpService.LSHQ, memoryStream.ToArray());
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
@@ -357,7 +357,7 @@ namespace OwLib
                                         case FuncTypeRealTime.IndexFuturesDetail:
                                         case FuncTypeRealTime.MinKLine:
                                         case FuncTypeRealTime.LimitedPrice:
-                                            QuoteStart.Send(TcpService.SSHQ, memoryStream.ToArray());
+                                            CFTService.Send(TcpService.SSHQ, memoryStream.ToArray());
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             break;
                                         case FuncTypeRealTime.AllOrderStockDetailLevel2:
@@ -376,14 +376,14 @@ namespace OwLib
                                                         using (BinaryWriter bw1 = new BinaryWriter(memoryStream1))
                                                         {
                                                             tmp.CodePacket(bw1);
-                                                            QuoteStart.Send(TcpService.SSHQ, memoryStream1.ToArray());
+                                                            CFTService.Send(TcpService.SSHQ, memoryStream1.ToArray());
                                                             Debug.Print("SendPacket cancel " + ((RealTimeDataPacket)dataPacket).RequestType);
                                                         }
                                                     }
                                                 }
                                                 _pushPackets[((int)((RealTimeDataPacket)dataPacket).RequestType)]
                                                        = dataPacket;
-                                                QuoteStart.Send(TcpService.SSHQ, memoryStream.ToArray());
+                                                CFTService.Send(TcpService.SSHQ, memoryStream.ToArray());
                                                 Debug.Print("SendPacket request " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             }
                                             else
@@ -393,7 +393,7 @@ namespace OwLib
                                                         (int)((RealTimeDataPacket)dataPacket).RequestType))
                                                     _pushPackets.Remove(
                                                         (int)((RealTimeDataPacket)dataPacket).RequestType);
-                                                QuoteStart.Send(TcpService.SSHQ, memoryStream.ToArray());
+                                                CFTService.Send(TcpService.SSHQ, memoryStream.ToArray());
                                                 Debug.Print("SendPacket cancel " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             }
                                             break;
@@ -407,7 +407,7 @@ namespace OwLib
 
                                             //}
 
-                                            QuoteStart.Send(TcpService.SSHQ, memoryStream.ToArray());
+                                            CFTService.Send(TcpService.SSHQ, memoryStream.ToArray());
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             break;
                                         case FuncTypeRealTime.HisTrend:
@@ -420,7 +420,7 @@ namespace OwLib
                                             break;
                                         case FuncTypeRealTime.InitLogon:
 
-                                            QuoteStart.Send(TcpService.SSHQ, memoryStream.ToArray());
+                                            CFTService.Send(TcpService.SSHQ, memoryStream.ToArray());
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
                                             break;
                                         case FuncTypeRealTime.OceanHeart:

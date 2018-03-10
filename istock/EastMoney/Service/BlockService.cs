@@ -8,7 +8,7 @@ namespace OwLib
     /// <summary>
     /// 板块服务
     /// </summary>
-    public class BlockService :HttpEasyService
+    public class BlockService : EMGlobalDataService
     {
         /// <summary>
         /// 创建板块服务

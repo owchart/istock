@@ -130,9 +130,9 @@ namespace OwLib
                 {
                     continue;
                 }
-                String pCode = line.Split(new String[] { "\t" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                String pCode = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[0];
                 String code = CStrA.ConvertFileCodeToMemoryCode(pCode);
-                String cName = line.Split(new String[] { "\t" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                String cName = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[1];
                 Security security =  new Security();
                 security.m_code = code;
                 security.m_name = cName;
@@ -645,7 +645,7 @@ namespace OwLib
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < strs.Length; i++)
                 {
-                    String[] subStrs = strs[i].Split('\t');
+                    String[] subStrs = strs[i].Split(',');
                     Security security = new Security();
                     security.m_code = CStrA.ConvertFileCodeToMemoryCode(subStrs[0]);
                     security.m_name = subStrs[1];

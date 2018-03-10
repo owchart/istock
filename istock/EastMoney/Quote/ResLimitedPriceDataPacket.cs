@@ -52,7 +52,7 @@ namespace OwLib
             }
             DetailData.FieldIndexDataSingle[this.Code][FieldIndex.UpLimit] = fieldValue;
             DetailData.FieldIndexDataSingle[this.Code][FieldIndex.DownLimit] = num5;
-            QuoteForm.SetData(FuncTypeRealTime.LimitedPrice, fieldValue.ToString() + num5.ToString());
+            CFTService.CallBack(FuncTypeRealTime.LimitedPrice, fieldValue.ToString() + num5.ToString());
             return true;
         }
     }

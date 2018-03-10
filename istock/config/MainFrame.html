@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html>
+  <head>
+    <script type="text/javascript" language="gaia">
+    </script>
+  </head>
+  <body>
+    <div type="tabcontrol" dock="fill">
+      <div name="TabPage" text="股票列表" type="tabpage">
+        <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
+          <div name="Div">
+            <label name="Label" text="选择股票" location="11,15" size="60,17" />
+            <input type="text" name="txtCode" location="78,12" size="126,20" />
+            <input type="button" name="btnAdd" text="添加" location="219,12" size="70,20" />
+            <select name="cbType" location="300,12" selectedindex="0">
+                <option text="自选股"></option>
+                <option text="涨停"></option>
+                <option text="跌停"></option>
+                <option text="停牌"></option>
+            </select>
+          </div>
+          <table name="gridUserSecurities" dock="fill">
+            <tr>
+              <th name="colP1" text="股票代码" width="100" />
+              <th name="colP2" text="股票名称" width="100" />
+              <th name="colP3" text="最新价" width="100" />
+              <th name="colP4" text="涨跌额" width="100" />
+              <th name="colP5" text="涨跌幅" width="100" />
+              <th name="colP6" text="最高价" width="100" />
+              <th name="colP7" text="最低价" width="100" />
+              <th name="colP8" text="开盘价" width="100" />
+              <th name="colP9" text="成交量" width="100" />
+              <th name="colP10" text="成交额" width="100" />
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

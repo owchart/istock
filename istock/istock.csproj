@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{568E51CF-2A0D-4FB6-9FC0-D8A37FAA7AA1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>istock</RootNamespace>
+    <AssemblyName>istock</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EmCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EmCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EmSerDataService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EmSerDataService.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EmSerDSComm, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EmSerDSComm.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EmSocketClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EmSocketClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=2.0.0.922, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ICSharpCode.TextEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MemCompressor, Version=1.0.0.3, Culture=neutral, PublicKeyToken=d7dc4571284f76c3">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MemCompressor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="officeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\officeLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="owchart_net, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\owchart_net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="owxmlui_net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\owxmlui_net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.DLL</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Winista.HtmlParser, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Winista.HtmlParser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Binary.cs" />
+    <Compile Include="Base\CFile.cs" />
+    <Compile Include="Base\CStr.cs" />
+    <Compile Include="Base\Sound.cs" />
+    <Compile Include="EastMoney\Indicator\BindParameter.cs" />
+    <Compile Include="EastMoney\Indicator\BlockCatRequestEntity.cs" />
+    <Compile Include="EastMoney\Indicator\BlockElementsEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\BlockEntityBase.cs" />
+    <Compile Include="EastMoney\Indicator\BlockIndicatorDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\BlockIndicatorParams.cs" />
+    <Compile Include="EastMoney\Indicator\BlockSeriesDataCore.cs" />
+    <Compile Include="EastMoney\Indicator\BlockTreeReceiveEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\BrokerEntity.cs" />
+    <Compile Include="EastMoney\Indicator\BrowserType.cs" />
+    <Compile Include="EastMoney\Indicator\CommonEnumerators.cs" />
+    <Compile Include="EastMoney\Indicator\ConnectManager.cs" />
+    <Compile Include="EastMoney\Indicator\CreateParameter.cs" />
+    <Compile Include="EastMoney\Indicator\CustomerIndicatorDataHelper.cs" />
+    <Compile Include="EastMoney\Indicator\CustomIndicatorDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\CustomIndicatorEntity.cs" />
+    <Compile Include="EastMoney\Indicator\DataCore.cs" />
+    <Compile Include="EastMoney\Indicator\DataPacketBase.cs" />
+    <Compile Include="EastMoney\Indicator\DataPacketEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\DataServiceHelper.cs" />
+    <Compile Include="EastMoney\Indicator\DateHelper.cs" />
+    <Compile Include="EastMoney\Indicator\DelegateMgr.cs" />
+    <Compile Include="EastMoney\Indicator\EventArgsMgr.cs" />
+    <Compile Include="EastMoney\Indicator\FieldValueEntity.cs" />
+    <Compile Include="EastMoney\Indicator\FileUploadEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\FilterEntity.cs" />
+    <Compile Include="EastMoney\Indicator\FinanceSeriesDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\GetMethodInfo.cs" />
+    <Compile Include="EastMoney\Indicator\GroupCategoryInfo.cs" />
+    <Compile Include="EastMoney\Indicator\GroupStatisEntity.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorCategoryDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorDataCore.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorEntity.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorEntityDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorEntityEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorEntityEx.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorEntityListDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorLeafDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\IndicatorTableDataCore.cs" />
+    <Compile Include="EastMoney\Indicator\Item.cs" />
+    <Compile Include="EastMoney\Indicator\Mark.cs" />
+    <Compile Include="EastMoney\Indicator\MarkType.cs" />
+    <Compile Include="EastMoney\Indicator\MenuMode.cs" />
+    <Compile Include="EastMoney\Indicator\ModuleDataType.cs" />
+    <Compile Include="EastMoney\Indicator\NameValue.cs" />
+    <Compile Include="EastMoney\Indicator\NodeData.cs" />
+    <Compile Include="EastMoney\Indicator\ParameterObject.cs" />
+    <Compile Include="EastMoney\Indicator\ParameterType.cs" />
+    <Compile Include="EastMoney\Indicator\QuoteSeriesDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\RangeEntity.cs" />
+    <Compile Include="EastMoney\Indicator\SearchIndicatorResultEntity.cs" />
+    <Compile Include="EastMoney\Indicator\SearchIndicatorTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EastMoney\Indicator\SeriesDataPacket.cs" />
+    <Compile Include="EastMoney\Indicator\StockEntity.cs" />
+    <Compile Include="EastMoney\Indicator\TableContextMenu.cs" />
+    <Compile Include="EastMoney\Indicator\TemplateBlockElementsEventArgs.cs" />
+    <Compile Include="EastMoney\Indicator\TimeParameter.cs" />
+    <Compile Include="EastMoney\Indicator\UnitDataHandle.cs" />
+    <Compile Include="EastMoney\Indicator\UnitItem.cs" />
+    <Compile Include="EastMoney\Indicator\UnitNameValue.cs" />
+    <Compile Include="EastMoney\MacIndusty\DealWithReturnData.cs" />
+    <Compile Include="EastMoney\MacIndusty\FindContentFlag.cs" />
+    <Compile Include="EastMoney\MacIndusty\FindIndicator.cs" />
+    <Compile Include="EastMoney\MacIndusty\FindOptionFlag.cs" />
+    <Compile Include="EastMoney\MacIndusty\LocalDataRetriver.cs" />
+    <Compile Include="EastMoney\MacIndusty\MacroDataType.cs" />
+    <Compile Include="EastMoney\MacIndusty\MongoDBConstant.cs" />
+    <Compile Include="EastMoney\MacIndusty\MongoRetriver.cs" />
+    <Compile Include="EastMoney\Quote\CapitalFlowTable.cs" />
+    <Compile Include="EastMoney\Quote\CftContainerId.cs" />
+    <Compile Include="EastMoney\Quote\CftContainerIdMgr.cs" />
+    <Compile Include="EastMoney\Quote\Collections.cs" />
+    <Compile Include="EastMoney\Quote\ColorThemeManager.cs" />
+    <Compile Include="EastMoney\Quote\CompressHelper.cs" />
+    <Compile Include="EastMoney\Quote\ConnectEvent.cs" />
+    <Compile Include="EastMoney\Quote\ConnectManager.cs" />
+    <Compile Include="EastMoney\Quote\ContributionDataTable.cs" />
+    <Compile Include="EastMoney\Quote\ConvertCode.cs" />
+    <Compile Include="EastMoney\Quote\ConvertFieldIndex.cs" />
+    <Compile Include="EastMoney\Quote\CustomReportData.cs" />
+    <Compile Include="EastMoney\Quote\DataCenterCore.cs" />
+    <Compile Include="EastMoney\Quote\DataPacket.cs" />
+    <Compile Include="EastMoney\Quote\DataQueryConnections.cs" />
+    <Compile Include="EastMoney\Quote\DataTableBase.cs" />
+    <Compile Include="EastMoney\Quote\DealDataTable.cs" />
+    <Compile Include="EastMoney\Quote\DepthAnalyseDataTable.cs" />
+    <Compile Include="EastMoney\Quote\DetailDataTable.cs" />
+    <Compile Include="EastMoney\Quote\DetailLev2DataTable.cs" />
+    <Compile Include="EastMoney\Quote\DllImportHelper.cs" />
+    <Compile Include="EastMoney\Quote\EnumUtility.cs" />
+    <Compile Include="EastMoney\Quote\F10DataTable.cs" />
+    <Compile Include="EastMoney\Quote\FieldFormat.cs" />
+    <Compile Include="EastMoney\Quote\FieldInfoCfgFileIO.cs" />
+    <Compile Include="EastMoney\Quote\FormulaCfgManager.cs" />
+    <Compile Include="EastMoney\Quote\FormulaOutput.cs" />
+    <Compile Include="EastMoney\Quote\FormulaProxy.cs" />
+    <Compile Include="EastMoney\Quote\FormulaSetting.cs" />
+    <Compile Include="EastMoney\Quote\GetKlineData.cs" />
+    <Compile Include="EastMoney\Quote\HisKLineData.cs" />
+    <Compile Include="EastMoney\Quote\HttpConnection.cs" />
+    <Compile Include="EastMoney\Quote\IndexDetailData.cs" />
+    <Compile Include="EastMoney\Quote\Indicator.cs" />
+    <Compile Include="EastMoney\Quote\IndicatorDataTable.cs" />
+    <Compile Include="EastMoney\Quote\IndicatorQueryConnectiuon.cs" />
+    <Compile Include="EastMoney\Quote\InfoPanel.cs" />
+    <Compile Include="EastMoney\Quote\InfoPanelCfgFileIO.cs" />
+    <Compile Include="EastMoney\Quote\KLineDataTable.cs" />
+    <Compile Include="EastMoney\Quote\KLineIndexCfgFileIO.cs" />
+    <Compile Include="EastMoney\Quote\KlineIndicatorCfgIO.cs" />
+    <Compile Include="EastMoney\Quote\KlineStateIO.cs" />
+    <Compile Include="EastMoney\Quote\LogUtilities.cs" />
+    <Compile Include="EastMoney\Quote\MarketDetailData.cs" />
+    <Compile Include="EastMoney\Quote\News24hDataTable.cs" />
+    <Compile Include="EastMoney\Quote\NewsData.cs" />
+    <Compile Include="EastMoney\Quote\OneBondOrderDetail.cs" />
+    <Compile Include="EastMoney\Quote\OrderDetailDataTable.cs" />
+    <Compile Include="EastMoney\Quote\OrderQueueDataTable.cs" />
+    <Compile Include="EastMoney\Quote\OrgRateDataTable.cs" />
+    <Compile Include="EastMoney\Quote\PathUtilities.cs" />
+    <Compile Include="EastMoney\Quote\PriceStatusDataTable.cs" />
+    <Compile Include="EastMoney\Quote\ProfitForecastDataTable.cs" />
+    <Compile Include="EastMoney\Quote\QuoteDataBase.cs" />
+    <Compile Include="EastMoney\Quote\QuoteDrawService.cs" />
+    <Compile Include="EastMoney\Quote\QuoteSortService.cs" />
+    <Compile Include="EastMoney\Quote\QuoteStart.cs" />
+    <Compile Include="EastMoney\Quote\RankDataTable.cs" />
+    <Compile Include="EastMoney\Quote\ReadFieldInfo.cs" />
+    <Compile Include="EastMoney\Quote\ReportFieldConfigMananger.cs" />
+    <Compile Include="EastMoney\Quote\ReportGridColumn.cs" />
+    <Compile Include="EastMoney\Quote\ReqLimitedPriceDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\ReqMarketTradeDateDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\RequestDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\ResearchReportDatatable.cs" />
+    <Compile Include="EastMoney\Quote\ResHKTradeDateDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\ResLimitedPriceDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\ResponsDataPacket.cs" />
+    <Compile Include="EastMoney\Quote\SectorBarConfigManager.cs" />
+    <Compile Include="EastMoney\Quote\SecurityAttribute.cs" />
+    <Compile Include="EastMoney\Quote\Serialize.cs" />
+    <Compile Include="EastMoney\Quote\Serializer.cs" />
+    <Compile Include="EastMoney\Quote\ShortLineStrategyDataTable.cs" />
+    <Compile Include="EastMoney\Quote\SocketConnection.cs" />
+    <Compile Include="EastMoney\Quote\StockCustIndicatorFileIO.cs" />
+    <Compile Include="EastMoney\Quote\StockDetailData.cs" />
+    <Compile Include="EastMoney\Quote\StockMarkInfoMananger.cs" />
+    <Compile Include="EastMoney\Quote\Stuct.cs" />
+    <Compile Include="EastMoney\Quote\SysCfgFileIO.cs" />
+    <Compile Include="EastMoney\Quote\SystemConfig.cs" />
+    <Compile Include="EastMoney\Quote\TabConfigFileIO.cs" />
+    <Compile Include="EastMoney\Quote\TcpConnection.cs" />
+    <Compile Include="EastMoney\Quote\TickDataTable.cs" />
+    <Compile Include="EastMoney\Quote\TimeUtilities.cs" />
+    <Compile Include="EastMoney\Quote\TradeDateDataTable.cs" />
+    <Compile Include="EastMoney\Quote\TransactionData.cs" />
+    <Compile Include="EastMoney\Quote\TrendData.cs" />
+    <Compile Include="EastMoney\Quote\TrendDataTable.cs" />
+    <Compile Include="EastMoney\Quote\TypeDefine.cs" />
+    <Compile Include="EastMoney\Service\BlockService.cs" />
+    <Compile Include="EastMoney\Service\DataAccess.cs" />
+    <Compile Include="EastMoney\Service\DataCenter.cs" />
+    <Compile Include="EastMoney\Service\DataSourceService.cs" />
+    <Compile Include="EastMoney\Service\HttpEasyService.cs" />
+    <Compile Include="EastMoney\Service\NodeService.cs" />
+    <Compile Include="EastMoney\Service\QuoteSequencService.cs" />
+    <Compile Include="EastMoney\Service\Security.cs" />
+    <Compile Include="EastMoney\Service\SecurityService.cs" />
+    <Compile Include="EastMoney\Service\UserSecurityService.cs" />
+    <Compile Include="EastMoney\Special\BindFilter.cs" />
+    <Compile Include="EastMoney\Special\CommonContant.cs" />
+    <Compile Include="EastMoney\Special\CommonService.cs" />
+    <Compile Include="EastMoney\Special\ConvertUtil.cs" />
+    <Compile Include="EastMoney\Special\CustomDate.cs" />
+    <Compile Include="EastMoney\Special\DataCache.cs" />
+    <Compile Include="EastMoney\Special\DataHelper.cs" />
+    <Compile Include="EastMoney\Special\DataSourceAdaptor.cs" />
+    <Compile Include="EastMoney\Special\DataTableExtentions.cs" />
+    <Compile Include="EastMoney\Special\EnumCode.cs" />
+    <Compile Include="EastMoney\Special\FilterMode.cs" />
+    <Compile Include="EastMoney\Special\FormatUtil.cs" />
+    <Compile Include="EastMoney\Special\GridColumn.cs" />
+    <Compile Include="EastMoney\Special\Limits.cs" />
+    <Compile Include="EastMoney\Special\LoadSpecialData.cs" />
+    <Compile Include="EastMoney\Special\ModSpecialtopic.cs" />
+    <Compile Include="EastMoney\Special\ModSpecialtopicCategory.cs" />
+    <Compile Include="EastMoney\Special\Normal.cs" />
+    <Compile Include="EastMoney\Special\PropertiyName.cs" />
+    <Compile Include="EastMoney\Web\CommDao.cs" />
+    <Compile Include="EastMoney\Web\CommonController.cs" />
+    <Compile Include="EastMoney\Web\EcomomyDataHelper.cs" />
+    <Compile Include="EastMoney\Web\FinancingIndexParam.cs" />
+    <Compile Include="EastMoney\Web\FutureF9DataHelper.cs" />
+    <Compile Include="EastMoney\Web\LogHelper.cs" />
+    <Compile Include="EastMoney\Web\MacroIndicateParam.cs" />
+    <Compile Include="EastMoney\Web\NewStockDataHelper.cs" />
+    <Compile Include="EastMoney\Web\NoticeDataHelper.cs" />
+    <Compile Include="EastMoney\Web\ReportDataHelper.cs" />
+    <Compile Include="EastMoney\Web\StockF9DataHelper.cs" />
+    <Compile Include="EastMoney\Web\StockIndicateParam.cs" />
+    <Compile Include="EastMoney\Web\StockNewsDataHelper.cs" />
+    <Compile Include="EastMoney\Web\TradeInfoDataHelper.cs" />
+    <Compile Include="EastMoney\Web\WebDataSource.cs" />
+    <Compile Include="Form\EcomomyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\EcomomyForm.designer.cs">
+      <DependentUpon>EcomomyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormulaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormulaForm.designer.cs">
+      <DependentUpon>FormulaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FutureF9Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FutureF9Form.designer.cs">
+      <DependentUpon>FutureF9Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\IndicatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\IndicatorForm.designer.cs">
+      <DependentUpon>IndicatorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MacIndustyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MacIndustyForm.designer.cs">
+      <DependentUpon>MacIndustyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\NewStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\NewStockForm.designer.cs">
+      <DependentUpon>NewStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\NoticeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\NoticeForm.designer.cs">
+      <DependentUpon>NoticeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\OtherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\OtherForm.Designer.cs">
+      <DependentUpon>OtherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ReportForm.designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SecurityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SecurityForm.designer.cs">
+      <DependentUpon>SecurityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SingleInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SingleInfoForm.designer.cs">
+      <DependentUpon>SingleInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SpecialForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SpecialForm.designer.cs">
+      <DependentUpon>SpecialForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\StockF9Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\StockF9Form.designer.cs">
+      <DependentUpon>StockF9Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\StockNewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\StockNewsForm.designer.cs">
+      <DependentUpon>StockNewsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\TradeInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\TradeInfoForm.designer.cs">
+      <DependentUpon>TradeInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Script\CFunctionBase.cs" />
+    <Compile Include="Product\Script\CFunctionDataSource.cs" />
+    <Compile Include="Product\Script\CFunctionEx.cs" />
+    <Compile Include="Product\Script\CFunctionUI.cs" />
+    <Compile Include="Product\Script\CFunctionWin.cs" />
+    <Compile Include="Product\Script\GaiaScript.cs" />
+    <Compile Include="Product\Service\BaseService.cs" />
+    <Compile Include="Product\Service\DataCenter.cs" />
+    <Compile Include="Product\Service\ExportService.cs" />
+    <Compile Include="Product\Service\HttpGetService.cs" />
+    <Compile Include="Product\Service\HttpPostService.cs" />
+    <Compile Include="Product\Service\Security.cs" />
+    <Compile Include="Product\Service\SecurityService.cs" />
+    <Compile Include="Product\Service\StockService.cs" />
+    <Compile Include="Product\Service\UserCookieService.cs" />
+    <Compile Include="Product\Service\UserSecurityService.cs" />
+    <Compile Include="Product\UI\BarrageDiv.cs" />
+    <Compile Include="Product\UI\CDraw.cs" />
+    <Compile Include="Product\UI\GdiPlusPaintEx.cs" />
+    <Compile Include="Product\UI\MainFrame.cs" />
+    <Compile Include="Product\UI\RibbonButton.cs" />
+    <Compile Include="Product\UI\UIXmlEx.cs" />
+    <Compile Include="Product\UI\WindowButton.cs" />
+    <Compile Include="Product\UI\WindowEx.cs" />
+    <Compile Include="Product\UI\WinHostEx.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Form\QuoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\QuoteForm.Designer.cs">
+      <DependentUpon>QuoteForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form\EcomomyForm.resx">
+      <DependentUpon>EcomomyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormulaForm.resx">
+      <DependentUpon>FormulaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FutureF9Form.resx">
+      <DependentUpon>FutureF9Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\IndicatorForm.resx">
+      <DependentUpon>IndicatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MacIndustyForm.resx">
+      <DependentUpon>MacIndustyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\NewStockForm.resx">
+      <DependentUpon>NewStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\NoticeForm.resx">
+      <DependentUpon>NoticeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\OtherForm.resx">
+      <DependentUpon>OtherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SecurityForm.resx">
+      <DependentUpon>SecurityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SingleInfoForm.resx">
+      <DependentUpon>SingleInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SpecialForm.resx">
+      <DependentUpon>SpecialForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\StockF9Form.resx">
+      <DependentUpon>StockF9Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\StockNewsForm.resx">
+      <DependentUpon>StockNewsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\TradeInfoForm.resx">
+      <DependentUpon>TradeInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Form\QuoteForm.resx">
+      <DependentUpon>QuoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="config\ServerList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\log4.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\MainFrame.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\ParameterType.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\ServerListPort.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\UnitType.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\userid.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -16,6 +16,15 @@ using Newtonsoft.Json;
 
 namespace OwLib
 {
+    public class UserSecurity
+    {
+        public String m_code;
+
+        public double m_up;
+
+        public double m_down;
+    }
+
     /// <summary>
     /// 自选股服务
     /// </summary>
@@ -32,7 +41,7 @@ namespace OwLib
             {
                 try
                 {
-                    m_codes = JsonConvert.DeserializeObject<List<String>>(cookie.m_value);
+                    m_codes = JsonConvert.DeserializeObject<List<UserSecurity>>(cookie.m_value);
                 }
                 catch (Exception ex)
                 {
@@ -41,7 +50,7 @@ namespace OwLib
                 {
                     try
                     {
-                        m_codes = JsonConvert.DeserializeObject<List<String>>(cookie.m_value);
+                        m_codes = JsonConvert.DeserializeObject<List<UserSecurity>>(cookie.m_value);
                     }
                     catch (Exception ex)
                     {
@@ -53,13 +62,13 @@ namespace OwLib
         /// <summary>
         /// 自选股信息
         /// </summary>
-        public List<String> m_codes = new List<String>();
+        public List<UserSecurity> m_codes = new List<UserSecurity>();
 
         /// <summary>
         /// 保存信息
         /// </summary>
         /// <param name="code">自选股</param>
-        public void Add(String code)
+        public void Add(UserSecurity code)
         {
             bool modify = false;
             int awardsSize = m_codes.Count;
@@ -68,6 +77,8 @@ namespace OwLib
                 if (m_codes[i] == code)
                 {
                     modify = true;
+                    m_codes[i] = code;
+                    Save();
                     break;
                 }
             }
@@ -87,13 +98,31 @@ namespace OwLib
             int codesSize = m_codes.Count;
             for (int i = 0; i < codesSize; i++)
             {
-                if (m_codes[i] == code)
+                if (m_codes[i].m_code == code)
                 {
                     m_codes.RemoveAt(i);
                     Save();
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取嘉奖信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns>嘉奖信息</returns>
+        public UserSecurity Get(String code)
+        {
+            int codesSize = m_codes.Count;
+            for (int i = 0; i < codesSize; i++)
+            {
+                if (m_codes[i].m_code == code)
+                {
+                    return m_codes[i];
+                }
+            }
+            return null;
         }
 
         /// <summary>

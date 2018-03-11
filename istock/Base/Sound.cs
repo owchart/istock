@@ -35,6 +35,7 @@ namespace OwLib
         [DllImport("winmm.dll")]
         static extern bool mciGetErrorString(Int32 errorCode, StringBuilder errorText, Int32 errorTextSize);
 
+        private static Dictionary<String, String> m_plays = new Dictionary<String, String>();
 
         /// <summary>
         /// 开始播放声音
@@ -42,7 +43,7 @@ namespace OwLib
         /// <param name="args">参数</param>
         private static void StartPlay(object args)
         {
-            String fileName = DataCenter.GetAppPath() + "\\config\\" + args.ToString();
+            String fileName = Application.StartupPath + "\\config\\" + args.ToString();
             if (CFileA.IsFileExist(fileName))
             {
                 try
@@ -51,7 +52,7 @@ namespace OwLib
                     if (error == 0)
                     {
                         mciSendString("play " + fileName, null, 0, new IntPtr(0));
-                        Thread.Sleep(10000);
+                        Thread.Sleep(3000);
                         mciSendString("stop " + fileName, null, 0, new IntPtr(0));
                         mciSendString("close " + fileName, null, 0, new IntPtr(0));
                     }
@@ -59,6 +60,13 @@ namespace OwLib
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message + "\r\n" + ex.StackTrace);
+                }
+            }
+            lock (m_plays)
+            {
+                if (m_plays.ContainsKey(args.ToString()))
+                {
+                    m_plays.Remove(args.ToString());
                 }
             }
         }
@@ -69,8 +77,15 @@ namespace OwLib
         /// <param name="key">文件名</param>
         public static void Play(String key)
         {
-            Thread thread = new Thread(new ParameterizedThreadStart(StartPlay));
-            thread.Start(key);
+            lock (m_plays)
+            {
+                if (!m_plays.ContainsKey(key))
+                {
+                    m_plays[key] = "";
+                    Thread thread = new Thread(new ParameterizedThreadStart(StartPlay));
+                    thread.Start(key);
+                }
+            }
         }
     }
 }

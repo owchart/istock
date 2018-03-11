@@ -51,15 +51,17 @@ namespace OwLib
         /// 添加自选股
         /// </summary>
         /// <param name="code">代码</param>
-        public void AddUserSecurity(String code)
+        public void AddUserSecurity(UserSecurity userSecurity)
         {
             List<GridRow> rows = m_gridUserSecurities.m_rows;
             int rowsSize = rows.Count;
             for (int i = 0; i < rowsSize; i++)
             {
                 GridRow findRow = rows[i];
-                if (findRow.GetCell("colP1").GetString() == code)
+                if (findRow.GetCell("colP1").GetString() == userSecurity.m_code)
                 {
+                    findRow.GetCell("colP11").SetDouble(userSecurity.m_up);
+                    findRow.GetCell("colP12").SetDouble(userSecurity.m_down);
                     return;
                 }
             }
@@ -76,7 +78,7 @@ namespace OwLib
             editButton.Name = "btnGridRowEdit";
             editButton.Size = new SIZE(100, 30);
             row.EditButton = editButton;
-            row.AddCell("colP1", new GridStringCell(code));
+            row.AddCell("colP1", new GridStringCell(userSecurity.m_code));
             row.AddCell("colP2", new GridStringCell());
             GridDoubleCellEx cellP3 = new GridDoubleCellEx();
             cellP3.Digit = 2;
@@ -99,14 +101,25 @@ namespace OwLib
             row.AddCell("colP8", cellP8);
             row.AddCell("colP9", new GridDoubleCellEx());
             row.AddCell("colP10", new GridDoubleCellEx());
+            GridDoubleCellEx cellP11 = new GridDoubleCellEx();
+            cellP11.Digit = 2;
+            cellP11.SetDouble(userSecurity.m_up);
+            row.AddCell("colP11", cellP11);
+            GridDoubleCellEx cellP12 = new GridDoubleCellEx();
+            cellP12.Digit = 2;
+            cellP12.SetDouble(userSecurity.m_down);
+            row.AddCell("colP12", cellP12);
             List<GridCell> cells = row.GetCells();
             int cellsSize = cells.Count;
             for (int i = 0; i < cellsSize; i++)
             {
                 cells[i].Style = new GridCellStyle();
                 cells[i].Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                if (i >= 10)
+                {
+                    cells[i].AllowEdit = true;
+                }
             }
-            DataCenter.UserSecurityService.Add(code);
             m_gridUserSecurities.Update();
             m_gridUserSecurities.Invalidate();
         }
@@ -131,7 +144,10 @@ namespace OwLib
                     GSecurity security = new GSecurity();
                     if (SecurityService.GetSecurityByCode(code, ref security) > 0)
                     {
-                        AddUserSecurity(code);
+                        UserSecurity userSecurity = new UserSecurity();
+                        userSecurity.m_code = code;
+                        AddUserSecurity(userSecurity);
+                        DataCenter.UserSecurityService.Add(userSecurity);
                     }
                 }
                 else if (name == "btnGridRowEdit")
@@ -168,6 +184,63 @@ namespace OwLib
                 {
                     ReportForm reportForm = new ReportForm();
                     reportForm.Show();
+                }
+                else if (name == "btnContract")
+                {
+                    Process.Start("LordALike.exe");
+                }
+                else if (name == "btnActiveStock" || name == "btnSecondNewStock"
+                    || name == "btnUpperLimitStock" || name == "btnDownLimitStock"
+                    || name == "btnUnTradeStock" || name == "btnSwingStock"
+                    || name == "btnLowPriceStock" || name == "btnAmountsStock")
+                {
+                    m_gridUserSecurities.ClearRows();
+                    List<String> codes = new List<String>();
+                    if (name == "btnActiveStock")
+                    {
+                        SecurityService.GetActiveCodes(codes);
+                    }
+                    else if (name == "btnSecondNewStock")
+                    {
+                        SecurityService.GetSecondNewCodes(codes);
+                    }
+                    else if (name == "btnUpperLimitStock")
+                    {
+                        SecurityService.GetLimitUp(codes);
+                    }
+                    else if (name == "btnDownLimitStock")
+                    {
+                        SecurityService.GetLimitDown(codes);
+                    }
+                    else if (name == "btnUnTradeStock")
+                    {
+                        SecurityService.GetNotTradedCodes(codes);
+                    }
+                    else if (name == "btnSwingStock")
+                    {
+                        SecurityService.GetCodesBySwing(codes);
+                    }
+                    else if (name == "btnLowPriceStock")
+                    {
+                        SecurityService.GetCodesByPrice(codes);
+                    }
+                    else if (name == "btnAmountsStock")
+                    {
+                        SecurityService.GetCodesByAmount(codes);
+                    }
+                    int codesSize = codes.Count;
+                    for (int i = 0; i < codesSize; i++)
+                    {
+                        UserSecurity userSecurity = new UserSecurity();
+                        userSecurity.m_code = codes[i];
+                        AddUserSecurity(userSecurity);
+                    }
+                    GetTabControl("tabMain").SelectedIndex = 0;
+                    Native.Invalidate();
+                }
+                else if (name == "btnExport")
+                {
+                    ExportToTxt("Stocks.txt", m_gridUserSecurities);
                 }
             }
         }
@@ -209,13 +282,44 @@ namespace OwLib
         {
             if (clicks == 2)
             {
-                String code = cell.Row.GetCell("colP1").GetString();
-                if (m_chartEx != null)
+                if (cell.Column.Name != "colP11" && cell.Column.Name != "colP12")
                 {
-                    GSecurity security = new GSecurity();
-                    SecurityService.GetSecurityByCode(code, ref security);
-                    m_chartEx.SearchSecurity(security);
-                    GetTabControl("tabMain").SelectedIndex = 1;
+                    String code = cell.Row.GetCell("colP1").GetString();
+                    if (m_chartEx != null)
+                    {
+                        GSecurity security = new GSecurity();
+                        SecurityService.GetSecurityByCode(code, ref security);
+                        m_chartEx.SearchSecurity(security);
+                        GetTabControl("tabMain").SelectedIndex = 1;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 单元格编辑结束事件
+        /// </summary>
+        /// <param name="sender">调用者</param>
+        /// <param name="cell">单元格</param>
+        private void GridCellEditEnd(object sender, GridCell cell)
+        {
+            if (cell != null)
+            {
+                String colName = cell.Column.Name;
+                String cellValue = cell.GetString();
+                UserSecurity userSecurity = DataCenter.UserSecurityService.Get(cell.Row.GetCell("colP1").GetString());
+                if (userSecurity != null)
+                {
+                    if (colName == "colP11")
+                    {
+                        userSecurity.m_up = cell.GetDouble();
+                        DataCenter.UserSecurityService.Add(userSecurity);
+                    }
+                    else if (colName == "colP12")
+                    {
+                        userSecurity.m_down = cell.GetDouble();
+                        DataCenter.UserSecurityService.Add(userSecurity);
+                    }
                 }
             }
         }
@@ -236,13 +340,49 @@ namespace OwLib
                 securityData.m_low = oneDayDataRec.Low;
                 securityData.m_open = oneDayDataRec.Open;
                 securityData.m_volume = oneDayDataRec.Volume;
-                securityData.m_amount = oneDayDataRec.Amount;
-                securityData.m_date = oneDayDataRec.Date;
+                securityData.m_amount = oneDayDataRec.Amount;               
+                int year = oneDayDataRec.Date / 10000;
+                int month = (oneDayDataRec.Date  - year * 10000) / 100;
+                int day = oneDayDataRec.Date - year * 10000 - month * 100;
+                int hour = oneDayDataRec.Time / 10000;
+                int minute = (oneDayDataRec.Time - hour * 10000) / 100;
+                securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0);
                 securityDatas.Add(securityData);
             }
             HistoryDataInfo historyDataInfo = new HistoryDataInfo();
-            historyDataInfo.m_codes = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code);
-            historyDataInfo.m_cycle = 1440;
+            historyDataInfo.m_codes = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code);    
+            if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint1)
+            {
+                historyDataInfo.m_cycle = 1;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint5)
+            {
+                historyDataInfo.m_cycle = 5;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint15)
+            {
+                historyDataInfo.m_cycle = 15;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint30)
+            {
+                historyDataInfo.m_cycle = 30;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint60)
+            {
+                historyDataInfo.m_cycle = 60;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleDay)
+            {
+                historyDataInfo.m_cycle = 1440;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleWeek)
+            {
+                historyDataInfo.m_cycle = 10080;
+            }
+            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMonth)
+            {
+                historyDataInfo.m_cycle = 43200;
+            }
             historyDataInfo.m_subscription = 1;
             m_chartEx.BindHistoryData(historyDataInfo, securityDatas);
         }
@@ -325,6 +465,9 @@ namespace OwLib
             latestData.m_buyVolume8 = fieldInt32[FieldIndex.BuyVolume8];
             latestData.m_buyVolume9 = fieldInt32[FieldIndex.BuyVolume9];
             latestData.m_buyVolume10 = fieldInt32[FieldIndex.BuyVolume10];
+            latestData.m_allBuyVol = fieldInt64[FieldIndex.GreenVolume];
+            latestData.m_allSellVol = fieldInt64[FieldIndex.RedVolume];
+
             m_chartEx.LatestDiv.LatestData = latestData;
         }
 
@@ -339,7 +482,7 @@ namespace OwLib
             control.BackColor = COLOR.CONTROL;
             RegisterEvents(control);
             m_gridUserSecurities = GetGrid("gridUserSecurities");
-            List<String> codes = DataCenter.UserSecurityService.m_codes;
+            List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
             int codesSize = codes.Count;
             for (int i = 0; i < codesSize; i++)
             {
@@ -353,6 +496,7 @@ namespace OwLib
             m_gridUserSecurities.RegisterEvent(new ControlTimerEvent(TimerEvent), EVENTID.TIMER);
             m_gridUserSecurities.StartTimer(m_timerID, 1000);
             m_gridUserSecurities.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
+            m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
             m_chartEx = new ChartEx(this);
             DataCenter.MainUI = this;
         }
@@ -464,6 +608,28 @@ namespace OwLib
                     row.GetCell("colP9").Style.ForeColor = COLOR.ARGB(80, 255, 255);
                     row.GetCell("colP10").SetDouble(latestData.m_amount);
                     row.GetCell("colP10").Style.ForeColor = COLOR.ARGB(80, 255, 255);
+                    row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 80);
+                    row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(80, 255, 80);
+                    if (latestData.m_close > 0)
+                    {
+                        double up = row.GetCell("colP11").GetDouble(), down = row.GetCell("colP12").GetDouble();
+                        if (up != 0)
+                        {
+                            if (latestData.m_close > up)
+                            {
+                                Sound.Play("alarm.wav");
+                                row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                            }
+                        }
+                        if (down != 0)
+                        {
+                            if (latestData.m_close < down)
+                            {
+                                Sound.Play("alarm.wav");
+                                row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                            }
+                        }
+                    }
                 }
                 m_gridUserSecurities.Invalidate();
             }

@@ -114,6 +114,11 @@ namespace OwLib
         public const long PCOLORS_FORECOLOR5 = PCOLORS_USERCOLOR - 104;
 
         /// <summary>
+        /// 前景色6
+        /// </summary>
+        public const long PCOLORS_FORECOLOR6 = PCOLORS_USERCOLOR - 105;
+
+        /// <summary>
         /// 前景色9
         /// </summary>
         public const long PCOLORS_FORECOLOR9 = PCOLORS_USERCOLOR - 108;
@@ -331,7 +336,7 @@ namespace OwLib
                 }
                 else if (color == PCOLORS_BACKCOLOR3)
                 {
-                    color = COLOR.ARGB(200, 0, 0, 0);
+                    color = COLOR.ARGB(50, 0, 0, 0);
                 }
                 else if (color == PCOLORS_BACKCOLOR4)
                 {
@@ -385,15 +390,19 @@ namespace OwLib
                 {
                     color = COLOR.ARGB(255, 255, 255);
                 }
-                else if (color == CDraw.PCOLORS_FORECOLOR5)
+                else if (color == PCOLORS_FORECOLOR5)
                 {
                     color = COLOR.ARGB(192, 192, 192);
                 }
-                else if (color == CDraw.PCOLORS_FORECOLOR9)
+                else if (color == PCOLORS_FORECOLOR6)
+                {
+                    color = COLOR.ARGB(100, 255, 255);
+                }
+                else if (color == PCOLORS_FORECOLOR9)
                 {
                     color = COLOR.ARGB(255, 255, 0);
                 }
-                else if (color == CDraw.PCOLORS_FORECOLOR11)
+                else if (color == PCOLORS_FORECOLOR11)
                 {
                     color = COLOR.ARGB(135, 206, 235);
                 }

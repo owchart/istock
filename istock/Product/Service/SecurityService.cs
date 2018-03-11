@@ -210,7 +210,7 @@ namespace OwLib
         /// 加载历史数据
         /// </summary>
         /// <param name="history"></param>
-        public static void LoadHistory()
+        public static void LoadHistoryDatas()
         {
             if (m_historyDatas.Count > 0)
             {
@@ -230,8 +230,57 @@ namespace OwLib
                         m_historyDatas[code] = datas;
                     }
                 }
+            }  
+        }
+
+        /// <summary>
+        /// 获取最近活跃的代码
+        /// </summary>
+        /// <returns>活跃代码集合</returns>
+        public static int GetActiveCodes(List<String> activeCodes)
+        {
+            LoadHistoryDatas();
+            Dictionary<String, double> dic = new Dictionary<string, double>();
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
+            {
+                //非停牌
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
+                {
+                    if (m_historyDatas.ContainsKey(latestData.m_code))
+                    {
+                        List<SecurityData> datas = m_historyDatas[latestData.m_code];
+                        int datasSize = datas.Count;
+                        if (datasSize > 250)
+                        {
+                            double totalVol = 0;
+                            double latestVol = 0;
+                            for (int i = 0; i < datasSize; i++)
+                            {
+                                totalVol += datas[i].m_volume;
+                                if (i > datasSize - 20)
+                                {
+                                    latestVol += datas[i].m_volume;
+                                }
+                            }
+                            if (totalVol > 0)
+                            {
+                                dic[latestData.m_code] = latestVol / totalVol;
+                            }
+                        }
+                    }
+                }
             }
-           
+            List<KeyValuePair<String, double>> lst = new List<KeyValuePair<String, double>>(dic);
+            lst.Sort(delegate(KeyValuePair<String, double> s1, KeyValuePair<String, double> s2)
+            {
+                return s2.Value.CompareTo(s1.Value);
+            });
+            dic.Clear();
+            for (int i = 0; i < lst.Count && i < 50; i++)
+            {
+                activeCodes.Add(lst[i].Key);
+            }
+            return 1;
         }
 
         /// <summary>
@@ -285,157 +334,169 @@ namespace OwLib
         /// 获取涨停股票合约集合
         /// </summary>
         /// <param name="limitUpCodes">out 涨停股票合约集合</param>
-        public static void GetLimitUp(ref List<String> limitUpCodes)
+        public static int GetLimitUp(List<String> limitUpCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                //非停牌
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    if (lastData.m_sellVolume1 == 0)
+                    if (latestData.m_sellVolume1 == 0)
                     {
-                        if (lastData.m_buyVolume1 == 0)
+                        if (latestData.m_buyVolume1 == 0)
                         {
                             //无交易股票
                             continue;
                         }
-                        limitUpCodes.Add(code);
+                        limitUpCodes.Add(latestData.m_code);
                     }
                 }
             }
+            return 1;
         }
 
         /// <summary>
         /// 获取跌停合约集合
         /// </summary>
         /// <param name="limitDownCodes">out 跌停合约集合</param>
-        public static void GetLimitDown(ref List<String> limitDownCodes)
+        public static int GetLimitDown(List<String> limitDownCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                //非停牌
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    if (lastData.m_buyVolume1 == 0)
+                    if (latestData.m_buyVolume1 == 0)
                     {
-                        if (lastData.m_sellVolume1 == 0)
+                        if (latestData.m_sellVolume1 == 0)
                         {
                             //无交易股票
                             continue;
                         }
-                        limitDownCodes.Add(code);
+                        limitDownCodes.Add(latestData.m_code);
                     }
                 }
             }
+            return 1;
         }
 
         /// <summary>
         /// 获取无交易合约集合
         /// </summary>
         /// <param name="notTradedCodes">out  无交易合约集合</param>
-        public static void GetNotTradedCodes(ref List<String> notTradedCodes)
+        public static int GetNotTradedCodes(List<String> notTradedCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && latestData.m_buyVolume1 == 0 && latestData.m_sellVolume1 == 0)
                 {
-                    if (lastData.m_buyVolume1 == 0 && lastData.m_sellVolume1 == 0)
-                    {
-                        notTradedCodes.Add(code);
-                    }
+                    notTradedCodes.Add(latestData.m_code);
                 }
             }
+            return 1;
         }
 
         /// <summary>
         /// 交易合约集合
         /// </summary>
         /// <param name="notTradedCodes">out  交易合约集合</param>
-        public static void GetTradedCodes(ref List<String> tradedCodes)
+        public static int GetTradedCodes(List<String> tradedCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    if (lastData.m_buyVolume1 != 0 || lastData.m_sellVolume1 != 0)
+                    tradedCodes.Add(latestData.m_code);
+                }
+            }
+            return 1;
+        }
+
+        /// <summary>
+        /// 次新股
+        /// </summary>
+        /// <param name="secondNewCodes"></param>
+        /// <returns></returns>
+        public static int GetSecondNewCodes(List<String> secondNewCodes)
+        {
+            LoadHistoryDatas();
+            Dictionary<String, double> dic = new Dictionary<string, double>();
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
+            {
+                //非停牌
+                if (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0)
+                {
+                    if (m_historyDatas.ContainsKey(latestData.m_code))
                     {
-                        tradedCodes.Add(code);
+                        List<SecurityData> datas = m_historyDatas[latestData.m_code];
+                        int datasSize = datas.Count;
+                        if (datasSize > 20 && datasSize < 60)
+                        {
+                            dic[latestData.m_code] = datasSize;
+                        }
                     }
                 }
             }
+            List<KeyValuePair<String, double>> lst = new List<KeyValuePair<String, double>>(dic);
+            lst.Sort(delegate(KeyValuePair<String, double> s1, KeyValuePair<String, double> s2)
+            {
+                return s1.Value.CompareTo(s2.Value);
+            });
+            dic.Clear();
+            for (int i = 0; i < lst.Count && i < 50; i++)
+            {
+                secondNewCodes.Add(lst[i].Key);
+            }
+            return 1;
         }
 
         /// <summary>
         /// 获取ST股票
         /// </summary>
         /// <param name="stCodes">out ST股票</param>
-        public static void GetSTCodes(ref List<String> stCodes)
+        public static int GetSTCodes(List<String> stCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (GSecurity security in m_securities)
             {
-                GSecurity security = new GSecurity();
-                if (SecurityService.GetSecurityByCode(code, ref security) == 1)
+                if (security.m_name.IndexOf("ST") == 0)
                 {
-                    if (security.m_name.IndexOf("ST") == 0)
-                    {
-                        stCodes.Add(code);
-                    }
+                    stCodes.Add(security.m_code);
                 }
             }
+            return 1;
         }
 
         /// <summary>
         /// 获取*ST股票
         /// </summary>
         /// <param name="stCodes">out 获取*ST股票</param>
-        public static void GetStarSTCodes(ref List<String> starSTCodes)
+        public static int GetStarSTCodes(List<String> starSTCodes)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
-            foreach (String code in codes)
+            foreach (GSecurity security in m_securities)
             {
-                GSecurity security = new GSecurity();
-                if (SecurityService.GetSecurityByCode(code, ref security) == 1)
+                if (security.m_name.IndexOf("*ST") == 0)
                 {
-                    if (security.m_name.IndexOf("*ST") == 0)
-                    {
-                        starSTCodes.Add(code);
-                    }
+                    starSTCodes.Add(security.m_code);
                 }
             }
+            return 1;
         }
 
         /// <summary>
         /// 获取涨幅排名
         /// </summary>
         /// <param name="riseRanking">out 涨幅排名</param>
-        public static void GetRiseRanking(ref List<String> riseRanking)
+        public static int GetRiseRanking(List<String> riseRanking)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    double rank = (lastData.m_close - lastData.m_lastClose) / lastData.m_lastClose;
-                    dic.Add(code, rank);
+                    double rank = (latestData.m_close - latestData.m_lastClose) / latestData.m_lastClose;
+                    dic.Add(latestData.m_code, rank);
                 }
             }
-
             List<KeyValuePair<String, double>> lst = new List<KeyValuePair<String, double>>(dic);
             lst.Sort(delegate(KeyValuePair<String, double> s1, KeyValuePair<String, double> s2)
             {
@@ -446,24 +507,22 @@ namespace OwLib
             {
                 riseRanking.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
         /// 获取跌幅排名
         /// </summary>
         /// <param name="riseRanking">out 跌幅排名</param>
-        public static void GetFallRanking(ref List<String> fallRanking)
+        public static int GetFallRanking(ref List<String> fallRanking)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    double rank = (lastData.m_close - lastData.m_lastClose) / lastData.m_lastClose;
-                    dic.Add(code, rank);
+                    double rank = (latestData.m_close - latestData.m_lastClose) / latestData.m_lastClose;
+                    dic.Add(latestData.m_code, rank);
                 }
             }
 
@@ -477,23 +536,21 @@ namespace OwLib
             {
                 fallRanking.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
         /// 根据成交量排名
         /// </summary>
         /// <param name="codesByVol">成交量排名</param>
-        public static void GetCodesByVolume(ref List<String> codesByVol)
+        public static int GetCodesByVolume(List<String> codesByVol)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    dic.Add(code, lastData.m_volume);
+                    dic.Add(latestData.m_code, latestData.m_volume);
                 }
             }
 
@@ -503,27 +560,25 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < lst.Count && i < 50; i++)
             {
                 codesByVol.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
         /// 根据成交额排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static void GetCodesByAmount(ref List<String> codesByAmount)
+        public static int GetCodesByAmount(List<String> codesByAmount)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    dic.Add(code, lastData.m_amount);
+                    dic.Add(latestData.m_code, latestData.m_amount);
                 }
             }
 
@@ -533,70 +588,68 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < lst.Count && i < 50; i++)
             {
                 codesByAmount.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
         /// 根据振幅排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static void GetCodesBySwing(ref List<String> codesBySwing)
+        public static int GetCodesBySwing(List<String> codesBySwing)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0 && (latestData.m_buyVolume1 != 0 || latestData.m_sellVolume1 != 0))
                 {
-                    dic.Add(code, (int)(lastData.m_high - lastData.m_low) / lastData.m_lastClose);
+                    if (latestData.m_lastClose > 0)
+                    {
+                        dic.Add(latestData.m_code, (int)(latestData.m_high - latestData.m_low) / latestData.m_lastClose);
+                    }
                 }
             }
-
             List<KeyValuePair<String, double>> lst = new List<KeyValuePair<String, double>>(dic);
             lst.Sort(delegate(KeyValuePair<String, double> s1, KeyValuePair<String, double> s2)
             {
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < lst.Count && i < 50; i++)
             {
                 codesBySwing.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
         /// 根据股价排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static void GetCodesByPrice(ref List<String> codesByPrice)
+        public static int GetCodesByPrice(List<String> codesByPrice)
         {
-            List<String> codes = new List<String>();
-            SecurityService.GetCodes(codes);
             Dictionary<String, double> dic = new Dictionary<String, double>();
-            foreach (String code in codes)
+            foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
-                SecurityLatestData lastData = new SecurityLatestData();
-                if (SecurityService.GetLatestData(code, ref lastData) == 1)
+                if (latestData.m_close > 0)
                 {
-                    dic.Add(code, lastData.m_close);
+                    dic.Add(latestData.m_code, latestData.m_close);
                 }
             }
-
             List<KeyValuePair<String, double>> lst = new List<KeyValuePair<String, double>>(dic);
             lst.Sort(delegate(KeyValuePair<String, double> s1, KeyValuePair<String, double> s2)
             {
-                return s2.Value.CompareTo(s1.Value);
+                return s1.Value.CompareTo(s2.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < lst.Count && i < 50; i++)
             {
                 codesByPrice.Add(lst[i].Key);
             }
+            return 1;
         }
 
         /// <summary>
@@ -727,7 +780,14 @@ namespace OwLib
                                         SecurityLatestData cp = new SecurityLatestData();
                                         cp.Copy(latestData);
                                         cp.m_code = CStrA.ConvertFileCodeToMemoryCode(latestData.m_code);
-                                        m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_code)] = cp;
+                                        if (!m_latestDatas.ContainsKey(cp.m_code))
+                                        {
+                                            m_latestDatas[cp.m_code] = cp;
+                                        }
+                                        else
+                                        {
+                                            m_latestDatas[cp.m_code].Copy(cp);
+                                        }
                                         cp = null;
                                     }
                                 }
@@ -755,7 +815,7 @@ namespace OwLib
             int type =  (int)arr[0];
             double min = (double)arr[1];
             double max = (double)arr[2];
-            LoadHistory();
+            LoadHistoryDatas();
             List<String> fallCodes = GetLastDayCodes(type);
             GetMinuteDatas();
             Dictionary<String, double> pMap = Step5(fallCodes);
@@ -777,7 +837,7 @@ namespace OwLib
         public static void StartWork3()
         {
             //复制数据
-            LoadHistory();
+            LoadHistoryDatas();
             GetMinuteDatas();
             Dictionary<String, List<SecurityData>> cpHistoryDatas = new Dictionary<String, List<SecurityData>>(m_historyDatas.Count);
             foreach (String oCode in m_historyDatas.Keys)

@@ -12,6 +12,7 @@
             <label name="Label" text="选择股票" location="11,15" size="60,17" />
             <input type="text" name="txtCode" location="78,12" size="126,20" />
             <input type="button" name="btnAdd" text="添加" location="219,12" size="70,20" />
+            <input type="button" name="btnExport" text="导出结果" location="315,12" size="100,20" />
           </div>
           <table name="gridUserSecurities" dock="fill">
             <tr>
@@ -25,6 +26,8 @@
               <th name="colP8" text="开盘价" width="100" />
               <th name="colP9" text="成交量" width="100" />
               <th name="colP10" text="成交额" width="100" />
+              <th name="colP11" text="止盈位" width="100" />
+              <th name="colP12" text="止损位" width="100" />
             </tr>
           </table>
         </div>
@@ -43,6 +46,15 @@
         <input type="usercontrol" cid="ribbonbutton" name="btnSingleInfo" text="个股新闻" location="68,79" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnNotice" text="公司公告" location="68,138" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnReport" text="公司研报" location="68,197" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="68,318" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交最多个股" location="316,377" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="最活跃个股" location="68,377" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="316,18" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="316,79" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="316,138" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="316,197" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅最大个股" location="316,259" size="208,45" />
+        <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价个股" location="316,318" size="208,45" />
       </div>
     </div>
     <!--浮动数据-->

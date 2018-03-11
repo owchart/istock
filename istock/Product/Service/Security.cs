@@ -411,6 +411,10 @@ namespace OwLib
         {
             if (data == null) return;
             m_amount = data.m_amount;
+            m_allBuyVol = data.m_allBuyVol;
+            m_allSellVol = data.m_allSellVol;
+            m_avgBuyPrice = data.m_avgBuyPrice;
+            m_avgSellPrice = data.m_avgSellPrice;
             m_buyVolume1 = data.m_buyVolume1;
             m_buyVolume2 = data.m_buyVolume2;
             m_buyVolume3 = data.m_buyVolume3;

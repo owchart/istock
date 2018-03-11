@@ -308,18 +308,22 @@ namespace OwLib
                 String colName = cell.Column.Name;
                 String cellValue = cell.GetString();
                 UserSecurity userSecurity = DataCenter.UserSecurityService.Get(cell.Row.GetCell("colP1").GetString());
-                if (userSecurity != null)
+                if (userSecurity == null)
                 {
-                    if (colName == "colP11")
-                    {
-                        userSecurity.m_up = cell.GetDouble();
-                        DataCenter.UserSecurityService.Add(userSecurity);
-                    }
-                    else if (colName == "colP12")
-                    {
-                        userSecurity.m_down = cell.GetDouble();
-                        DataCenter.UserSecurityService.Add(userSecurity);
-                    }
+                    userSecurity = new UserSecurity();
+                    userSecurity.m_code = cell.Row.GetCell("colP1").GetString();
+                }
+                if (colName == "colP11")
+                {
+                    userSecurity.m_up = cell.GetDouble();
+                    DataCenter.UserSecurityService.Add(userSecurity);
+                    TimerEvent(null, m_timerID);
+                }
+                else if (colName == "colP12")
+                {
+                    userSecurity.m_down = cell.GetDouble();
+                    DataCenter.UserSecurityService.Add(userSecurity);
+                    TimerEvent(null, m_timerID);
                 }
             }
         }

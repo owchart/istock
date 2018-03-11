@@ -1,9 +1,9 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
+namespace OwLib
+{
     public static class CftContainerIdMgr
     {
         private static Dictionary<FuncTypeRealTime, CftContainerId> _idMgr = new Dictionary<FuncTypeRealTime, CftContainerId>(5);

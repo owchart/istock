@@ -1,6 +1,4 @@
-﻿
-
-namespace OwLib
+﻿namespace OwLib
 {
     /// <summary>
     /// TrendData

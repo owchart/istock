@@ -7,7 +7,6 @@ namespace OwLib
     /// </summary>
     public abstract class FormatUtil : ConvertUtil
     {
-
         /// <summary>
         /// 格式化数字1
         /// 格式int

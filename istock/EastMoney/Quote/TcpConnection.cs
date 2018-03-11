@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
- 
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -16,7 +15,6 @@ namespace OwLib
     /// </summary>
     public class TcpConnection
     {
-       
         ///<summary>
         /// 收到数据包的消息处理函数
         ///</summary>

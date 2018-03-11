@@ -1,7 +1,7 @@
-﻿namespace OwLib
-{
-    using System;
+﻿using System;
 
+namespace OwLib
+{
     public class FindIndicator
     {
         public string content;

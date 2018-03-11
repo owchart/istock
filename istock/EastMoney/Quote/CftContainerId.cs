@@ -1,9 +1,9 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
+namespace OwLib
+{
     public class CftContainerId
     {
         private List<int> _available;

@@ -149,6 +149,26 @@ namespace OwLib
                 {
                     SecurityService.Start3();
                 }
+                else if (name == "btnNews")
+                {
+                    StockNewsForm stockNewsForm = new StockNewsForm();
+                    stockNewsForm.Show();
+                }
+                else if (name == "btnSingleInfo")
+                {
+                    SingleInfoForm singleInfoForm = new SingleInfoForm();
+                    singleInfoForm.Show();
+                }
+                else if (name == "btnNotice")
+                {
+                    NoticeForm noticeForm = new NoticeForm();
+                    noticeForm.Show();
+                }
+                else if (name == "btnReport")
+                {
+                    ReportForm reportForm = new ReportForm();
+                    reportForm.Show();
+                }
             }
         }
 

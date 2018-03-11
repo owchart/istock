@@ -1,8 +1,8 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.IO;
+﻿using System;
+using System.IO;
 
+namespace OwLib
+{
     public class ResHKTradeDateDataPacket : OrgDataPacket
     {
         protected override bool DecodingBody(BinaryReader br)

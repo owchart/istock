@@ -1,8 +1,8 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
+namespace OwLib
+{
     public enum MacroDataType
     {
         [Description("全部数据")]

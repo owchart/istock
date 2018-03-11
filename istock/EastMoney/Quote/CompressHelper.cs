@@ -1,10 +1,10 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 
+namespace OwLib
+{
     public class CompressHelper
     {
         [DllImport("lcmex.dll", CallingConvention=CallingConvention.Cdecl)]

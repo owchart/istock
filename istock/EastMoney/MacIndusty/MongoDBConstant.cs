@@ -1,8 +1,8 @@
-﻿namespace OwLib
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OwLib
+{
     public class MongoDBConstant
     {
         private const string AluminumExtractDataCommond = "$-alum\r\n$indicate(name={0}|userid={1})";

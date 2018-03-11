@@ -158,7 +158,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "ReportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "公告";
+            this.Text = "研报";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockNewsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();

@@ -94,7 +94,7 @@ namespace OwLib
         /// K线
         /// </summary>
         /// <param name="code"></param>
-        public static void QueryDayHistory(String code, KLineCycle cycle)
+        public static void QueryHistoryDatas(String code, KLineCycle cycle)
         {
             if (EMSecurityService.KwItems.ContainsKey(code))
             {

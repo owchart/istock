@@ -331,7 +331,7 @@ namespace OwLib
                 }
                 else if (color == PCOLORS_BACKCOLOR3)
                 {
-                    color = COLOR.ARGB(25, 200, 200, 200);
+                    color = COLOR.ARGB(200, 0, 0, 0);
                 }
                 else if (color == PCOLORS_BACKCOLOR4)
                 {

@@ -37,6 +37,26 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 根据代码获取东财代码
+        /// </summary>
+        /// <param name="code">代码</param>
+        /// <returns>东财代码</returns>
+        public static String ConvertDBCodeToEMCode(String code)
+        {
+            return code.Substring(2) + "." + code.Substring(0, 2);
+        }
+
+        /// <summary>
+        /// 东财代码转化为代码
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static String ConvertEMCodeToDBCode(String code)
+        {
+            return code.Substring(code.IndexOf(".") + 1) + code.Substring(0, code.IndexOf("."));
+        }
+
+        /// <summary>
         /// 将股票代码转化为新浪代码
         /// </summary>
         /// <param name="code">股票代码</param>

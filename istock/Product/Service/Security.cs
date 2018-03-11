@@ -244,6 +244,11 @@ namespace OwLib
         public double m_close;
 
         /// <summary>
+        /// 股票代码
+        /// </summary>
+        public String m_code = "";
+
+        /// <summary>
         /// 日期及时间
         /// </summary>
         public double m_date;
@@ -282,11 +287,6 @@ namespace OwLib
         /// 外盘成交量
         /// </summary>
         public int m_outerVol;
-
-        /// <summary>
-        /// 股票代码
-        /// </summary>
-        public String m_securityCode = "";
 
         /// <summary>
         /// 卖一量
@@ -421,6 +421,16 @@ namespace OwLib
             m_buyPrice3 = data.m_buyPrice3;
             m_buyPrice4 = data.m_buyPrice4;
             m_buyPrice5 = data.m_buyPrice5;
+            m_buyVolume6 = data.m_buyVolume6;
+            m_buyVolume7 = data.m_buyVolume7;
+            m_buyVolume8 = data.m_buyVolume8;
+            m_buyVolume9 = data.m_buyVolume9;
+            m_buyVolume10 = data.m_buyVolume10;
+            m_buyPrice6 = data.m_buyPrice6;
+            m_buyPrice7 = data.m_buyPrice7;
+            m_buyPrice8 = data.m_buyPrice8;
+            m_buyPrice9 = data.m_buyPrice9;
+            m_buyPrice10 = data.m_buyPrice10;
             m_close = data.m_close;
             m_date = data.m_date;
             m_high = data.m_high;
@@ -430,7 +440,7 @@ namespace OwLib
             m_open = data.m_open;
             m_openInterest = data.m_openInterest;
             m_outerVol = data.m_outerVol;
-            m_securityCode = data.m_securityCode;
+            m_code = data.m_code;
             m_sellVolume1 = data.m_sellVolume1;
             m_sellVolume2 = data.m_sellVolume2;
             m_sellVolume3 = data.m_sellVolume3;
@@ -441,6 +451,17 @@ namespace OwLib
             m_sellPrice3 = data.m_sellPrice3;
             m_sellPrice4 = data.m_sellPrice4;
             m_sellPrice5 = data.m_sellPrice5;
+            m_settlePrice = data.m_settlePrice;
+            m_sellVolume6 = data.m_sellVolume6;
+            m_sellVolume7 = data.m_sellVolume7;
+            m_sellVolume8 = data.m_sellVolume8;
+            m_sellVolume9 = data.m_sellVolume9;
+            m_sellVolume10 = data.m_sellVolume10;
+            m_sellPrice6 = data.m_sellPrice6;
+            m_sellPrice7 = data.m_sellPrice7;
+            m_sellPrice8 = data.m_sellPrice8;
+            m_sellPrice9 = data.m_sellPrice9;
+            m_sellPrice10 = data.m_sellPrice10;
             m_settlePrice = data.m_settlePrice;
             m_turnoverRate = data.m_turnoverRate;
             m_volume = data.m_volume;
@@ -474,7 +495,7 @@ namespace OwLib
             && m_open == data.m_open
             && m_openInterest == data.m_openInterest
             && m_outerVol == data.m_outerVol
-            && m_securityCode == data.m_securityCode
+            && m_code == data.m_code
             && m_sellVolume1 == data.m_sellVolume1
             && m_sellVolume2 == data.m_sellVolume2
             && m_sellVolume3 == data.m_sellVolume3
@@ -520,7 +541,7 @@ namespace OwLib
         /// <summary>
         /// 股票代码
         /// </summary>
-        public String m_securityCode;
+        public String m_codes;
 
         /// <summary>
         /// 数据条数
@@ -655,5 +676,93 @@ namespace OwLib
         /// </summary>
         public String m_script;
 
+    }
+
+    /// <summary>
+    /// 指标对象
+    /// </summary>
+    public class Indicator
+    {
+        #region Lord 2016/3/13
+        /// <summary>
+        /// 类别
+        /// </summary>
+        public String m_category = "";
+
+        /// <summary>
+        /// 预定显示坐标
+        /// </summary>
+        public String m_coordinate = "";
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public String m_description = "";
+
+        /// <summary>
+        /// 显示小数的位数
+        /// </summary>
+        public int m_digit;
+
+        /// <summary>
+        /// 指标ID
+        /// </summary>
+        public String m_indicatorID = "";
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public String m_name = "";
+
+        /// <summary>
+        /// 列表顺序
+        /// </summary>
+        public int m_orderNum;
+
+        /// <summary>
+        /// 画线方法
+        /// </summary>
+        public int m_paintType;
+
+        /// <summary>
+        /// 参数
+        /// </summary>
+        public String m_parameters = "";
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public String m_password = "";
+
+        /// <summary>
+        /// 特殊Y轴坐标
+        /// </summary>
+        public String m_specialCoordinate = "";
+
+        /// <summary>
+        /// 文本
+        /// </summary>
+        public String m_text = "";
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public int m_type;
+
+        /// <summary>
+        /// 是否使用密码
+        /// </summary>
+        public int m_usePassword;
+
+        /// <summary>
+        /// 用户ID
+        /// </summary>
+        public int m_userID;
+
+        /// <summary>
+        /// 版本
+        /// </summary>
+        public int m_version;
+        #endregion
     }
 }

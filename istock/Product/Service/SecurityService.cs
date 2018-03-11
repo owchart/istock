@@ -698,11 +698,11 @@ namespace OwLib
                                     }
                                     lock (m_latestDatas)
                                     {
-                                        m_latestDatasStr[latestData.m_securityCode] = subStrs[j];
+                                        m_latestDatasStr[latestData.m_code] = subStrs[j];
                                         bool append = true;
-                                        if (m_latestDatas.ContainsKey(latestData.m_securityCode))
+                                        if (m_latestDatas.ContainsKey(latestData.m_code))
                                         {
-                                            if (!m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_securityCode)].Equals(latestData))
+                                            if (!m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_code)].Equals(latestData))
                                             {
                                                 append = false;
                                             }
@@ -722,12 +722,12 @@ namespace OwLib
                                             }
                                             String line = String.Format("{0},{1},{2},{3}\r\n", latestData.m_date,//
                                                 latestData.m_close, latestData.m_volume, latestData.m_amount);
-                                            CFileA.Append(m_newFileDir + latestData.m_securityCode + ".txt", line);
+                                            CFileA.Append(m_newFileDir + latestData.m_code + ".txt", line);
                                         }
                                         SecurityLatestData cp = new SecurityLatestData();
                                         cp.Copy(latestData);
-                                        cp.m_securityCode = CStrA.ConvertFileCodeToMemoryCode(latestData.m_securityCode);
-                                        m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_securityCode)] = cp;
+                                        cp.m_code = CStrA.ConvertFileCodeToMemoryCode(latestData.m_code);
+                                        m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_code)] = cp;
                                         cp = null;
                                     }
                                 }

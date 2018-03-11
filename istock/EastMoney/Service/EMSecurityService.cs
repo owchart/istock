@@ -84,6 +84,20 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 根据内码获取股票
+        /// </summary>
+        /// <param name="innerCode"></param>
+        /// <returns></returns>
+        public static KwItem GetKwItemByInnerCode(int innerCode)
+        {
+            if (kwItems2.ContainsKey(innerCode))
+            {
+                return kwItems2[innerCode];
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 获取可用的股票
         /// </summary>
         /// <param name="items">股票列表</param>

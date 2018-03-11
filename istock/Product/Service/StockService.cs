@@ -366,8 +366,8 @@ namespace OwLibSV
                 switch (j)
                 {
                     case 0:
-                        data.m_securityCode = CStrA.ConvertSinaCodeToDBCode(str2);
-                        if (data.m_securityCode.StartsWith("399"))
+                        data.m_code = CStrA.ConvertSinaCodeToDBCode(str2);
+                        if (data.m_code.StartsWith("399"))
                         {
                             szIndex = true;
                         }

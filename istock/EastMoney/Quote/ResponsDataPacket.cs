@@ -575,11 +575,9 @@ namespace OwLib
                 {
                     DllImportHelper.SetFieldData<int>(this.Code, FieldIndex.SellVolume10Delta, num76 - num77);
                 }
-                text += JsonConvert.SerializeObject(fieldInt32) + JsonConvert.SerializeObject(fieldInt64)
-                    + JsonConvert.SerializeObject(fieldSingle) + JsonConvert.SerializeObject(fieldDouble);
+                DataCenter.MainUI.LV2DatasCallBack(this.Code, fieldInt32, fieldSingle, fieldInt64, fieldDouble);
                 //DataPacket.CalcBondAi(this.Code, true, amount, volume);
             }
-            CFTService.CallBack(FuncTypeRealTime.StockDetailLev2, text);
             return true;
         }
     }
@@ -4142,8 +4140,7 @@ namespace OwLib
                                                                             i % oneDayNum, cycle);
                 KLineDataRec.OneDayDataList.Add(oneDayData);
             }
-            FormulaForm.SetData(FuncTypeRealTime.HisKLine, JsonConvert.SerializeObject(KLineDataRec.OneDayDataList));
-            CFTService.CallBack(FuncTypeRealTime.HisKLine, JsonConvert.SerializeObject(KLineDataRec.OneDayDataList));
+            DataCenter.MainUI.HistoryDatasCallBack(KLineDataRec);
             return true;
         }
     }

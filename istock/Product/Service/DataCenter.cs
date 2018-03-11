@@ -127,6 +127,17 @@ namespace OwLib
             set { DataCenter.dataQuery = value; }
         }
 
+        private static MainFrame m_mainUI;
+
+        /// <summary>
+        /// 获取或设置主界面
+        /// </summary>
+        public static MainFrame MainUI
+        {
+            get { return DataCenter.m_mainUI; }
+            set { DataCenter.m_mainUI = value; }
+        }
+
         private static QuoteSequencService quoteSequencService = new QuoteSequencService();
 
         /// <summary>

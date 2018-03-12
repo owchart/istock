@@ -22,7 +22,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
-using OwLibSV;
 using EmSerDataService;
 
 namespace OwLib

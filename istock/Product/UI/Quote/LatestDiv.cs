@@ -81,6 +81,19 @@ namespace OwLib
             set
             {
                 m_latestData.Copy(value);
+                if (m_chart != null)
+                {
+                    HistoryDataInfo historyDataInfo = new HistoryDataInfo();
+                    historyDataInfo.m_code = m_latestData.m_code;
+                    historyDataInfo.m_pushData = true;
+                    historyDataInfo.m_cycle = m_chart.Cycle;
+                    historyDataInfo.m_subscription = m_chart.Subscription;
+                    SecurityData securityData = new SecurityData();
+                    StockService.GetSecurityData(m_latestData, m_latestData.m_lastClose, historyDataInfo.m_cycle, historyDataInfo.m_subscription, ref securityData);
+                    List<SecurityData> datas = new List<SecurityData>();
+                    datas.Add(securityData);
+                    //m_chart.BindHistoryData(historyDataInfo, datas);
+                }
                 Invalidate();
             }
         }

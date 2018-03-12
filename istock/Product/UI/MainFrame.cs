@@ -16,7 +16,6 @@ using OwLib;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
-using OwLibSV;
 
 namespace OwLib
 {
@@ -354,7 +353,7 @@ namespace OwLib
                 securityDatas.Add(securityData);
             }
             HistoryDataInfo historyDataInfo = new HistoryDataInfo();
-            historyDataInfo.m_codes = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code);    
+            historyDataInfo.m_code = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code);    
             if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint1)
             {
                 historyDataInfo.m_cycle = 1;
@@ -471,7 +470,14 @@ namespace OwLib
             latestData.m_buyVolume10 = fieldInt32[FieldIndex.BuyVolume10];
             latestData.m_allBuyVol = fieldInt64[FieldIndex.GreenVolume];
             latestData.m_allSellVol = fieldInt64[FieldIndex.RedVolume];
-
+            int time = fieldInt32[FieldIndex.Time];
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            int day = DateTime.Now.Day;
+            int hour = time / 10000;
+            int minute = (time - hour * 10000) / 100;
+            int second = time - hour * 10000 - minute * 100;
+            latestData.m_date = CStrA.M129(year, month, day, hour, 0, 0, 0);
             m_chartEx.LatestDiv.LatestData = latestData;
         }
 
@@ -614,6 +620,7 @@ namespace OwLib
                     row.GetCell("colP10").Style.ForeColor = COLOR.ARGB(80, 255, 255);
                     row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 80);
                     row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(80, 255, 80);
+                    int isAlarm = 0;
                     if (latestData.m_close > 0)
                     {
                         double up = row.GetCell("colP11").GetDouble(), down = row.GetCell("colP12").GetDouble();
@@ -622,7 +629,7 @@ namespace OwLib
                             if (latestData.m_close > up)
                             {
                                 Sound.Play("alarm.wav");
-                                row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                                isAlarm = 1;
                             }
                         }
                         if (down != 0)
@@ -630,8 +637,26 @@ namespace OwLib
                             if (latestData.m_close < down)
                             {
                                 Sound.Play("alarm.wav");
-                                row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                                isAlarm = 2;
                             }
+                        }
+                    }
+                    List<GridCell> cells = row.GetCells();
+                    int cellsSize = cells.Count;
+                    for (int j = 0; j < cellsSize; j++)
+                    {
+                        GridCell cCell = cells[j];
+                        if (isAlarm == 2)
+                        {
+                            cCell.Style.BackColor = COLOR.ARGB(100, 80, 255, 80);
+                        }
+                        else if (isAlarm == 1)
+                        {
+                            cCell.Style.BackColor = COLOR.ARGB(100, 255, 80, 80);
+                        }
+                        else
+                        {
+                            cCell.Style.BackColor = COLOR.ARGB(0, 0, 0);
                         }
                     }
                 }

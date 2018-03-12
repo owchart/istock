@@ -16,7 +16,7 @@ using System.Threading;
 using System.Diagnostics;
 using OwLib;
 
-namespace OwLibSV
+namespace OwLib
 {
     /// <summary>
     /// ¹ÉÆ±·þÎñ

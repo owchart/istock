@@ -545,7 +545,7 @@ namespace OwLib
         /// <summary>
         /// 股票代码
         /// </summary>
-        public String m_codes;
+        public String m_code;
 
         /// <summary>
         /// 数据条数

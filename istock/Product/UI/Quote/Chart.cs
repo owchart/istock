@@ -363,7 +363,7 @@ namespace OwLib
         /// <param name="historyDatas">历史数据</param>
         public void BindHistoryData(HistoryDataInfo dataInfo, List<SecurityData> historyDatas)
         {
-            if (dataInfo.m_codes == m_latestDiv.SecurityCode && dataInfo.m_cycle == m_cycle
+            if (dataInfo.m_code == m_latestDiv.SecurityCode && dataInfo.m_cycle == m_cycle
                 && dataInfo.m_subscription == m_subscription)
             {
                 CTable dataSource = m_chart.DataSource;
@@ -1183,7 +1183,7 @@ namespace OwLib
             m_latestDiv.SecurityCode = security.m_code;
             m_latestDiv.SecurityName = security.m_name;
             HistoryDataInfo dataInfo = new HistoryDataInfo();
-            dataInfo.m_codes = CStrA.ConvertDBCodeToEMCode(security.m_code);
+            dataInfo.m_code = CStrA.ConvertDBCodeToEMCode(security.m_code);
             int cycle = Cycle;
             if (cycle <= 60)
             {
@@ -1253,8 +1253,8 @@ namespace OwLib
             {
                 klineCycle = KLineCycle.CycleMonth;
             }
-            CFTService.QueryLV2(dataInfo.m_codes);
-            CFTService.QueryHistoryDatas(dataInfo.m_codes, klineCycle);
+            CFTService.QueryLV2(dataInfo.m_code);
+            CFTService.QueryHistoryDatas(dataInfo.m_code, klineCycle);
             m_chart.Update();
             m_mainFrame.Native.Invalidate();
         }

@@ -363,12 +363,6 @@
     <Compile Include="Form\ReportForm.designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\SingleInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\SingleInfoForm.designer.cs">
-      <DependentUpon>SingleInfoForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\SpecialForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +411,7 @@
     <Compile Include="Product\UI\Quote\SecurityDataHelper.cs" />
     <Compile Include="Product\UI\RibbonButton.cs" />
     <Compile Include="Product\UI\RTCWindow.cs" />
+    <Compile Include="Product\UI\StockNews.cs" />
     <Compile Include="Product\UI\TradePlugIn.cs" />
     <Compile Include="Product\UI\UIXmlEx.cs" />
     <Compile Include="Product\UI\WindowButton.cs" />
@@ -438,9 +433,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\SingleInfoForm.resx">
-      <DependentUpon>SingleInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SpecialForm.resx">
       <DependentUpon>SpecialForm.cs</DependentUpon>

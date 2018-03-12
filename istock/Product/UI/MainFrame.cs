@@ -47,6 +47,17 @@ namespace OwLib
         /// </summary>
         private int m_timerID = ControlA.GetNewTimerID();
 
+        private StockNews m_stockNews;
+
+        /// <summary>
+        /// 获取或设置个股新闻
+        /// </summary>
+        public StockNews StockNews
+        {
+            get { return m_stockNews; }
+            set { m_stockNews = value; }
+        }
+
         private TradePlugIn m_tradePlugIn;
 
         /// <summary>
@@ -181,11 +192,6 @@ namespace OwLib
                     StockNewsForm stockNewsForm = new StockNewsForm();
                     stockNewsForm.Show();
                 }
-                else if (name == "btnSingleInfo")
-                {
-                    SingleInfoForm singleInfoForm = new SingleInfoForm();
-                    singleInfoForm.Show();
-                }
                 else if (name == "btnNotice")
                 {
                     NoticeForm noticeForm = new NoticeForm();
@@ -310,6 +316,7 @@ namespace OwLib
                         SecurityService.GetSecurityByCode(code, ref security);
                         m_chartEx.SearchSecurity(security);
                         GetTabControl("tabMain").SelectedIndex = 1;
+                        m_stockNews.Code = code; 
                     }
                 }
             }
@@ -373,7 +380,7 @@ namespace OwLib
                 securityDatas.Add(securityData);
             }
             HistoryDataInfo historyDataInfo = new HistoryDataInfo();
-            historyDataInfo.m_code = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code);    
+            historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code;    
             if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint1)
             {
                 historyDataInfo.m_cycle = 1;
@@ -442,7 +449,7 @@ namespace OwLib
                 Dictionary<FieldIndex, double> fieldDouble)
         {
             SecurityLatestData latestData = new SecurityLatestData();
-            latestData.m_code = CStrA.ConvertEMCodeToDBCode(EMSecurityService.GetKwItemByInnerCode(code).Code);
+            latestData.m_code = EMSecurityService.GetKwItemByInnerCode(code).Code;
             latestData.m_high = fieldSingle[FieldIndex.High];
             latestData.m_low = fieldSingle[FieldIndex.Low];
             latestData.m_open = fieldSingle[FieldIndex.Open];
@@ -530,6 +537,7 @@ namespace OwLib
             m_chartEx = new ChartEx(this);
             DataCenter.MainUI = this;
             m_tradePlugIn = new TradePlugIn(this);
+            m_stockNews = new StockNews(this);
         }
 
         /// <summary>

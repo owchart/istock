@@ -72,6 +72,7 @@ namespace OwLib
                 CFileA.Write(Application.StartupPath + "\\codes.txt", sb.ToString());
                 EMSecurityService.KwItems = availableItems;
                 CFileA.Write(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems));
+                SecurityService.ImportSecurities(EMSecurityService.KwItems);
             }
             else
             {

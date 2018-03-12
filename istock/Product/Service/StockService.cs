@@ -653,13 +653,13 @@ namespace OwLib
             for (int i = 0; i < strLen; i++)
             {
                 String postCode = strs[i];
-                sinaCodes.Add(postCode);
+                sinaCodes.Add(CStrA.ConvertDBCodeToSinaCode(postCode));
             }
             String requestCode = "";
             int sinaCodesSize = sinaCodes.Count;
             for (int i = 0; i < sinaCodesSize; i++)
             {
-                String postCode = strs[i];
+                String postCode = sinaCodes[i];
                 requestCode += postCode;
                 if (i != strLen - 1)
                 {

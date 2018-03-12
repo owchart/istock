@@ -5,6 +5,7 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace OwLib
 {
@@ -115,31 +116,6 @@ namespace OwLib
         }
 
         /// <summary>
-        /// 获取代码字典
-        /// </summary>
-        public static void GetCodeMap()
-        {
-            m_codedMap.Clear();
-            String codeFullStr = "";
-            CFileA.Read(DataCenter.GetAppPath() + "\\codes.txt", ref codeFullStr);
-            String[] lines = codeFullStr.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (String line in lines)
-            {
-                if (line.Trim() == "")
-                {
-                    continue;
-                }
-                String pCode = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[0];
-                String code = CStrA.ConvertFileCodeToMemoryCode(pCode);
-                String cName = line.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries)[1];
-                GSecurity security =  new GSecurity();
-                security.m_code = code;
-                security.m_name = cName;
-                m_codedMap[code] = security;
-            }
-        }
-
-        /// <summary>
         /// 获取前一天下跌的股票
         /// </summary>
         public static List<String> GetLastDayCodes(int type)
@@ -217,7 +193,7 @@ namespace OwLib
             }
             foreach(String code in m_codedMap.Keys)
             {
-                String fileName = DataCenter.GetAppPath() + "\\day\\" + code + ".txt";
+                String fileName = DataCenter.GetAppPath() + "\\day\\" + CStrA.ConvertDBCodeToSinaCode(code).ToUpper() + ".txt";
                 if (File.Exists(fileName))
                 {
                     StreamReader sra = new StreamReader(fileName, Encoding.Default);
@@ -297,7 +273,7 @@ namespace OwLib
                 String fileName = m_newFileDir + CStrA.ConvertDBCodeToFileName(code);
                 if (!CFileA.IsFileExist(fileName))
                 {
-                    fileName = m_newFileDir + code.Substring(2) + "." + code.Substring(0, 2) + ".txt";
+                    fileName = m_newFileDir + CStrA.ConvertDBCodeToSinaCode(code).ToUpper() + ".txt";
                 }
                 if (CFileA.IsFileExist(fileName))
                 {
@@ -652,6 +628,45 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 导入股票
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="type">类型</param>
+        public static void ImportSecurities(Dictionary<String, KwItem> kwItems)
+        {
+            String dataBasePath = DataCenter.GetAppPath() + "\\securities.db";
+            if (CFileA.IsFileExist(dataBasePath))
+            {
+                CFileA.RemoveFile(dataBasePath);
+            }
+            String connectStr = "Data Source = " + dataBasePath;
+            if (!CFileA.IsFileExist(dataBasePath))
+            {
+                //创建数据库文件
+                SQLiteConnection.CreateFile("securities.db");
+                //创建表
+                SQLiteConnection conn2 = new SQLiteConnection(connectStr);
+                conn2.Open();
+                SQLiteCommand cmd2 = conn2.CreateCommand();
+                cmd2.CommandText = "CREATE TABLE SECURITY(ID INTEGER PRIMARY KEY, CODE, NAME, PINGYIN, TYPE INTEGER, STATUS INTEGER, CREATETIME DATE, MODIFYTIME DATE)";
+                cmd2.ExecuteNonQuery();
+                conn2.Close();
+            }
+            SQLiteConnection conn = new SQLiteConnection(connectStr);
+            conn.Open();
+            SQLiteCommand cmd = conn.CreateCommand();
+            int strSize = kwItems.Count;
+            foreach(KwItem kwItem  in kwItems.Values)
+            {
+                String sql = String.Format("INSERT INTO SECURITY(CODE, NAME, PINGYIN, TYPE, STATUS, CREATETIME, MODIFYTIME) VALUES ('{0}', '{1}', '{2}', {3}, {4}, '1970-1-1', '1970-1-1')",
+                    kwItem.Code, kwItem.Name, kwItem.Pingyin, kwItem.Type, kwItem.Innercode);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+        }
+
+        /// <summary>
         /// 开始策略
         /// </summary>
         public static void Start()
@@ -699,18 +714,17 @@ namespace OwLib
                 {
                     String[] subStrs = strs[i].Split(',');
                     GSecurity security = new GSecurity();
-                    security.m_code = CStrA.ConvertFileCodeToMemoryCode(subStrs[0]);
+                    security.m_code = subStrs[0];
                     security.m_name = subStrs[1];
-                    lock (m_securities)
-                    {
-                        m_securities.Add(security);
-                    }
-                    m_codedMap[security.m_code] = security;
-                    codes += security.m_code;
-                    codes += ",";
                     if (!security.m_code.StartsWith("A"))
                     {
-                        sb.Append(security.m_code + "," + security.m_name + "\r\n");
+                        lock (m_securities)
+                        {
+                            m_securities.Add(security);
+                        }
+                        m_codedMap[security.m_code] = security;
+                        codes += security.m_code;
+                        codes += ",";
                     }
                 }
             }
@@ -776,18 +790,14 @@ namespace OwLib
                                         //        latestData.m_close, latestData.m_volume, latestData.m_amount);
                                         //    CFileA.Append(m_newFileDir + latestData.m_code + ".txt", line);
                                         //}
-                                        SecurityLatestData cp = new SecurityLatestData();
-                                        cp.Copy(latestData);
-                                        cp.m_code = CStrA.ConvertFileCodeToMemoryCode(latestData.m_code);
-                                        if (!m_latestDatas.ContainsKey(cp.m_code))
+                                        if (!m_latestDatas.ContainsKey(latestData.m_code))
                                         {
-                                            m_latestDatas[cp.m_code] = cp;
+                                            m_latestDatas[latestData.m_code] = latestData;
                                         }
                                         else
                                         {
-                                            m_latestDatas[cp.m_code].Copy(cp);
+                                            m_latestDatas[latestData.m_code].Copy(latestData);
                                         }
-                                        cp = null;
                                     }
                                 }
                                 latestDatas.Clear();

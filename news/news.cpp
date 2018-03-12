@@ -14,11 +14,11 @@ extern "C" __declspec(dllexport) int GetNews(const char* code, char* str)
 	return length;
 }
 
-//int _tmain(int argc, _TCHAR* argv[])
-//{
-//	char str[102400] = {0};
-//	GetNews("601857.SH", str);
-//	return 0;
-//}
+int _tmain(int argc, _TCHAR* argv[])
+{
+	char str[102400] = {0};
+	GetNews("601857.SH", str);
+	return 0;
+}
 
 

@@ -51,7 +51,7 @@ string NewsService::GetNews(string code)
 	StockVersionInfo svInfo;
 	g_mapVersion[security.m_status] = svInfo;
 
-	string url = "http://121.52.237.8:1818/market/web.action";
+	string url = "http://183.136.163.249:1818/market/web.action";
 	int totalLen = 0;
 	//«Î«Û–¬Œ≈
 	char *ps = CMakeNewInfo::MakeNewReq(50, g_vecSecuVarietyCode, g_mapVersion, totalLen);

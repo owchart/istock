@@ -53,16 +53,6 @@ namespace OwLib
         }
 
         /// <summary>
-        /// 根据代码获取东财代码
-        /// </summary>
-        /// <param name="code">代码</param>
-        /// <returns>东财代码</returns>
-        public static String ConvertDBCodeToEMCode(String code)
-        {
-            return code.Substring(2) + "." + code.Substring(0, 2);
-        }
-
-        /// <summary>
         /// 东财代码转化为代码
         /// </summary>
         /// <param name="code"></param>

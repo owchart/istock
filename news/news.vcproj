@@ -17,9 +17,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
+			OutputDirectory="..\istock\bin\Debug"
 			IntermediateDirectory=".\Debug"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			UseOfMFC="1"
 			CharacterSet="1"
 			>
@@ -62,6 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"

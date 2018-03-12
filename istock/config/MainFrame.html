@@ -40,6 +40,15 @@
           <input type="usercontrol" cid="klinediv" name="divKLine" />
         </div>
       </div>
+        <div name="TabPage4" text="个股新闻" type="tabpage">
+        <table name="gridStockNews" dock="fill">
+        <tr>
+              <th name="colN1" text="时间" width="120" />
+              <th name="colN2" text="类型" width="60" />
+              <th name="colN3" text="标题" width="1000" />
+            </tr>
+        </table>
+       </div>
        <div name="TabPage3" text="自动交易" type="tabpage">
         <splitlayoutdiv name="divMain2" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitmode="percentsize" splitterposition="0,35,400,36">
       <div name="divCapital" location="0,0">
@@ -137,10 +146,9 @@
       </splitlayoutdiv>
     </splitlayoutdiv>
        </div>
-      <div name="TabPage4" text="更多功能" type="tabpage">
+      <div name="TabPage5" text="更多功能" type="tabpage">
         <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="68,259" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnNews" text="股票新闻" location="68,18" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnSingleInfo" text="个股新闻" location="68,79" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnNotice" text="公司公告" location="68,138" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnReport" text="公司研报" location="68,197" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="68,318" size="208,45" />

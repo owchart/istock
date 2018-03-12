@@ -457,9 +457,7 @@ namespace OwLib
         /// </summary>
         public GridColumnEx()
         {
-            BorderColor = COLOR.EMPTY;
-            ForeColor = COLOR.ARGB(255, 255, 255);
-            Font = new FONT("Î¢ÈíÑÅºÚ", 14, true, false, false);
+            Font = new FONT("Î¢ÈíÑÅºÚ", 12, false, false, false);
         }
 
         /// <summary>
@@ -471,7 +469,7 @@ namespace OwLib
         {
             int width = Width, height = Height;
             RECT drawRect = new RECT(0, 0, width, height);
-            paint.FillRect(COLOR.ARGB(0, 0, 0), drawRect);
+            paint.FillGradientRect(CDraw.PCOLORS_BACKCOLOR, CDraw.PCOLORS_BACKCOLOR2, drawRect, 0, 90);
         }
     }
 }

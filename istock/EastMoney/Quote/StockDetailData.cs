@@ -57,6 +57,9 @@ namespace OwLib
             }
            
         }
+
+        private DataPacket m_packet;
+        
         /// <summary>
         /// SubscribeData
         /// </summary>
@@ -74,6 +77,19 @@ namespace OwLib
                 (packet as ReqStockDetailDataPacket).Code = Code;
             }
             Cm.Request(packet);
+            m_packet = packet;
+        }
+
+        /// <summary>
+        /// CancelSubscribe
+        /// </summary>
+        protected override void CancelSubscribe()
+        {
+            if (m_packet != null)
+            {
+                m_packet.IsPush = false;
+                Cm.Request(m_packet);
+            }
         }
     }
 

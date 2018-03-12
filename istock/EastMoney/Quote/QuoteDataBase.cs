@@ -78,7 +78,10 @@ namespace OwLib
         /// <summary>
         /// CancelSubscribe
         /// </summary>
-        protected virtual void CancelSubscribe(){}
+        protected virtual void CancelSubscribe()
+        {
+            
+        }
         /// <summary>
         /// _cm_DoCMReceiveData
         /// </summary>

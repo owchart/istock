@@ -1180,10 +1180,11 @@ namespace OwLib
             System.GC.Collect();
             m_searchSecurity = security;
             m_latestDiv.Type = security.m_type;
+            CFTService.QuitLV2(m_latestDiv.SecurityCode);
             m_latestDiv.SecurityCode = security.m_code;
             m_latestDiv.SecurityName = security.m_name;
             HistoryDataInfo dataInfo = new HistoryDataInfo();
-            dataInfo.m_code = CStrA.ConvertDBCodeToEMCode(security.m_code);
+            dataInfo.m_code = security.m_code;
             int cycle = Cycle;
             if (cycle <= 60)
             {
@@ -1253,8 +1254,8 @@ namespace OwLib
             {
                 klineCycle = KLineCycle.CycleMonth;
             }
-            CFTService.QueryLV2(dataInfo.m_code);
             CFTService.QueryHistoryDatas(dataInfo.m_code, klineCycle);
+            CFTService.QueryLV2(dataInfo.m_code);
             m_chart.Update();
             m_mainFrame.Native.Invalidate();
         }

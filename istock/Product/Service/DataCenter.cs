@@ -148,6 +148,26 @@ namespace OwLib
             set { DataCenter.quoteSequencService = value; }
         }
 
+        private static StrategySettingService m_strategySettingService = new StrategySettingService();
+
+        /// <summary>
+        /// 获取策略服务
+        /// </summary>
+        public static StrategySettingService StrategySettingService
+        {
+            get { return DataCenter.m_strategySettingService; }
+        }
+
+        private static THSDealService m_thsDealService = new THSDealService();
+
+        /// <summary>
+        /// 获取同花顺交易服务
+        /// </summary>
+        public static THSDealService ThsDealService
+        {
+            get { return m_thsDealService; }
+        }
+
         /// <summary>
         /// 获取或设置用户ID
         /// </summary>

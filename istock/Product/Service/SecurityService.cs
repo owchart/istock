@@ -751,31 +751,31 @@ namespace OwLib
                                     lock (m_latestDatas)
                                     {
                                         m_latestDatasStr[latestData.m_code] = subStrs[j];
-                                        bool append = true;
-                                        if (m_latestDatas.ContainsKey(latestData.m_code))
-                                        {
-                                            if (!m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_code)].Equals(latestData))
-                                            {
-                                                append = false;
-                                            }
-                                        }
-                                        if(append)
-                                        {
-                                            long today = (long)DateTime.Now.Subtract(DateTime.Parse("1970-1-1")).TotalMilliseconds / 86400000;
-                                            if (m_today < today)
-                                            {
-                                                m_today = today;
-                                                String nPath = DataCenter.GetAppPath() + "\\tick\\" + DateTime.Now.ToString("yyyy-MM-dd");
-                                                if (!Directory.Exists(nPath))
-                                                {
-                                                    Directory.CreateDirectory(nPath);
-                                                }
-                                                m_newFileDir = nPath + "\\";
-                                            }
-                                            String line = String.Format("{0},{1},{2},{3}\r\n", latestData.m_date,//
-                                                latestData.m_close, latestData.m_volume, latestData.m_amount);
-                                            CFileA.Append(m_newFileDir + latestData.m_code + ".txt", line);
-                                        }
+                                        //bool append = true;
+                                        //if (m_latestDatas.ContainsKey(latestData.m_code))
+                                        //{
+                                        //    if (!m_latestDatas[CStrA.ConvertFileCodeToMemoryCode(latestData.m_code)].Equals(latestData))
+                                        //    {
+                                        //        append = false;
+                                        //    }
+                                        //}
+                                        //if(append)
+                                        //{
+                                        //    long today = (long)DateTime.Now.Subtract(DateTime.Parse("1970-1-1")).TotalMilliseconds / 86400000;
+                                        //    if (m_today < today)
+                                        //    {
+                                        //        m_today = today;
+                                        //        String nPath = DataCenter.GetAppPath() + "\\tick\\" + DateTime.Now.ToString("yyyy-MM-dd");
+                                        //        if (!Directory.Exists(nPath))
+                                        //        {
+                                        //            Directory.CreateDirectory(nPath);
+                                        //        }
+                                        //        m_newFileDir = nPath + "\\";
+                                        //    }
+                                        //    String line = String.Format("{0},{1},{2},{3}\r\n", latestData.m_date,//
+                                        //        latestData.m_close, latestData.m_volume, latestData.m_amount);
+                                        //    CFileA.Append(m_newFileDir + latestData.m_code + ".txt", line);
+                                        //}
                                         SecurityLatestData cp = new SecurityLatestData();
                                         cp.Copy(latestData);
                                         cp.m_code = CStrA.ConvertFileCodeToMemoryCode(latestData.m_code);

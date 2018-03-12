@@ -37,6 +37,22 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 将股票代码转化为成交代码
+        /// </summary>
+        /// <param name="code">股票代码</param>
+        /// <returns>新浪代码</returns>
+        public static String ConvertDBCodeToDealCode(String code)
+        {
+            String securityCode = code;
+            int index = securityCode.IndexOf(".");
+            if (index > 0)
+            {
+                securityCode = securityCode.Substring(0, index);
+            }
+            return securityCode;
+        }
+
+        /// <summary>
         /// 根据代码获取东财代码
         /// </summary>
         /// <param name="code">代码</param>

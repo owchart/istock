@@ -769,4 +769,486 @@ namespace OwLib
         public int m_version;
         #endregion
     }
+
+    /// <summary>
+    /// 交易信息
+    /// </summary>
+    public class OrderInfo
+    {
+        public String m_code;
+        public float m_price;
+        public int m_qty;
+    }
+
+    /// <summary>
+    /// 交易策略设置
+    /// </summary>
+    public class SecurityStrategySetting
+    {
+        /// <summary>
+        /// 设置的股票代码
+        /// </summary>
+        public String m_securityCode = "";
+        /// <summary>
+        /// 设置的股票名称
+        /// </summary>
+        public String m_securityName = "";
+        /// <summary>
+        /// 策略类型
+        /// 0：区间交易
+        /// </summary>
+        public int m_strategyType = 0;
+        /// <summary>
+        /// 交易策略的内容
+        /// </summary>
+        public String m_strategySettingInfo = "";
+    }
+
+    /// <summary>
+    /// 股票区间交易条件
+    /// </summary>
+    public class SecurityRangeTradeCondition
+    {
+        /// <summary>
+        /// 区间下限
+        /// </summary>
+        public float m_bottomRangePrice = 0;
+        /// <summary>
+        /// 每次购买数量
+        /// </summary>
+        public int m_buyCount = 0;
+        /// <summary>
+        /// 委托买入不成交，多长时间后撤销,单位秒,0为不撤销
+        /// </summary>
+        public int m_cancelIntervalBuyNoDeal = 0;
+        /// <summary>
+        /// 委托卖出不成交，多长时间后撤销,单位秒,0为不撤销
+        /// </summary>
+        public int m_cancelIntervalSellNoDeal = 0;
+        /// <summary>
+        /// 清仓价格
+        /// </summary>
+        public float m_cleanPrice = 0;
+        /// <summary>
+        /// 有效时间段的开始时间
+        /// </summary>
+        public String m_fromEffectiveTransactionTime = "";
+        /// <summary>
+        /// 初始建仓数量
+        /// </summary>
+        public int m_initBuildCount = 0;
+        /// <summary>
+        /// 是否已经初始建仓
+        /// </summary>
+        public bool m_initBuildFlag = false;
+        /// <summary>
+        /// 初始建仓价格
+        /// </summary>
+        public float m_initBuildPrice = 0;
+        /// <summary>
+        /// 委托后，多长时间检查成交状态,单位秒,0为不查询
+        /// </summary>
+        public int m_intervalChceckTradeStatus = 0;
+        /// <summary>
+        /// 是否跨区间乘数买
+        /// </summary>
+        public bool m_isCrossBuy = false;
+        /// <summary>
+        /// 是否跨区间乘数卖
+        /// </summary>
+        public bool m_isCrossSell = false;
+        /// <summary>
+        /// 是否设置有效时间段
+        /// </summary>
+        public bool m_isSetEffectiveTransactionTime = false;
+        /// <summary>
+        /// 低于上次成交价的比例或者价格
+        /// </summary>
+        public float m_lowLastDealBuy = 0;
+        /// <summary>
+        /// 上次成交的数量
+        /// </summary>
+        public int m_lastDealCount = 0;
+        /// <summary>
+        /// 上次成交的价格
+        /// </summary>
+        public float m_lastDealPrice = 0;
+        /// <summary>
+        /// 有效时间段的结束时间
+        /// </summary>
+        public String m_toEffectiveTransactionTime = "";
+        /// <summary>
+        /// 设置的股票代码
+        /// </summary>
+        public String m_securityCode = "";
+        /// <summary>
+        /// 设置的股票名称
+        /// </summary>
+        public String m_securityName = "";
+        /// <summary>
+        /// 是否按价格买卖。默认按照百分比
+        /// </summary>
+        public bool m_isBasePrice = false;
+        /// <summary>
+        /// 涨跌计算标准
+        /// </summary>
+        public String m_priceDealBaseLine = "";
+        /// <summary>
+        /// 每次卖出的数量
+        /// </summary>
+        public int m_sellCount = 0;
+        /// <summary>
+        /// 价格上限
+        /// </summary>
+        public float m_topRangePrice = 0;
+        /// <summary>
+        /// 成交价上涨多少卖出
+        /// </summary>
+        public float m_overLastDealSell = 0;
+    }
+
+    /// <summary>
+    /// 股票成交信息
+    /// </summary>
+    public class SecurityTrade
+    {
+        /// <summary>
+        /// 撤销数量
+        /// </summary>
+        public double m_cancelVolume = 0;
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public String m_operate;
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        public String m_orderSysID;
+        /// <summary>
+        /// 成交编号
+        /// </summary>
+        public String m_orderTradeID;
+        /// <summary>
+        /// 订单类型
+        /// </summary>
+        public String m_orderType;
+        /// <summary>
+        /// 股票余额
+        /// </summary>
+        public double m_stockBalance = 0;
+        /// <summary>
+        /// 证券代码
+        /// </summary>
+        public String m_stockCode;
+        /// <summary>
+        /// 证券名称
+        /// </summary>
+        public String m_stockName;
+        /// <summary>
+        /// 成交金额
+        /// </summary>
+        public double m_tradeAmount = 0;
+        /// <summary>
+        /// 成交时间
+        /// </summary>
+        public String m_tradeDate;
+        /// <summary>
+        /// 成交数量
+        /// </summary>
+        public double m_tradeVolume = 0;
+        /// <summary>
+        /// 成交均价
+        /// </summary>
+        public double m_tradeAvgPrice = 0;
+
+        /// <summary>
+        /// 字符串转换成成交对象
+        /// </summary>
+        /// <param name="tradeResult"></param>
+        /// <returns></returns>
+        public static SecurityTrade ConvertToStockTrade(String tradeResult)
+        {
+            if (tradeResult == null || tradeResult.Length == 0)
+            {
+                return null;
+            }
+            String[] tradeFields = tradeResult.Split("	".ToCharArray());
+            if (tradeFields == null || tradeFields.Length < 11)
+            {
+                return null;
+            }
+            int index = 0;
+            SecurityTrade trade = new SecurityTrade();
+            trade.m_tradeDate = tradeFields[index++];
+            trade.m_stockCode = tradeFields[index++];
+            trade.m_stockName = tradeFields[index++];
+            trade.m_operate = tradeFields[index++];
+            trade.m_tradeVolume = CStrA.ConvertStrToDouble(tradeFields[index++]);
+            trade.m_tradeAvgPrice = CStrA.ConvertStrToDouble(tradeFields[index++]);
+            trade.m_tradeAmount = CStrA.ConvertStrToDouble(tradeFields[index++]);
+            trade.m_orderSysID = tradeFields[index++];
+            trade.m_orderTradeID = tradeFields[index++];
+            trade.m_cancelVolume = CStrA.ConvertStrToDouble(tradeFields[index++]);
+            trade.m_stockBalance = CStrA.ConvertStrToDouble(tradeFields[index++]);
+            return trade;
+        }
+    }
+
+    /// <summary>
+    /// 交易账户信息
+    /// </summary>
+    public class SecurityTradingAccount
+    {
+        /// <summary>
+        ///  可用金额
+        /// </summary>
+        public double m_available = 0;
+        /// <summary>
+        ///  资金余额
+        /// </summary>
+        public double m_capitalBalance = 0;
+        /// <summary>
+        ///  冻结金额
+        /// </summary>
+        public double m_frozenCash = 0;
+        /// <summary>
+        ///  股票市值
+        /// </summary>
+        public double m_stockValue = 0;
+        /// <summary>
+        ///  总资产
+        /// </summary>
+        public double m_totalCapital = 0;
+        /// <summary>
+        ///  可取金额
+        /// </summary>
+        public double m_withdrawQuota = 0;
+
+        /// <summary>
+        /// 字符串转换成持仓对象
+        /// </summary>
+        /// <param name="tradingAccountResult"></param>
+        /// <returns></returns>
+        public static SecurityTradingAccount ConvertToStockTradingAccount(String tradingAccountResult)
+        {
+            if (tradingAccountResult == null || tradingAccountResult.Length == 0)
+            {
+                return null;
+            }
+            String[] tradingAccountFields = tradingAccountResult.Split(Environment.NewLine.ToCharArray(),
+                StringSplitOptions.RemoveEmptyEntries);
+            if (tradingAccountFields == null || tradingAccountFields.Length < 6)
+            {
+                return null;
+            }
+            int index = 0;
+            SecurityTradingAccount stockTradingAccount = new SecurityTradingAccount();
+            stockTradingAccount.m_capitalBalance = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            stockTradingAccount.m_frozenCash = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            stockTradingAccount.m_available = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            stockTradingAccount.m_withdrawQuota = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            stockTradingAccount.m_stockValue = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            stockTradingAccount.m_totalCapital = CStrA.ConvertStrToDouble(tradingAccountFields[index++]);
+            return stockTradingAccount;
+        }
+    }
+
+    /// <summary>
+    /// 股票持仓信息
+    /// </summary>
+    public class SecurityPosition
+    {
+        /// <summary>
+        ///  可用余额
+        /// </summary>
+        public double m_availableBalance = 0;
+
+        /// <summary>
+        /// 冻结数量
+        /// </summary>
+        public double m_frozenVolume = 0;
+
+        /// <summary>
+        /// 股东帐户
+        /// </summary>
+        public String m_investorAccount;
+
+        /// <summary>
+        /// 交易市场
+        /// </summary>
+        public String m_marketName;
+
+        /// <summary>
+        /// 市价
+        /// </summary>
+        public double m_marketPrice = 0;
+
+        /// <summary>
+        /// 市值
+        /// </summary>
+        public double m_marketValue = 0;
+
+        /// <summary>
+        /// 成本价
+        /// </summary>
+        public double m_positionCost;
+
+        /// <summary>
+        /// 盈亏
+        /// </summary>
+        public double m_positionProfit;
+
+        /// <summary>
+        /// 盈亏比(%)
+        /// </summary>
+        public double m_positionProfitRatio;
+
+        /// <summary>
+        /// 可申赎数量
+        /// </summary>
+        public double m_redemptionVolume = 0;
+
+        /// <summary>
+        /// 股票余额
+        /// </summary>
+        public double m_stockBalance = 0;
+
+        /// <summary>
+        /// 证券代码
+        /// </summary>
+        public String m_stockCode;
+        /// <summary>
+        /// 证券名称
+        /// </summary>
+        public String m_stockName;
+
+        /// <summary>
+        /// 实际数量
+        /// </summary>
+        public double m_volume = 0;
+
+        /// <summary>
+        /// 字符串转换成持仓对象
+        /// </summary>
+        /// <param name="positionResult"></param>
+        /// <returns></returns>
+        public static SecurityPosition ConvertToStockPosition(String positionResult)
+        {
+            if (positionResult == null || positionResult.Length == 0)
+            {
+                return null;
+            }
+            String[] positionFields = positionResult.Split("	".ToCharArray());
+            if (positionFields == null || positionFields.Length < 14)
+            {
+                return null;
+            }
+            int index = 0;
+            SecurityPosition position = new SecurityPosition();
+            position.m_stockCode = positionFields[index++];
+            position.m_stockName = positionFields[index++];
+            position.m_stockBalance = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_availableBalance = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_volume = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_frozenVolume = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_positionProfit = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_positionCost = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_positionProfitRatio = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_marketPrice = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_marketValue = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_redemptionVolume = CStrA.ConvertStrToDouble(positionFields[index++]);
+            position.m_marketName = positionFields[index++];
+            position.m_investorAccount = positionFields[index++];
+            return position;
+        }
+    }
+
+
+    /// <summary>
+    /// 股票委托信息
+    /// </summary>
+    public class SecurityCommission
+    {
+        /// <summary>
+        /// 撤销数量
+        /// </summary>
+        public double m_cancelVolume = 0;
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public String m_operate;
+        /// <summary>
+        /// 委托时间
+        /// </summary>
+        public String m_orderDate;
+        /// <summary>
+        /// 委托价格
+        /// </summary>
+        public double m_orderPrice = 0;
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        public String m_orderSysID;
+        /// <summary>
+        /// 订单类型
+        /// </summary>
+        public String m_orderType;
+        /// <summary>
+        /// 委托数量
+        /// </summary>
+        public double m_orderVolume = 0;
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public String m_remark;
+        /// <summary>
+        /// 证券代码
+        /// </summary>
+        public String m_stockCode;
+        /// <summary>
+        /// 证券名称
+        /// </summary>
+        public String m_stockName;
+        /// <summary>
+        /// 成交均价
+        /// </summary>
+        public double m_tradeAvgPrice = 0;
+        /// <summary>
+        /// 成交数量
+        /// </summary>
+        public double m_tradeVolume = 0;
+
+        /// <summary>
+        /// 字符串转换成委托对象
+        /// </summary>
+        /// <param name="commissionResult"></param>
+        /// <returns></returns>
+        public static SecurityCommission ConvertToSecurityCommission(String commissionResult)
+        {
+            if (commissionResult == null || commissionResult.Length == 0)
+            {
+                return null;
+            }
+            String[] orderFields = commissionResult.Split("	".ToCharArray());
+            if (orderFields == null || orderFields.Length < 12)
+            {
+                return null;
+            }
+            int index = 0;
+            SecurityCommission commission = new SecurityCommission();
+            commission.m_orderDate = orderFields[index++];
+            commission.m_stockCode = orderFields[index++];
+            commission.m_stockName = orderFields[index++];
+            commission.m_operate = orderFields[index++];
+            commission.m_remark = orderFields[index++];
+            commission.m_orderVolume = CStrA.ConvertStrToDouble(orderFields[index++]);
+            commission.m_tradeVolume = CStrA.ConvertStrToDouble(orderFields[index++]);
+            commission.m_cancelVolume = CStrA.ConvertStrToDouble(orderFields[index++]);
+            commission.m_orderPrice = CStrA.ConvertStrToDouble(orderFields[index++]);
+            commission.m_orderType = orderFields[index++];
+            commission.m_tradeAvgPrice = CStrA.ConvertStrToDouble(orderFields[index++]);
+            commission.m_orderSysID = orderFields[index++];
+            return commission;
+        }
+    }
 }

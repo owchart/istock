@@ -90,9 +90,11 @@ namespace OwLib
                     historyDataInfo.m_subscription = m_chart.Subscription;
                     SecurityData securityData = new SecurityData();
                     StockService.GetSecurityData(m_latestData, m_latestData.m_lastClose, historyDataInfo.m_cycle, historyDataInfo.m_subscription, ref securityData);
+                    securityData.m_volume = 1;
+                    securityData.m_amount = 1;
                     List<SecurityData> datas = new List<SecurityData>();
                     datas.Add(securityData);
-                    //m_chart.BindHistoryData(historyDataInfo, datas);
+                    m_chart.BindHistoryData(historyDataInfo, datas);
                 }
                 Invalidate();
             }

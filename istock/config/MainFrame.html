@@ -40,7 +40,104 @@
           <input type="usercontrol" cid="klinediv" name="divKLine" />
         </div>
       </div>
-      <div name="TabPage3" text="工具" type="tabpage">
+       <div name="TabPage3" text="自动交易" type="tabpage">
+        <splitlayoutdiv name="divMain2" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitmode="percentsize" splitterposition="0,35,400,36">
+      <div name="divCapital" location="0,0">
+        <label name="Label" text="资金余额:" location="31,17" size="62,20" />
+        <label name="lblCapitalBalance" text="" location="97,17" size="100,20" />
+        <label name="Labe3" text="冻结金额:" location="31,41" size="59,20" />
+        <label name="lblFrozenCash" text="" location="97,41" size="100,20" />
+        <label name="Labe5" text="可用金额:" location="213,17" size="60,20" />
+        <label name="lblAvailable" text="" location="275,17" size="100,20" />
+        <label name="Labe7" text="可取金额:" location="213,41" size="65,20" />
+        <label name="lblWithdrawQuota" text="" location="274,41" size="100,20" />
+        <label name="Labe9" text="股票市值:" location="424,17" size="66,20" />
+        <label name="lblStockValue" text="" location="484,17" size="100,20" />
+        <label name="Labe11" text="总资产:" location="424,41" size="51,20" />
+        <label name="lblTotalCapital" text="" location="485,41" size="100,20" />
+        <button name="btnStart" text="启动" location="700,14" size="100,20" />
+        <button name="btnSetStrategy" text="设置策略" location="700,40" size="100,20" />
+      </div>
+      <!--下层-->
+      <splitlayoutdiv name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,360,400,361">
+        <splitlayoutdiv name="chartdiv" dock="fill" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
+          <!--实时报价-->
+          <usercontrol cid="latestdiv" name="divLatest" text="实时报价" />
+          <!--K线图
+          <usercontrol cid="klinediv" name="divKLine" text="K线图" />-->
+          <tabcontrol name="tabTradeAccount">
+            <tabpage name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
+              <!--成交表格-->
+              <grid name="gridTradeAccount" dock="fill" headerheight="30" location="0,0" size="1479,222">
+                <columns>
+                  <column name="colTF1" text="成交时间" width="80" />
+                  <column name="colTF2" text="证券代码" width="80" />
+                  <column name="colTF3" text="证券名称" width="80" />
+                  <column name="colTF4" text="操作" width="80" />
+                  <column name="colTF6" text="成交数量" width="80" />
+                  <column name="colTF7" text="成交均价" width="80" />
+                  <column name="colTF8" text="成交金额" width="80" />
+                  <column name="colTF9" text="合同编号" width="80" />
+                  <column name="colTF10" text="成交编号" width="80" />
+                  <column name="colTF11" text="撤单数量" width="80" />
+                  <column name="colTF12" text="股票余额" width="80" />
+                </columns>
+              </grid>
+            </tabpage>
+          </tabcontrol>
+        </splitlayoutdiv>
+        <splitlayoutdiv name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,120,400,121">
+          <!--持仓页-->
+          <tabcontrol name="tabPositionAccount">
+            <tabpage name="pagePositionAccount" text="持仓" headersize="100,20">
+              <!--持仓表格-->
+              <grid name="gridPositionAccount" dock="fill" headerheight="30">
+                <columns>
+                  <column name="colPF1" text="证券代码" width="80" />
+                  <column name="colPF2" text="证券名称" width="80" />
+                  <column name="colPF3" text="股票余额" width="80" />
+                  <column name="colPF4" text="可用余额" width="80" />
+                  <column name="colPF5" text="实际数量" width="80" />
+                  <column name="colPF6" text="冻结数量" width="80" />
+                  <column name="colPF7" text="盈亏" width="80" />
+                  <column name="colPF8" text="成本价" width="80" />
+                  <column name="colPF9" text="盈亏比(%)" width="80" />
+                  <column name="colPF10" text="市价" width="80" />
+                  <column name="colPF11" text="市值" width="80" />
+                  <column name="colPF12" text="可申赎数量" width="80" />
+                  <column name="colPF13" text="交易市场" width="80" />
+                  <column name="colPF14" text="股东帐户" width="80" />
+                </columns>
+              </grid>
+            </tabpage>
+          </tabcontrol>
+          <!--委托页-->
+          <tabcontrol name="tabOrderAccount">
+            <tabpage name="pageOrderAccount" text="委托" headersize="100,20">
+              <!--委托表格-->
+              <grid name="gridOrderAccount" dock="fill" headerheight="30">
+                <columns>
+                  <column name="colOF1" text="委托时间" width="80" />
+                  <column name="colOF2" text="证券代码" width="80" />
+                  <column name="colOF3" text="证券名称" width="80" />
+                  <column name="colOF4" text="操作" width="80" />
+                  <column name="colOF5" text="备注" width="80" />
+                  <column name="colOF6" text="委托数量" width="80" />
+                  <column name="colOF7" text="成交数量" width="80" />
+                  <column name="colOF8" text="撤销数量" width="80" />
+                  <column name="colOF9" text="委托价格" width="80" />
+                  <column name="colOF10" text="订单类型" width="80" />
+                  <column name="colOF11" text="成交均价" width="80" />
+                  <column name="colOF12" text="合同编号" width="80" />
+                </columns>
+              </grid>
+            </tabpage>
+          </tabcontrol>
+        </splitlayoutdiv>
+      </splitlayoutdiv>
+    </splitlayoutdiv>
+       </div>
+      <div name="TabPage4" text="更多功能" type="tabpage">
         <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="68,259" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnNews" text="股票新闻" location="68,18" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnSingleInfo" text="个股新闻" location="68,79" size="208,45" />

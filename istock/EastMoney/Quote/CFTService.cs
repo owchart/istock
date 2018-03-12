@@ -95,9 +95,10 @@ namespace OwLib
         /// <param name="code"></param>
         public static void QueryHistoryDatas(String code, KLineCycle cycle)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[emCode];
                 int innerCode = item.Innercode;
                 //财富通历史数据
                 OneStockHisKLineData oneStockHisKLineData = new OneStockHisKLineData(innerCode,
@@ -133,9 +134,10 @@ namespace OwLib
         /// <param name="code"></param>
         public static void QueryTrendLine(String code)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[emCode];
                 int innerCode = item.Innercode;
                 TrendData trendData = new TrendData();
                 trendData.Code = innerCode;
@@ -149,9 +151,10 @@ namespace OwLib
         /// <param name="code">代码</param>
         public static void QueryNQuote(String code)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[emCode];
                 int innerCode = item.Innercode;
                 ReqNOrderStockDetailLevel2DataPacket req = new ReqNOrderStockDetailLevel2DataPacket();
                 req.Code = innerCode;
@@ -189,9 +192,10 @@ namespace OwLib
         /// <param name="code"></param>
         public static void QueryLV1(String code)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[emCode];
                 int innerCode = item.Innercode;
                 OneStockDetailData detailDate = new OneStockDetailData();
                 detailDate.Code = innerCode;
@@ -199,19 +203,36 @@ namespace OwLib
             }
         }
 
+        private static Dictionary<String, OneStockDetailData> m_queryLv2s = new Dictionary<string, OneStockDetailData>();
+
         /// <summary>
         /// 查询LV2行情
         /// </summary>
         /// <param name="code"></param>
         public static void QueryLV2(String code)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
-                int innerCode = item.Innercode;
+                KwItem item = EMSecurityService.KwItems[emCode];
                 OneStockDetailData detailDate = new OneStockDetailData();
+                int innerCode = item.Innercode;
+                detailDate.IsPush = true;
                 detailDate.Code = innerCode;
+                m_queryLv2s[code] = detailDate;
                 detailDate.Start();
+            }
+        }
+
+        public static void QuitLV2(String code)
+        {
+            if (code != null)
+            {
+                if (m_queryLv2s.ContainsKey(code))
+                {
+                    m_queryLv2s[code].Quit();
+                    m_queryLv2s.Remove(code);
+                }
             }
         }
 
@@ -221,9 +242,10 @@ namespace OwLib
         /// <param name="code"></param>
         public static void QueryN100(String code)
         {
-            if (EMSecurityService.KwItems.ContainsKey(code))
+            String emCode = CStrA.ConvertDBCodeToEMCode(code);
+            if (EMSecurityService.KwItems.ContainsKey(emCode))
             {
-                KwItem item = EMSecurityService.KwItems[code];
+                KwItem item = EMSecurityService.KwItems[emCode];
                 int innerCode = item.Innercode;
                 ReqAllOrderStockDetailLev2DataPacket req = new ReqAllOrderStockDetailLev2DataPacket();
                 req.Code = innerCode;

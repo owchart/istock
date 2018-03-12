@@ -16,6 +16,7 @@ using OwLib;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace OwLib
 {
@@ -45,6 +46,17 @@ namespace OwLib
         /// 秒表ID
         /// </summary>
         private int m_timerID = ControlA.GetNewTimerID();
+
+        private TradePlugIn m_tradePlugIn;
+
+        /// <summary>
+        /// 获取或设置同花顺交易
+        /// </summary>
+        public TradePlugIn TradePlugIn
+        {
+            get { return m_tradePlugIn; }
+            set { m_tradePlugIn = value; }
+        }
 
         /// <summary>
         /// 添加自选股
@@ -241,6 +253,14 @@ namespace OwLib
                 {
                     ExportToTxt("Stocks.txt", m_gridUserSecurities);
                 }
+                else if (name == "btnStart")
+                {
+                    LoadData();
+                }
+                else if (name == "btnSetStrategy")
+                {
+                    m_tradePlugIn.ShowStrategySettingWindow();
+                }     
             }
         }
 
@@ -509,6 +529,7 @@ namespace OwLib
             m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
             m_chartEx = new ChartEx(this);
             DataCenter.MainUI = this;
+            m_tradePlugIn = new TradePlugIn(this);
         }
 
         /// <summary>
@@ -656,7 +677,7 @@ namespace OwLib
                         }
                         else
                         {
-                            cCell.Style.BackColor = COLOR.ARGB(0, 0, 0);
+                            cCell.Style.BackColor = COLOR.EMPTY;
                         }
                     }
                 }

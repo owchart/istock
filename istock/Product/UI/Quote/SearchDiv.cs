@@ -59,26 +59,15 @@ namespace OwLib
         /// </summary>
         private ControlKeyEvent m_textBoxKeyDownEvent;
 
-        private String m_categoryID;
-
-        /// <summary>
-        /// 要添加到的自选股ID
-        /// </summary>
-        public String CategoryID
-        {
-            get { return m_categoryID; }
-            set { m_categoryID = value; }
-        }
-
-        private ChartEx m_chart;
+        private MainFrame m_mainFrame;
 
         /// <summary>
         /// 获取或设置股票控件
         /// </summary>
-        public ChartEx Chart
+        public MainFrame MainFrame
         {
-            get { return m_chart; }
-            set { m_chart = value; }
+            get { return m_mainFrame; }
+            set { m_mainFrame = value; }
         }
 
         private TextBoxA m_searchTextBox;
@@ -131,6 +120,17 @@ namespace OwLib
             m_grid.ClearRows();
             int row = 0;
             CList<GSecurity> securities = new CList<GSecurity>();
+            if (sText.Length > 0)
+            {
+                foreach (GSecurity gSecurity in SecurityService.m_codedMap.Values)
+                {
+                    if (gSecurity.m_code.ToUpper().IndexOf(sText) == 0 || gSecurity.m_name.ToUpper().IndexOf(sText) == 0
+                        || gSecurity.m_pingyin.ToUpper().IndexOf(sText) == 0)
+                    {
+                        securities.push_back(gSecurity);
+                    }
+                }
+            }
             if (securities != null)
             {
                 int rowCount = securities.size();
@@ -236,12 +236,9 @@ namespace OwLib
                 GridRow selectedRow = rows[0];
                 GSecurity security = new GSecurity();
                 SecurityService.GetSecurityByCode(selectedRow.GetCell(0).Text, ref security);
+                m_mainFrame.FindControl("txtCode").Text=security.m_code;
                 Visible = false;
                 Invalidate();
-                if (m_chart != null)
-                {
-                    m_chart.SearchSecurity(security);
-                }
             }
         }
 
@@ -295,21 +292,6 @@ namespace OwLib
             {
                 m_grid.OnKeyDown(key);
             }
-        }
-
-        /// <summary>
-        /// 可见状态改变方法
-        /// </summary>
-        public override void OnVisibleChanged()
-        {
-            if (!Visible)
-            {
-                if (m_chart != null)
-                {
-                    m_chart.Chart.Focused = true;
-                }
-            }
-            base.OnVisibleChanged();
         }
         #endregion
     }

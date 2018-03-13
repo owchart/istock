@@ -182,6 +182,17 @@ namespace OwLib
         /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
+            if (m.Msg == 0x100 || m.Msg == 260)
+            {
+                if (m_native != null)
+                {
+                    char key = (char)m.WParam;
+                    if (m_xml is MainFrame)
+                    {
+                        (m_xml as MainFrame).ShowSearchDiv(key);
+                    }
+                }
+            }
             if (m_host != null)
             {
                 if (m_host.OnMessage(ref m) > 0)

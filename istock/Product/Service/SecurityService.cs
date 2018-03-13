@@ -15,7 +15,6 @@ namespace OwLib
     public class SecurityService
     {
         #region Lord 2015/11/14
-
         /// <summary>
         /// 代码表字典
         /// </summary>
@@ -29,7 +28,7 @@ namespace OwLib
         /// <summary>
         /// 最新数据
         /// </summary>
-        private static Dictionary<String, SecurityLatestData> m_latestDatas = new Dictionary<String, SecurityLatestData>();
+        public static Dictionary<String, SecurityLatestData> m_latestDatas = new Dictionary<String, SecurityLatestData>();
 
         /// <summary>
         /// 最新数据字符串
@@ -45,11 +44,6 @@ namespace OwLib
         /// 每日新数据存放目录
         /// </summary>
         private static String m_newFileDir = "";
-
-        /// <summary>
-        /// 股票列表
-        /// </summary>
-        private static List<GSecurity> m_securities = new List<GSecurity>();
 
         /// <summary>
         /// 今日时间
@@ -431,7 +425,7 @@ namespace OwLib
         /// <param name="stCodes">out ST股票</param>
         public static int GetSTCodes(List<String> stCodes)
         {
-            foreach (GSecurity security in m_securities)
+            foreach (GSecurity security in m_codedMap.Values)
             {
                 if (security.m_name.IndexOf("ST") == 0)
                 {
@@ -447,7 +441,7 @@ namespace OwLib
         /// <param name="stCodes">out 获取*ST股票</param>
         public static int GetStarSTCodes(List<String> starSTCodes)
         {
-            foreach (GSecurity security in m_securities)
+            foreach (GSecurity security in m_codedMap.Values)
             {
                 if (security.m_name.IndexOf("*ST") == 0)
                 {
@@ -704,24 +698,18 @@ namespace OwLib
         {
             //加载代码表//step 1
             String codes = "";
-            if (m_securities.Count == 0)
+            if (m_codedMap.Count == 0)
             {
-                String codesStr = "";
-                CFileA.Read(DataCenter.GetAppPath() + "\\codes.txt", ref codesStr);
-                String[] strs = codesStr.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < strs.Length; i++)
+                Dictionary<String, KwItem> items = EMSecurityService.KwItems;
+                foreach (KwItem item in items.Values)
                 {
-                    String[] subStrs = strs[i].Split(',');
                     GSecurity security = new GSecurity();
-                    security.m_code = subStrs[0];
-                    security.m_name = subStrs[1];
+                    security.m_code = item.Code;
+                    security.m_name = item.Name;
+                    security.m_pingyin = item.Pingyin;
+                    security.m_type = item.Type;
                     if (!security.m_code.StartsWith("A"))
                     {
-                        lock (m_securities)
-                        {
-                            m_securities.Add(security);
-                        }
                         m_codedMap[security.m_code] = security;
                         codes += security.m_code;
                         codes += ",";

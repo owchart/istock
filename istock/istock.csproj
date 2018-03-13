@@ -351,29 +351,11 @@
     <Compile Include="Form\MacIndustyForm.designer.cs">
       <DependentUpon>MacIndustyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\NoticeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\NoticeForm.designer.cs">
-      <DependentUpon>NoticeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\ReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\ReportForm.designer.cs">
-      <DependentUpon>ReportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\SpecialForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\SpecialForm.designer.cs">
       <DependentUpon>SpecialForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\StockNewsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\StockNewsForm.designer.cs">
-      <DependentUpon>StockNewsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -412,11 +394,14 @@
     <Compile Include="Product\UI\RibbonButton.cs" />
     <Compile Include="Product\UI\RTCWindow.cs" />
     <Compile Include="Product\UI\StockNews.cs" />
-    <Compile Include="Product\UI\TradePlugIn.cs" />
+    <Compile Include="Product\UI\OrderTrade.cs" />
     <Compile Include="Product\UI\UIXmlEx.cs" />
     <Compile Include="Product\UI\WindowButton.cs" />
     <Compile Include="Product\UI\WindowEx.cs" />
     <Compile Include="Product\UI\WinHostEx.cs" />
+    <Compile Include="Product\UI\AllStockNews.cs" />
+    <Compile Include="Product\UI\AllStockNotices.cs" />
+    <Compile Include="Product\UI\AllStockReports.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\FormulaForm.resx">
@@ -428,17 +413,8 @@
     <EmbeddedResource Include="Form\MacIndustyForm.resx">
       <DependentUpon>MacIndustyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\NoticeForm.resx">
-      <DependentUpon>NoticeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\ReportForm.resx">
-      <DependentUpon>ReportForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\SpecialForm.resx">
       <DependentUpon>SpecialForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\StockNewsForm.resx">
-      <DependentUpon>StockNewsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -121,7 +121,7 @@ namespace OwLib
                 if (name == "btnConfirm")
                 {
                     UpdateSecurityRangeTradeCondition();
-                    m_mainFrame.TradePlugIn.ReloadStrategySetting();
+                    m_mainFrame.OrderTrade.ReloadStrategySetting();
                     Close();
                 }
                 else if (name == "btnCancel")

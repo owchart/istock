@@ -47,6 +47,61 @@ namespace OwLib
         /// </summary>
         private int m_timerID = ControlA.GetNewTimerID();
 
+        private AllStockNews m_allStockNews;
+
+        /// <summary>
+        /// 获取或设置所有股票新闻
+        /// </summary>
+        public AllStockNews AllStockNews
+        {
+            get { return m_allStockNews; }
+            set { m_allStockNews = value; }
+        }
+
+        private AllStockNotices m_allStockNotices;
+
+        /// <summary>
+        /// 获取或设置所有股票公告
+        /// </summary>
+        public AllStockNotices AllStockNotices
+        {
+            get { return m_allStockNotices; }
+            set { m_allStockNotices = value; }
+        }
+
+        private AllStockReports m_allStockReports;
+
+        /// <summary>
+        /// 获取或设置所有股票研报
+        /// </summary>
+        public AllStockReports AllStockReports
+        {
+            get { return m_allStockReports; }
+            set { m_allStockReports = value; }
+        }
+
+        private OrderTrade m_orderTrade;
+
+        /// <summary>
+        /// 获取或设置同花顺交易
+        /// </summary>
+        public OrderTrade OrderTrade
+        {
+            get { return m_orderTrade; }
+            set { m_orderTrade = value; }
+        }
+
+        private SearchDiv m_searchDiv;
+
+        /// <summary>
+        /// 获取或设置搜索框
+        /// </summary>
+        public SearchDiv SearchDiv
+        {
+            get { return m_searchDiv; }
+            set { m_searchDiv = value; }
+        }
+
         private StockNews m_stockNews;
 
         /// <summary>
@@ -56,17 +111,6 @@ namespace OwLib
         {
             get { return m_stockNews; }
             set { m_stockNews = value; }
-        }
-
-        private TradePlugIn m_tradePlugIn;
-
-        /// <summary>
-        /// 获取或设置同花顺交易
-        /// </summary>
-        public TradePlugIn TradePlugIn
-        {
-            get { return m_tradePlugIn; }
-            set { m_tradePlugIn = value; }
         }
 
         /// <summary>
@@ -187,21 +231,6 @@ namespace OwLib
                 {
                     SecurityService.Start3();
                 }
-                else if (name == "btnNews")
-                {
-                    StockNewsForm stockNewsForm = new StockNewsForm();
-                    stockNewsForm.Show();
-                }
-                else if (name == "btnNotice")
-                {
-                    NoticeForm noticeForm = new NoticeForm();
-                    noticeForm.Show();
-                }
-                else if (name == "btnReport")
-                {
-                    ReportForm reportForm = new ReportForm();
-                    reportForm.Show();
-                }
                 else if (name == "btnContract")
                 {
                     Process.Start("LordALike.exe");
@@ -265,7 +294,7 @@ namespace OwLib
                 }
                 else if (name == "btnSetStrategy")
                 {
-                    m_tradePlugIn.ShowStrategySettingWindow();
+                    m_orderTrade.ShowStrategySettingWindow();
                 }     
             }
         }
@@ -519,12 +548,6 @@ namespace OwLib
             control.BackColor = COLOR.CONTROL;
             RegisterEvents(control);
             m_gridUserSecurities = GetGrid("gridUserSecurities");
-            List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
-            int codesSize = codes.Count;
-            for (int i = 0; i < codesSize; i++)
-            {
-                AddUserSecurity(codes[i]);
-            }
             m_gridUserSecurities.UseAnimation = true;
             m_gridUserSecurities.GridLineColor = COLOR.EMPTY;
             m_gridUserSecurities.BackColor = COLOR.ARGB(0, 0, 0);
@@ -536,8 +559,24 @@ namespace OwLib
             m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
             m_chartEx = new ChartEx(this);
             DataCenter.MainUI = this;
-            m_tradePlugIn = new TradePlugIn(this);
+            //m_tradePlugIn = new TradePlugIn(this);
             m_stockNews = new StockNews(this);
+            m_allStockNews = new AllStockNews(this);
+            m_allStockNotices = new AllStockNotices(this);
+            m_allStockReports = new AllStockReports(this);
+            List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
+            int codesSize = codes.Count;
+            if (codesSize > 0)
+            {
+                for (int i = 0; i < codesSize; i++)
+                {
+                    AddUserSecurity(codes[i]);
+                }
+                GSecurity security = new GSecurity();
+                SecurityService.GetSecurityByCode(codes[0].m_code, ref security);
+                m_chartEx.SearchSecurity(security);
+                m_stockNews.Code = codes[0].m_code;
+            }
         }
 
         /// <summary>
@@ -585,6 +624,83 @@ namespace OwLib
         {
             MessageBox.Show(text, caption);
             return 1;
+        }
+
+        /// <summary>
+        /// 显示键盘精灵层
+        /// </summary>
+        /// <param name="key">按键</param>
+        public void ShowSearchDiv(char key)
+        {
+            ControlA focusedControl = Native.FocusedControl;
+            if (focusedControl != null)
+            {
+                String name = focusedControl.Name;
+                if (IsWindowShowing() && name != "txtCode")
+                {
+                    return;
+                }
+                if (!(focusedControl is TextBoxA) || (m_searchDiv != null && focusedControl == m_searchDiv.SearchTextBox)
+                    || name == "txtCode")
+                {
+                    Keys keyData = (Keys)key;
+                    //创建键盘精灵
+                    if (m_searchDiv == null)
+                    {
+                        m_searchDiv = new SearchDiv();
+                        m_searchDiv.Popup = true;
+                        m_searchDiv.Size = new SIZE(240, 200);
+                        m_searchDiv.Visible = false;
+                        Native.AddControl(m_searchDiv);
+                        m_searchDiv.BringToFront();
+                        m_searchDiv.MainFrame = this;
+                    }
+                    //退出
+                    if (keyData == Keys.Escape)
+                    {
+                        m_searchDiv.Visible = false;
+                        m_searchDiv.Invalidate();
+                    }
+                    //输入
+                    else
+                    {
+                        if (!m_searchDiv.Visible)
+                        {
+                            char ch = '\0';
+                            if ((keyData >= Keys.D0) && (keyData <= Keys.D9))
+                            {
+                                ch = (char)((0x30 + keyData) - 0x30);
+                            }
+                            else if ((keyData >= Keys.A) && (keyData <= Keys.Z))
+                            {
+                                ch = (char)((0x41 + keyData) - 0x41);
+                            }
+                            else if ((keyData >= Keys.NumPad0) && (keyData <= Keys.NumPad9))
+                            {
+                                ch = (char)((0x30 + keyData) - 0x60);
+                            }
+                            if (ch != '\0')
+                            {
+                                SIZE size = Native.Host.GetSize();
+                                POINT location = new POINT(size.cx - m_searchDiv.Width, size.cy - m_searchDiv.Height);
+                                if (name == "txtCode")
+                                {
+                                    POINT fPoint = new POINT(0, 0);
+                                    fPoint = focusedControl.PointToNative(fPoint);
+                                    location = new POINT(fPoint.x, fPoint.y + focusedControl.Height);
+                                    m_searchDiv.Location = location;
+                                    m_searchDiv.SearchTextBox.Text = "";
+                                    m_searchDiv.FilterSearch();
+                                    m_searchDiv.Visible = true;
+                                    m_searchDiv.SearchTextBox.Focused = true;
+                                    m_searchDiv.Update();
+                                    m_searchDiv.Invalidate();
+                                }           
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

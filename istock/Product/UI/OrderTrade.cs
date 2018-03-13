@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace OwLib
 {
-    public class TradePlugIn
+    public class OrderTrade
     {
-        public TradePlugIn(MainFrame mainFrame)
+        public OrderTrade(MainFrame mainFrame)
         {
             m_mainFrame = mainFrame;
             // 委托表格

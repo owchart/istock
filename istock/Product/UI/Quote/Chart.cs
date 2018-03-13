@@ -378,6 +378,17 @@ namespace OwLib
                 {
                     SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas);
                     index = 0;
+                    if (m_latestDiv.LatestData != null && m_latestDiv.LatestData.m_code == dataInfo.m_code)
+                    {
+                        SecurityData securityData = new SecurityData();
+                        StockService.GetSecurityData(m_latestDiv.LatestData, m_latestDiv.LatestData.m_lastClose, m_cycle, m_subscription, ref securityData);
+                        if (SecurityService.m_latestDatas.ContainsKey(m_latestDiv.LatestData.m_code))
+                        {
+                            securityData.m_volume = SecurityService.m_latestDatas[m_latestDiv.LatestData.m_code].m_volume;
+                            securityData.m_amount = SecurityService.m_latestDatas[m_latestDiv.LatestData.m_code].m_amount;
+                        }
+                        SecurityDataHelper.InsertLatestData(m_chart, dataSource, m_indicators, fields, securityData);
+                    }
                 }
                 if (index >= 0)
                 {
@@ -1258,117 +1269,6 @@ namespace OwLib
             CFTService.QueryLV2(dataInfo.m_code);
             m_chart.Update();
             m_mainFrame.Native.Invalidate();
-        }
-
-        /// <summary>
-        /// 显示提示窗口
-        /// </summary>
-        /// <param name="text">文本</param>
-        /// <param name="caption">标题</param>
-        /// <param name="uType">格式</param>
-        /// <returns>结果</returns>
-        public int ShowMessageBox(String text, String caption, int uType)
-        {
-            MessageBox.Show(text, caption);
-            return 1;
-        }
-
-        /// <summary>
-        /// 显示键盘精灵层
-        /// </summary>
-        /// <param name="key">按键</param>
-        public void ShowSearchDiv(char key)
-        {
-            ControlA focusedControl = m_mainFrame.Native.FocusedControl;
-            if (focusedControl != null)
-            {
-                String name = focusedControl.Name;
-                if (!(focusedControl is TextBoxA) || (m_searchDiv != null && focusedControl == m_searchDiv.SearchTextBox)
-                    || name == "txtSearch")
-                {
-                    Keys keyData = (Keys)key;
-                    //创建键盘精灵
-                    if (m_searchDiv == null)
-                    {
-                        m_searchDiv = new SearchDiv();
-                        m_searchDiv.Popup = true;
-                        m_searchDiv.Size = new SIZE(240, 200);
-                        m_searchDiv.Visible = false;
-                        m_mainFrame.Native.AddControl(m_searchDiv);
-                        m_searchDiv.BringToFront();
-                        m_searchDiv.Chart = this;
-                    }
-                    //退出
-                    if (keyData == Keys.Escape)
-                    {
-                        m_searchDiv.Visible = false;
-                        m_searchDiv.Invalidate();
-                    }
-                    //切换分时图和K线
-                    else if (keyData == Keys.F5)
-                    {
-                        m_showMinuteLine = !m_showMinuteLine;
-                        if (m_showMinuteLine)
-                        {
-                            m_cycle = 0;
-                        }
-                        else
-                        {
-                            m_cycle = 1440;
-                        }
-                        String securityCode = m_latestDiv.SecurityCode;
-                        if (securityCode != null && securityCode.Length > 0)
-                        {
-                            GSecurity security = new GSecurity();
-                            SecurityService.GetSecurityByCode(securityCode, ref security);
-                            SearchSecurity(security);
-                        }
-                    }
-                    //输入
-                    else
-                    {
-                        if (!m_searchDiv.Visible)
-                        {
-                            char ch = '\0';
-                            if ((keyData >= Keys.D0) && (keyData <= Keys.D9))
-                            {
-                                ch = (char)((0x30 + keyData) - 0x30);
-                            }
-                            else if ((keyData >= Keys.A) && (keyData <= Keys.Z))
-                            {
-                                ch = (char)((0x41 + keyData) - 0x41);
-                            }
-                            else if ((keyData >= Keys.NumPad0) && (keyData <= Keys.NumPad9))
-                            {
-                                ch = (char)((0x30 + keyData) - 0x60);
-                            }
-                            if (ch != '\0')
-                            {
-                                SIZE size = m_mainFrame.Native.Host.GetSize();
-                                POINT location = new POINT(size.cx - m_searchDiv.Width, size.cy - m_searchDiv.Height);
-                                if (name == "txtSearch")
-                                {
-                                    POINT fPoint = new POINT(0, 0);
-                                    fPoint = focusedControl.PointToNative(fPoint);
-                                    location = new POINT(fPoint.x, fPoint.y - m_searchDiv.Height + focusedControl.Height);
-                                    m_searchDiv.CategoryID = focusedControl.Tag.ToString();
-                                }
-                                else
-                                {
-                                    m_searchDiv.CategoryID = "";
-                                }
-                                m_searchDiv.Location = location;
-                                m_searchDiv.SearchTextBox.Text = "";
-                                m_searchDiv.FilterSearch();
-                                m_searchDiv.Visible = true;
-                                m_searchDiv.SearchTextBox.Focused = true;
-                                m_searchDiv.Update();
-                                m_searchDiv.Invalidate();
-                            }
-                        }
-                    }
-                }
-            }
         }
         #endregion
     }

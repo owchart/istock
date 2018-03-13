@@ -54,7 +54,7 @@ namespace OwLib
             m_plotRightMenu.RegisterEvent(menuItemClickEvent2, EVENTID.MENUITEMCLICK);
 
             Indicator ma = new Indicator();
-            SecurityDataHelper.GetIndicatorByName("MA", ma);
+            SecurityDataHelper.GetIndicatorByName("BOLL", ma);
             Indicator macd = new Indicator();
             SecurityDataHelper.GetIndicatorByName("MACD", macd);
             AddMainIndicator(ma.m_name, ma.m_name, ma.m_text, ma.m_parameters, m_candleDiv, true);

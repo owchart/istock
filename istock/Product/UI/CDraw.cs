@@ -276,9 +276,9 @@ namespace OwLib
                     SIZE size = paint.TextSize(nbs[1], font);
                     CDraw.DrawText(paint, nbs[0], fontColor, font, x, y);
                     CDraw.DrawText(paint, nbs[1], fontColor, font, x
-                        + decimalSize.cx + 1, y);
+                        + decimalSize.cx, y);
                     paint.DrawLine(fontColor, 1, 0, x
-                        + decimalSize.cx + 1, y + decimalSize.cy,
+                        + decimalSize.cx, y + decimalSize.cy,
                         x + decimalSize.cx + size.cx, y + decimalSize.cy);
                     return decimalSize.cx + size.cx;
                 }

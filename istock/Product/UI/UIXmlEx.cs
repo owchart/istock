@@ -69,6 +69,10 @@ namespace OwLib
             {
                 return new RibbonButton();
             }
+            else if (type == "indexdiv")
+            {
+                return new IndexDiv();
+            }
             else if (type == "windowex")
             {
                 return new WindowEx();

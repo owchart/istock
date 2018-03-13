@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>oldwhite_old.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EmCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -386,7 +389,9 @@
     <Compile Include="Product\UI\GdiPlusPaintEx.cs" />
     <Compile Include="Product\UI\MainFrame.cs" />
     <Compile Include="Product\Service\AutoTradeService.cs" />
+    <Compile Include="Product\UI\NewStocks.cs" />
     <Compile Include="Product\UI\Quote\FloatDiv.cs" />
+    <Compile Include="Product\UI\Quote\IndexDiv.cs" />
     <Compile Include="Product\UI\Quote\LatestDiv.cs" />
     <Compile Include="Product\UI\Quote\Chart.cs" />
     <Compile Include="Product\UI\Quote\SearchDiv.cs" />
@@ -471,6 +476,7 @@
     <Content Include="config\userid.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="oldwhite_old.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

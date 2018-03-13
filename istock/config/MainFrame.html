@@ -5,7 +5,9 @@
     </script>
   </head>
   <body>
-    <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
+   <div type="splitlayout" layoutstyle="bottomtotop" size="400,400" splitterposition="0,375,400,375" name="divMain" dock="fill">
+     <input type="usercontrol" cid="indexdiv" />
+     <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
       <div name="TabPage" text="报价列表" type="tabpage">
         <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
           <div name="Div">
@@ -209,7 +211,21 @@
           </div>
         </div>
       </div>
-      <div name="TabPage5" text="更多功能..." type="tabpage">
+       <div name="TabPage5" text="新股申购" type="tabpage">
+       <div type="tabcontrol" name="tabNewStock" dock="fill" selectedindex="0">
+        <div type="tabpage" name="tabPageNewStock2" text="新股日历">
+        <table name="gridNewStockCalendar" dock="fill" autoellipsis="true">
+                <tr>
+                    <th name="colN1" text="新股名称" allowdrag="true" allowresize="true"></th>
+                    <th name="colN2" text="新股代码" allowdrag="true" allowresize="true"></th>
+                    <th name="colN3" text="状态" width="400" allowdrag="true" allowresize="true"></th>
+                    <th name="colN4" text="日期" width="160" allowdrag="true" allowresize="true"></th>
+                </tr>
+            </table>
+        </div>
+       </div>
+       </div>
+      <div name="TabPage6" text="更多功能..." type="tabpage">
         <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="208,45" />
         <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="208,45" />
@@ -222,6 +238,7 @@
         <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="208,45" />
       </div>
     </div>
+   </div>
     <!--浮动数据-->
     <usercontrol cid="floatdiv" name="divFloat" allowdrag="true" location="85,20" size="85,300" visible="false" />
     <!--右键菜单-->

@@ -80,6 +80,17 @@ namespace OwLib
             set { m_allStockReports = value; }
         }
 
+        private NewStocks m_newStocks;
+
+        /// <summary>
+        /// 获取或设置新股申购
+        /// </summary>
+        public NewStocks NewStocks
+        {
+            get { return m_newStocks; }
+            set { m_newStocks = value; }
+        }
+
         private OrderTrade m_orderTrade;
 
         /// <summary>
@@ -564,6 +575,7 @@ namespace OwLib
             m_allStockNews = new AllStockNews(this);
             m_allStockNotices = new AllStockNotices(this);
             m_allStockReports = new AllStockReports(this);
+            m_newStocks = new NewStocks(this);
             List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
             int codesSize = codes.Count;
             if (codesSize > 0)

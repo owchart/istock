@@ -33,14 +33,14 @@ namespace OwLib
         }
 
         /// <summary>
-        /// K线控件
-        /// </summary>
-        private ChartEx m_chartEx;
-
-        /// <summary>
         /// 自选股表格
         /// </summary>
         private GridA m_gridUserSecurities;
+
+        /// <summary>
+        /// K线控件
+        /// </summary>
+        private KLine m_kline;
 
         /// <summary>
         /// 秒表ID
@@ -350,11 +350,11 @@ namespace OwLib
                 if (cell.Column.Name != "colP11" && cell.Column.Name != "colP12")
                 {
                     String code = cell.Row.GetCell("colP1").GetString();
-                    if (m_chartEx != null)
+                    if (m_kline != null)
                     {
                         GSecurity security = new GSecurity();
                         SecurityService.GetSecurityByCode(code, ref security);
-                        m_chartEx.SearchSecurity(security);
+                        m_kline.SearchSecurity(security);
                         GetTabControl("tabMain").SelectedIndex = 1;
                         m_stockNews.Code = code; 
                     }
@@ -454,7 +454,7 @@ namespace OwLib
                 historyDataInfo.m_cycle = 43200;
             }
             historyDataInfo.m_subscription = 1;
-            m_chartEx.BindHistoryData(historyDataInfo, securityDatas);
+            m_kline.BindHistoryData(historyDataInfo, securityDatas);
         }
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace OwLib
             int minute = (time - hour * 10000) / 100;
             int second = time - hour * 10000 - minute * 100;
             latestData.m_date = CStrA.M129(year, month, day, hour, 0, 0, 0);
-            m_chartEx.LatestDiv.LatestData = latestData;
+            m_kline.LatestDiv.LatestData = latestData;
         }
 
         /// <summary>
@@ -568,7 +568,7 @@ namespace OwLib
             m_gridUserSecurities.StartTimer(m_timerID, 1000);
             m_gridUserSecurities.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
-            m_chartEx = new ChartEx(this);
+            m_kline = new KLine(this);
             DataCenter.MainUI = this;
             //m_tradePlugIn = new TradePlugIn(this);
             m_stockNews = new StockNews(this);
@@ -586,7 +586,7 @@ namespace OwLib
                 }
                 GSecurity security = new GSecurity();
                 SecurityService.GetSecurityByCode(codes[0].m_code, ref security);
-                m_chartEx.SearchSecurity(security);
+                m_kline.SearchSecurity(security);
                 m_stockNews.Code = codes[0].m_code;
             }
         }

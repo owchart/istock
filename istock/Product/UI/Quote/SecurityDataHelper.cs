@@ -21,6 +21,27 @@ namespace OwLib
     public class SecurityDataHelper
     {
         #region Lord 2016/1/30
+        //1分钟
+        public const int CYCLE_MINUTE_1 = 1;
+        //3分钟
+        public const int CYCLE_MINUTE_3 = 3;
+        //5分钟
+        public const int CYCLE_MINUTE_5 = 5;
+        //10分钟
+        public const int CYCLE_MINUTE_10 = 10;
+        //15分钟
+        public const int CYCLE_MINUTE_15 = 15;
+        //30分钟
+        public const int CYCLE_MINUTE_30 = 30;
+        //60分钟
+        public const int CYCLE_MINUTE_60 = 60;
+        //日线
+        public const int CYCLE_DAY = 1440;
+        //周线
+        public const int CYCLE_WEEK = 10080;
+        //月线
+        public const int CYCLE_MONTH = 43200;
+
         /// <summary>
         /// 创建数据源
         /// </summary>
@@ -133,6 +154,125 @@ namespace OwLib
             }
         }
 
+        public static void BindHistoryDatas(ChartAEx chart, CTable dataSource, List<CIndicator> indicators, int[] fields, List<SecurityData> historyDatas, bool showMinuteLine)
+        {
+            dataSource.Clear();
+            int sizeData = (int)historyDatas.Count;
+            if (showMinuteLine)
+            {
+                int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+                int nextDayYear = 0, nextDayMonth = 0, nextDayDay = 0, nextDayHour = 0, nextDayMinute = 0, nextDaySecond = 0, nextDayMs = 0;
+                SecurityData securityData = historyDatas[0];
+                double date = securityData.m_date;
+                CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                if (hour <= 6)
+                {
+                    date = date - 60 * 60 * 24;
+                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                }
+                double nextDate = date + 60 * 60 * 24;
+                CStrA.M130(nextDate, ref nextDayYear, ref nextDayMonth, ref nextDayDay, ref nextDayHour, ref nextDayMinute, ref nextDaySecond, ref nextDayMs);
+                int startHour = 9;
+                int endHour = 15;
+                double minTime = CStrA.M129(year, month, day, startHour, 0, 0, 0);
+                double maxTime = CStrA.M129(nextDayYear, nextDayMonth, nextDayDay, endHour, 0, 0, 0);
+                int size = (int)((maxTime - minTime) / 60);
+                dataSource.SetRowsCapacity(size + 10);
+                dataSource.SetRowsGrowStep(100);
+                for (date = minTime; date <= maxTime; date = date + 60)
+                {
+                    dataSource.Set(date, fields[4], double.NaN);
+                    int index = dataSource.GetRowIndex(date);
+                    dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
+                    dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
+                }
+            }
+            else
+            {
+                dataSource.SetRowsCapacity(sizeData + 10);
+                dataSource.SetRowsGrowStep(100);
+            }
+            int columnsCount = dataSource.ColumnsCount;
+            for (int i = 0; i < sizeData; i++)
+            {
+                SecurityData securityData = historyDatas[i];
+                if (dataSource == chart.DataSource)
+                {
+                    if (securityData.m_close > 0)
+                    {
+                        InsertData(chart, dataSource, fields, securityData);
+                    }
+                }
+                else
+                {
+                    double[] ary = new double[columnsCount];
+                    ary[0] = securityData.m_close;
+                    ary[1] = securityData.m_high;
+                    ary[2] = securityData.m_low;
+                    ary[3] = securityData.m_open;
+                    ary[4] = securityData.m_volume;
+                    ary[5] = securityData.m_amount;
+                    ary[6] = securityData.m_avgPrice;
+                    //for (int j = 5; j < columnsCount; j++)
+                    //{
+                    //    ary[j] = dataSource->NaN;
+                    //}
+                    dataSource.AddRow((double)securityData.m_date, ary, columnsCount);
+                }
+            }
+            int indicatorsSize = (int)indicators.Count;
+            for (int i = 0; i < indicatorsSize; i++)
+            {
+                indicators[i].OnCalculate(0);
+            }
+        }
+
+
+        public static void BindHistoryVolAndAmountDatas(ChartAEx chart, CTable dataSource, int[] fields, List<SecurityData> historyDatas)
+        {
+            dataSource.Clear();
+            int size = (int)historyDatas.Count; ;
+            dataSource.SetRowsCapacity(size + 10);
+            dataSource.SetRowsGrowStep(100);
+            int columnsCount = dataSource.ColumnsCount;
+            for (int i = 0; i < size; i++)
+            {
+                SecurityData securityData = historyDatas[i];
+                double[] ary = new double[columnsCount];
+                ary[0] = securityData.m_volume;
+                ary[1] = securityData.m_amount;
+                dataSource.AddRow((double)securityData.m_date, ary, columnsCount);
+            }
+        }
+
+        public static int CalculateMinuteKLineDate(MinuteKLineDate minuteDate, int type, int cycle)
+        {
+            if (cycle < CYCLE_MINUTE_1 || cycle > CYCLE_MINUTE_60)
+            {
+                return 0;
+            }
+
+            int realCount = GetRealPeriodCount(cycle);
+            minuteDate.m_hour_cycle = minuteDate.m_hour;
+            minuteDate.m_minute_cycle = minuteDate.m_minute / realCount;
+            return 1;
+        }
+
+        public static int DayOfWeek(int y, int m, int d)
+        {
+            if (m == 1 || m == 2)
+            {
+                m += 12;
+                y--;
+            }
+            return (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7;
+        }
+
         public static void GetIndicatorByName(String name, Indicator indicator)
         {
             if(name == "MA")
@@ -221,6 +361,78 @@ namespace OwLib
             }
         }
 
+        public static double GetMinuteVol(CTable dataSource, double date, int field, double volume)
+        {
+            int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+            CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);    
+            double startDate = 0;
+            double endDate = date;
+            if(hour >= 6)
+            {
+                startDate = CStrA.M129(year, month, day, 6, 0, 0, 0);
+            }
+            else
+            {
+                double preDate = date - 86400;
+                int lyear = 0, lmonth = 0, lday = 0, lhour = 0, lminute = 0, lsecond = 0, lms = 0;
+                CStrA.M130(preDate, ref lyear, ref lmonth, ref lday, ref lhour, ref lminute, ref lsecond, ref lms);
+                startDate = CStrA.M129(lyear, lmonth, lday, 6, 0, 0, 0);
+            }
+            int dataSize = dataSource.RowsCount;
+            bool containsFlg = false;
+            for(int i = dataSize -1 ; i >= 0; i--)
+            {
+                containsFlg = false;
+                double ldate = dataSource.GetXValue(i);
+                if(startDate <= ldate && ldate <= endDate)
+                {
+                    containsFlg = true;
+                }
+                if(!containsFlg)
+                {
+                    break;
+                }
+                else
+                {
+                    double vol = dataSource.Get2(i, KeyFields.VOL_INDEX);
+                    volume = volume - vol;
+                }
+            }
+            return volume;
+        }
+
+        public static int GetRealPeriodCount(int cycle)
+        {
+            int sCount = 0;
+            switch (cycle)
+            {
+                case CYCLE_MINUTE_1:
+                    sCount = 1;
+                    break;
+                case CYCLE_MINUTE_3:
+                    sCount = 3;
+                    break;
+                case CYCLE_MINUTE_5:
+                    sCount = 5;
+                    break;
+                case CYCLE_MINUTE_10:
+                    sCount = 10;
+                    break;
+                case CYCLE_MINUTE_15:
+                    sCount = 15;
+                    break;
+                case CYCLE_MINUTE_30:
+                    sCount = 30;
+                    break;
+                case CYCLE_MINUTE_60:
+                    sCount = 60;
+                    break;
+                default:
+                    break;
+            }
+            return sCount;
+        }
+
         /// <summary>
         /// 插入数据
         /// </summary>
@@ -273,6 +485,28 @@ namespace OwLib
             return index;
         }
 
+        public static void InsertLatestData(ChartAEx chart, CTable dataSource, List<CIndicator> indicators, int []fields, double preClose, int lastIndex)
+        {
+            for(int i = 0 ; i < lastIndex; i++)
+            {
+                double close = dataSource.Get2(i, fields[KeyFields.CLOSE_INDEX]);
+                if(double.IsNaN(close))
+                {
+                    dataSource.Set2(i, fields[KeyFields.CLOSE_INDEX], preClose);
+                    dataSource.Set2(i, fields[KeyFields.OPEN_INDEX], preClose);
+                    dataSource.Set2(i, fields[KeyFields.HIGH_INDEX], preClose);
+                    dataSource.Set2(i, fields[KeyFields.LOW_INDEX], preClose);
+                    dataSource.Set2(i, fields[KeyFields.VOL_INDEX], 0);
+                    dataSource.Set2(i, fields[KeyFields.AMOUNT_INDEX], 0);
+                    dataSource.Set2(i, fields[KeyFields.AVGPRICE_INDEX], preClose);
+                }
+                else
+                {
+                    preClose = close;
+                }
+            }
+        }
+
         /// <summary>
         /// 插入最新数据
         /// </summary>
@@ -300,6 +534,57 @@ namespace OwLib
                 return -1;
             }
         }
+
+        public static double SumHistoryData(CTable dataSource, double date, int cycle, int field)
+        {
+            double sumValue = 0;
+            double value = 0;
+            int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+            CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);    
+            if(cycle == CYCLE_WEEK)
+            {
+                int dayOfWeek = DayOfWeek(year, month, day);
+                if(dayOfWeek >= 5)
+                {
+                    dayOfWeek = 4;
+                }
+                for(int i = 1; i <= dayOfWeek; i++)
+                {
+                    double calcDate = CStrA.M129(year, month, day - i, 0, 0, 0, 0);
+                    value = dataSource.Get(calcDate, field);
+                    if(!double.IsNaN(value))
+                    {
+                        sumValue += value;
+                    }
+                }
+            }
+            else if(cycle == CYCLE_MONTH)
+            {
+                for(int i = 1; i < day; i++)
+                {
+                    double calcDate = CStrA.M129(year, month, i, 0, 0, 0, 0);
+                    value = dataSource.Get(calcDate, field);
+                    if(!double.IsNaN(value))
+                    {
+                        sumValue += value;
+                    }
+                }
+            }
+            else if(cycle == 0)
+            {
+                int rowCount = dataSource.RowsCount;
+                for(int i = 0; i < rowCount; i++)
+                {
+                    value = dataSource.Get2(i, field);
+                    if(!double.IsNaN(value))
+                    {
+                        sumValue += value;
+                    }
+                }
+            }
+            return sumValue;
+        }
+
         #endregion
     }
 }

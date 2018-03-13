@@ -31,12 +31,12 @@ namespace OwLib
             Cursor = CursorsA.SizeAll;
         }
 
-        private ChartEx m_chart;
+        private KLine m_chart;
 
         /// <summary>
         /// 获取或设置
         /// </summary>
-        public ChartEx Chart
+        public KLine Chart
         {
             get { return m_chart; }
             set { m_chart = value; }

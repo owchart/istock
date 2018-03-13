@@ -4,6 +4,7 @@ using System.Text;
 
 namespace OwLib
 {
+
     /// <summary>
     /// π…∆±–≈œ¢
     /// </summary>
@@ -680,6 +681,18 @@ namespace OwLib
         /// </summary>
         public String m_script;
 
+    }
+
+    public class MinuteKLineDate
+    {
+        public int m_year;
+        public int m_month;
+        public int m_day;
+        public int m_hour;
+        public int m_minute;
+        public int m_hour_cycle;
+        public int m_minute_cycle;
+        public int m_cycle;
     }
 
     /// <summary>

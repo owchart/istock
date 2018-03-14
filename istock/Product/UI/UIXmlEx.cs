@@ -55,7 +55,7 @@ namespace OwLib
             }
             else if (type == "klinediv")
             {
-                return new ChartA();
+                return new ChartAEx();
             }
             else if (type == "latestdiv")
             {

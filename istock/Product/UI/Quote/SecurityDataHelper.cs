@@ -427,6 +427,15 @@ namespace OwLib
                 case CYCLE_MINUTE_60:
                     sCount = 60;
                     break;
+                case CYCLE_DAY:
+                    sCount = 1440;
+                    break;
+                case CYCLE_WEEK:
+                    sCount = 10080;
+                    break;
+                case CYCLE_MONTH:
+                    sCount = 43200;
+                    break;
                 default:
                     break;
             }

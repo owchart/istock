@@ -62,6 +62,11 @@ namespace OwLib
         public double m_close;
 
         /// <summary>
+        /// 上次的成交量
+        /// </summary>
+        public double m_dVolume;
+
+        /// <summary>
         /// 日期
         /// </summary>
         public double m_date;
@@ -248,6 +253,11 @@ namespace OwLib
         /// 股票代码
         /// </summary>
         public String m_code = "";
+
+        /// <summary>
+        /// 上次成交量
+        /// </summary>
+        public double m_dVolume;
 
         /// <summary>
         /// 日期及时间
@@ -663,6 +673,9 @@ namespace OwLib
         /// 平均价格字段
         /// </summary>
         public const int AVGPRICE_INDEX = 6;
+
+        public const int VOLHISTORY_INDEX = 0;
+        public const int AMOUNTHISTORY_INDEX = 1;
         #endregion
     }
 

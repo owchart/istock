@@ -201,6 +201,75 @@ namespace OwLib
             m_gridUserSecurities.Invalidate();
         }
 
+        private void ChartInvoke(object sender, object args)
+        {
+            if (args is OneStockKLineDataRec)
+            {
+                OneStockKLineDataRec oneStockKLineDataRec = args as OneStockKLineDataRec;
+                List<SecurityData> securityDatas = new List<SecurityData>();
+                int size = oneStockKLineDataRec.OneDayDataList.Count;
+                for (int i = 0; i < size; i++)
+                {
+                    OneDayDataRec oneDayDataRec = oneStockKLineDataRec.OneDayDataList[i];
+                    SecurityData securityData = new SecurityData();
+                    securityData.m_close = oneDayDataRec.Close;
+                    securityData.m_high = oneDayDataRec.High;
+                    securityData.m_low = oneDayDataRec.Low;
+                    securityData.m_open = oneDayDataRec.Open;
+                    securityData.m_volume = oneDayDataRec.Volume;
+                    securityData.m_amount = oneDayDataRec.Amount;
+                    int year = oneDayDataRec.Date / 10000;
+                    int month = (oneDayDataRec.Date - year * 10000) / 100;
+                    int day = oneDayDataRec.Date - year * 10000 - month * 100;
+                    int hour = oneDayDataRec.Time / 10000;
+                    int minute = (oneDayDataRec.Time - hour * 10000) / 100;
+                    securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0);
+                    securityDatas.Add(securityData);
+                }
+                HistoryDataInfo historyDataInfo = new HistoryDataInfo();
+                historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code;
+                if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMint1)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_1);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMint5)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_5);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMint15)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_15);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMint30)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_30);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMint60)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_60);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleDay)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_DAY);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleWeek)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_WEEK);
+                }
+                else if (oneStockKLineDataRec.Cycle == KLineCycle.CycleMonth)
+                {
+                    historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MONTH);
+                }
+                historyDataInfo.m_subscription = 1;
+                m_kline.BindHistoryData(historyDataInfo, securityDatas);
+                CFTService.QueryLV2(historyDataInfo.m_code);
+            }
+            else if (args is SecurityLatestData)
+            {
+                m_kline.LatestDiv.LatestData = args as SecurityLatestData;
+            }
+        }
+
         /// <summary>
         /// µã»÷ÊÂ¼þ
         /// </summary>
@@ -399,62 +468,7 @@ namespace OwLib
         /// </summary>
         public void HistoryDatasCallBack(OneStockKLineDataRec oneStockKLineDataRec)
         {
-            List<SecurityData> securityDatas = new List<SecurityData>();
-            int size = oneStockKLineDataRec.OneDayDataList.Count;
-            for (int i = 0; i < size; i++)
-            {
-                OneDayDataRec oneDayDataRec = oneStockKLineDataRec.OneDayDataList[i];
-                SecurityData securityData = new SecurityData();
-                securityData.m_close = oneDayDataRec.Close;
-                securityData.m_high = oneDayDataRec.High;
-                securityData.m_low = oneDayDataRec.Low;
-                securityData.m_open = oneDayDataRec.Open;
-                securityData.m_volume = oneDayDataRec.Volume;
-                securityData.m_amount = oneDayDataRec.Amount;               
-                int year = oneDayDataRec.Date / 10000;
-                int month = (oneDayDataRec.Date  - year * 10000) / 100;
-                int day = oneDayDataRec.Date - year * 10000 - month * 100;
-                int hour = oneDayDataRec.Time / 10000;
-                int minute = (oneDayDataRec.Time - hour * 10000) / 100;
-                securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0);
-                securityDatas.Add(securityData);
-            }
-            HistoryDataInfo historyDataInfo = new HistoryDataInfo();
-            historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code;    
-            if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint1)
-            {
-                historyDataInfo.m_cycle = 1;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint5)
-            {
-                historyDataInfo.m_cycle = 5;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint15)
-            {
-                historyDataInfo.m_cycle = 15;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint30)
-            {
-                historyDataInfo.m_cycle = 30;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMint60)
-            {
-                historyDataInfo.m_cycle = 60;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleDay)
-            {
-                historyDataInfo.m_cycle = 1440;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleWeek)
-            {
-                historyDataInfo.m_cycle = 10080;
-            }
-            else if(oneStockKLineDataRec.Cycle == KLineCycle.CycleMonth)
-            {
-                historyDataInfo.m_cycle = 43200;
-            }
-            historyDataInfo.m_subscription = 1;
-            m_kline.BindHistoryData(historyDataInfo, securityDatas);
+            m_kline.Chart.BeginInvoke(oneStockKLineDataRec);
         }
 
         /// <summary>
@@ -545,7 +559,7 @@ namespace OwLib
             int minute = (time - hour * 10000) / 100;
             int second = time - hour * 10000 - minute * 100;
             latestData.m_date = CStrA.M129(year, month, day, hour, 0, 0, 0);
-            m_kline.LatestDiv.LatestData = latestData;
+            m_kline.Chart.BeginInvoke(latestData);
         }
 
         /// <summary>
@@ -589,6 +603,7 @@ namespace OwLib
                 m_kline.SearchSecurity(security);
                 m_stockNews.Code = codes[0].m_code;
             }
+            m_kline.Chart.RegisterEvent(new ControlInvokeEvent(ChartInvoke), EVENTID.INVOKE);
         }
 
         /// <summary>

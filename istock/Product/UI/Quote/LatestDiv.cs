@@ -83,21 +83,10 @@ namespace OwLib
                 m_latestData.Copy(value);
                 if (m_chart != null)
                 {
-                    HistoryDataInfo historyDataInfo = new HistoryDataInfo();
-                    historyDataInfo.m_code = m_latestData.m_code;
-                    historyDataInfo.m_pushData = true;
-                    historyDataInfo.m_cycle = m_chart.Cycle;
-                    historyDataInfo.m_subscription = m_chart.Subscription;
-                    SecurityData securityData = new SecurityData();
-                    StockService.GetSecurityData(m_latestData, m_latestData.m_lastClose, historyDataInfo.m_cycle, historyDataInfo.m_subscription, ref securityData);
-                    if (SecurityService.m_latestDatas.ContainsKey(m_latestData.m_code))
-                    {
-                        securityData.m_volume = SecurityService.m_latestDatas[m_latestData.m_code].m_volume;
-                        securityData.m_amount = SecurityService.m_latestDatas[m_latestData.m_code].m_amount;
-                    }
-                    List<SecurityData> datas = new List<SecurityData>();
-                    datas.Add(securityData);
-                    m_chart.BindHistoryData(historyDataInfo, datas);
+                    List<SecurityLatestData> datas = new List<SecurityLatestData>();
+                    datas.Add(value);
+                    m_chart.m_refreshKLineFlag = true;
+                    m_chart.RefreshKLineData(datas);
                 }
                 Invalidate();
             }

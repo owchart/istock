@@ -138,16 +138,16 @@
             // 
             this.rtbResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbResult.Font = new System.Drawing.Font("宋体", 12F);
-            this.rtbResult.Location = new System.Drawing.Point(0, 140);
+            this.rtbResult.Location = new System.Drawing.Point(0, 228);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(516, 300);
+            this.rtbResult.Size = new System.Drawing.Size(516, 212);
             this.rtbResult.TabIndex = 16;
             this.rtbResult.Text = "";
             // 
             // splitter3
             // 
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(0, 137);
+            this.splitter3.Location = new System.Drawing.Point(0, 225);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(516, 3);
             this.splitter3.TabIndex = 1;
@@ -158,7 +158,7 @@
             this.rtbCodes.Dock = System.Windows.Forms.DockStyle.Top;
             this.rtbCodes.Location = new System.Drawing.Point(0, 0);
             this.rtbCodes.Name = "rtbCodes";
-            this.rtbCodes.Size = new System.Drawing.Size(516, 137);
+            this.rtbCodes.Size = new System.Drawing.Size(516, 225);
             this.rtbCodes.TabIndex = 0;
             this.rtbCodes.Text = "";
             // 

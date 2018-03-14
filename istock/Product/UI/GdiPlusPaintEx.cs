@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OwLib;
+using System.Drawing;
 
 namespace OwLib
 {
@@ -29,6 +30,14 @@ namespace OwLib
         private bool m_supportTransparent = true;
 
         /// <summary>
+        /// 获取绘图对象
+        /// </summary>
+        public Graphics Graphics
+        {
+            get { return m_g; }
+        }
+
+        /// <summary>
         /// 获取颜色
         /// </summary>
         /// <param name="dwPenColor">输入颜色</param>
@@ -36,6 +45,18 @@ namespace OwLib
         public override long GetColor(long dwPenColor)
         {
             return CDraw.GetWhiteColor(dwPenColor);
+        }
+
+        /// <summary>
+        /// 获取容器的尺寸
+        /// </summary>
+        /// <param name="rect">矩形</param>
+        /// <returns>尺寸</returns>
+        public Rectangle GetContainer(RECT rect)
+        {
+            Rectangle gdiPlusRect = new Rectangle(rect.left + m_offsetX, rect.top + m_offsetY, rect.right - rect.left, rect.bottom - rect.top);
+            AffectScaleFactor(ref gdiPlusRect);
+            return gdiPlusRect;
         }
 
         /// <summary>

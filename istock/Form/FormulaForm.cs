@@ -81,98 +81,89 @@ namespace OwLib
             }
         }
 
-        /// <summary>
-        /// 秒表事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timer_Tick(object sender, EventArgs e)
+        public void HistoryDataCallBack(List<OneDayDataRec> list)
         {
-            if (hisData.Length > 0)
+            int listSize = list.Count;
+            EMIndicator indicator = indicators[lbFormula.SelectedIndex];
+            indicator.QuoteData.Clear();
+            FORMULA_TIME begin, end;
+            begin = new FORMULA_TIME();
+            end = new FORMULA_TIME();
+            int nlen = list.Count;
+            Kline[] klines = new Kline[nlen];
+            if (list == null || list.Count <= 0)
+                return;
+            begin.year = (ushort)(list[0].Date / 10000);
+            begin.month = (byte)((list[0].Date - begin.year * 10000) / 100);
+            begin.day = (byte)(list[0].Date - begin.year * 10000 - begin.month * 100);
+            end = new FORMULA_TIME();
+            end.year = (ushort)(list[nlen - 1].Date / 10000);
+            end.month = (byte)((list[nlen - 1].Date - end.year * 10000) / 100);
+            end.day = (byte)(list[nlen - 1].Date - end.year * 10000 - end.month * 100);
+            for (int i = 0; i < nlen; i++)
             {
-                List<OneDayDataRec> list = JsonConvert.DeserializeObject<List<OneDayDataRec>>(hisData);
-                int listSize = list.Count;
-                EMIndicator indicator = indicators[lbFormula.SelectedIndex];
-                indicator.QuoteData.Clear();
-                FORMULA_TIME begin, end;
-                begin = new FORMULA_TIME();
-                end = new FORMULA_TIME();
-                int nlen = list.Count;
-                Kline[] klines = new Kline[nlen];
-                if (list == null || list.Count <= 0)
-                    return;
-                begin.year = (ushort)(list[0].Date / 10000);
-                begin.month = (byte)((list[0].Date - begin.year * 10000) / 100);
-                begin.day = (byte)(list[0].Date - begin.year * 10000 - begin.month * 100);
-                end = new FORMULA_TIME();
-                end.year = (ushort)(list[nlen - 1].Date / 10000);
-                end.month = (byte)((list[nlen - 1].Date - end.year * 10000) / 100);
-                end.day = (byte)(list[nlen - 1].Date - end.year * 10000 - end.month * 100);
-                for (int i = 0; i < nlen; i++)
-                {
-                    klines[i].Date = list[i].Date;
-                    //不复权
-                    klines[i].Open = list[i].Open;
-                    klines[i].Close = list[i].Close;
-                    klines[i].High = list[i].High;
-                    klines[i].Low = list[i].Low;
-                    klines[i].Value = list[i].Amount;
-                    klines[i].Volume = (uint)list[i].Volume;
-                    klines[i].Time = list[i].Time;
-                }
-                string errmsg = string.Empty;
-                FmFormulaOutput output = new FmFormulaOutput();
-                Dictionary<int, Dictionary<FieldIndex, string>> dict = DetailData.FieldIndexDataString;
-                //执行调用指标公式方法
-                if (indicator.Formula.fid <= 0)
-                {
-                    FormulaProxy.ExecuteFormula(list[0].Date, (int)KLINEPERIOD.PERIOD_DAY, 1, txtCode.Text, begin,
-                                                                end, 0, klines, indicator.IndicatorName, errmsg, ref output, nlen);
-                }
-                else
-                {
-                    FormulaProxy.ExecuteFormulaWithKLineAndFormula(list[0].Date,
-                                                                   (int)KLINEPERIOD.PERIOD_DAY, 1, txtCode.Text, begin,
-                                                                   end, klines, indicator.Formula, errmsg, ref output, nlen);
-                }
+                klines[i].Date = list[i].Date;
+                //不复权
+                klines[i].Open = list[i].Open;
+                klines[i].Close = list[i].Close;
+                klines[i].High = list[i].High;
+                klines[i].Low = list[i].Low;
+                klines[i].Value = list[i].Amount;
+                klines[i].Volume = (uint)list[i].Volume;
+                klines[i].Time = list[i].Time;
+            }
+            string errmsg = string.Empty;
+            FmFormulaOutput output = new FmFormulaOutput();
+            Dictionary<int, Dictionary<FieldIndex, string>> dict = DetailData.FieldIndexDataString;
+            //执行调用指标公式方法
+            if (indicator.Formula.fid <= 0)
+            {
+                FormulaProxy.ExecuteFormula(list[0].Date, (int)KLINEPERIOD.PERIOD_DAY, 1, txtCode.Text, begin,
+                                                            end, 0, klines, indicator.IndicatorName, errmsg, ref output, nlen);
+            }
+            else
+            {
+                FormulaProxy.ExecuteFormulaWithKLineAndFormula(list[0].Date,
+                                                               (int)KLINEPERIOD.PERIOD_DAY, 1, txtCode.Text, begin,
+                                                               end, klines, indicator.Formula, errmsg, ref output, nlen);
+            }
 
-                
-                for (int n = 0; n < output.outputCount; n++)
+
+            for (int n = 0; n < output.outputCount; n++)
+            {
+                if (output.fmOutput[n].normaloutput.ToInt64() != 0)
+                    GetNormalFormulaOutput(indicator, output, nlen, n, 0, MarketType2.MARKET_SZ, KLineCycle.CycleDay);
+                else
+                    GetFunctionFormulaOutput(indicator, output, nlen, n, 0);
+            }
+            DataTable dt = new DataTable(indicator.IndicatorName);
+            foreach (QuoteDataStru stu in indicator.QuoteData)
+            {
+                dt.Columns.Add(stu.QuoteName);
+            }
+            int idx = indicator.QuoteData[0].QuoteDataList.Count;
+            int ix = indicator.QuoteData.Count;
+            if (idx > 0)
+            {
+                for (int i = 0; i < idx; i++)
                 {
-                    if (output.fmOutput[n].normaloutput.ToInt64() != 0)
-                        GetNormalFormulaOutput(indicator, output, nlen, n, 0, MarketType2.MARKET_SZ, KLineCycle.CycleDay);
-                    else
-                        GetFunctionFormulaOutput(indicator, output, nlen, n, 0);
-                }
-                DataTable dt = new DataTable(indicator.IndicatorName);
-                foreach (QuoteDataStru stu in indicator.QuoteData)
-                {
-                    dt.Columns.Add(stu.QuoteName);
-                }
-                int idx = indicator.QuoteData[0].QuoteDataList.Count;
-                int ix = indicator.QuoteData.Count;
-                if (idx > 0)
-                {
-                    for (int i = 0; i < idx; i++)
+                    DataRow row = dt.NewRow();
+                    dt.Rows.Add(row);
+                    for (int j = 0; j < ix; j++)
                     {
-                        DataRow row = dt.NewRow();
-                        dt.Rows.Add(row);
-                        for (int j = 0; j < ix; j++)
-                        {
-                            row[j] = indicator.QuoteData[j].QuoteDataList[i];
-                        }
+                        row[j] = indicator.QuoteData[j].QuoteDataList[i];
                     }
                 }
-                try
-                {
-                    dgvData.DataSource = dt.DefaultView;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("1");
-                }
-                hisData = "";
             }
+            try
+            {
+                dgvData.DataSource = dt.DefaultView;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("1");
+            }
+            hisData = "";
         }
 
         private static void GetNormalFormulaOutput(EMIndicator indicator, FmFormulaOutput output,

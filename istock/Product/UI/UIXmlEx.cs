@@ -53,6 +53,10 @@ namespace OwLib
             {
                 return new FloatDiv();
             }
+            else if (type == "graph")
+            {
+                return new FundCurveDiv();
+            }
             else if (type == "klinediv")
             {
                 return new ChartAEx();

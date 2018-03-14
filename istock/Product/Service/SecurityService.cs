@@ -683,15 +683,6 @@ namespace OwLib
         }
 
         /// <summary>
-        /// 开启数据落地线程
-        /// </summary>
-        public static void Start3()
-        {
-            Thread thread = new Thread(new ThreadStart(StartWork3));
-            thread.Start();
-        }
-
-        /// <summary>
         /// 开始工作
         /// </summary>
         private static void StartWork()

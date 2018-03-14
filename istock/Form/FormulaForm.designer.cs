@@ -28,29 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.btnQuery = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvData = new System.Windows.Forms.DataGridView();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             this.rtbText = new System.Windows.Forms.RichTextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbFormula = new System.Windows.Forms.ListBox();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.dgvData = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // label1
             // 
@@ -103,6 +96,28 @@
             this.panel3.Size = new System.Drawing.Size(588, 433);
             this.panel3.TabIndex = 2;
             // 
+            // dgvData
+            // 
+            this.dgvData.AllowUserToAddRows = false;
+            this.dgvData.AllowUserToDeleteRows = false;
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvData.Location = new System.Drawing.Point(0, 166);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.RowHeadersVisible = false;
+            this.dgvData.RowTemplate.Height = 23;
+            this.dgvData.Size = new System.Drawing.Size(588, 267);
+            this.dgvData.TabIndex = 9;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter2.Location = new System.Drawing.Point(0, 163);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(588, 3);
+            this.splitter2.TabIndex = 8;
+            this.splitter2.TabStop = false;
+            // 
             // rtbText
             // 
             this.rtbText.Dock = System.Windows.Forms.DockStyle.Top;
@@ -140,28 +155,6 @@
             this.lbFormula.TabIndex = 0;
             this.lbFormula.SelectedIndexChanged += new System.EventHandler(this.lbFormula_SelectedIndexChanged);
             // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(0, 163);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(588, 3);
-            this.splitter2.TabIndex = 8;
-            this.splitter2.TabStop = false;
-            // 
-            // dgvData
-            // 
-            this.dgvData.AllowUserToAddRows = false;
-            this.dgvData.AllowUserToDeleteRows = false;
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(0, 166);
-            this.dgvData.Name = "dgvData";
-            this.dgvData.RowHeadersVisible = false;
-            this.dgvData.RowTemplate.Height = 23;
-            this.dgvData.Size = new System.Drawing.Size(588, 267);
-            this.dgvData.TabIndex = 9;
-            // 
             // FormulaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -178,8 +171,8 @@
             this.Load += new System.EventHandler(this.FormulaForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,7 +180,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.Button btnQuery;

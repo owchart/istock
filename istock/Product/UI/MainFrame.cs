@@ -33,6 +33,11 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 公式编辑界面
+        /// </summary>
+        private FormulaForm m_formulaForm;
+
+        /// <summary>
         /// 自选股表格
         /// </summary>
         private GridA m_gridUserSecurities;
@@ -78,6 +83,17 @@ namespace OwLib
         {
             get { return m_allStockReports; }
             set { m_allStockReports = value; }
+        }
+
+        private MacIndustry m_macIndustry;
+
+        /// <summary>
+        /// 获取或设置宏观数据
+        /// </summary>
+        public MacIndustry MacIndustry
+        {
+            get { return m_macIndustry; }
+            set { m_macIndustry = value; }
         }
 
         private NewStocks m_newStocks;
@@ -155,6 +171,7 @@ namespace OwLib
             editButton.Name = "btnGridRowEdit";
             editButton.Size = new SIZE(100, 30);
             row.EditButton = editButton;
+            row.Tag = userSecurity;
             row.AddCell("colP1", new GridStringCell(userSecurity.m_code));
             row.AddCell("colP2", new GridStringCell());
             GridDoubleCellEx cellP3 = new GridDoubleCellEx();
@@ -206,6 +223,10 @@ namespace OwLib
             if (args is OneStockKLineDataRec)
             {
                 OneStockKLineDataRec oneStockKLineDataRec = args as OneStockKLineDataRec;
+                if (m_formulaForm != null)
+                {
+                    m_formulaForm.HistoryDataCallBack(oneStockKLineDataRec.OneDayDataList);
+                }
                 List<SecurityData> securityDatas = new List<SecurityData>();
                 int size = oneStockKLineDataRec.OneDayDataList.Count;
                 for (int i = 0; i < size; i++)
@@ -292,6 +313,7 @@ namespace OwLib
                     {
                         UserSecurity userSecurity = new UserSecurity();
                         userSecurity.m_code = code;
+                        userSecurity.m_state = 1;
                         AddUserSecurity(userSecurity);
                         DataCenter.UserSecurityService.Add(userSecurity);
                     }
@@ -309,7 +331,8 @@ namespace OwLib
                 }
                 else if (name == "btnMergeHistoryDatas")
                 {
-                    SecurityService.Start3();
+                    SecurityService.StartWork3();
+                    MessageBox.Show("日线落地完成!", "提示");
                 }
                 else if (name == "btnContract")
                 {
@@ -375,7 +398,23 @@ namespace OwLib
                 else if (name == "btnSetStrategy")
                 {
                     m_orderTrade.ShowStrategySettingWindow();
-                }     
+                }
+                else if (name == "btnFormula")
+                {
+                    m_formulaForm = new FormulaForm();
+                    m_formulaForm.ShowDialog();
+                    m_formulaForm = null;
+                }
+                else if (name == "btnIndicator")
+                {
+                    IndicatorForm indicatorForm = new IndicatorForm();
+                    indicatorForm.Show();
+                }
+                else if (name == "btnSpecial")
+                {
+                    SpecialForm specialForm = new SpecialForm();
+                    specialForm.Show();
+                }
             }
         }
 
@@ -448,6 +487,7 @@ namespace OwLib
                     userSecurity = new UserSecurity();
                     userSecurity.m_code = cell.Row.GetCell("colP1").GetString();
                 }
+                userSecurity.m_state = 1;
                 if (colName == "colP11")
                 {
                     userSecurity.m_up = cell.GetDouble();
@@ -551,6 +591,7 @@ namespace OwLib
             latestData.m_buyVolume10 = fieldInt32[FieldIndex.BuyVolume10];
             latestData.m_allBuyVol = fieldInt64[FieldIndex.GreenVolume];
             latestData.m_allSellVol = fieldInt64[FieldIndex.RedVolume];
+            latestData.m_dVolume = fieldInt64[FieldIndex.LastVolume];
             int time = fieldInt32[FieldIndex.Time];
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
@@ -590,6 +631,7 @@ namespace OwLib
             m_allStockNotices = new AllStockNotices(this);
             m_allStockReports = new AllStockReports(this);
             m_newStocks = new NewStocks(this);
+            m_macIndustry = new MacIndustry(this);
             List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
             int codesSize = codes.Count;
             if (codesSize > 0)
@@ -604,6 +646,16 @@ namespace OwLib
                 m_stockNews.Code = codes[0].m_code;
             }
             m_kline.Chart.RegisterEvent(new ControlInvokeEvent(ChartInvoke), EVENTID.INVOKE);
+            if (m_newStocks.NewStockList.Count > 0)
+            {
+                StringBuilder newStockStr = new StringBuilder();
+                newStockStr.Append("今日新股申购提示:\r\n");
+                foreach (String str in m_newStocks.NewStockList)
+                {
+                    newStockStr.Append(str);
+                }
+                MessageBox.Show(newStockStr.ToString(), "提示");
+            }
         }
 
         /// <summary>
@@ -767,7 +819,15 @@ namespace OwLib
                     SecurityService.GetSecurityByCode(code, ref security);
                     SecurityService.GetLatestData(code, ref latestData);
                     row.GetCell("colP2").SetString(security.m_name);
-                    row.GetCell("colP2").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                    UserSecurity userSecurity = row.Tag as UserSecurity;
+                    if (userSecurity.m_state == 1)
+                    {
+                        row.GetCell("colP2").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                    }
+                    else
+                    {
+                        row.GetCell("colP2").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                    }
                     double diff = 0, diffRange = 0;
                     if (latestData.m_lastClose != 0)
                     {
@@ -795,7 +855,7 @@ namespace OwLib
                     int isAlarm = 0;
                     if (latestData.m_close > 0)
                     {
-                        double up = row.GetCell("colP11").GetDouble(), down = row.GetCell("colP12").GetDouble();
+                        double up = userSecurity.m_up, down = userSecurity.m_down;
                         if (up != 0)
                         {
                             if (latestData.m_close > up)

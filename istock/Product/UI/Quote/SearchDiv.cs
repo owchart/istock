@@ -124,10 +124,13 @@ namespace OwLib
             {
                 foreach (GSecurity gSecurity in SecurityService.m_codedMap.Values)
                 {
-                    if (gSecurity.m_code.ToUpper().IndexOf(sText) == 0 || gSecurity.m_name.ToUpper().IndexOf(sText) == 0
-                        || gSecurity.m_pingyin.ToUpper().IndexOf(sText) == 0)
+                    if (gSecurity.m_name != null)
                     {
-                        securities.push_back(gSecurity);
+                        if (gSecurity.m_code.ToUpper().IndexOf(sText) == 0 || gSecurity.m_name.ToUpper().IndexOf(sText) == 0
+                            || gSecurity.m_pingyin.ToUpper().IndexOf(sText) == 0)
+                        {
+                            securities.push_back(gSecurity);
+                        }
                     }
                 }
             }

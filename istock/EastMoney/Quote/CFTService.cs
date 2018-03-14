@@ -26,7 +26,6 @@ namespace OwLib
                 DateTime dtStart = DateTime.Now;
                 ConnectManager2.CreateInstance().DoNetConnect();
                 DataCenterCore dc = DataCenterCore.CreateInstance();
-                Thread.Sleep(2000);
                 //dc.TimerStart();
                 //dc.DoTimerElapsed();
 

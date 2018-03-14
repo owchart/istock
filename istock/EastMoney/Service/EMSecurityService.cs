@@ -56,10 +56,10 @@ namespace OwLib
         /// 加载
         /// </summary>
         /// <param name="loadAll">是否全部加载标记</param>
-        public static void Load(bool loadAll)
+        public static bool Load()
         {
-            String sPath = Application.StartupPath + "\\securities.txt";
-            if (loadAll || !File.Exists(sPath))
+            String sPath = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+            if (!File.Exists(sPath))
             {
                 List<KwItem> items = DataCenter.EMSecurityService.GetKwItems();
                 Dictionary<String, KwItem> availableItems = EMSecurityService.GetAvailableItems(items);
@@ -72,7 +72,8 @@ namespace OwLib
                 CFileA.Write(Application.StartupPath + "\\codes.txt", sb.ToString());
                 EMSecurityService.KwItems = availableItems;
                 CFileA.Write(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems));
-                SecurityService.ImportSecurities(EMSecurityService.KwItems);
+                //SecurityService.ImportSecurities(EMSecurityService.KwItems);
+                return false;
             }
             else
             {
@@ -81,6 +82,7 @@ namespace OwLib
                 {
                     kwItems2[KwItems[key].Innercode] = KwItems[key];
                 }
+                return true;
             }
         }
 

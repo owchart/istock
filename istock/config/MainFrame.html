@@ -5,240 +5,275 @@
     </script>
   </head>
   <body>
-   <div type="splitlayout" layoutstyle="bottomtotop" size="400,400" splitterposition="0,375,400,375" name="divMain" dock="fill">
-     <input type="usercontrol" cid="indexdiv" />
-     <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
-      <div name="TabPage" text="报价列表" type="tabpage">
-        <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
-          <div name="Div">
-            <label name="Label" text="选择股票" location="11,15" size="60,17" />
-            <input type="text" name="txtCode" location="78,12" size="126,20" />
-            <input type="usercontrol" cid="ribbonbutton" name="btnAdd" text="添加" location="219,12" size="70,20" />
-            <input type="usercontrol" cid="ribbonbutton" name="btnExport" text="导出结果" location="315,12" size="100,20" />
-          </div>
-          <table name="gridUserSecurities" dock="fill">
-            <tr>
-              <th name="colP1" text="股票代码" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP2" text="股票名称" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP3" text="最新价" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP4" text="涨跌额" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP5" text="涨跌幅" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP6" text="最高价" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP7" text="最低价" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP8" text="开盘价" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP9" text="成交量" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP10" text="成交额" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP11" text="止盈位" width="100" allowdrag="true" allowresize="true"/>
-              <th name="colP12" text="止损位" width="100" allowdrag="true" allowresize="true"/>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div name="TabPage2" text="分时/K线" type="tabpage">
-        <div type="splitlayout" name="chartdiv" dock="fill" backcolor="empty" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
-          <!--实时报价-->
-          <input type="usercontrol" cid="latestdiv" name="divLatest" />
-          <!--K线图-->
-          <input type="usercontrol" cid="klinediv" name="divKLine" />
-        </div>
-      </div>
-      <div name="TabPage4" text="资讯" type="tabpage">
-        <div type="tabcontrol" dock="fill" selectedindex="0">
-          <div type="tabpage" text="个股新闻" name="InfoTabPage1">
-            <table name="gridStockNews" dock="fill">
-              <tr>
-                <th name="colN1" text="时间" width="160" allowdrag="true" allowresize="true"/>
-                <th name="colN2" text="类型" width="60" allowdrag="true" allowresize="true"/>
-                <th name="colN3" text="标题" width="1000" allowdrag="true" allowresize="true"/>
-              </tr>
-            </table>
-          </div>
-          <div type="tabpage" text="新闻汇总" name="InfoTabPage2">
-          <div type="splitlayout" name="divAllStockNews" dock="fill" size="400,400" splitterposition="200,0,200,400">
-            <tree name="tvAllStockNews" headerheight="0">
-            <tr>
-            <th name="colT1" width="20" />
-            <th name="colT2" width="20" />
-            <th name="colT3" width="20" />
-            <th name="colT4" width="20" />
-            <th name="colT5" width="120" />
-            </tr>
-            </tree>
-            <table name="gridAllStockNews" dock="fill">
-              <tr>
-                <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true"/>
-                <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true"/>
-                <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true"/>
-                 <th name="colN4" text="ID" visible="false" />
-              </tr>
-            </table>
-          </div>
-          </div>
-          <div type="tabpage" text="公告汇总" name="InfoTabPage3">
-           <div type="splitlayout" name="divAllStockNotices" dock="fill" size="400,400" splitterposition="200,0,200,400">
-            <tree name="tvAllStockNotices" headerheight="0">
-             <tr>
-            <th name="colT1" width="20" />
-            <th name="colT2" width="20" />
-            <th name="colT3" width="20" />
-            <th name="colT4" width="20" />
-            <th name="colT5" width="120" />
-            </tr></tree>
-            <table name="gridAllStockNotices" dock="fill">
-              <tr>
-                <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true"/>
-                <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true"/>
-                <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true"/>
-                 <th name="colN4" text="ID" visible="false" />
-              </tr>
-            </table>
-          </div>
-          </div>
-           <div type="tabpage" text="研报汇总" name="InfoTabPage4">
-            <div type="splitlayout" name="divAllReports" dock="fill" size="400,400" splitterposition="200,0,200,400">
-            <tree name="tvAllStockReports" headerheight="0">
-                        <tr>
-            <th name="colT1" width="20" />
-            <th name="colT2" width="20" />
-            <th name="colT3" width="20" />
-            <th name="colT4" width="20" />
-            <th name="colT5" width="120" />
-            </tr></tree>
-            <table name="gridAllStockReports" dock="fill">
-              <tr>
-                <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true"/>
-                <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true"/>
-                <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true"/>
-                 <th name="colN4" text="ID" visible="false" />
-              </tr>
-            </table>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div name="TabPage3" text="委托交易" type="tabpage">
-        <div type="splitlayout" name="divMain2" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitmode="percentsize" splitterposition="0,35,400,36">
-          <div name="divCapital" location="0,0">
-            <label name="Label" text="资金余额:" location="13,8" size="63,17" />
-            <label name="lblCapitalBalance" text="" location="79,6" size="100,20" />
-            <label name="Labe3" text="冻结金额:" location="13,32" size="59,20" />
-            <label name="lblFrozenCash" text="" location="79,32" size="100,20" />
-            <label name="Labe5" text="可用金额:" location="195,8" size="60,20" />
-            <label name="lblAvailable" text="" location="257,6" size="100,20" />
-            <label name="Labe7" text="可取金额:" location="195,32" size="65,20" />
-            <label name="lblWithdrawQuota" text="" location="256,32" size="100,20" />
-            <label name="Labe9" text="股票市值:" location="406,8" size="66,20" />
-            <label name="lblStockValue" text="" location="466,6" size="100,20" />
-            <label name="Labe11" text="总资产:" location="406,32" size="51,20" />
-            <label name="lblTotalCapital" text="" location="467,32" size="100,20" />
-            <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="682,5" size="100,20" />
-            <input type="usercontrol" cid="ribbonbutton" name="btnSetStrategy" text="设置策略" location="682,31" size="100,20" />
-          </div>
-          <!--下层-->
-          <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,360,400,361">
-            <div type="splitlayout" name="chartdiv" dock="fill" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
-              <!--实时报价-->
-              <input type="usercontrol" cid="latestdiv" name="divLatest" text="实时报价" />
-              <div type="tabcontrol" name="tabTradeAccount">
-                <div type="tabpage" name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
-                  <!--成交表格-->
-                  <table name="gridTradeAccount" dock="fill" location="0,0" size="544,340">
-                    <tr>
-                      <th name="colTF1" text="成交时间" width="80" />
-                      <th name="colTF2" text="证券代码" width="80" />
-                      <th name="colTF3" text="证券名称" width="80" />
-                      <th name="colTF4" text="操作" width="80" />
-                      <th name="colTF6" text="成交数量" width="80" />
-                      <th name="colTF7" text="成交均价" width="80" />
-                      <th name="colTF8" text="成交金额" width="80" />
-                      <th name="colTF9" text="合同编号" width="80" />
-                      <th name="colTF10" text="成交编号" width="80" />
-                      <th name="colTF11" text="撤单数量" width="80" />
-                      <th name="colTF12" text="股票余额" width="80" />
-                    </tr>
-                  </table>
-                </div>
-              </div>
+    <div type="splitlayout" layoutstyle="bottomtotop" size="400,400" splitterposition="0,375,400,375" name="divMain" dock="fill" location="0,0">
+      <input type="usercontrol" cid="indexdiv" />
+      <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
+        <div name="TabPage" text="报价列表" type="tabpage">
+          <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
+            <div name="Div">
+              <label name="Label" text="选择股票" location="11,15" size="60,17" />
+              <input type="text" name="txtCode" location="78,12" size="126,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnAdd" text="添加" location="219,12" size="70,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnExport" text="导出结果" location="315,12" size="100,20" />
             </div>
-            <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,120,400,121">
-              <!--持仓页-->
-              <div type="tabcontrol" name="tabPositionAccount">
-                <div type="tabpage" name="pagePositionAccount" text="持仓" headersize="100,20">
-                  <!--持仓表格-->
-                  <table name="gridPositionAccount" dock="fill">
-                    <tr>
-                      <th name="colPF1" text="证券代码" width="80" />
-                      <th name="colPF2" text="证券名称" width="80" />
-                      <th name="colPF3" text="股票余额" width="80" />
-                      <th name="colPF4" text="可用余额" width="80" />
-                      <th name="colPF5" text="实际数量" width="80" />
-                      <th name="colPF6" text="冻结数量" width="80" />
-                      <th name="colPF7" text="盈亏" width="80" />
-                      <th name="colPF8" text="成本价" width="80" />
-                      <th name="colPF9" text="盈亏比(%)" width="80" />
-                      <th name="colPF10" text="市价" width="80" />
-                      <th name="colPF11" text="市值" width="80" />
-                      <th name="colPF12" text="可申赎数量" width="80" />
-                      <th name="colPF13" text="交易市场" width="80" />
-                      <th name="colPF14" text="股东帐户" width="80" />
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <!--委托页-->
-              <div type="tabcontrol" name="tabOrderAccount">
-                <div type="tabpage" name="pageOrderAccount" text="委托" headersize="100,20">
-                  <!--委托表格-->
-                  <table name="gridOrderAccount" dock="fill">
-                    <tr>
-                      <th name="colOF1" text="委托时间" width="80" />
-                      <th name="colOF2" text="证券代码" width="80" />
-                      <th name="colOF3" text="证券名称" width="80" />
-                      <th name="colOF4" text="操作" width="80" />
-                      <th name="colOF5" text="备注" width="80" />
-                      <th name="colOF6" text="委托数量" width="80" />
-                      <th name="colOF7" text="成交数量" width="80" />
-                      <th name="colOF8" text="撤销数量" width="80" />
-                      <th name="colOF9" text="委托价格" width="80" />
-                      <th name="colOF10" text="订单类型" width="80" />
-                      <th name="colOF11" text="成交均价" width="80" />
-                      <th name="colOF12" text="合同编号" width="80" />
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <table name="gridUserSecurities" dock="fill">
+              <tr>
+                <th name="colP1" text="股票代码" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP2" text="股票名称" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP3" text="最新价" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP4" text="涨跌额" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP5" text="涨跌幅" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP6" text="最高价" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP7" text="最低价" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP8" text="开盘价" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP9" text="成交量" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP10" text="成交额" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP11" text="止盈位" width="100" allowdrag="true" allowresize="true" />
+                <th name="colP12" text="止损位" width="100" allowdrag="true" allowresize="true" />
+              </tr>
+            </table>
           </div>
         </div>
-      </div>
-       <div name="TabPage5" text="新股申购" type="tabpage">
-       <div type="tabcontrol" name="tabNewStock" dock="fill" selectedindex="0">
-        <div type="tabpage" name="tabPageNewStock2" text="新股日历">
-        <table name="gridNewStockCalendar" dock="fill" autoellipsis="true">
+        <div name="TabPage2" text="分时/K线" type="tabpage">
+          <div type="splitlayout" name="chartdiv" dock="fill" backcolor="empty" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
+            <!--实时报价-->
+            <input type="usercontrol" cid="latestdiv" name="divLatest" />
+            <!--K线图-->
+            <input type="usercontrol" cid="klinediv" name="divKLine" />
+          </div>
+        </div>
+        <div name="TabPage4" text="资讯" type="tabpage">
+          <div type="tabcontrol" dock="fill" selectedindex="0">
+            <div type="tabpage" text="个股新闻" name="InfoTabPage1">
+              <table name="gridStockNews" dock="fill">
                 <tr>
-                    <th name="colN1" text="新股名称" allowdrag="true" allowresize="true"></th>
-                    <th name="colN2" text="新股代码" allowdrag="true" allowresize="true"></th>
-                    <th name="colN3" text="状态" width="400" allowdrag="true" allowresize="true"></th>
-                    <th name="colN4" text="日期" width="160" allowdrag="true" allowresize="true"></th>
+                  <th name="colN1" text="时间" width="160" allowdrag="true" allowresize="true" />
+                  <th name="colN2" text="类型" width="60" allowdrag="true" allowresize="true" />
+                  <th name="colN3" text="标题" width="1000" allowdrag="true" allowresize="true" />
                 </tr>
-            </table>
+              </table>
+            </div>
+            <div type="tabpage" text="新闻汇总" name="InfoTabPage2">
+              <div type="splitlayout" name="divAllStockNews" dock="fill" size="400,400" splitterposition="200,0,200,400">
+                <tree name="tvAllStockNews" headerheight="0">
+                  <tr>
+                    <th name="colT1" width="20" />
+                    <th name="colT2" width="20" />
+                    <th name="colT3" width="20" />
+                    <th name="colT4" width="20" />
+                    <th name="colT5" width="120" />
+                  </tr>
+                </tree>
+                <table name="gridAllStockNews" dock="fill">
+                  <tr>
+                    <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true" />
+                    <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true" />
+                    <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true" />
+                    <th name="colN4" text="ID" visible="false" />
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div type="tabpage" text="公告汇总" name="InfoTabPage3">
+              <div type="splitlayout" name="divAllStockNotices" dock="fill" size="400,400" splitterposition="200,0,200,400">
+                <tree name="tvAllStockNotices" headerheight="0">
+                  <tr>
+                    <th name="colT1" width="20" />
+                    <th name="colT2" width="20" />
+                    <th name="colT3" width="20" />
+                    <th name="colT4" width="20" />
+                    <th name="colT5" width="120" />
+                  </tr>
+                </tree>
+                <table name="gridAllStockNotices" dock="fill">
+                  <tr>
+                    <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true" />
+                    <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true" />
+                    <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true" />
+                    <th name="colN4" text="ID" visible="false" />
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div type="tabpage" text="研报汇总" name="InfoTabPage4">
+              <div type="splitlayout" name="divAllReports" dock="fill" size="400,400" splitterposition="200,0,200,400">
+                <tree name="tvAllStockReports" headerheight="0">
+                  <tr>
+                    <th name="colT1" width="20" />
+                    <th name="colT2" width="20" />
+                    <th name="colT3" width="20" />
+                    <th name="colT4" width="20" />
+                    <th name="colT5" width="120" />
+                  </tr>
+                </tree>
+                <table name="gridAllStockReports" dock="fill">
+                  <tr>
+                    <th name="colN1" text="时间" width="100" allowdrag="true" allowresize="true" />
+                    <th name="colN2" text="标题" width="400" allowdrag="true" allowresize="true" />
+                    <th name="colN3" text="地址" width="500" allowdrag="true" allowresize="true" />
+                    <th name="colN4" text="ID" visible="false" />
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div type="tabpage" name="tabPageNewStock2" text="新股日历">
+              <table name="gridNewStockCalendar" dock="fill" autoellipsis="true">
+                <tr>
+                  <th name="colN1" text="新股名称" allowdrag="true" allowresize="true">
+                  </th>
+                  <th name="colN2" text="新股代码" allowdrag="true" allowresize="true">
+                  </th>
+                  <th name="colN3" text="状态" width="400" allowdrag="true" allowresize="true">
+                  </th>
+                  <th name="colN4" text="日期" width="160" allowdrag="true" allowresize="true">
+                  </th>
+                </tr>
+              </table>
+            </div>
+          </div>
         </div>
-       </div>
-       </div>
-      <div name="TabPage6" text="更多功能..." type="tabpage">
-        <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="208,45" />
-        <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="208,45" />
+        <div name="TabPage7" text="宏观数据" type="tabpage">
+          <div type="splitlayout" name="divMacIndustry" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="400,0,400,400">
+            <div type="splitlayout" name="divMacIndustryLeft" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitterposition="0,50,400,51">
+              <div name="divMacIndustryTop">
+                <select name="cbMacIndustry" location="81,14" size="100,20" />
+                <label name="Label2" text="选择类型：" location="8,17" size="73,17" />
+              </div>
+              <tree name="tvMacIndustry" headerheight="0">
+                <tr>
+                  <th name="colT1" width="20" />
+                  <th name="colT2" width="20" />
+                  <th name="colT3" width="20" />
+                  <th name="colT4" width="20" />
+                  <th name="colT5" width="20" />
+                  <th name="colT6" width="20" />
+                  <th name="colT7" width="280" />
+                </tr>
+              </tree>
+            </div>
+             <div type="splitlayout" name="divMacIndustryRight" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="250,0,250,400">
+              <table name="gridMacIndustry">
+              <tr>
+                <th name="colN1" text="日期" allowdrag="true" allowresize="true" width="100">
+                </th>
+                <th name="colN2" text="结果" allowdrag="true" allowresize="true" width="150">
+                </th>
+              </tr>
+            </table>
+            <input type="usercontrol" cid="graph" name="graphMacIndustry" />
+              </div>
+          </div>
+        </div>
+        <div name="TabPage3" text="委托交易" type="tabpage">
+          <div type="splitlayout" name="divMain2" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitmode="percentsize" splitterposition="0,35,400,36">
+            <div name="divCapital" location="0,0">
+              <label name="Label" text="资金余额:" location="13,8" size="63,17" />
+              <label name="lblCapitalBalance" text="" location="79,6" size="100,20" />
+              <label name="Labe3" text="冻结金额:" location="13,32" size="59,20" />
+              <label name="lblFrozenCash" text="" location="79,32" size="100,20" />
+              <label name="Labe5" text="可用金额:" location="195,8" size="60,20" />
+              <label name="lblAvailable" text="" location="257,6" size="100,20" />
+              <label name="Labe7" text="可取金额:" location="195,32" size="65,20" />
+              <label name="lblWithdrawQuota" text="" location="256,32" size="100,20" />
+              <label name="Labe9" text="股票市值:" location="406,8" size="66,20" />
+              <label name="lblStockValue" text="" location="466,6" size="100,20" />
+              <label name="Labe11" text="总资产:" location="406,32" size="51,20" />
+              <label name="lblTotalCapital" text="" location="467,32" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="682,5" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnSetStrategy" text="设置策略" location="682,31" size="100,20" />
+            </div>
+            <!--下层-->
+            <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,360,400,361">
+              <div type="splitlayout" name="chartdiv" dock="fill" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
+                <!--实时报价-->
+                <input type="usercontrol" cid="latestdiv" name="divLatest" text="实时报价" />
+                <div type="tabcontrol" name="tabTradeAccount">
+                  <div type="tabpage" name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
+                    <!--成交表格-->
+                    <table name="gridTradeAccount" dock="fill" location="0,0" size="544,340">
+                      <tr>
+                        <th name="colTF1" text="成交时间" width="80" />
+                        <th name="colTF2" text="证券代码" width="80" />
+                        <th name="colTF3" text="证券名称" width="80" />
+                        <th name="colTF4" text="操作" width="80" />
+                        <th name="colTF6" text="成交数量" width="80" />
+                        <th name="colTF7" text="成交均价" width="80" />
+                        <th name="colTF8" text="成交金额" width="80" />
+                        <th name="colTF9" text="合同编号" width="80" />
+                        <th name="colTF10" text="成交编号" width="80" />
+                        <th name="colTF11" text="撤单数量" width="80" />
+                        <th name="colTF12" text="股票余额" width="80" />
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,120,400,121">
+                <!--持仓页-->
+                <div type="tabcontrol" name="tabPositionAccount">
+                  <div type="tabpage" name="pagePositionAccount" text="持仓" headersize="100,20">
+                    <!--持仓表格-->
+                    <table name="gridPositionAccount" dock="fill">
+                      <tr>
+                        <th name="colPF1" text="证券代码" width="80" />
+                        <th name="colPF2" text="证券名称" width="80" />
+                        <th name="colPF3" text="股票余额" width="80" />
+                        <th name="colPF4" text="可用余额" width="80" />
+                        <th name="colPF5" text="实际数量" width="80" />
+                        <th name="colPF6" text="冻结数量" width="80" />
+                        <th name="colPF7" text="盈亏" width="80" />
+                        <th name="colPF8" text="成本价" width="80" />
+                        <th name="colPF9" text="盈亏比(%)" width="80" />
+                        <th name="colPF10" text="市价" width="80" />
+                        <th name="colPF11" text="市值" width="80" />
+                        <th name="colPF12" text="可申赎数量" width="80" />
+                        <th name="colPF13" text="交易市场" width="80" />
+                        <th name="colPF14" text="股东帐户" width="80" />
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!--委托页-->
+                <div type="tabcontrol" name="tabOrderAccount">
+                  <div type="tabpage" name="pageOrderAccount" text="委托" headersize="100,20">
+                    <!--委托表格-->
+                    <table name="gridOrderAccount" dock="fill">
+                      <tr>
+                        <th name="colOF1" text="委托时间" width="80" />
+                        <th name="colOF2" text="证券代码" width="80" />
+                        <th name="colOF3" text="证券名称" width="80" />
+                        <th name="colOF4" text="操作" width="80" />
+                        <th name="colOF5" text="备注" width="80" />
+                        <th name="colOF6" text="委托数量" width="80" />
+                        <th name="colOF7" text="成交数量" width="80" />
+                        <th name="colOF8" text="撤销数量" width="80" />
+                        <th name="colOF9" text="委托价格" width="80" />
+                        <th name="colOF10" text="订单类型" width="80" />
+                        <th name="colOF11" text="成交均价" width="80" />
+                        <th name="colOF12" text="合同编号" width="80" />
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div name="TabPage6" text="更多功能..." type="tabpage">
+          <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="208,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnFormula" text="东财公式" location="224,165" size="208,45" />
+        </div>
       </div>
     </div>
-   </div>
     <!--浮动数据-->
     <usercontrol cid="floatdiv" name="divFloat" allowdrag="true" location="85,20" size="85,300" visible="false" />
     <!--右键菜单-->

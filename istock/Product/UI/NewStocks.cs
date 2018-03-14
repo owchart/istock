@@ -32,6 +32,17 @@ namespace OwLib
             set { m_mainFrame = value; }
         }
 
+        private List<String> m_newStockList = new List<String>();
+
+        /// <summary>
+        /// 获取或设置新股列表
+        /// </summary>
+        public List<String> NewStockList
+        {
+            get { return m_newStockList; }
+            set { m_newStockList = value; }
+        }
+
         /// <summary>
         /// 绑定新股名称表格
         /// </summary>
@@ -43,6 +54,7 @@ namespace OwLib
             gridNewStockCalendar.RowStyle = new GridRowStyle();
             gridNewStockCalendar.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             DataSet ds = NewStockDataHelper.GetNewStockCalendar(0);
+            StringBuilder sb = new StringBuilder();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 GridRow row = new GridRow();
@@ -59,6 +71,10 @@ namespace OwLib
                 row.GetCell("colN3").Style.ForeColor = COLOR.ARGB(255, 80, 255);
                 row.GetCell("colN4").Style = new GridCellStyle();
                 row.GetCell("colN4").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                if (dr[3].ToString().IndexOf("网上申购日") != -1)
+                {
+                    m_newStockList.Add(dr[2].ToString() + " " + dr[1].ToString() + "\r\n");
+                }
             }
         }
     }

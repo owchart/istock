@@ -135,6 +135,81 @@
     <Compile Include="Base\CFile.cs" />
     <Compile Include="Base\CStr.cs" />
     <Compile Include="Base\Sound.cs" />
+    <Compile Include="EastMoney\Chart\ArrowObj.cs" />
+    <Compile Include="EastMoney\Chart\Axis.cs" />
+    <Compile Include="EastMoney\Chart\AxisLabel.cs" />
+    <Compile Include="EastMoney\Chart\Bar.cs" />
+    <Compile Include="EastMoney\Chart\BarItem.cs" />
+    <Compile Include="EastMoney\Chart\BarSettings.cs" />
+    <Compile Include="EastMoney\Chart\Border.cs" />
+    <Compile Include="EastMoney\Chart\BoxMarkObj.cs" />
+    <Compile Include="EastMoney\Chart\BoxObj.cs" />
+    <Compile Include="EastMoney\Chart\Chart.cs" />
+    <Compile Include="EastMoney\Chart\CircleButton.cs" />
+    <Compile Include="EastMoney\Chart\ColorObj.cs" />
+    <Compile Include="EastMoney\Chart\ColorSymbolRotator.cs" />
+    <Compile Include="EastMoney\Chart\ControlerButton.cs" />
+    <Compile Include="EastMoney\Chart\ControlerButtonList.cs" />
+    <Compile Include="EastMoney\Chart\CurveItem.cs" />
+    <Compile Include="EastMoney\Chart\CurveList.cs" />
+    <Compile Include="EastMoney\Chart\DateAsOrdinalScale.cs" />
+    <Compile Include="EastMoney\Chart\DateScale.cs" />
+    <Compile Include="EastMoney\Chart\EllipseObj.cs" />
+    <Compile Include="EastMoney\Chart\ExponentScale.cs" />
+    <Compile Include="EastMoney\Chart\ExtendedParts.cs" />
+    <Compile Include="EastMoney\Chart\Fill.cs" />
+    <Compile Include="EastMoney\Chart\FontSpec.cs" />
+    <Compile Include="EastMoney\Chart\GapLabel.cs" />
+    <Compile Include="EastMoney\Chart\Graph.cs" />
+    <Compile Include="EastMoney\Chart\GraphObj.cs" />
+    <Compile Include="EastMoney\Chart\GraphObjLine.cs" />
+    <Compile Include="EastMoney\Chart\GraphObjList.cs" />
+    <Compile Include="EastMoney\Chart\GraphObjRect.cs" />
+    <Compile Include="EastMoney\Chart\GraphPane.cs" />
+    <Compile Include="EastMoney\Chart\IPointList.cs" />
+    <Compile Include="EastMoney\Chart\IPointListEdit.cs" />
+    <Compile Include="EastMoney\Chart\ItemTipMaster.cs" />
+    <Compile Include="EastMoney\Chart\Label.cs" />
+    <Compile Include="EastMoney\Chart\Legend.cs" />
+    <Compile Include="EastMoney\Chart\Line.cs" />
+    <Compile Include="EastMoney\Chart\LinearAsOrdinalScale.cs" />
+    <Compile Include="EastMoney\Chart\LinearScale.cs" />
+    <Compile Include="EastMoney\Chart\LineBase.cs" />
+    <Compile Include="EastMoney\Chart\LineItem.cs" />
+    <Compile Include="EastMoney\Chart\LineObj.cs" />
+    <Compile Include="EastMoney\Chart\Location.cs" />
+    <Compile Include="EastMoney\Chart\LogScale.cs" />
+    <Compile Include="EastMoney\Chart\MajorGrid.cs" />
+    <Compile Include="EastMoney\Chart\MajorTic.cs" />
+    <Compile Include="EastMoney\Chart\Margin.cs" />
+    <Compile Include="EastMoney\Chart\MasterPane.cs" />
+    <Compile Include="EastMoney\Chart\MinorGrid.cs" />
+    <Compile Include="EastMoney\Chart\MinorTic.cs" />
+    <Compile Include="EastMoney\Chart\OrdinalScale.cs" />
+    <Compile Include="EastMoney\Chart\PaneBase.cs" />
+    <Compile Include="EastMoney\Chart\Pie.cs" />
+    <Compile Include="EastMoney\Chart\PieItem.cs" />
+    <Compile Include="EastMoney\Chart\PointPair.cs" />
+    <Compile Include="EastMoney\Chart\PointPairBase.cs" />
+    <Compile Include="EastMoney\Chart\PointPairList.cs" />
+    <Compile Include="EastMoney\Chart\RectButton.cs" />
+    <Compile Include="EastMoney\Chart\RotateButton.cs" />
+    <Compile Include="EastMoney\Chart\RoundedRectangleObj.cs" />
+    <Compile Include="EastMoney\Chart\Scale.cs" />
+    <Compile Include="EastMoney\Chart\Selection.cs" />
+    <Compile Include="EastMoney\Chart\StickItem.cs" />
+    <Compile Include="EastMoney\Chart\Symbol.cs" />
+    <Compile Include="EastMoney\Chart\TextObj.cs" />
+    <Compile Include="EastMoney\Chart\TextScale.cs" />
+    <Compile Include="EastMoney\Chart\Trend.cs" />
+    <Compile Include="EastMoney\Chart\Types.cs" />
+    <Compile Include="EastMoney\Chart\ValueHandler.cs" />
+    <Compile Include="EastMoney\Chart\XAxis.cs" />
+    <Compile Include="EastMoney\Chart\XDate.cs" />
+    <Compile Include="EastMoney\Chart\Y2Axis.cs" />
+    <Compile Include="EastMoney\Chart\YAxis.cs" />
+    <Compile Include="EastMoney\Curve\FundCurveData.cs" />
+    <Compile Include="EastMoney\Curve\FundCurveDiv.cs" />
     <Compile Include="EastMoney\Indicator\BindParameter.cs" />
     <Compile Include="EastMoney\Indicator\BlockCatRequestEntity.cs" />
     <Compile Include="EastMoney\Indicator\BlockElementsEventArgs.cs" />
@@ -348,12 +423,6 @@
     <Compile Include="Form\IndicatorForm.designer.cs">
       <DependentUpon>IndicatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\MacIndustyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\MacIndustyForm.designer.cs">
-      <DependentUpon>MacIndustyForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\SpecialForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,6 +456,7 @@
     <Compile Include="Product\UI\BarrageDiv.cs" />
     <Compile Include="Product\UI\CDraw.cs" />
     <Compile Include="Product\UI\GdiPlusPaintEx.cs" />
+    <Compile Include="Product\UI\MacIndustry.cs" />
     <Compile Include="Product\UI\MainFrame.cs" />
     <Compile Include="Product\Service\AutoTradeService.cs" />
     <Compile Include="Product\UI\NewStocks.cs" />
@@ -415,9 +485,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\IndicatorForm.resx">
       <DependentUpon>IndicatorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\MacIndustyForm.resx">
-      <DependentUpon>MacIndustyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\SpecialForm.resx">
       <DependentUpon>SpecialForm.cs</DependentUpon>

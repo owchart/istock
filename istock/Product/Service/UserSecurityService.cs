@@ -20,9 +20,11 @@ namespace OwLib
     {
         public String m_code;
 
-        public double m_up;
-
         public double m_down;
+
+        public int m_state;
+
+        public double m_up;
     }
 
     /// <summary>

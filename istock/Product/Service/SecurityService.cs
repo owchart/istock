@@ -846,15 +846,10 @@ namespace OwLib
             //复制数据
             LoadHistoryDatas();
             GetMinuteDatas();
-            Dictionary<String, List<SecurityData>> cpHistoryDatas = new Dictionary<String, List<SecurityData>>(m_historyDatas.Count);
-            foreach (String oCode in m_historyDatas.Keys)
-            {
-                cpHistoryDatas[oCode] = m_historyDatas[oCode];
-            }
             //新旧数据合并
             foreach(String oCode in m_historyDatas.Keys)
             {
-                if (!m_latestDatas.ContainsKey(oCode) || !m_historyDatas.ContainsKey(oCode) || !m_minuteDatas.ContainsKey(oCode)) continue;
+                if (!m_latestDatas.ContainsKey(oCode) || !m_historyDatas.ContainsKey(oCode)) continue;
                 SecurityLatestData securityLatestData = m_latestDatas[oCode];
                 List<SecurityData> oldSecurityDatas = m_historyDatas[oCode];
                 SecurityData oldSecurityData = oldSecurityDatas[oldSecurityDatas.Count -1];
@@ -866,21 +861,17 @@ namespace OwLib
                 {
                     SecurityData nSecurityData = new SecurityData();
                     nSecurityData.m_amount = securityLatestData.m_amount;
-                    List<SecurityData> temp = m_minuteDatas[oCode];
-                    SecurityData temp2 = temp[temp.Count - 1];
-                    nSecurityData.m_avgPrice = temp2.m_avgPrice;
                     nSecurityData.m_close = securityLatestData.m_close;
                     nSecurityData.m_date = securityLatestData.m_date;
                     nSecurityData.m_high = securityLatestData.m_high;
                     nSecurityData.m_low = securityLatestData.m_low;
                     nSecurityData.m_open = securityLatestData.m_open;
                     nSecurityData.m_volume = securityLatestData.m_volume;
-                    List<SecurityData> temp3 = cpHistoryDatas[oCode];
                     if (day == mday)
                     {
-                        temp3.RemoveAt(temp3.Count - 1);
+                        m_historyDatas[oCode].RemoveAt(m_historyDatas[oCode].Count - 1);
                     }
-                    temp3.Add(nSecurityData);
+                    m_historyDatas[oCode].Add(nSecurityData);
                 }
             }
             String outputFileTemplate = DataCenter.GetAppPath() + "\\day\\{0}.txt";
@@ -889,9 +880,9 @@ namespace OwLib
             String lineTemp = "{0},{1},{2},{3},{4},{5},{6}\r\n";
             String timeFormatStr = "yyyy-MM-dd";
             //写入文件
-            foreach (String code in cpHistoryDatas.Keys)
+            foreach (String code in m_historyDatas.Keys)
             {
-                List<SecurityData> temp3 = cpHistoryDatas[code];
+                List<SecurityData> temp3 = m_historyDatas[code];
                 StringBuilder strbuff = new StringBuilder();
                 strbuff.Append(String.Format(fileInfo, m_codedMap[code].m_code, m_codedMap[code].m_name));
                 strbuff.Append(title);
@@ -909,10 +900,6 @@ namespace OwLib
                 strbuff.Append("数据来源:通达信\r\n");
                 CFileA.Write(String.Format(outputFileTemplate, code), strbuff.ToString());
             }
-            //更新内存中的老数据
-            m_historyDatas.Clear();
-            m_historyDatas = null;
-            m_historyDatas = cpHistoryDatas;
         }
 
         /// <summary>

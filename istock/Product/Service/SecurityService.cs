@@ -83,6 +83,30 @@ namespace OwLib
             }
         }
 
+        public static CList<GSecurity> FilterCode(String text)
+        {
+            CList<GSecurity> securities = new CList<GSecurity>();
+            foreach (GSecurity gSecurity in SecurityService.m_codedMap.Values)
+            {
+                if (gSecurity.m_name != null)
+                {
+                    if (text.Length == 0)
+                    {
+                        securities.push_back(gSecurity);
+                    }
+                    else
+                    {
+                        if (gSecurity.m_code.ToUpper().IndexOf(text) == 0 || gSecurity.m_name.ToUpper().IndexOf(text) == 0
+                            || gSecurity.m_pingyin.ToUpper().IndexOf(text) == 0)
+                        {
+                            securities.push_back(gSecurity);
+                        }
+                    }
+                }
+            }
+            return securities;
+        }
+
         /// <summary>
         /// 返回所有合约
         /// </summary>

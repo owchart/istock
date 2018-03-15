@@ -20,6 +20,7 @@ namespace OwLib
         public IndicatorBrowser(MainFrame mainFrame)
         {
             m_mainFrame = mainFrame;
+            m_txtIndicatorCode = mainFrame.GetTextBox("txtIndicatorCode");
             m_gridIndicatorBrowser = mainFrame.GetGrid("gridIndicatorBrowser");
             m_gridIndicatorBrowser.GridLineColor = COLOR.EMPTY;
             m_gridIndicatorBrowser.BackColor = COLOR.ARGB(0, 0, 0);
@@ -39,6 +40,11 @@ namespace OwLib
         /// 数据表格
         /// </summary>
         private GridA m_gridIndicatorBrowser;
+
+        /// <summary>
+        /// 指标代码
+        /// </summary>
+        private TextBoxA m_txtIndicatorCode;
 
         /// <summary>
         /// 指标树
@@ -232,12 +238,11 @@ namespace OwLib
                     else
                     {
                         StringBuilder sb = new StringBuilder();
-                        List<String> codes = new List<String>();
-                        SecurityService.GetCodes(codes);
-                        int codesSize = codes.Count;
+                        CList<GSecurity> securities = SecurityService.FilterCode(m_txtIndicatorCode.Text);
+                        int codesSize = securities.size();
                         for (int i = 0; i < codesSize; i++)
                         {
-                            sb.Append(codes[i]);
+                            sb.Append(securities.get(i).m_code);
                             if (i != codesSize - 1)
                             {
                                 sb.Append(",");

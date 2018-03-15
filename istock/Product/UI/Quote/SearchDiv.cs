@@ -119,21 +119,7 @@ namespace OwLib
             m_grid.BeginUpdate();
             m_grid.ClearRows();
             int row = 0;
-            CList<GSecurity> securities = new CList<GSecurity>();
-            if (sText.Length > 0)
-            {
-                foreach (GSecurity gSecurity in SecurityService.m_codedMap.Values)
-                {
-                    if (gSecurity.m_name != null)
-                    {
-                        if (gSecurity.m_code.ToUpper().IndexOf(sText) == 0 || gSecurity.m_name.ToUpper().IndexOf(sText) == 0
-                            || gSecurity.m_pingyin.ToUpper().IndexOf(sText) == 0)
-                        {
-                            securities.push_back(gSecurity);
-                        }
-                    }
-                }
-            }
+            CList<GSecurity> securities = SecurityService.FilterCode(sText);
             if (securities != null)
             {
                 int rowCount = securities.size();

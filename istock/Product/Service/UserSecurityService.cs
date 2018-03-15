@@ -95,12 +95,12 @@ namespace OwLib
         /// É¾³ý´úÂë
         /// </summary>
         /// <param name="code">´úÂë</param>
-        public void Delete(String code)
+        public void Delete(UserSecurity userSecurity)
         {
             int codesSize = m_codes.Count;
             for (int i = 0; i < codesSize; i++)
             {
-                if (m_codes[i].m_code == code)
+                if (m_codes[i].m_code == userSecurity.m_code)
                 {
                     m_codes.RemoveAt(i);
                     Save();

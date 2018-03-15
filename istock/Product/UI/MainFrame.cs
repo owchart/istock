@@ -337,6 +337,20 @@ namespace OwLib
                         AddUserSecurity(userSecurity);
                     }
                 }
+                else if (name == "btnAddUserSecurity")
+                {
+                    List<GridRow> selectedRows = m_gridUserSecurities.SelectedRows;
+                    int selectedRowsSize = selectedRows.Count;
+                    if (selectedRowsSize > 0)
+                    {
+                        GridRow selectedRow = selectedRows[0];
+                        UserSecurity userSecurity = selectedRow.Tag as UserSecurity;
+                        userSecurity.m_state = 1;
+                        DataCenter.UserSecurityService.Add(userSecurity);
+                        AddUserSecurity(userSecurity);
+                        m_gridUserSecurities.OnRowEditEnd();
+                    }
+                }
                 else if (name == "btnDeleteSecurity")
                 {
                     List<GridRow> selectedRows = m_gridUserSecurities.SelectedRows;
@@ -357,7 +371,7 @@ namespace OwLib
                         GridRow selectedRow = selectedRows[0];
                         UserSecurity userSecurity = selectedRow.Tag as UserSecurity;
                         userSecurity.m_state = 0;
-                        DataCenter.UserSecurityService.Delete(selectedRow.GetCell("colP1").GetString());
+                        DataCenter.UserSecurityService.Delete(userSecurity);
                         AddUserSecurity(userSecurity);
                         m_gridUserSecurities.OnRowEditEnd();
                     }
@@ -492,30 +506,29 @@ namespace OwLib
         {
             ControlA editButton = new ControlA();
             editButton.Height = 30;
+            editButton.Width = 200;
+            editButton.Native = Native;
+            int left = 0;
+            ButtonA removeButton = new ButtonA();
+            removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
+            removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
+            removeButton.Font = new FONT("微软雅黑", 16, true, false, false);
+            removeButton.BackColor = COLOR.ARGB(80, 80, 255);
+            removeButton.ForeColor = COLOR.ARGB(255, 255, 255);
             if (userSecurity.m_state == 1)
             {
-                editButton.Width = 200;
+                removeButton.Text = "移出自选";
+                removeButton.Name = "btnDeleteUserSecurity";
             }
             else
             {
-                editButton.Width = 100;
+                removeButton.Text = "加入自选";
+                removeButton.Name = "btnAddUserSecurity";
             }
-            editButton.Native = Native;
-            int left = 0;
-            if (userSecurity.m_state == 1)
-            {
-                ButtonA removeButton = new ButtonA();
-                removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
-                removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
-                removeButton.Font = new FONT("微软雅黑", 16, true, false, false);
-                removeButton.BackColor = COLOR.ARGB(80, 80, 255);
-                removeButton.ForeColor = COLOR.ARGB(255, 255, 255);
-                removeButton.Text = "移出自选";
-                removeButton.Name = "btnDeleteUserSecurity";
-                removeButton.Size = new SIZE(100, 30);
-                editButton.AddControl(removeButton);
-                left = 100;
-            }
+            removeButton.Size = new SIZE(100, 30);
+            editButton.AddControl(removeButton);
+            left = 100;
+
             ButtonA deleteButton = new ButtonA();
             deleteButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
             deleteButton.Font = new FONT("微软雅黑", 16, true, false, false);

@@ -3716,7 +3716,7 @@ namespace OwLib
                 br.ReadByte();
                 this.ShortLineData.Add(item);
             }
-            CFTService.CallBack(FuncTypeRealTime.ShortLineStrategy, JsonConvert.SerializeObject(ShortLineData));
+            DataCenter.MainUI.ShortLineStrategyCallBack(ShortLineData);
             return true;
         }
     }

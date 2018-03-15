@@ -85,6 +85,17 @@ namespace OwLib
             set { m_allStockReports = value; }
         }
 
+        private BarrageDiv m_barrageDiv;
+
+        /// <summary>
+        /// 获取或设置弹幕
+        /// </summary>
+        public BarrageDiv BarrageDiv
+        {
+            get { return m_barrageDiv; }
+            set { m_barrageDiv = value; }
+        }
+
         private IndicatorBrowser m_indicatorBrowser;
 
         /// <summary>
@@ -222,13 +233,14 @@ namespace OwLib
             cellP12.Digit = 2;
             cellP12.SetDouble(userSecurity.m_down);
             row.AddCell("colP12", cellP12);
+            row.AddCell("colP13", new GridStringCell(""));
             List<GridCell> cells = row.GetCells();
             int cellsSize = cells.Count;
             for (int i = 0; i < cellsSize; i++)
             {
                 cells[i].Style = new GridCellStyle();
                 cells[i].Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                if (i >= 10)
+                if (i >= 10 && i !=12)
                 {
                     cells[i].AllowEdit = true;
                 }
@@ -471,13 +483,6 @@ namespace OwLib
                     specialForm.Show();
                 }
             }
-        }
-
-        /// <summary>
-        /// 销毁资源方法
-        /// </summary>
-        public override void Dispose()
-        {
         }
 
         /// <summary>
@@ -756,6 +761,11 @@ namespace OwLib
                 }
                 MessageBox.Show(newStockStr.ToString(), "提示");
             }
+            m_barrageDiv = new BarrageDiv();
+            m_barrageDiv.TopMost = true;
+            m_barrageDiv.Dock = DockStyleA.Fill;
+            Native.AddControl(m_barrageDiv);
+            CFTService.QueryShortLineStrategy();
         }
 
         /// <summary>
@@ -803,6 +813,95 @@ namespace OwLib
             m_kline.SearchSecurity(security);
             GetTabControl("tabMain").SelectedIndex = 1;
             m_stockNews.Code = code; 
+        }
+
+        /// <summary>
+        /// 短线精灵回调
+        /// </summary>
+        /// <param name="datas"></param>
+        public void ShortLineStrategyCallBack(List<OneShortLineDataRec> datas)
+        {
+            int datasSize = datas.Count;
+            for (int i = 0; i < datasSize; i++)
+            {
+                OneShortLineDataRec rec = datas[i];
+                KwItem item = EMSecurityService.KwItems2[datas[i].Code];
+                String content = "";
+                switch(rec.SlType)
+                {
+                    case ShortLineType.SurgedLimit:
+                        content = "封涨停板";
+                        break;
+                    case ShortLineType.DeclineLimit:
+                        content = "封跌停板";
+                        break;
+                    case ShortLineType.OpenSurgedLimit:
+                        content = "打开涨停";
+                        break;
+                    case ShortLineType.OpenDeclineLimit:
+                        content = "打开跌停";
+                        break;
+                    case ShortLineType.BiggerAskOrder:
+                        content = "有大买盘";
+                        break;
+                    case ShortLineType.BiggerBidOrder:
+                        content = "有大卖盘";
+                        break;
+                    case ShortLineType.InstitutionAskOrder:
+                        content = "机构买单";
+                        break;
+                    case ShortLineType.InstitutionBidOrder:
+                        content = "机构卖单";
+                        break;
+                    case ShortLineType.RocketLaunch:
+                        content = "火箭发射";
+                        break;
+                    case ShortLineType.StrongRebound:
+                        content = "快速反弹";
+                        break;
+                    case ShortLineType.HighDiving:
+                        content = "高台跳水";
+                        break;
+                    case ShortLineType.SpeedupDown:
+                        content = "加速下跌";
+                        break;
+                    case ShortLineType.CancelBigAskOrder:
+                        content = "买入撤单";
+                        break;
+                    case ShortLineType.CancelBigBidOrder:
+                        content = "卖出撤单";
+                        break;
+                    case ShortLineType.InstitutionBidTrans:
+                        content = "大笔卖出";
+                        break;
+                    case ShortLineType.InstitutionAskTrans:
+                        content = "大笔买入";
+                        break;
+                    case ShortLineType.MultiSameAskOrders:
+                        content = "买单分单";
+                        break;
+                    case ShortLineType.MultiSameBidOrders:
+                        content = "卖单分单";
+                        break;
+                }
+                List<GridRow> rows = m_gridUserSecurities.m_rows;
+                int rowsSize = rows.Count;
+                for (int j = 0; j < rowsSize; j++)
+                {
+                    if (rows[j].GetCell("colP1").GetString() == item.Code)
+                    {
+                        for (int n = 0; n < 10; n++)
+                        {
+                            Barrage barrage = new Barrage();
+                            barrage.Text = item.Name + "(" + item.Code + ")" + content;
+                            m_barrageDiv.AddBarrage(barrage);
+                            rows[j].GetCell("colP13").SetString(content);
+                        }
+                        Sound.Play("alarm.wav");
+                        break;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -965,6 +1064,7 @@ namespace OwLib
                     row.GetCell("colP10").Style.ForeColor = COLOR.ARGB(80, 255, 255);
                     row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 80);
                     row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(80, 255, 80);
+                    row.GetCell("colP13").Style.ForeColor = COLOR.ARGB(255, 255, 80);
                     int isAlarm = 0;
                     if (latestData.m_close > 0)
                     {

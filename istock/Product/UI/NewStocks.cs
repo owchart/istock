@@ -73,7 +73,7 @@ namespace OwLib
                 row.GetCell("colN4").Style.ForeColor = COLOR.ARGB(255, 255, 80);
                 if (dr[3].ToString().IndexOf("网上申购日") != -1)
                 {
-                    m_newStockList.Add(dr[2].ToString() + " " + dr[1].ToString() + "\r\n");
+                    m_newStockList.Add(Convert.ToDateTime(dr[4]).ToString("yyyy-MM-dd") + " " + dr[2].ToString() + " " + dr[1].ToString() + "\r\n");
                 }
             }
         }

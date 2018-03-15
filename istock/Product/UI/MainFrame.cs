@@ -85,6 +85,17 @@ namespace OwLib
             set { m_allStockReports = value; }
         }
 
+        private IndicatorBrowser m_indicatorBrowser;
+
+        /// <summary>
+        /// 获取或设置股票数据浏览器
+        /// </summary>
+        public IndicatorBrowser IndicatorBrowser
+        {
+            get { return m_indicatorBrowser; }
+            set { m_indicatorBrowser = value; }
+        }
+
         private MacIndustry m_macIndustry;
 
         /// <summary>
@@ -405,11 +416,6 @@ namespace OwLib
                     m_formulaForm.ShowDialog();
                     m_formulaForm = null;
                 }
-                else if (name == "btnIndicator")
-                {
-                    IndicatorForm indicatorForm = new IndicatorForm();
-                    indicatorForm.Show();
-                }
                 else if (name == "btnSpecial")
                 {
                     SpecialForm specialForm = new SpecialForm();
@@ -632,6 +638,7 @@ namespace OwLib
             m_allStockReports = new AllStockReports(this);
             m_newStocks = new NewStocks(this);
             m_macIndustry = new MacIndustry(this);
+            m_indicatorBrowser = new IndicatorBrowser(this);
             List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
             int codesSize = codes.Count;
             if (codesSize > 0)
@@ -649,7 +656,7 @@ namespace OwLib
             if (m_newStocks.NewStockList.Count > 0)
             {
                 StringBuilder newStockStr = new StringBuilder();
-                newStockStr.Append("今日新股申购提示:\r\n");
+                newStockStr.Append("新股申购预告:\r\n");
                 foreach (String str in m_newStocks.NewStockList)
                 {
                     newStockStr.Append(str);

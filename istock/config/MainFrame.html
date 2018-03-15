@@ -57,11 +57,11 @@
               <div type="splitlayout" name="divAllStockNews" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockNews" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" />
-                    <th name="colT2" width="20" />
-                    <th name="colT3" width="20" />
-                    <th name="colT4" width="20" />
-                    <th name="colT5" width="120" />
+                    <th name="colT1" width="20" allowsort="false"/>
+                    <th name="colT2" width="20" allowsort="false"/>
+                    <th name="colT3" width="20" allowsort="false"/>
+                    <th name="colT4" width="20" allowsort="false"/>
+                    <th name="colT5" width="120" allowsort="false"/>
                   </tr>
                 </tree>
                 <table name="gridAllStockNews" dock="fill">
@@ -78,11 +78,11 @@
               <div type="splitlayout" name="divAllStockNotices" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockNotices" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" />
-                    <th name="colT2" width="20" />
-                    <th name="colT3" width="20" />
-                    <th name="colT4" width="20" />
-                    <th name="colT5" width="120" />
+                    <th name="colT1" width="20" allowsort="false"/>
+                    <th name="colT2" width="20" allowsort="false"/>
+                    <th name="colT3" width="20" allowsort="false"/>
+                    <th name="colT4" width="20" allowsort="false"/>
+                    <th name="colT5" width="120" allowsort="false"/>
                   </tr>
                 </tree>
                 <table name="gridAllStockNotices" dock="fill">
@@ -99,11 +99,11 @@
               <div type="splitlayout" name="divAllReports" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockReports" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" />
-                    <th name="colT2" width="20" />
-                    <th name="colT3" width="20" />
-                    <th name="colT4" width="20" />
-                    <th name="colT5" width="120" />
+                    <th name="colT1" width="20" allowsort="false"/>
+                    <th name="colT2" width="20" allowsort="false"/>
+                    <th name="colT3" width="20" allowsort="false"/>
+                    <th name="colT4" width="20" allowsort="false"/>
+                    <th name="colT5" width="120" allowsort="false"/>
                   </tr>
                 </tree>
                 <table name="gridAllStockReports" dock="fill">
@@ -141,13 +141,17 @@
               </div>
               <tree name="tvMacIndustry" headerheight="0">
                 <tr>
-                  <th name="colT1" width="20" />
-                  <th name="colT2" width="20" />
-                  <th name="colT3" width="20" />
-                  <th name="colT4" width="20" />
-                  <th name="colT5" width="20" />
-                  <th name="colT6" width="20" />
-                  <th name="colT7" width="280" />
+                  <th name="colT1" width="20" allowsort="false"/>
+                  <th name="colT2" width="20" allowsort="false"/>
+                  <th name="colT3" width="20" allowsort="false"/>
+                  <th name="colT4" width="20" allowsort="false"/>
+                  <th name="colT5" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT7" width="200" allowsort="false"/>
                 </tr>
               </tree>
             </div>
@@ -156,12 +160,47 @@
               <tr>
                 <th name="colN1" text="日期" allowdrag="true" allowresize="true" width="100">
                 </th>
-                <th name="colN2" text="结果" allowdrag="true" allowresize="true" width="150">
+                <th name="colN2" text="数据" allowdrag="true" allowresize="true" width="150">
                 </th>
               </tr>
             </table>
             <input type="usercontrol" cid="graph" name="graphMacIndustry" />
               </div>
+          </div>
+        </div>
+          <div name="TabPage8" text="数据浏览器" type="tabpage">
+          <div type="splitlayout" name="divIndicatorBrowser" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="400,0,400,400">
+            <div type="splitlayout" name="divIndicatorBrowserLeft" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitterposition="0,50,400,51">
+              <div name="divIndicatorBrowserTop">
+                <select name="cbIndicatorBrowser" location="81,14" size="100,20" />
+                <label name="Label2" text="选择类型：" location="8,17" size="73,17" />
+              </div>
+              <tree name="tvIndicatorBrowser" headerheight="0">
+                <tr>
+                  <th name="colT1" width="20" allowsort="false"/>
+                  <th name="colT2" width="20" allowsort="false"/>
+                  <th name="colT3" width="20" allowsort="false"/>
+                  <th name="colT4" width="20" allowsort="false"/>
+                  <th name="colT5" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT6" width="20" allowsort="false"/>
+                  <th name="colT7" width="200" allowsort="false"/>
+                </tr>
+              </tree>
+            </div>
+              <table name="gridIndicatorBrowser">
+              <tr>
+                <th name="colN1" text="股票名称" allowdrag="true" allowresize="true" width="100">
+                </th>
+                <th name="colN2" text="股票代码" allowdrag="true" allowresize="true" width="100">
+                </th>
+                 <th name="colN3" text="股票数据" allowdrag="true" allowresize="true" width="400">
+                </th>
+              </tr>
+            </table>
           </div>
         </div>
         <div name="TabPage3" text="委托交易" type="tabpage">
@@ -270,7 +309,6 @@
           <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="208,45" />
           <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="208,45" />
           <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnFormula" text="东财公式" location="224,165" size="208,45" />
         </div>
       </div>
     </div>

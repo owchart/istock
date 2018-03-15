@@ -27,6 +27,10 @@ namespace OwLib
             m_gridAllStockReports.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             m_gridAllStockReports.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             m_tvAllStockReports = mainFrame.GetTree("tvAllStockReports");
+            m_tvAllStockReports.BackColor = COLOR.ARGB(0, 0, 0);
+            m_tvAllStockReports.ForeColor = COLOR.ARGB(255, 255, 255);
+            m_tvAllStockReports.RowStyle = new GridRowStyle();
+            m_tvAllStockReports.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             m_tvAllStockReports.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             object data = ReportDataHelper.GetLeftTree("F004|S004004");
             NewsTypeRoot newsRoot = JsonConvert.DeserializeObject<NewsTypeRoot>(data.ToString());
@@ -36,11 +40,17 @@ namespace OwLib
                 {
                     TreeNodeA tn = new TreeNodeA();
                     tn.Text = node.Name;
+                    tn.Style = new GridCellStyle();
+                    tn.Style.ForeColor = COLOR.ARGB(255, 255, 255);
+                    tn.Style.Font = new FONT("微软雅黑", 14, true, false, false);
                     m_tvAllStockReports.AppendNode(tn);
                     foreach (NewsTypeNode subNode in node.NodeList)
                     {
                         TreeNodeA subTn = new TreeNodeA();
                         subTn.Text = subNode.Name;
+                        subTn.Style = new GridCellStyle();
+                        subTn.Style.ForeColor = COLOR.ARGB(255, 255, 255);
+                        subTn.Style.Font = new FONT("微软雅黑", 14, true, false, false);
                         tn.AppendNode(subTn);
                         subTn.Tag = subNode.Id;
                     }

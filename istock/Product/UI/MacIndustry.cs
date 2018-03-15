@@ -20,6 +20,10 @@ namespace OwLib
             m_gridMacIndustry.RowStyle = new GridRowStyle();
             m_gridMacIndustry.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             m_tvMacIndustry = mainFrame.GetTree("tvMacIndustry");
+            m_tvMacIndustry.BackColor = COLOR.ARGB(0, 0, 0);
+            m_tvMacIndustry.ForeColor = COLOR.ARGB(255, 255, 255);
+            m_tvMacIndustry.RowStyle = new GridRowStyle();
+            m_tvMacIndustry.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
             m_tvMacIndustry.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             String[] names = Enum.GetNames(typeof(MacroDataType));
             for (int i = 0; i < names.Length; i++)
@@ -75,6 +79,9 @@ namespace OwLib
                             {
                                 TreeNodeA node = new TreeNodeA();
                                 node.Tag = "2";
+                                node.Style = new GridCellStyle();
+                                node.Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                                node.Style.Font = new FONT("微软雅黑", 14, true, false, false);
                                 node.Text = row["STR_MACRONAME"].ToString();
                                 node.Name = row[0].ToString();
                                 tn.AppendNode(node);
@@ -193,6 +200,9 @@ namespace OwLib
                 {
                     TreeNodeA treeNode = new TreeNodeA();
                     treeNode.Name = code;
+                    treeNode.Style = new GridCellStyle();
+                    treeNode.Style.ForeColor = COLOR.ARGB(255, 255, 255);
+                    treeNode.Style.Font = new FONT("微软雅黑", 14, true, false, false);
                     treeNode.Text = name;
                     nodesMap[parentCode].AppendNode(treeNode);
                     nodesMap[code] = treeNode;
@@ -202,6 +212,9 @@ namespace OwLib
                     TreeNodeA treeNode = new TreeNodeA();
                     treeNode.Name = code;
                     treeNode.Text = name;
+                    treeNode.Style = new GridCellStyle();
+                    treeNode.Style.ForeColor = COLOR.ARGB(255, 255, 255);
+                    treeNode.Style.Font = new FONT("微软雅黑", 14, true, false, false);
                     m_tvMacIndustry.AppendNode(treeNode);
                     nodesMap[code] = treeNode;
                 }

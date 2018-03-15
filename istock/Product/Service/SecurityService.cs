@@ -236,7 +236,7 @@ namespace OwLib
         /// 获取最近活跃的代码
         /// </summary>
         /// <returns>活跃代码集合</returns>
-        public static int GetActiveCodes(List<String> activeCodes)
+        public static int GetActiveCodes(List<String> activeCodes, int maxCount)
         {
             LoadHistoryDatas();
             Dictionary<String, double> dic = new Dictionary<string, double>();
@@ -275,7 +275,7 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 activeCodes.Add(lst[i].Key);
             }
@@ -416,7 +416,7 @@ namespace OwLib
         /// </summary>
         /// <param name="secondNewCodes"></param>
         /// <returns></returns>
-        public static int GetSecondNewCodes(List<String> secondNewCodes)
+        public static int GetSecondNewCodes(List<String> secondNewCodes, int maxCount)
         {
             LoadHistoryDatas();
             Dictionary<String, double> dic = new Dictionary<string, double>();
@@ -442,7 +442,7 @@ namespace OwLib
                 return s1.Value.CompareTo(s2.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 secondNewCodes.Add(lst[i].Key);
             }
@@ -542,7 +542,7 @@ namespace OwLib
         /// 根据成交量排名
         /// </summary>
         /// <param name="codesByVol">成交量排名</param>
-        public static int GetCodesByVolume(List<String> codesByVol)
+        public static int GetCodesByVolume(List<String> codesByVol, int maxCount)
         {
             Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
@@ -559,7 +559,7 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 codesByVol.Add(lst[i].Key);
             }
@@ -570,7 +570,7 @@ namespace OwLib
         /// 根据成交额排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static int GetCodesByAmount(List<String> codesByAmount)
+        public static int GetCodesByAmount(List<String> codesByAmount, int maxCount)
         {
             Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
@@ -587,7 +587,7 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 codesByAmount.Add(lst[i].Key);
             }
@@ -598,7 +598,7 @@ namespace OwLib
         /// 根据振幅排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static int GetCodesBySwing(List<String> codesBySwing)
+        public static int GetCodesBySwing(List<String> codesBySwing, int maxCount)
         {
             Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
@@ -617,7 +617,7 @@ namespace OwLib
                 return s2.Value.CompareTo(s1.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 codesBySwing.Add(lst[i].Key);
             }
@@ -628,7 +628,7 @@ namespace OwLib
         /// 根据股价排名
         /// </summary>
         /// <param name="codesByAmount"></param>
-        public static int GetCodesByPrice(List<String> codesByPrice)
+        public static int GetCodesByPrice(List<String> codesByPrice, int maxCount)
         {
             Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
@@ -644,7 +644,7 @@ namespace OwLib
                 return s1.Value.CompareTo(s2.Value);
             });
             dic.Clear();
-            for (int i = 0; i < lst.Count && i < 50; i++)
+            for (int i = 0; i < lst.Count && i < maxCount; i++)
             {
                 codesByPrice.Add(lst[i].Key);
             }

@@ -443,17 +443,18 @@ namespace OwLib
                 else if (name == "btnActiveStock" || name == "btnSecondNewStock"
                     || name == "btnUpperLimitStock" || name == "btnDownLimitStock"
                     || name == "btnUnTradeStock" || name == "btnSwingStock"
-                    || name == "btnLowPriceStock" || name == "btnAmountsStock")
+                    || name == "btnLowPriceStock" || name == "btnAmountsStock"
+                    || name == "btnVolumessStock")
                 {
                     m_gridUserSecurities.ClearRows();
                     List<String> codes = new List<String>();
                     if (name == "btnActiveStock")
                     {
-                        SecurityService.GetActiveCodes(codes);
+                        SecurityService.GetActiveCodes(codes, 50);
                     }
                     else if (name == "btnSecondNewStock")
                     {
-                        SecurityService.GetSecondNewCodes(codes);
+                        SecurityService.GetSecondNewCodes(codes, 50);
                     }
                     else if (name == "btnUpperLimitStock")
                     {
@@ -469,15 +470,19 @@ namespace OwLib
                     }
                     else if (name == "btnSwingStock")
                     {
-                        SecurityService.GetCodesBySwing(codes);
+                        SecurityService.GetCodesBySwing(codes, 50);
                     }
                     else if (name == "btnLowPriceStock")
                     {
-                        SecurityService.GetCodesByPrice(codes);
+                        SecurityService.GetCodesByPrice(codes, 50);
                     }
                     else if (name == "btnAmountsStock")
                     {
-                        SecurityService.GetCodesByAmount(codes);
+                        SecurityService.GetCodesByAmount(codes, 50);
+                    }
+                    else if (name == "btnVolumesStock")
+                    {
+                        SecurityService.GetCodesByVolume(codes, 50);
                     }
                     int codesSize = codes.Count;
                     for (int i = 0; i < codesSize; i++)

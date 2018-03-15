@@ -589,14 +589,14 @@ namespace OwLib
                 if (colName == "colP11")
                 {
                     userSecurity.m_up = cell.GetDouble();
+                    cell.Row.Tag = userSecurity;
                     DataCenter.UserSecurityService.Add(userSecurity);
-                    TimerEvent(null, m_timerID);
                 }
                 else if (colName == "colP12")
                 {
                     userSecurity.m_down = cell.GetDouble();
+                    cell.Row.Tag = userSecurity;
                     DataCenter.UserSecurityService.Add(userSecurity);
-                    TimerEvent(null, m_timerID);
                 }
             }
         }

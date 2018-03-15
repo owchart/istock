@@ -72,7 +72,7 @@ namespace OwLib
                 CFileA.Write(Application.StartupPath + "\\codes.txt", sb.ToString());
                 EMSecurityService.KwItems = availableItems;
                 CFileA.Write(sPath, JsonConvert.SerializeObject(EMSecurityService.KwItems));
-                //SecurityService.ImportSecurities(EMSecurityService.KwItems);
+                SecurityService.ImportSecurities(EMSecurityService.KwItems);
                 return false;
             }
             else
@@ -82,6 +82,7 @@ namespace OwLib
                 {
                     kwItems2[KwItems[key].Innercode] = KwItems[key];
                 }
+                SecurityService.ImportSecurities(EMSecurityService.KwItems);
                 return true;
             }
         }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Runtime.InteropServices;
 
 namespace OwLib
 {
@@ -621,6 +622,9 @@ namespace OwLib
             return 1;
         }
 
+        [DllImport("news.dll", EntryPoint = "AddSecurity", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AddSecurity(String code, String name, int innerCode, int type);
+
         /// <summary>
         /// 导入股票
         /// </summary>
@@ -628,36 +632,10 @@ namespace OwLib
         /// <param name="type">类型</param>
         public static void ImportSecurities(Dictionary<String, KwItem> kwItems)
         {
-            String dataBasePath = DataCenter.GetAppPath() + "\\securities.db";
-            if (CFileA.IsFileExist(dataBasePath))
+            foreach (KwItem item in kwItems.Values)
             {
-                CFileA.RemoveFile(dataBasePath);
+                AddSecurity(item.Code, item.Name, item.Innercode, item.Type);
             }
-            String connectStr = "Data Source = " + dataBasePath;
-            if (!CFileA.IsFileExist(dataBasePath))
-            {
-                //创建数据库文件
-                SQLiteConnection.CreateFile("securities.db");
-                //创建表
-                SQLiteConnection conn2 = new SQLiteConnection(connectStr);
-                conn2.Open();
-                SQLiteCommand cmd2 = conn2.CreateCommand();
-                cmd2.CommandText = "CREATE TABLE SECURITY(ID INTEGER PRIMARY KEY, CODE, NAME, PINGYIN, TYPE INTEGER, STATUS INTEGER, CREATETIME DATE, MODIFYTIME DATE)";
-                cmd2.ExecuteNonQuery();
-                conn2.Close();
-            }
-            SQLiteConnection conn = new SQLiteConnection(connectStr);
-            conn.Open();
-            SQLiteCommand cmd = conn.CreateCommand();
-            int strSize = kwItems.Count;
-            foreach(KwItem kwItem  in kwItems.Values)
-            {
-                String sql = String.Format("INSERT INTO SECURITY(CODE, NAME, PINGYIN, TYPE, STATUS, CREATETIME, MODIFYTIME) VALUES ('{0}', '{1}', '{2}', {3}, {4}, '1970-1-1', '1970-1-1')",
-                    kwItem.Code, kwItem.Name, kwItem.Pingyin, kwItem.Type, kwItem.Innercode);
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-            }
-            conn.Close();
         }
 
         /// <summary>

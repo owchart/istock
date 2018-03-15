@@ -5,6 +5,18 @@
 #include "DataCenter.h"
 #include "NewsService.h"
 
+extern "C" __declspec(dllexport) int AddSecurity(const char* code, const char *name, int innerCode, int type)
+{
+	Security security;
+	Str::stringTowstring(security.m_code, code);
+	Str::stringTowstring(security.m_name, name);
+	security.m_innerCode = innerCode;
+	security.m_type = type;
+	DataCenter::StartService();
+	DataCenter::GetSecurityService()->AddSecurity(&security);
+	return 1;
+}
+
 extern "C" __declspec(dllexport) int GetNews(const char* code, char* str)
 {
 	DataCenter::StartService();

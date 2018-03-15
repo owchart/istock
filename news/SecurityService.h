@@ -18,23 +18,18 @@
 //证券服务
 class SecurityService
 {
-private:
-	string m_createTableSQL;
-	String m_dataBasePath;
+public:
 	map<int, Security> m_securitiesMap;
 	map<String, Security> m_securitiesMap2;
 public:
 	SecurityService();
 	virtual ~SecurityService();
 public:
-	//创建表
-	void CreateTable();
+	void AddSecurity(Security *security); 
 	//根据内码获取证券代码
 	int GetSecurity(int innerCode, Security *security); 
 	//根据代码获取证券代码
 	int GetSecurity(String code, Security *security); 
-	//从流中解析证券信息
-	int GetSecurities(vector<Security> *securities, String filter);
 };
 
 #endif

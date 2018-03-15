@@ -12,6 +12,6 @@ public:
 	String m_name;
 	String m_pingyin;
 	int m_type;
-	int m_status;
+	int m_innerCode;
 };
 #endif

@@ -47,9 +47,9 @@ string NewsService::GetNews(string code)
 
 	vector<int> g_vecSecuVarietyCode;
 	map<int, StockVersionInfo> g_mapVersion; 
-	g_vecSecuVarietyCode.push_back(security.m_status);
+	g_vecSecuVarietyCode.push_back(security.m_innerCode);
 	StockVersionInfo svInfo;
-	g_mapVersion[security.m_status] = svInfo;
+	g_mapVersion[security.m_innerCode] = svInfo;
 
 	string url = "http://183.136.163.249:1818/market/web.action";
 	int totalLen = 0;

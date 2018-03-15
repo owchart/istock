@@ -7,8 +7,15 @@ using System.Drawing;
 
 namespace OwLib
 {
+    /// <summary>
+    /// 宏观数据
+    /// </summary>
     public class MacIndustry
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="mainFrame"></param>
         public MacIndustry(MainFrame mainFrame)
         {
             m_mainFrame = mainFrame;
@@ -37,16 +44,31 @@ namespace OwLib
             m_fundCurve.BackColor = COLOR.ARGB(0, 0, 0);
         }
 
+        /// <summary>
+        /// 下拉菜单
+        /// </summary>
         private ComboBoxA m_cbMacIndustry;
 
+        /// <summary>
+        /// 曲线图
+        /// </summary>
         private FundCurveDiv m_fundCurve;
 
+        /// <summary>
+        /// 数据表格
+        /// </summary>
         private GridA m_gridMacIndustry;
 
+        /// <summary>
+        /// 宏观树
+        /// </summary>
         private TreeA m_tvMacIndustry;
 
         private MainFrame m_mainFrame;
 
+        /// <summary>
+        /// 获取或设置主框架
+        /// </summary>
         public MainFrame MainFrame
         {
             get { return m_mainFrame; }

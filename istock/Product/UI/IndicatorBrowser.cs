@@ -13,6 +13,10 @@ namespace OwLib
     /// </summary>
     public class IndicatorBrowser
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="mainFrame"></param>
         public IndicatorBrowser(MainFrame mainFrame)
         {
             m_mainFrame = mainFrame;
@@ -30,8 +34,14 @@ namespace OwLib
             LoadType(BrowserType.STOCK);
         }
 
+        /// <summary>
+        /// 数据表格
+        /// </summary>
         private GridA m_gridIndicatorBrowser;
 
+        /// <summary>
+        /// 指标树
+        /// </summary>
         private TreeA m_tvIndicatorBrowser;
 
         private MainFrame m_mainFrame;
@@ -45,6 +55,13 @@ namespace OwLib
             set { m_mainFrame = value; }
         }
 
+        /// <summary>
+        /// 获取指标数据
+        /// </summary>
+        /// <param name="indicatorCode"></param>
+        /// <param name="blockType"></param>
+        /// <param name="codes"></param>
+        /// <returns></returns>
         public static IndicatorRootData GetIndicatorData(String indicatorCode, String blockType, String codes)
         {
             if (!IndicatorDataCore._IndicatorEntityDict.ContainsKey(indicatorCode))

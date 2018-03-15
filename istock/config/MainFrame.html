@@ -6,17 +6,31 @@
   </head>
   <body>
     <div type="splitlayout" layoutstyle="bottomtotop" size="400,400" splitterposition="0,375,400,375" name="divMain" dock="fill" location="0,0">
-      <input type="usercontrol" cid="indexdiv" />
+      <input type="usercontrol" cid="indexdiv" name="divIndex"/>
       <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
         <div name="TabPage" text="报价列表" type="tabpage">
           <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
             <div name="Div">
               <label name="Label" text="选择股票" location="11,15" size="60,17" />
               <input type="text" name="txtCode" location="78,12" size="126,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnAdd" text="添加" location="219,12" size="70,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnExport" text="导出结果" location="315,12" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnAdd" text="添加到自选股" location="219,12" size="120,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnExport" text="导出结果" location="360,12" size="100,20" />
             </div>
-            <table name="gridUserSecurities" dock="fill">
+             <div type="splitlayout" layoutstyle="bottomtotop" size="200,200" splitterposition="0,160,200,160" name="SplitLayoutDiv22">
+             <div type="layout" name="divFunc" style="lefttoright" showhscrollbar="true" allowpreviewsevent="true" allowdragscroll="true">
+         <input type="usercontrol" cid="ribbonbutton" name="btnUserSecurity" text="我的自选股" location="8,62" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="140,45" />
+           <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="140,45" />
+          <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="140,45" />
+             </div>
+              <table name="gridUserSecurities">
               <tr>
                 <th name="colP1" text="股票代码" width="100" allowdrag="true" allowresize="true" />
                 <th name="colP2" text="股票名称" width="100" allowdrag="true" allowresize="true" />
@@ -32,6 +46,7 @@
                 <th name="colP12" text="止损位" width="100" allowdrag="true" allowresize="true" />
               </tr>
             </table>
+             </div>
           </div>
         </div>
         <div name="TabPage2" text="分时/K线" type="tabpage">
@@ -297,18 +312,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div name="TabPage6" text="更多功能..." type="tabpage">
-          <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="208,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="208,45" />
         </div>
       </div>
     </div>

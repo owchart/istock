@@ -112,7 +112,9 @@ namespace OwLib
             for (int i = 0; i < itemsSize; i++)
             {
                 KwItem item = items[i];
-                if (item.Type == 1 || item.Type == 2)
+                if (item.Type == 1 || item.Type == 2 || item.Code == "000001.SH"
+                    || item.Code == "399001.SZ" || item.Code == "399005.SZ" 
+                    || item.Code == "399006.SZ")
                 {
                     availableItems[item.Code] = item;
                 }

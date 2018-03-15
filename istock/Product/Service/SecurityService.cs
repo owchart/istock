@@ -692,16 +692,6 @@ namespace OwLib
             if (m_codedMap.Count == 0)
             {
                 Dictionary<String, KwItem> items = EMSecurityService.KwItems;
-                List<String> iCodes = new List<String>();
-                iCodes.Add("000001.SH");
-                iCodes.Add("399001.SZ");
-                iCodes.Add("399006.SZ");
-                foreach (String ic in iCodes)
-                {
-                    KwItem gSecurity = new KwItem();
-                    gSecurity.Code = ic;
-                    items[ic] = gSecurity;
-                }
                 foreach (KwItem item in items.Values)
                 {
                     GSecurity security = new GSecurity();

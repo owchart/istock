@@ -57,6 +57,17 @@ namespace OwLib
         /// </summary>
         private int m_timerID = ControlA.GetNewTimerID();
 
+        private MainFrame m_mainFrame;
+
+        /// <summary>
+        /// 获取或设置主界面
+        /// </summary>
+        public MainFrame MainFrame
+        {
+            get { return m_mainFrame; }
+            set { m_mainFrame = value; }
+        }
+
         /// <summary>
         /// 控件加载方法
         /// </summary>
@@ -64,6 +75,33 @@ namespace OwLib
         {
             base.OnLoad();
             StartTimer(m_timerID, 1000);
+        }
+
+        /// <summary>
+        /// 鼠标点击事件
+        /// </summary>
+        /// <param name="mp"></param>
+        /// <param name="button"></param>
+        /// <param name="clicks"></param>
+        /// <param name="delta"></param>
+        public override void OnClick(POINT mp, MouseButtonsA button, int clicks, int delta)
+        {
+            base.OnClick(mp, button, clicks, delta);
+            int width = Width;
+            String code = "";
+            if (mp.x < width / 3)
+            {
+                code = m_ssLatestData.m_code;
+            }
+            else if (mp.x < width * 2 / 3)
+            {
+                code = m_szLatestData.m_code;
+            }
+            else
+            {
+                code = m_cyLatestData.m_code;
+            }
+            m_mainFrame.SearchSecurity(code);
         }
 
         /// <summary>

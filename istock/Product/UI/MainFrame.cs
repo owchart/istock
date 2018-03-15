@@ -157,6 +157,11 @@ namespace OwLib
         /// <param name="code">代码</param>
         public void AddUserSecurity(UserSecurity userSecurity)
         {
+            UserSecurity us = DataCenter.UserSecurityService.Get(userSecurity.m_code);
+            if(us != null)
+            {
+                userSecurity = us;
+            }
             List<GridRow> rows = m_gridUserSecurities.m_rows;
             int rowsSize = rows.Count;
             for (int i = 0; i < rowsSize; i++)
@@ -164,8 +169,19 @@ namespace OwLib
                 GridRow findRow = rows[i];
                 if (findRow.GetCell("colP1").GetString() == userSecurity.m_code)
                 {
+                    findRow.Tag = userSecurity;
                     findRow.GetCell("colP11").SetDouble(userSecurity.m_up);
                     findRow.GetCell("colP12").SetDouble(userSecurity.m_down);
+                    if (findRow.EditButton != null)
+                    {
+                        ControlA div = findRow.EditButton as ControlA;
+                        if (div.Parent != null)
+                        {
+                            div.Parent.RemoveControl(div);
+                        }
+                        div.Dispose();
+                        findRow.EditButton = GetEditButton(userSecurity);
+                    }
                     return;
                 }
             }
@@ -173,15 +189,7 @@ namespace OwLib
             row.AllowEdit = true;
             row.Height = 30;
             m_gridUserSecurities.AddRow(row);
-            ButtonA editButton = new ButtonA();
-            editButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
-            editButton.Font = new FONT("微软雅黑", 16, true, false, false);
-            editButton.BackColor = COLOR.ARGB(255, 80, 80);
-            editButton.ForeColor = COLOR.ARGB(255, 255, 255);
-            editButton.Text = "删除";
-            editButton.Name = "btnGridRowEdit";
-            editButton.Size = new SIZE(100, 30);
-            row.EditButton = editButton;
+            row.EditButton = GetEditButton(userSecurity);
             row.Tag = userSecurity;
             row.AddCell("colP1", new GridStringCell(userSecurity.m_code));
             row.AddCell("colP2", new GridStringCell());
@@ -325,18 +333,32 @@ namespace OwLib
                         UserSecurity userSecurity = new UserSecurity();
                         userSecurity.m_code = code;
                         userSecurity.m_state = 1;
-                        AddUserSecurity(userSecurity);
                         DataCenter.UserSecurityService.Add(userSecurity);
+                        AddUserSecurity(userSecurity);
                     }
                 }
-                else if (name == "btnGridRowEdit")
+                else if (name == "btnDeleteSecurity")
                 {
                     List<GridRow> selectedRows = m_gridUserSecurities.SelectedRows;
                     int selectedRowsSize = selectedRows.Count;
                     if (selectedRowsSize > 0)
                     {
-                        DataCenter.UserSecurityService.Delete(selectedRows[0].GetCell("colP1").GetString());
-                        m_gridUserSecurities.AnimateRemoveRow(selectedRows[0]);
+                        GridRow selectedRow = selectedRows[0];
+                        m_gridUserSecurities.AnimateRemoveRow(selectedRow);
+                        m_gridUserSecurities.OnRowEditEnd();
+                    }
+                }
+                else if (name == "btnDeleteUserSecurity")
+                {
+                    List<GridRow> selectedRows = m_gridUserSecurities.SelectedRows;
+                    int selectedRowsSize = selectedRows.Count;
+                    if (selectedRowsSize > 0)
+                    {
+                        GridRow selectedRow = selectedRows[0];
+                        UserSecurity userSecurity = selectedRow.Tag as UserSecurity;
+                        userSecurity.m_state = 0;
+                        DataCenter.UserSecurityService.Delete(selectedRow.GetCell("colP1").GetString());
+                        AddUserSecurity(userSecurity);
                         m_gridUserSecurities.OnRowEditEnd();
                     }
                 }
@@ -395,7 +417,6 @@ namespace OwLib
                         userSecurity.m_code = codes[i];
                         AddUserSecurity(userSecurity);
                     }
-                    GetTabControl("tabMain").SelectedIndex = 0;
                     Native.Invalidate();
                 }
                 else if (name == "btnExport")
@@ -415,6 +436,20 @@ namespace OwLib
                     m_formulaForm = new FormulaForm();
                     m_formulaForm.ShowDialog();
                     m_formulaForm = null;
+                }
+                else if (name == "btnUserSecurity")
+                {
+                    m_gridUserSecurities.ClearRows();
+                    List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
+                    int codesSize = codes.Count;
+                    if (codesSize > 0)
+                    {
+                        for (int i = 0; i < codesSize; i++)
+                        {
+                            AddUserSecurity(codes[i]);
+                        }
+                    }
+                    Native.Invalidate();
                 }
                 else if (name == "btnSpecial")
                 {
@@ -449,6 +484,52 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 获取编辑按钮
+        /// </summary>
+        /// <param name="userSecurity"></param>
+        /// <returns></returns>
+        public ControlA GetEditButton(UserSecurity userSecurity)
+        {
+            ControlA editButton = new ControlA();
+            editButton.Height = 30;
+            if (userSecurity.m_state == 1)
+            {
+                editButton.Width = 200;
+            }
+            else
+            {
+                editButton.Width = 100;
+            }
+            editButton.Native = Native;
+            int left = 0;
+            if (userSecurity.m_state == 1)
+            {
+                ButtonA removeButton = new ButtonA();
+                removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
+                removeButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
+                removeButton.Font = new FONT("微软雅黑", 16, true, false, false);
+                removeButton.BackColor = COLOR.ARGB(80, 80, 255);
+                removeButton.ForeColor = COLOR.ARGB(255, 255, 255);
+                removeButton.Text = "移出自选";
+                removeButton.Name = "btnDeleteUserSecurity";
+                removeButton.Size = new SIZE(100, 30);
+                editButton.AddControl(removeButton);
+                left = 100;
+            }
+            ButtonA deleteButton = new ButtonA();
+            deleteButton.RegisterEvent(new ControlMouseEvent(ClickEvent), EVENTID.CLICK);
+            deleteButton.Font = new FONT("微软雅黑", 16, true, false, false);
+            deleteButton.BackColor = COLOR.ARGB(255, 80, 80);
+            deleteButton.ForeColor = COLOR.ARGB(255, 255, 255);
+            deleteButton.Text = "删除";
+            deleteButton.Left = left;
+            deleteButton.Name = "btnDeleteSecurity";
+            deleteButton.Size = new SIZE(100, 30);
+            editButton.AddControl(deleteButton);
+            return editButton;
+        }
+
+        /// <summary>
         /// 单元格双击事件
         /// </summary>
         /// <param name="sender">调用者</param>
@@ -463,16 +544,14 @@ namespace OwLib
             {
                 if (cell.Column.Name != "colP11" && cell.Column.Name != "colP12")
                 {
-                    String code = cell.Row.GetCell("colP1").GetString();
-                    if (m_kline != null)
-                    {
-                        GSecurity security = new GSecurity();
-                        SecurityService.GetSecurityByCode(code, ref security);
-                        m_kline.SearchSecurity(security);
-                        GetTabControl("tabMain").SelectedIndex = 1;
-                        m_stockNews.Code = code; 
-                    }
+                    SearchSecurity(cell.Row.GetCell("colP1").GetString());
                 }
+            }
+            else
+            {
+                TextBoxA txtCode= GetTextBox("txtCode");
+                txtCode.Text = cell.Row.GetCell("colP1").GetString();
+                txtCode.Invalidate();
             }
         }
 
@@ -639,6 +718,7 @@ namespace OwLib
             m_newStocks = new NewStocks(this);
             m_macIndustry = new MacIndustry(this);
             m_indicatorBrowser = new IndicatorBrowser(this);
+            (FindControl("divIndex") as IndexDiv).MainFrame = this;
             List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
             int codesSize = codes.Count;
             if (codesSize > 0)
@@ -697,6 +777,19 @@ namespace OwLib
                 }
                 RegisterEvents(controls[i]);
             }
+        }
+
+        /// <summary>
+        /// 搜索股票
+        /// </summary>
+        /// <param name="code">代码</param>
+        public void SearchSecurity(String code)
+        {
+            GSecurity security = new GSecurity();
+            SecurityService.GetSecurityByCode(code, ref security);
+            m_kline.SearchSecurity(security);
+            GetTabControl("tabMain").SelectedIndex = 1;
+            m_stockNews.Code = code; 
         }
 
         /// <summary>

@@ -241,6 +241,8 @@ namespace OwLib
                     nodesMap[code] = treeNode;
                 }
             }
+            m_tvMacIndustry.Update();
+            m_tvMacIndustry.Invalidate();
         }
 
         /// <summary>

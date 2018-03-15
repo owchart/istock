@@ -25,6 +25,7 @@ namespace OwLib
             m_gridIndicatorBrowser.BackColor = COLOR.ARGB(0, 0, 0);
             m_gridIndicatorBrowser.RowStyle = new GridRowStyle();
             m_gridIndicatorBrowser.RowStyle.BackColor = COLOR.ARGB(0, 0, 0);
+            m_gridIndicatorBrowser.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             m_tvIndicatorBrowser = mainFrame.GetTree("tvIndicatorBrowser");
             m_tvIndicatorBrowser.BackColor = COLOR.ARGB(0, 0, 0);
             m_tvIndicatorBrowser.ForeColor = COLOR.ARGB(255, 255, 255);
@@ -179,102 +180,112 @@ namespace OwLib
         /// <param name="delta">滚轮值</param>
         private void GridCellClick(object sender, GridCell cell, POINT mp, MouseButtonsA button, int clicks, int delta)
         {
-            TreeNodeA tn = cell as TreeNodeA;
-            if (tn.m_nodes.Count == 0)
+            if (cell.Grid == m_tvIndicatorBrowser)
             {
-                NodeData nodeData = tn.Tag as NodeData;
-                if (nodeData.IsCatalog)
+                TreeNodeA tn = cell as TreeNodeA;
+                if (tn.m_nodes.Count == 0)
                 {
-                    IndicatorLeafDataPacket leafPacket = new IndicatorLeafDataPacket(nodeData.Id);
-                    ConnectManager.CreateInstance().Request(leafPacket);
-                    int tick = 0;
-                    while (leafPacket.ReserveFlag == 0 && tick < 50)
+                    NodeData nodeData = tn.Tag as NodeData;
+                    if (nodeData.IsCatalog)
                     {
-                        Thread.Sleep(100);
-                        tick++;
-                    }
-                    if (leafPacket.LeafNodeList.Count > 0)
-                    {
-                        List<NodeData> nodes = leafPacket.LeafNodeList;
-                        Dictionary<String, TreeNodeA> nodesMap = new Dictionary<String, TreeNodeA>();
-                        int nodesSzie = nodes.Count;
-                        for (int i = 0; i < nodesSzie; i++)
+                        IndicatorLeafDataPacket leafPacket = new IndicatorLeafDataPacket(nodeData.Id);
+                        ConnectManager.CreateInstance().Request(leafPacket);
+                        int tick = 0;
+                        while (leafPacket.ReserveFlag == 0 && tick < 50)
                         {
-                            NodeData node = nodes[i];
-                            TreeNodeA subTn = new TreeNodeA();
-                            subTn.Text = node.Name;
-                            subTn.Style = new GridCellStyle();
-                            subTn.Style.ForeColor = COLOR.ARGB(255, 255, 80);
-                            subTn.Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                            subTn.Name = node.Id;
-                            subTn.Tag = node;
-                            if (nodesMap.ContainsKey(node.ParentId))
-                            {
-                                nodesMap[node.ParentId].AppendNode(subTn);
-                                nodesMap[node.Id] = subTn;
-                            }
-                            else
-                            {
-                                tn.AppendNode(subTn);
-                                nodesMap[node.Id] = subTn;
-                            }
-                            IndicatorEntityDataPacket entity = new IndicatorEntityDataPacket(node.Id);
-                            ConnectManager.CreateInstance().Request(entity);
+                            Thread.Sleep(100);
+                            tick++;
                         }
-                        tn.ExpendAll();
-                        m_tvIndicatorBrowser.Update();
-                        m_tvIndicatorBrowser.Invalidate();
+                        if (leafPacket.LeafNodeList.Count > 0)
+                        {
+                            List<NodeData> nodes = leafPacket.LeafNodeList;
+                            Dictionary<String, TreeNodeA> nodesMap = new Dictionary<String, TreeNodeA>();
+                            int nodesSzie = nodes.Count;
+                            for (int i = 0; i < nodesSzie; i++)
+                            {
+                                NodeData node = nodes[i];
+                                TreeNodeA subTn = new TreeNodeA();
+                                subTn.Text = node.Name;
+                                subTn.Style = new GridCellStyle();
+                                subTn.Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                                subTn.Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                                subTn.Name = node.Id;
+                                subTn.Tag = node;
+                                if (nodesMap.ContainsKey(node.ParentId))
+                                {
+                                    nodesMap[node.ParentId].AppendNode(subTn);
+                                    nodesMap[node.Id] = subTn;
+                                }
+                                else
+                                {
+                                    tn.AppendNode(subTn);
+                                    nodesMap[node.Id] = subTn;
+                                }
+                                IndicatorEntityDataPacket entity = new IndicatorEntityDataPacket(node.Id);
+                                ConnectManager.CreateInstance().Request(entity);
+                            }
+                            tn.ExpendAll();
+                            m_tvIndicatorBrowser.Update();
+                            m_tvIndicatorBrowser.Invalidate();
+                        }
+                    }
+                    else
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        List<String> codes = new List<String>();
+                        SecurityService.GetCodes(codes);
+                        int codesSize = codes.Count;
+                        for (int i = 0; i < codesSize; i++)
+                        {
+                            sb.Append(codes[i]);
+                            if (i != codesSize - 1)
+                            {
+                                sb.Append(",");
+                            }
+                        }
+                        m_gridIndicatorBrowser.ClearRows();
+                        IndicatorRootData data = GetIndicatorData(nodeData.Id, "Stock", sb.ToString());
+                        m_gridIndicatorBrowser.GetColumn("colN3").Text = data.categoryName;
+                        foreach (IndicatorItemData indicatorItem in data.items)
+                        {
+                            GridRow row = new GridRow();
+                            m_gridIndicatorBrowser.AddRow(row);
+                            GridStringCell codeCell = new GridStringCell(indicatorItem.code);
+                            row.AddCell("colN1", codeCell);
+                            GSecurity security = new GSecurity();
+                            SecurityService.GetSecurityByCode(indicatorItem.code, ref security);
+                            row.AddCell("colN2", new GridStringCell(security.m_name));
+                            if (indicatorItem.type == 0)
+                            {
+                                GridStringCell valueCell = new GridStringCell(indicatorItem.text);
+                                row.AddCell("colN3", valueCell);
+                            }
+                            else if (indicatorItem.type == 1)
+                            {
+                                GridDoubleCell valueCell = new GridDoubleCell(indicatorItem.num);
+                                row.AddCell("colN3", valueCell);
+                            }
+                            row.GetCell("colN1").Style = new GridCellStyle();
+                            row.GetCell("colN1").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                            row.GetCell("colN1").Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                            row.GetCell("colN1").Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                            row.GetCell("colN2").Style = new GridCellStyle();
+                            row.GetCell("colN2").Style.ForeColor = COLOR.ARGB(255, 80, 80);
+                            row.GetCell("colN2").Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                            row.GetCell("colN3").Style = new GridCellStyle();
+                            row.GetCell("colN3").Style.ForeColor = COLOR.ARGB(80, 255, 255);
+                            row.GetCell("colN3").Style.Font = new FONT("微软雅黑", 14, true, false, false);
+                        }
+                        m_gridIndicatorBrowser.Update();
+                        m_gridIndicatorBrowser.Invalidate();
                     }
                 }
-                else
+            }
+            else if (cell.Grid == m_gridIndicatorBrowser)
+            {
+                if (clicks == 2)
                 {
-                    StringBuilder sb = new StringBuilder();
-                    List<String> codes = new List<String>();
-                    SecurityService.GetCodes(codes);
-                    int codesSize = codes.Count;
-                    for (int i = 0; i < codesSize; i++)
-                    {
-                        sb.Append(codes[i]);
-                        if (i != codesSize - 1)
-                        {
-                            sb.Append(",");
-                        }
-                    }
-                    m_gridIndicatorBrowser.ClearRows();
-                    IndicatorRootData data = GetIndicatorData(nodeData.Id, "Stock", sb.ToString());
-                    m_gridIndicatorBrowser.GetColumn("colN3").Text = data.categoryName;
-                    foreach (IndicatorItemData indicatorItem in data.items)
-                    {
-                        GridRow row = new GridRow();
-                        m_gridIndicatorBrowser.AddRow(row);
-                        GridStringCell codeCell = new GridStringCell(indicatorItem.code);
-                        row.AddCell("colN1", codeCell);
-                        GSecurity security = new GSecurity();
-                        SecurityService.GetSecurityByCode(indicatorItem.code, ref security);
-                        row.AddCell("colN2", new GridStringCell(security.m_name));
-                        if (indicatorItem.type == 0)
-                        {
-                            GridStringCell valueCell = new GridStringCell(indicatorItem.text);
-                            row.AddCell("colN3", valueCell);
-                        }
-                        else if (indicatorItem.type == 1)
-                        {
-                            GridDoubleCell valueCell = new GridDoubleCell(indicatorItem.num);
-                            row.AddCell("colN3", valueCell);
-                        }
-                        row.GetCell("colN1").Style = new GridCellStyle();
-                        row.GetCell("colN1").Style.ForeColor = COLOR.ARGB(255, 255, 80);
-                        row.GetCell("colN1").Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                        row.GetCell("colN1").Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                        row.GetCell("colN2").Style = new GridCellStyle();
-                        row.GetCell("colN2").Style.ForeColor = COLOR.ARGB(255, 80, 80);
-                        row.GetCell("colN2").Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                        row.GetCell("colN3").Style = new GridCellStyle();
-                        row.GetCell("colN3").Style.ForeColor = COLOR.ARGB(80, 255, 255);
-                        row.GetCell("colN3").Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                    }
-                    m_gridIndicatorBrowser.Update();
-                    m_gridIndicatorBrowser.Invalidate();
+                    m_mainFrame.SearchSecurity(cell.Row.GetCell("colN1").GetString());
                 }
             }
         }

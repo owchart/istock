@@ -15,6 +15,7 @@ using System.Text;
 using OwLib;
 using System.Threading;
 using System.IO;
+using System.Diagnostics;
 
 namespace OwLib
 {
@@ -199,6 +200,22 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 鼠标点击事件
+        /// </summary>
+        /// <param name="mp"></param>
+        /// <param name="button"></param>
+        /// <param name="clicks"></param>
+        /// <param name="delta"></param>
+        public override void OnClick(POINT mp, MouseButtonsA button, int clicks, int delta)
+        {
+            base.OnClick(mp, button, clicks, delta);
+            if (mp.y < 30)
+            {
+                Process.Start("http://app.jg.eastmoney.com/html_F9/index.html?securityCode=" + m_latestData.m_code);
+            }
+        }
+
+        /// <summary>
         /// 绘制前景方法
         /// </summary>
         /// <param name="paint">绘图对象</param>
@@ -248,7 +265,7 @@ namespace OwLib
                 CDraw.DrawText(paint, "内盘", wordColor, font, 110, top + 100);
                 font.m_bold = true;
                 //画股票代码
-                long yellowColor = CDraw.PCOLORS_FORECOLOR4;
+                long yellowColor = COLOR.ARGB(255, 255, 80);
                 if (m_latestData.m_code!=null && m_latestData.m_code.Length > 0)
                 {
                     double close = m_latestData.m_close, open = m_latestData.m_open, high = m_latestData.m_high, low = m_latestData.m_low, lastClose = m_latestData.m_lastClose;

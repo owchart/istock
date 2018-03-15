@@ -1186,6 +1186,10 @@ namespace OwLib
 
         public void RefreshKLineData(List<SecurityLatestData> datas)
         {
+            if (m_cycle != SecurityDataHelper.CYCLE_DAY)
+            {
+                return;
+            }
             int dataSize = datas.Count;
             if (dataSize == 0)
             {

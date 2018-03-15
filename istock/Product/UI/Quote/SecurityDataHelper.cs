@@ -110,50 +110,6 @@ namespace OwLib
             return indicator;
         }
 
-        /// <summary>
-        /// 绑定历史数据
-        /// </summary>
-        /// <param name="chart">股票控件</param>
-        /// <param name="dataSource">数据源</param>
-        /// <param name="indicators">指标</param>
-        /// <param name="fields">字段</param>
-        /// <param name="historyDatas">历史数据</param>
-        public static void BindHistoryDatas(ChartA chart, CTable dataSource, List<CIndicator> indicators, int[] fields, List<SecurityData> historyDatas)
-        {
-            dataSource.Clear();
-            int size = historyDatas.Count;
-            dataSource.SetRowsCapacity(size + 10);
-            dataSource.SetRowsGrowStep(100);
-            int columnsCount = dataSource.ColumnsCount;
-            for (int i = 0; i < size; i++)
-            {
-                SecurityData securityData = historyDatas[i];
-                if (dataSource == chart.DataSource)
-                {
-                    InsertData(chart, dataSource, fields, securityData);
-                }
-                else
-                {
-                    double[] ary = new double[columnsCount];
-                    ary[0] = securityData.m_close;
-                    ary[1] = securityData.m_high;
-                    ary[2] = securityData.m_low;
-                    ary[3] = securityData.m_open;
-                    ary[4] = securityData.m_volume;
-                    for (int j = 5; j < columnsCount; j++)
-                    {
-                        ary[j] = double.NaN;
-                    }
-                    dataSource.AddRow(securityData.m_date, ary, columnsCount);
-                }
-            }
-            int indicatorsSize = indicators.Count;
-            for (int i = 0; i < indicatorsSize; i++)
-            {
-                indicators[i].OnCalculate(0);
-            }
-        }
-
         public static void BindHistoryDatas(ChartAEx chart, CTable dataSource, List<CIndicator> indicators, int[] fields, List<SecurityData> historyDatas, bool showMinuteLine)
         {
             dataSource.Clear();
@@ -161,35 +117,26 @@ namespace OwLib
             if (showMinuteLine)
             {
                 int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                int nextDayYear = 0, nextDayMonth = 0, nextDayDay = 0, nextDayHour = 0, nextDayMinute = 0, nextDaySecond = 0, nextDayMs = 0;
                 SecurityData securityData = historyDatas[0];
                 double date = securityData.m_date;
                 CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                if (hour <= 6)
-                {
-                    date = date - 60 * 60 * 24;
-                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                }
-                double nextDate = date + 60 * 60 * 24;
-                CStrA.M130(nextDate, ref nextDayYear, ref nextDayMonth, ref nextDayDay, ref nextDayHour, ref nextDayMinute, ref nextDaySecond, ref nextDayMs);
-                int startHour = 9;
-                int endHour = 15;
-                double minTime = CStrA.M129(year, month, day, startHour, 0, 0, 0);
-                double maxTime = CStrA.M129(nextDayYear, nextDayMonth, nextDayDay, endHour, 0, 0, 0);
-                int size = (int)((maxTime - minTime) / 60);
-                dataSource.SetRowsCapacity(size + 10);
-                dataSource.SetRowsGrowStep(100);
+                double minTime = CStrA.M129(year, month, day, 9, 30, 0, 0);
+                double maxTime = CStrA.M129(year, month, day, 15, 0, 0, 0);
                 for (date = minTime; date <= maxTime; date = date + 60)
                 {
-                    dataSource.Set(date, fields[4], double.NaN);
-                    int index = dataSource.GetRowIndex(date);
-                    dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
-                    dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
+                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                    if ((hour * 60 + minute) < 690 || (hour * 60 + minute) >= 780)
+                    {
+                        dataSource.Set(date, fields[4], double.NaN);
+                        int index = dataSource.GetRowIndex(date);
+                        dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
+                        dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
+                    }
                 }
             }
             else
@@ -218,10 +165,6 @@ namespace OwLib
                     ary[4] = securityData.m_volume;
                     ary[5] = securityData.m_amount;
                     ary[6] = securityData.m_avgPrice;
-                    //for (int j = 5; j < columnsCount; j++)
-                    //{
-                    //    ary[j] = dataSource->NaN;
-                    //}
                     dataSource.AddRow((double)securityData.m_date, ary, columnsCount);
                 }
             }

@@ -49,12 +49,12 @@ namespace OwLib
         /// </summary>
         private int m_requestID = BaseService.GetRequestID();
 
-        private KLine m_chart;
+        private KLineDiv m_chart;
 
         /// <summary>
         /// 获取或设置
         /// </summary>
-        public KLine Chart
+        public KLineDiv Chart
         {
             get { return m_chart; }
             set { m_chart = value; }

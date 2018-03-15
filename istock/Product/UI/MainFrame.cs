@@ -45,7 +45,7 @@ namespace OwLib
         /// <summary>
         /// K线控件
         /// </summary>
-        private KLine m_kline;
+        private KLineDiv m_klineDiv;
 
         /// <summary>
         /// 秒表ID
@@ -313,12 +313,55 @@ namespace OwLib
                     historyDataInfo.m_cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MONTH);
                 }
                 historyDataInfo.m_subscription = 1;
-                m_kline.BindHistoryData(historyDataInfo, securityDatas);
+                m_klineDiv.BindHistoryData(historyDataInfo, securityDatas);
                 CFTService.QueryLV2(historyDataInfo.m_code);
             }
             else if (args is SecurityLatestData)
             {
-                m_kline.LatestDiv.LatestData = args as SecurityLatestData;
+                m_klineDiv.LatestDiv.LatestData = args as SecurityLatestData;
+            }
+            else if (args is OneDayTrendDataRec)
+            {
+                OneDayTrendDataRec rec = args as OneDayTrendDataRec;
+                int datasSize = rec.MintDatas.Length;
+                List<SecurityData> securityDatas = new List<SecurityData>();
+                int year = rec.Date / 10000;
+                int month = (rec.Date - year * 10000) / 100;
+                int day = rec.Date - year * 10000 - month * 100;
+                int hour = 9;
+                int minute = 30;
+                int sec = 0;
+                for (int i = 0; i < datasSize; i++)
+                {
+                    OneMinuteDataRec oneMinuteDataRec = rec.MintDatas[i];
+                    if (oneMinuteDataRec.Amount != 0)
+                    {
+                        SecurityData securityData = new SecurityData();
+                        securityData.m_close = oneMinuteDataRec.Price;
+                        securityData.m_high = oneMinuteDataRec.Price;
+                        securityData.m_low = oneMinuteDataRec.Price;
+                        securityData.m_open = oneMinuteDataRec.Price;
+                        securityData.m_volume = oneMinuteDataRec.Volume;
+                        securityData.m_amount = oneMinuteDataRec.Amount;
+                        securityData.m_avgPrice = oneMinuteDataRec.AverPrice;
+                        securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0) + 60 * sec;
+                        int syear = 0, smonth = 0, sday = 0, shour = 0, sminute = 0, ssecond = 0, sms = 0;
+                        CStrA.M130(securityData.m_date, ref syear, ref smonth, ref sday, ref shour, ref sminute, ref ssecond, ref sms);
+                        if (shour * 60 + sminute >= 690)
+                        {
+                            securityData.m_date += 90 * 60;
+                        }
+                        securityDatas.Add(securityData);
+                        sec++;
+                    }
+                }
+                HistoryDataInfo historyDataInfo = new HistoryDataInfo();
+                historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(rec.Code).Code;
+                historyDataInfo.m_subscription = 1;
+                historyDataInfo.m_cycle = 0;
+                m_klineDiv.BindHistoryData(historyDataInfo, securityDatas);
+                CFTService.QueryLV2(historyDataInfo.m_code);
+                Console.WriteLine("1");
             }
         }
 
@@ -611,7 +654,7 @@ namespace OwLib
         /// </summary>
         public void HistoryDatasCallBack(OneStockKLineDataRec oneStockKLineDataRec)
         {
-            m_kline.Chart.BeginInvoke(oneStockKLineDataRec);
+            m_klineDiv.Chart.BeginInvoke(oneStockKLineDataRec);
         }
 
         /// <summary>
@@ -696,14 +739,17 @@ namespace OwLib
             latestData.m_allSellVol = fieldInt64[FieldIndex.RedVolume];
             latestData.m_dVolume = fieldInt64[FieldIndex.LastVolume];
             int time = fieldInt32[FieldIndex.Time];
-            int year = DateTime.Now.Year;
-            int month = DateTime.Now.Month;
-            int day = DateTime.Now.Day;
+            double shDate = SecurityService.m_shTradeTime;
+            int syear = 0, smonth = 0, sday = 0, shour = 0, sminute = 0, ssecond = 0, sms = 0;
+            CStrA.M130(shDate, ref syear, ref smonth, ref sday, ref shour, ref sminute, ref ssecond, ref sms);
+            int year = syear;
+            int month = smonth;
+            int day = sday;
             int hour = time / 10000;
             int minute = (time - hour * 10000) / 100;
             int second = time - hour * 10000 - minute * 100;
             latestData.m_date = CStrA.M129(year, month, day, hour, 0, 0, 0);
-            m_kline.Chart.BeginInvoke(latestData);
+            m_klineDiv.Chart.BeginInvoke(latestData);
         }
 
         /// <summary>
@@ -726,7 +772,7 @@ namespace OwLib
             m_gridUserSecurities.StartTimer(m_timerID, 1000);
             m_gridUserSecurities.RegisterEvent(new GridCellMouseEvent(GridCellClick), EVENTID.GRIDCELLCLICK);
             m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
-            m_kline = new KLine(this);
+            m_klineDiv = new KLineDiv(this);
             DataCenter.MainUI = this;
             //m_tradePlugIn = new TradePlugIn(this);
             m_stockNews = new StockNews(this);
@@ -747,10 +793,10 @@ namespace OwLib
                 }
                 GSecurity security = new GSecurity();
                 SecurityService.GetSecurityByCode(codes[0].m_code, ref security);
-                m_kline.SearchSecurity(security);
+                m_klineDiv.SearchSecurity(security);
                 m_stockNews.Code = codes[0].m_code;
             }
-            m_kline.Chart.RegisterEvent(new ControlInvokeEvent(ChartInvoke), EVENTID.INVOKE);
+            m_klineDiv.Chart.RegisterEvent(new ControlInvokeEvent(ChartInvoke), EVENTID.INVOKE);
             if (m_newStocks.NewStockList.Count > 0)
             {
                 StringBuilder newStockStr = new StringBuilder();
@@ -810,7 +856,7 @@ namespace OwLib
         {
             GSecurity security = new GSecurity();
             SecurityService.GetSecurityByCode(code, ref security);
-            m_kline.SearchSecurity(security);
+            m_klineDiv.SearchSecurity(security);
             GetTabControl("tabMain").SelectedIndex = 1;
             m_stockNews.Code = code; 
         }
@@ -1107,6 +1153,15 @@ namespace OwLib
                 }
                 m_gridUserSecurities.Invalidate();
             }
+        }
+
+        /// <summary>
+        /// 趋势线回调
+        /// </summary>
+        /// <param name="oneDayTrendDataRec"></param>
+        public void TrendDataCallBack(OneDayTrendDataRec oneDayTrendDataRec)
+        {
+            m_klineDiv.Chart.BeginInvoke(oneDayTrendDataRec);
         }
     }
 

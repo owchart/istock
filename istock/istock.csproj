@@ -385,7 +385,7 @@
     <Compile Include="Product\UI\Quote\FloatDiv.cs" />
     <Compile Include="Product\UI\Quote\IndexDiv.cs" />
     <Compile Include="Product\UI\Quote\LatestDiv.cs" />
-    <Compile Include="Product\UI\Quote\KLine.cs" />
+    <Compile Include="Product\UI\Quote\KLineDiv.cs" />
     <Compile Include="Product\UI\Quote\SearchDiv.cs" />
     <Compile Include="Product\UI\Quote\SecurityDataHelper.cs" />
     <Compile Include="Product\UI\RibbonButton.cs" />

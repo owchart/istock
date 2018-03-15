@@ -1482,7 +1482,7 @@ namespace OwLib
                         }
                     }
                 }
-                CFTService.CallBack(FuncTypeRealTime.StockTrend, JsonConvert.SerializeObject(TrendData.MintDatas));
+                DataCenter.MainUI.TrendDataCallBack(TrendData);
             }
             catch (Exception exception)
             {

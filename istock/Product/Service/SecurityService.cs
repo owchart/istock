@@ -47,6 +47,11 @@ namespace OwLib
         private static String m_newFileDir = "";
 
         /// <summary>
+        /// 上证交易时间
+        /// </summary>
+        public static double m_shTradeTime;
+
+        /// <summary>
         /// 今日时间
         /// </summary>
         private static long m_today = 0;
@@ -754,6 +759,10 @@ namespace OwLib
                                         else
                                         {
                                             m_latestDatas[latestData.m_code].Copy(latestData);
+                                        }
+                                        if (latestData.m_code == "000001.SH")
+                                        {
+                                            m_shTradeTime = latestData.m_date;
                                         }
                                     }
                                 }

@@ -23,7 +23,6 @@ namespace OwLib
             try
             {
                 LogUtilities.LogMessage("行情开始加载");
-                DateTime dtStart = DateTime.Now;
                 ConnectManager2.CreateInstance().DoNetConnect();
                 DataCenterCore dc = DataCenterCore.CreateInstance();
                 //dc.TimerStart();

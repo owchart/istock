@@ -21,13 +21,13 @@ namespace OwLib
     /// <summary>
     /// 行情系统
     /// </summary>
-    public class KLine
+    public class KLineDiv
     {
         #region Lord 2016/12/24
         /// <summary>
         /// 创建行情系统
         /// </summary>
-        public KLine(MainFrame mainFrame)
+        public KLineDiv(MainFrame mainFrame)
         {
             m_mainFrame = mainFrame;
             InitInterface();
@@ -56,7 +56,7 @@ namespace OwLib
             Indicator ma = new Indicator();
             SecurityDataHelper.GetIndicatorByName("BOLL", ma);
             Indicator macd = new Indicator();
-            SecurityDataHelper.GetIndicatorByName("MACD", macd);
+            SecurityDataHelper.GetIndicatorByName("KDJ", macd);
             AddMainIndicator(ma.m_name, ma.m_name, ma.m_text, ma.m_parameters, m_candleDiv, true);
             AddMainIndicator(macd.m_name, macd.m_name, macd.m_text, macd.m_parameters, m_divs[2], true);
         }
@@ -172,7 +172,7 @@ namespace OwLib
             set { m_chart = value; }
         }
 
-        private int m_cycle = 1440;
+        private int m_cycle = 0;
 
         /// <summary>
         /// 获取或设置周期
@@ -266,7 +266,7 @@ namespace OwLib
             set { m_searchDiv = value; }
         }
 
-        private bool m_showMinuteLine = false;
+        private bool m_showMinuteLine = true;
 
         /// <summary>
         /// 获取或设置是否分时图
@@ -373,8 +373,6 @@ namespace OwLib
 
         public void BindHistoryData(HistoryDataInfo dataInfo, List<SecurityData> historyDatas)
         {
-            int startHour = 9;
-            int endHour = 15;
             int size = historyDatas.Count;
             CTable dataSource = m_chart.DataSource;
             int[] fields = new int[7];
@@ -385,86 +383,29 @@ namespace OwLib
             fields[4] = KeyFields.VOL_INDEX;
             fields[5] = KeyFields.AMOUNT_INDEX;
             fields[6] = KeyFields.AVGPRICE_INDEX;
-            if (size == 0)
-            {
-                if (m_showMinuteLine)
-                {
-                    int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                    int nextDayYear = 0, nextDayMonth = 0, nextDayDay = 0, nextDayHour = 0, nextDayMinute = 0, nextDaySecond = 0, nextDayMs = 0;
-                    //SecurityData securityData = (*historyDatas)[0];
-                    //double date = securityData.m_date;
-                    DateTime dt = DateTime.Now;
-                    double date = CStrA.M129(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0);
-                    double nextDate = date + 60 * 60 * 24;
-                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    CStrA.M130(nextDate, ref nextDayYear, ref nextDayMonth, ref nextDayDay, ref nextDayHour, ref nextDayMinute, ref nextDaySecond, ref nextDayMs);
-                    double minTime = CStrA.M129(year, month, day, startHour, 0, 0, 0);
-                    double maxTime = CStrA.M129(nextDayYear, nextDayMonth, nextDayDay, endHour, 0, 0, 0);
-                    dataSource.SetRowsCapacity((int)((maxTime - minTime) / 60) + 10);
-                    dataSource.SetRowsGrowStep(100);
-                    for (date = minTime; date <= maxTime; date = date + 60)
-                    {
-                        dataSource.Set(date, fields[4], double.NaN);
-                        int index = dataSource.GetRowIndex(date);
-                        dataSource.Set2(index, fields[0], double.NaN);
-                        dataSource.Set2(index, fields[1], double.NaN);
-                        dataSource.Set2(index, fields[2], double.NaN);
-                        dataSource.Set2(index, fields[3], double.NaN);
-                        dataSource.Set2(index, fields[5], double.NaN);
-                        dataSource.Set2(index, fields[6], double.NaN);
-                        dataSource.Set2(index, fields[7], double.NaN);
-                    }
-                    m_chart.DefaultMinuteLine();
-                    m_chart.Update();
-                    m_chart.Invalidate();
-                    RefreshData();
-                }
-                return;
-            }
             if (dataInfo.m_cycle == m_cycle
                && dataInfo.m_code == m_latestDiv.SecurityCode
                && dataInfo.m_subscription == m_subscription)
             {
                 SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas, m_showMinuteLine);
-                if (m_cycle == 0)
-                {
-                    int lastIndex = dataSource.GetRowIndex(historyDatas[size - 1].m_date);
-                    SecurityDataHelper.InsertLatestData(m_chart, dataSource, m_indicators, fields, m_preClosePrice, lastIndex);
-                }
+                //if (m_cycle == 0)
+                //{
+                //    int lastIndex = dataSource.GetRowIndex(historyDatas[size - 1].m_date);
+                //    SecurityDataHelper.InsertLatestData(m_chart, dataSource, m_indicators, fields, m_preClosePrice, lastIndex);
+                //}
                 m_hScaleSteps.Clear();
                 if (m_showMinuteLine)
                 {
                     int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                    int nextDayYear = 0, nextDayMonth = 0, nextDayDay = 0, nextDayHour = 0, nextDayMinute = 0, nextDaySecond = 0, nextDayMs = 0;
                     double date = dataSource.GetXValue(0);
                     CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    if (hour <= 6)
-                    {
-                        date = date - 60 * 60 * 24;
-                        CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    }
-                    double nextDate = date + 60 * 60 * 24;
-                    CStrA.M130(nextDate, ref nextDayYear, ref nextDayMonth, ref nextDayDay, ref nextDayHour, ref nextDayMinute, ref nextDaySecond, ref nextDayMs);
-                    double minTime = CStrA.M129(year, month, day, startHour, 0, 0, 0);
-                    double maxTime = CStrA.M129(nextDayYear, nextDayMonth, nextDayDay, endHour, 0, 0, 0);
-                    m_hScaleSteps.Add(minTime);
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 15, 0, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 23, 0, 0, 0));
-                    m_hScaleSteps.Add(maxTime);
-                    int hScaleStepsSize = m_hScaleSteps.Count;
-                    for (int i = 0; i < hScaleStepsSize; i++)
-                    {
-                        date = m_hScaleSteps[i];
-                        dataSource.Set(date, fields[4], double.NaN);
-                        int index = dataSource.GetRowIndex(date);
-                        dataSource.Set2(index, fields[0], double.NaN);
-                        dataSource.Set2(index, fields[1], double.NaN);
-                        dataSource.Set2(index, fields[2], double.NaN);
-                        dataSource.Set2(index, fields[3], double.NaN);
-                        dataSource.Set2(index, fields[5], double.NaN);
-                        dataSource.Set2(index, fields[6], double.NaN);
-                        dataSource.Set2(index, fields[7], double.NaN);
-                    }
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 13, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 30, 0, 0));
                 }
                 else
                 {
@@ -805,12 +746,12 @@ namespace OwLib
             //分时线
             m_minuteLine = new PolylineShape();
             m_candleDiv.AddShape(m_minuteLine);
-            m_minuteLine.Color = CDraw.PCOLORS_LINECOLOR;
+            m_minuteLine.Color = COLOR.ARGB(255, 255, 255);
             m_minuteLine.FieldName = KeyFields.CLOSE_INDEX;
             //分时线的平均线
             m_minuteAvgLine = new PolylineShape();
             m_candleDiv.AddShape(m_minuteAvgLine);
-            m_minuteAvgLine.Color = CDraw.PCOLORS_LINECOLOR2;
+            m_minuteAvgLine.Color = COLOR.ARGB(255, 255, 80);
             m_minuteAvgLine.FieldName = KeyFields.AVGPRICE_INDEX;
             //添加成交量层
             m_volumeDiv = m_chart.AddDiv(15);
@@ -977,6 +918,7 @@ namespace OwLib
                     {
                         case "MINUTELINE":
                             m_showMinuteLine = true;
+                            cycle = 0;
                             break;
                         case "1MINUTE":
                             cycle = SecurityDataHelper.GetRealPeriodCount(SecurityDataHelper.CYCLE_MINUTE_1);
@@ -1138,14 +1080,22 @@ namespace OwLib
                 m_candleDiv.RightVScale.Type = VScaleType.Percent;
                 m_candle.DownColor = CDraw.PCOLORS_DOWNCOLOR2;
                 m_candle.Style = CandleStyle.Rect;
-                m_candle.TagColor = CDraw.PCOLORS_FORECOLOR;
+                m_candle.TagColor = COLOR.ARGB(255, 255, 255);
                 m_candle.UpColor = CDraw.PCOLORS_UPCOLOR;
                 m_bar.Style = BarStyle.Rect;
                 m_minuteLine.Visible = false;
                 m_candle.Visible = true;
                 m_minuteAvgLine.Visible = false;
-                m_volumeDiv.LeftVScale.Magnitude = 1000;
-                m_volumeDiv.RightVScale.Magnitude = 1000;
+                if (m_cycle >= 1 && m_cycle < 30)
+                {
+                    m_volumeDiv.LeftVScale.Magnitude = 1;
+                    m_volumeDiv.RightVScale.Magnitude = 1;
+                }
+                else
+                {
+                    m_volumeDiv.LeftVScale.Magnitude = 1000;
+                    m_volumeDiv.RightVScale.Magnitude = 1000;
+                }
             }
             int indicatorSize = m_indicators.Count;
             for (int i = 0; i < indicatorSize; i++)
@@ -1229,7 +1179,7 @@ namespace OwLib
                     div.LeftVScale.Digit = m_digit;
                     div.RightVScale.Digit = m_digit;
                 }
-                //div.HScale.SetScaleSteps(m_hScaleSteps);
+                div.HScale.SetScaleSteps(m_hScaleSteps);
                 div.VGrid.Visible = m_showMinuteLine;
             }
         }
@@ -1526,7 +1476,7 @@ namespace OwLib
             HistoryDataInfo dataInfo = new HistoryDataInfo();
             dataInfo.m_code = security.m_code;
             int cycle = Cycle;
-            if (cycle <= 60)
+            if (cycle <= SecurityDataHelper.CYCLE_MINUTE_60)
             {
                 dataInfo.m_cycle = cycle;
                 if (m_showMinuteLine)
@@ -1540,15 +1490,15 @@ namespace OwLib
             }
             else
             {
-                if (cycle == 1440)
+                if (cycle == SecurityDataHelper.CYCLE_DAY)
                 {
                     m_candleDiv.TitleBar.Text = "日线";
                 }
-                else if (cycle == 10080)
+                else if (cycle == SecurityDataHelper.CYCLE_WEEK)
                 {
                     m_candleDiv.TitleBar.Text = "周线";
                 }
-                else if (cycle == 43200)
+                else if (cycle == SecurityDataHelper.CYCLE_MONTH)
                 {
                     m_candleDiv.TitleBar.Text = "月线";
                 }
@@ -1598,7 +1548,6 @@ namespace OwLib
             SecurityLatestData data = new SecurityLatestData();
             SecurityService.GetLatestData(security.m_code, ref data);
             m_preClosePrice = data.m_lastClose;
-            m_chart.PreClosePrice = m_preClosePrice;
             double min = m_preClosePrice * 0.999;
             double max = m_preClosePrice * 1.001;
             m_candleDiv.LeftVScale.VisibleMin = min;
@@ -1607,15 +1556,22 @@ namespace OwLib
             m_candleDiv.RightVScale.VisibleMax = max;
             if (m_showMinuteLine)
             {
-                m_candleDiv.LeftVScale.AutoMaxMin = false;
-                m_candleDiv.RightVScale.AutoMaxMin = false;
+                m_candleDiv.LeftVScale.AutoMaxMin = true;
+                m_candleDiv.RightVScale.AutoMaxMin = true;
             }
             else
             {
                 m_candleDiv.LeftVScale.AutoMaxMin = true;
                 m_candleDiv.RightVScale.AutoMaxMin = true;
             }
-            CFTService.QueryHistoryDatas(dataInfo.m_code, klineCycle);
+            if (m_cycle == 0)
+            {
+                CFTService.QueryTrendLine(dataInfo.m_code);
+            }
+            else
+            {
+                CFTService.QueryHistoryDatas(dataInfo.m_code, klineCycle);
+            }
             m_chart.Update();
             m_mainFrame.Native.Invalidate();
         }

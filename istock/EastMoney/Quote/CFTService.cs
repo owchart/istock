@@ -125,6 +125,8 @@ namespace OwLib
             ConnectManager2.CreateInstance().Request(reqShortLine);
         }
 
+        private static Dictionary<String, TrendData> m_queryTrendLines = new Dictionary<string, TrendData>();
+
         /// <summary>
         /// 趋势线
         /// </summary>
@@ -137,7 +139,20 @@ namespace OwLib
                 int innerCode = item.Innercode;
                 TrendData trendData = new TrendData();
                 trendData.Code = innerCode;
+                m_queryTrendLines[code] = trendData;
                 trendData.Start();
+            }
+        }
+
+        public static void QuitTrendLine(String code)
+        {
+            if (code != null)
+            {
+                if (m_queryTrendLines.ContainsKey(code))
+                {
+                    m_queryTrendLines[code].Quit();
+                    m_queryTrendLines.Remove(code);
+                }
             }
         }
 

@@ -1475,6 +1475,7 @@ namespace OwLib
             m_searchSecurity = security;
             m_latestDiv.Type = security.m_type;
             CFTService.QuitLV2(m_latestDiv.SecurityCode);
+            CFTService.QuitTrendLine(m_latestDiv.SecurityCode);
             m_latestDiv.SecurityCode = security.m_code;
             m_latestDiv.SecurityName = security.m_name;
             HistoryDataInfo dataInfo = new HistoryDataInfo();

@@ -24,7 +24,7 @@ namespace OwLib
         /// <summary>
         /// 昨日数据
         /// </summary>
-        private static Dictionary<String, List<SecurityData>> m_historyDatas = new Dictionary<String, List<SecurityData>>();
+        public static Dictionary<String, List<SecurityData>> m_historyDatas = new Dictionary<String, List<SecurityData>>();
 
         /// <summary>
         /// 最新数据

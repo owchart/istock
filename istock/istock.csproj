@@ -368,6 +368,7 @@
     <Compile Include="Product\Service\HttpGetService.cs" />
     <Compile Include="Product\Service\HttpPostService.cs" />
     <Compile Include="Product\Service\Security.cs" />
+    <Compile Include="Product\Service\SecurityFilterExternFunc.cs" />
     <Compile Include="Product\Service\SecurityService.cs" />
     <Compile Include="Product\Service\StockService.cs" />
     <Compile Include="Product\Service\StrategySettingService.cs" />

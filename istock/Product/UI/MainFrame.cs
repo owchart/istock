@@ -1166,7 +1166,10 @@ namespace OwLib
         /// <param name="oneDayTrendDataRec"></param>
         public void TrendDataCallBack(OneDayTrendDataRec oneDayTrendDataRec)
         {
-            m_klineDiv.Chart.BeginInvoke(oneDayTrendDataRec);
+            if (oneDayTrendDataRec.MintDatas.Length > 1)
+            {
+                m_klineDiv.Chart.BeginInvoke(oneDayTrendDataRec);
+            }
         }
     }
 

@@ -114,64 +114,67 @@ namespace OwLib
         {
             dataSource.Clear();
             int sizeData = (int)historyDatas.Count;
-            if (showMinuteLine)
+            if (sizeData > 0)
             {
-                int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                SecurityData securityData = historyDatas[0];
-                double date = securityData.m_date;
-                CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                double minTime = CStrA.M129(year, month, day, 9, 30, 0, 0);
-                double maxTime = CStrA.M129(year, month, day, 15, 0, 0, 0);
-                for (date = minTime; date <= maxTime; date = date + 60)
+                if (showMinuteLine)
                 {
+                    int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+                    SecurityData securityData = historyDatas[0];
+                    double date = securityData.m_date;
                     CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    if ((hour * 60 + minute) < 690 || (hour * 60 + minute) >= 780)
+                    double minTime = CStrA.M129(year, month, day, 9, 30, 0, 0);
+                    double maxTime = CStrA.M129(year, month, day, 15, 0, 0, 0);
+                    for (date = minTime; date <= maxTime; date = date + 60)
                     {
-                        dataSource.Set(date, fields[4], double.NaN);
-                        int index = dataSource.GetRowIndex(date);
-                        dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
-                        dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
-                    }
-                }
-            }
-            else
-            {
-                dataSource.SetRowsCapacity(sizeData + 10);
-                dataSource.SetRowsGrowStep(100);
-            }
-            int columnsCount = dataSource.ColumnsCount;
-            for (int i = 0; i < sizeData; i++)
-            {
-                SecurityData securityData = historyDatas[i];
-                if (dataSource == chart.DataSource)
-                {
-                    if (securityData.m_close > 0)
-                    {
-                        InsertData(chart, dataSource, fields, securityData);
+                        CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                        if ((hour * 60 + minute) < 690 || (hour * 60 + minute) >= 780)
+                        {
+                            dataSource.Set(date, fields[4], double.NaN);
+                            int index = dataSource.GetRowIndex(date);
+                            dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
+                            dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
+                        }
                     }
                 }
                 else
                 {
-                    double[] ary = new double[columnsCount];
-                    ary[0] = securityData.m_close;
-                    ary[1] = securityData.m_high;
-                    ary[2] = securityData.m_low;
-                    ary[3] = securityData.m_open;
-                    ary[4] = securityData.m_volume;
-                    ary[5] = securityData.m_amount;
-                    ary[6] = securityData.m_avgPrice;
-                    dataSource.AddRow((double)securityData.m_date, ary, columnsCount);
+                    dataSource.SetRowsCapacity(sizeData + 10);
+                    dataSource.SetRowsGrowStep(100);
                 }
-            }
-            int indicatorsSize = (int)indicators.Count;
-            for (int i = 0; i < indicatorsSize; i++)
-            {
-                indicators[i].OnCalculate(0);
+                int columnsCount = dataSource.ColumnsCount;
+                for (int i = 0; i < sizeData; i++)
+                {
+                    SecurityData securityData = historyDatas[i];
+                    if (dataSource == chart.DataSource)
+                    {
+                        if (securityData.m_close > 0)
+                        {
+                            InsertData(chart, dataSource, fields, securityData);
+                        }
+                    }
+                    else
+                    {
+                        double[] ary = new double[columnsCount];
+                        ary[0] = securityData.m_close;
+                        ary[1] = securityData.m_high;
+                        ary[2] = securityData.m_low;
+                        ary[3] = securityData.m_open;
+                        ary[4] = securityData.m_volume;
+                        ary[5] = securityData.m_amount;
+                        ary[6] = securityData.m_avgPrice;
+                        dataSource.AddRow((double)securityData.m_date, ary, columnsCount);
+                    }
+                }
+                int indicatorsSize = (int)indicators.Count;
+                for (int i = 0; i < indicatorsSize; i++)
+                {
+                    indicators[i].OnCalculate(0);
+                }
             }
         }
 

@@ -1707,7 +1707,6 @@ namespace OwLib
                 TrendData.MintDatas[i].SellVolume = br.ReadInt32();
 
             }
-
             return base.DecodingBody(br);
         }
     }

@@ -264,19 +264,22 @@ namespace OwLib
                 {
                     OneDayDataRec oneDayDataRec = oneStockKLineDataRec.OneDayDataList[i];
                     SecurityData securityData = new SecurityData();
-                    securityData.m_close = oneDayDataRec.Close;
-                    securityData.m_high = oneDayDataRec.High;
-                    securityData.m_low = oneDayDataRec.Low;
-                    securityData.m_open = oneDayDataRec.Open;
-                    securityData.m_volume = oneDayDataRec.Volume;
-                    securityData.m_amount = oneDayDataRec.Amount;
-                    int year = oneDayDataRec.Date / 10000;
-                    int month = (oneDayDataRec.Date - year * 10000) / 100;
-                    int day = oneDayDataRec.Date - year * 10000 - month * 100;
-                    int hour = oneDayDataRec.Time / 10000;
-                    int minute = (oneDayDataRec.Time - hour * 10000) / 100;
-                    securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0);
-                    securityDatas.Add(securityData);
+                    if (oneDayDataRec.Volume >= 0)
+                    {
+                        securityData.m_close = oneDayDataRec.Close;
+                        securityData.m_high = oneDayDataRec.High;
+                        securityData.m_low = oneDayDataRec.Low;
+                        securityData.m_open = oneDayDataRec.Open;
+                        securityData.m_volume = oneDayDataRec.Volume;
+                        securityData.m_amount = oneDayDataRec.Amount;
+                        int year = oneDayDataRec.Date / 10000;
+                        int month = (oneDayDataRec.Date - year * 10000) / 100;
+                        int day = oneDayDataRec.Date - year * 10000 - month * 100;
+                        int hour = oneDayDataRec.Time / 10000;
+                        int minute = (oneDayDataRec.Time - hour * 10000) / 100;
+                        securityData.m_date = CStrA.M129(year, month, day, hour, minute, 0, 0);
+                        securityDatas.Add(securityData);
+                    }
                 }
                 HistoryDataInfo historyDataInfo = new HistoryDataInfo();
                 historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(oneStockKLineDataRec.Code).Code;
@@ -861,9 +864,12 @@ namespace OwLib
         {
             GSecurity security = new GSecurity();
             SecurityService.GetSecurityByCode(code, ref security);
-            m_klineDiv.SearchSecurity(security);
-            GetTabControl("tabMain").SelectedIndex = 1;
-            m_stockNews.Code = code; 
+            if(security.m_type == 1 || security.m_type==2)
+            {
+                m_klineDiv.SearchSecurity(security);
+                GetTabControl("tabMain").SelectedIndex = 1;
+                m_stockNews.Code = code; 
+            }
         }
 
         /// <summary>

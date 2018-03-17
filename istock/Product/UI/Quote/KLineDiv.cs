@@ -380,29 +380,34 @@ namespace OwLib
         {
             if (m_showMinuteLine)
             {
-                CTable dataSource = m_chart.DataSource;
-                int[] fields = new int[7];
-                fields[0] = KeyFields.CLOSE_INDEX;
-                fields[1] = KeyFields.HIGH_INDEX;
-                fields[2] = KeyFields.LOW_INDEX;
-                fields[3] = KeyFields.OPEN_INDEX;
-                fields[4] = KeyFields.VOL_INDEX;
-                fields[5] = KeyFields.AMOUNT_INDEX;
-                fields[6] = KeyFields.AVGPRICE_INDEX;
-                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas);
-                int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                double date = dataSource.GetXValue(0);
-                CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 0, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 30, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 0, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 30, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 13, 30, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 0, 0, 0));
-                m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 30, 0, 0));
-                RefreshData();
-                m_chart.Update();
-                m_chart.Invalidate();
+                if (dataInfo.m_cycle == m_cycle
+                   && dataInfo.m_code == m_latestDiv.SecurityCode
+                   && dataInfo.m_subscription == m_subscription)
+                {
+                    CTable dataSource = m_chart.DataSource;
+                    int[] fields = new int[7];
+                    fields[0] = KeyFields.CLOSE_INDEX;
+                    fields[1] = KeyFields.HIGH_INDEX;
+                    fields[2] = KeyFields.LOW_INDEX;
+                    fields[3] = KeyFields.OPEN_INDEX;
+                    fields[4] = KeyFields.VOL_INDEX;
+                    fields[5] = KeyFields.AMOUNT_INDEX;
+                    fields[6] = KeyFields.AVGPRICE_INDEX;
+                    SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas);
+                    int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+                    double date = dataSource.GetXValue(0);
+                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 13, 30, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 0, 0, 0));
+                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 30, 0, 0));
+                    RefreshData();
+                    m_chart.Update();
+                    m_chart.Invalidate();
+                }
             }
         }
 

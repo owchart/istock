@@ -152,11 +152,11 @@ namespace OwLib
 
         //public static SCGridTabControl SCGridTabControl = new SCGridTabControl();
 
-        // public static string StaticticsName { get; set; }
+        // public static String StaticticsName { get; set; }
         /// <summary>
         /// url地址
         /// </summary>
-        public const string URL = "HTTP://app.jg.eastmoney.com";
+        public const String URL = "HTTP://app.jg.eastmoney.com";
 
         /// <summary>
         /// 是否显示板块树
@@ -232,9 +232,9 @@ namespace OwLib
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="t">对象</param>
         /// <returns>返回序列化结果xml</returns>
-        public static string Serialize<T>(T t)
+        public static String Serialize<T>(T t)
         {
-            string res = null;
+            String res = null;
             try
             {
                 res = XmlConvertor.Serializable(t);
@@ -266,7 +266,7 @@ namespace OwLib
         /// <typeparam name="T">反序列化类型</typeparam>
         /// <param name="s">数据的存放路径</param>
         /// <returns>反序列化得到的对象</returns>
-        public static object Deserialize<T>(string s)
+        public static object Deserialize<T>(String s)
         {
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
             using (StreamReader sr = new StreamReader(s))
@@ -284,7 +284,7 @@ namespace OwLib
         /// <param name="type">对象类型</param>
         /// <param name="s">对象序列化后的Xml字符串</param>
         /// <returns></returns>
-        public static object Deserialize(string s, string type)
+        public static object Deserialize(String s, String type)
         {
             Type t = Type.GetType(type);
             return Deserialize(s, t);
@@ -296,7 +296,7 @@ namespace OwLib
         /// <param name="s">字符串</param>
         /// <param name="type">对象类型</param>
         /// <returns>反序列化后的对象</returns>
-        public static object Deserialize(string s, Type type)
+        public static object Deserialize(String s, Type type)
         {
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(type);
             using (StringReader reader=new StringReader(s))
@@ -344,7 +344,7 @@ namespace OwLib
         /// <typeparam name="T">要序列化的对象</typeparam>
         /// <param name="str">字符串</param>
         /// <returns>返回的反序列化对象结果</returns>
-        public static T JsonDeserializeObject<T>(string str)
+        public static T JsonDeserializeObject<T>(String str)
         {
             return JSONHelper.DeserializeObject<T>(str);
         }
@@ -354,7 +354,7 @@ namespace OwLib
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public string GetDateTimeName(string fileName)
+        public String GetDateTimeName(String fileName)
         {
             return fileName + CommonContant.ServerDateTime.ToString("yyyy/MM/DD");
         }
@@ -364,7 +364,7 @@ namespace OwLib
         /// </summary>
         /// <param name="o">对象</param>
         /// <returns>序列化后的字符串</returns>
-        public static string ObjectToStringSerialize(object o)
+        public static String ObjectToStringSerialize(object o)
         {
             return Convert.ToBase64String(BinaryFormatHelper.ToByteSerialize(o));
         }
@@ -375,7 +375,7 @@ namespace OwLib
         /// <typeparam name="T">返回类型</typeparam>
         /// <param name="str">要反序列化的字符串</param>
         /// <returns>反序列化后的对象</returns>
-        public static T StringToObjDeserialize<T>(string str)
+        public static T StringToObjDeserialize<T>(String str)
         {
             return BinaryFormatHelper.ToDeserialize<T>(Convert.FromBase64String(str));
         }
@@ -400,7 +400,7 @@ namespace OwLib
 
         private static  void GetValue(object deserialize,Type t, PropertyInfo propertyInfo, XmlNode node,List<Object> list )
         {
-            if (t == typeof (string))
+            if (t == typeof (String))
             {
                 SetProperty(deserialize, propertyInfo.Name, node.Value);
             }
@@ -430,7 +430,7 @@ namespace OwLib
         /// <param name="obj">设置属性的控件</param>
         /// <param name="property">属性名</param>
         /// <param name="value">属性值</param>
-        public static void SetProperty(object obj, string property, object value)
+        public static void SetProperty(object obj, String property, object value)
         {
             System.Reflection.PropertyInfo lObjProperties = obj.GetType().GetProperty(property);
             if (value == null)
@@ -623,11 +623,11 @@ namespace OwLib
         /// 写终端日志
         /// </summary>
         /// <param name="log"></param>
-        public static void Log(string log)
+        public static void Log(String log)
         {
 
             EmCore.EmLog.Write("专题:",
-                                string.Format("***专题logStart***\r\n{0}\r\n***专题logEnd***", log), LogScope.Debug);
+                                String.Format("***专题logStart***\r\n{0}\r\n***专题logEnd***", log), LogScope.Debug);
 
         }
 
@@ -637,14 +637,14 @@ namespace OwLib
         /// <param name="e"></param>
         public static void Log(Exception e)
         {
-            string info = string.Format("***专题logStart***\r\n{0}\r\n{1}\r\n***专题logEnd***", e.Message, e.StackTrace);           
+            String info = String.Format("***专题logStart***\r\n{0}\r\n{1}\r\n***专题logEnd***", e.Message, e.StackTrace);           
 
             EmCore.EmLog.Write("专题:",
-                                string.Format("***专题logStart***\r\n{0}\r\n{1}\r\n***专题logEnd***", e.Message, e.StackTrace), LogScope.Debug);
+                                String.Format("***专题logStart***\r\n{0}\r\n{1}\r\n***专题logEnd***", e.Message, e.StackTrace), LogScope.Debug);
             //MessageBox.Show(info);
 
         }
-        public static void EmLog(string log,LogScope logType)
+        public static void EmLog(String log,LogScope logType)
         {
 
             EmCore.EmLog.Write("专题:", log, logType);
@@ -777,7 +777,7 @@ namespace OwLib
             }
             catch (Exception exception)
             {
-                CommonService.Log(string.Format("控件垃圾回收出错: {0}{1}", exception.Message, exception.StackTrace));
+                CommonService.Log(String.Format("控件垃圾回收出错: {0}{1}", exception.Message, exception.StackTrace));
             }
          
         }

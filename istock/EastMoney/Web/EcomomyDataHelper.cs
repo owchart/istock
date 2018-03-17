@@ -21,7 +21,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_MARKET, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -43,7 +43,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_REG_MARKET, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -65,7 +65,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SAL_MARKET, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -85,7 +85,7 @@ namespace OwLib
         /// </summary>
         /// <param name="PROVINCE"></param>
         /// <returns></returns>
-        private string GetPinYin(string PROVINCE)
+        private String GetPinYin(String PROVINCE)
         {
             switch (PROVINCE)
             {
@@ -174,7 +174,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                 };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_COUNTA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -192,7 +192,7 @@ namespace OwLib
         /// <summary>
         ///  注册证券公司
         /// </summary>
-        public static DataSet GetRegBondCpy(string STR_REGCODE, int limit, int pageIndex, string sort, string order)
+        public static DataSet GetRegBondCpy(String STR_REGCODE, int limit, int pageIndex, String sort, String order)
         {
             try
             {
@@ -201,9 +201,9 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_REGCODE", STR_REGCODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -217,7 +217,7 @@ namespace OwLib
                     _sorts.Add(new Order("DAT_ESTADATE", false));
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 PagingData _DS = DataAccess.QueryByStatisticForPaging(WebDataSource.CUST_REG_SECINFO, _fileds, _querys, _sorts, _selectors, pageIndex, limit, WebDataSource.CUST_REG_SECINFO.ToString());
                 DataSet ds = new DataSet();
                 ds.Tables.Add(_DS.ResultData);
@@ -231,7 +231,7 @@ namespace OwLib
         }
 
 
-        public static DataSet GetSwithType(string STR_REGCODE, string STR_MARKET, string type, WebDataSource source, string name, string code)
+        public static DataSet GetSwithType(String STR_REGCODE, String STR_MARKET, String type, WebDataSource source, String name, String code)
         {
             
             List<Expression> _querys = new List<Expression>();
@@ -239,7 +239,7 @@ namespace OwLib
             _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
             List<Expression> _selectors = new List<Expression>();
             List<Order> _sorts = new List<Order>();
-            string[] _fileds = new string[] { };
+            String[] _fileds = new String[] { };
 
             ResultData _DS1 = null;
 
@@ -268,7 +268,7 @@ namespace OwLib
         /// <summary>
         /// 某地区 营业部
         /// </summary>
-        public static DataSet GetAreaDept(string STR_REGCODE, string sort, string order, int pageIndex, int limit)
+        public static DataSet GetAreaDept(String STR_REGCODE, String sort, String order, int pageIndex, int limit)
         {
             try
             {
@@ -277,9 +277,9 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_REGCODE", STR_REGCODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -292,7 +292,7 @@ namespace OwLib
                 {
                     _sorts.Add(new Order("STR_REGCODE", true));
                 }
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 PagingData _PD = DataAccess.QueryByStatisticForPaging(WebDataSource.CUST_REG_SALINFO, _fileds, _querys, _sorts, _selectors, pageIndex, limit, WebDataSource.CUST_REG_SALINFO.ToString());
                 DataSet ds = new DataSet();
@@ -315,16 +315,16 @@ namespace OwLib
         /// type:1 交易数据  2 市场份额  3 相对低位  4 均部
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetBondTradeRand(string STR_MARKET, string STR_PROVINCECODE, string dateB, string dateE, string type)
+        public static DataSet GetBondTradeRand(String STR_MARKET, String STR_PROVINCECODE, String dateB, String dateE, String type)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_MARKET))
+                if (!String.IsNullOrEmpty(STR_MARKET))
                 {
                     _querys.Add(Expression.Eq("STR_MARKET", STR_MARKET));
                 }
-                if (!string.IsNullOrEmpty(STR_PROVINCECODE))
+                if (!String.IsNullOrEmpty(STR_PROVINCECODE))
                     _querys.Add(Expression.Eq("STR_PROVINCECODE", STR_PROVINCECODE));
                 else
                     _querys.Add(Expression.Eq("STR_PROVINCECODE", "000000"));
@@ -332,7 +332,7 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_ENDDATE", dateE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = new ResultData(null, "", 0);
                 switch (type)
                 {
@@ -368,19 +368,19 @@ namespace OwLib
         /// type:1 交易数据  2 市场份额  3 相对低位  4 均部
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAllBondTrade(string STR_MARKET, string type, string STR_REGCODE)
+        public static DataSet GetAllBondTrade(String STR_MARKET, String type, String STR_REGCODE)
         {
             try
             {
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = null;
 
                 
                 List<Expression> _querys = new List<Expression>();
                 _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
-                if (!string.IsNullOrEmpty(STR_REGCODE))
+                if (!String.IsNullOrEmpty(STR_REGCODE))
                 {
                     _querys.Add(Expression.Eq("STR_REGCODE", HttpUtility.UrlDecode(STR_REGCODE)));
                     switch (type)
@@ -438,12 +438,12 @@ namespace OwLib
         /// type:1 交易数据  2 市场份额  3 相对低位  4 均部
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAreaTradeRand(string STR_MARKET, string dateB, string dateE, string type)
+        public static DataSet GetAreaTradeRand(String STR_MARKET, String dateB, String dateE, String type)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_MARKET))
+                if (!String.IsNullOrEmpty(STR_MARKET))
                 {
                     _querys.Add(Expression.Eq("STR_MARKET", STR_MARKET));
                 }
@@ -451,7 +451,7 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_ENDDATE", dateE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = new ResultData(null, "", 0);
                 switch (type)
                 {
@@ -485,7 +485,7 @@ namespace OwLib
         /// 获取地区交易排名  全部
         /// type:1 交易数据  2 市场份额  3 相对低位  4 均部
         /// </summary>
-        public static DataSet AllBondArea(string STR_MARKET, string type)
+        public static DataSet AllBondArea(String STR_MARKET, String type)
         {
             try
             {
@@ -497,7 +497,7 @@ namespace OwLib
                         _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
                         List<Expression> _selectors = new List<Expression>();
                         List<Order> _sorts = new List<Order>();
-                        string[] _fileds = new string[] { };
+                        String[] _fileds = new String[] { };
                         _sorts.Add(new Order("DEC_JYE3", false));
                         ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_REGALL_JYENEWRANK, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_REGALL_JYENEWRANK.ToString());
                         return _DS.Data;
@@ -510,7 +510,7 @@ namespace OwLib
                         List<Expression> _selectors1 = new List<Expression>();
                         List<Order> _sorts1 = new List<Order>();
                         _sorts1.Add(new Order("DEC_FE3", false));
-                        string[] _fileds1 = new string[] { };
+                        String[] _fileds1 = new String[] { };
                         ResultData _DS1 = DataAccess.QueryByStatistic(WebDataSource.CUST_REGALL_FENEWRANK, _fileds1, _querys1, _sorts1, _selectors1, 1, int.MaxValue, WebDataSource.CUST_REGALL_FENEWRANK.ToString());
                         return _DS1.Data;
                         #endregion
@@ -522,7 +522,7 @@ namespace OwLib
                         List<Expression> _selectors2 = new List<Expression>();
                         List<Order> _sorts2 = new List<Order>();
                         _sorts2.Add(new Order("DEC_DW3", false));
-                        string[] _fileds2 = new string[] { };
+                        String[] _fileds2 = new String[] { };
                         ResultData _DS2 = DataAccess.QueryByStatistic(WebDataSource.CUST_REGALL_DWNEWRANK, _fileds2, _querys2, _sorts2, _selectors2, 1, int.MaxValue, WebDataSource.CUST_REGALL_DWNEWRANK.ToString());
                         return _DS2.Data;
                         #endregion
@@ -534,7 +534,7 @@ namespace OwLib
                         List<Expression> _selectors3 = new List<Expression>();
                         List<Order> _sorts3 = new List<Order>();
                         _sorts3.Add(new Order("DEC_BJ3", false));
-                        string[] _fileds3 = new string[] { };
+                        String[] _fileds3 = new String[] { };
                         ResultData _DS3 = DataAccess.QueryByStatistic(WebDataSource.CUST_REGALL_BJNEWRANK, _fileds3, _querys3, _sorts3, _selectors3, 1, int.MaxValue, WebDataSource.CUST_REGALL_BJNEWRANK.ToString());
                         return _DS3.Data;
                         #endregion
@@ -558,16 +558,16 @@ namespace OwLib
 
         public static DataSet GetDepartTradeJson()
         {
-            string DeptMarket = "";
-            string time = "";
-            string timeB = time.Substring(0, 4) + "-01";
+            String DeptMarket = "";
+            String time = "";
+            String timeB = time.Substring(0, 4) + "-01";
             return GetDepartTrade(DeptMarket, "000000", "000000", "月报", timeB, time, "", "", 50, 1);
         }
         /// <summary>
         /// 交易数据
         /// </summary>
-        public static DataSet GetDepartTrade(string STR_MARKET, string STR_PROVINCECODE, string STR_SECODE, string STR_REPORTTYPE, string STR_STARTDATE, string STR_ENDDATE,
-            string sort, string order, int limit, int pageIndex)
+        public static DataSet GetDepartTrade(String STR_MARKET, String STR_PROVINCECODE, String STR_SECODE, String STR_REPORTTYPE, String STR_STARTDATE, String STR_ENDDATE,
+            String sort, String order, int limit, int pageIndex)
         {
             try
             {
@@ -580,9 +580,9 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_ENDDATE", STR_ENDDATE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -596,7 +596,7 @@ namespace OwLib
                     _sorts.Add(new Order("DEC_JYE3", false));
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 PagingData _DS = DataAccess.QueryByStatisticForPaging(WebDataSource.CUST_SAL_JYETRADE, _fileds, _querys, _sorts, _selectors, pageIndex, limit, WebDataSource.CUST_SAL_JYETRADE.ToString());
                 DataSet ds = new DataSet();
                 ds.Tables.Add(_DS.ResultData);
@@ -612,8 +612,8 @@ namespace OwLib
         /// <summary>
         /// 市场份额
         /// </summary>
-        public static DataSet GetDepartMarket(string STR_MARKET, string STR_PROVINCECODE, string STR_SECODE, string STR_REPORTTYPE, string STR_STARTDATE, string STR_ENDDATE,
-            string sort, string order, int limit, int pageIndex)
+        public static DataSet GetDepartMarket(String STR_MARKET, String STR_PROVINCECODE, String STR_SECODE, String STR_REPORTTYPE, String STR_STARTDATE, String STR_ENDDATE,
+            String sort, String order, int limit, int pageIndex)
         {
             try
             {
@@ -643,9 +643,9 @@ namespace OwLib
                 }
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -659,7 +659,7 @@ namespace OwLib
                     _sorts.Add(new Order("DEC_FE3", false));
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 PagingData _DS = DataAccess.QueryByStatisticForPaging(source, _fileds, _querys, _sorts, _selectors, pageIndex, limit, source.ToString());
                 DataSet ds = new DataSet();
                 ds.Tables.Add(_DS.ResultData);
@@ -675,8 +675,8 @@ namespace OwLib
         /// <summary>
         /// 相对地位
         /// </summary>
-        public static DataSet GetDepartPlace(string STR_MARKET, string STR_PROVINCECODE, string STR_SECODE, string STR_REPORTTYPE, string STR_STARTDATE, string STR_ENDDATE,
-            string sort, string order, int limit, int pageIndex)
+        public static DataSet GetDepartPlace(String STR_MARKET, String STR_PROVINCECODE, String STR_SECODE, String STR_REPORTTYPE, String STR_STARTDATE, String STR_ENDDATE,
+            String sort, String order, int limit, int pageIndex)
         {
             try
             {
@@ -706,9 +706,9 @@ namespace OwLib
                 }
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -722,7 +722,7 @@ namespace OwLib
                     _sorts.Add(new Order("DEC_DW3", false));
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 PagingData _DS = DataAccess.QueryByStatisticForPaging(source, _fileds, _querys, _sorts, _selectors, pageIndex, limit, source.ToString());
                 DataSet ds = new DataSet();
                 ds.Tables.Add(_DS.ResultData);
@@ -746,19 +746,19 @@ namespace OwLib
         /// 证券公司大全
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetBondMsgList(string STR_SECNAME, string STR_REPLACE, string type)
+        public static DataSet GetBondMsgList(String STR_SECNAME, String STR_REPLACE, String type)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
 
-                if (!string.IsNullOrEmpty(STR_SECNAME))
+                if (!String.IsNullOrEmpty(STR_SECNAME))
                     _querys.Add(Expression.Eq("STR_SECNAME", HttpUtility.UrlDecode(STR_SECNAME)));
 
-                if (!string.IsNullOrEmpty(STR_REPLACE))
+                if (!String.IsNullOrEmpty(STR_REPLACE))
                     _querys.Add(Expression.Eq("STR_REPLACE", HttpUtility.UrlDecode(STR_REPLACE)));
 
-                if (!string.IsNullOrEmpty(type))
+                if (!String.IsNullOrEmpty(type))
                 {
                     switch (type)
                     {
@@ -796,7 +796,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_SECENAME", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_INFO, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_INFO.ToString());
                 return _DS.Data;
             }
@@ -812,23 +812,23 @@ namespace OwLib
         /// 证券公司大全 比较
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetBondCompare(string STR_MARKET, string STR_SECODEList)
+        public static DataSet GetBondCompare(String STR_MARKET, String STR_SECODEList)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
 
-                if (!string.IsNullOrEmpty(STR_MARKET))
+                if (!String.IsNullOrEmpty(STR_MARKET))
                     _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
 
-                if (!string.IsNullOrEmpty(STR_SECODEList))
+                if (!String.IsNullOrEmpty(STR_SECODEList))
                     _querys.Add(Expression.In("STR_SECODE", STR_SECODEList.Split(',')));
 
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_SECENAME", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_COMPARE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_COMPARE.ToString());
                 return _DS.Data;
             }
@@ -842,19 +842,19 @@ namespace OwLib
         /// 证券公司大全 绘图
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetBondChart(string STR_MARKET, string STR_SECODEList)
+        public static DataSet GetBondChart(String STR_MARKET, String STR_SECODEList)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
 
-                if (!string.IsNullOrEmpty(STR_MARKET))
+                if (!String.IsNullOrEmpty(STR_MARKET))
                     _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
-                if (!string.IsNullOrEmpty(STR_SECODEList))
+                if (!String.IsNullOrEmpty(STR_SECODEList))
                     _querys.Add(Expression.In("STR_SECODE", STR_SECODEList.Split(',')));
 
-                string dataE = CommDao.SafeToDateString(DateTime.Now, "yyyy-MM");
-                string dataB = CommDao.SafeToDateString(DateTime.Now.AddMonths(-12), "yyyy-MM");
+                String dataE = CommDao.SafeToDateString(DateTime.Now, "yyyy-MM");
+                String dataB = CommDao.SafeToDateString(DateTime.Now.AddMonths(-12), "yyyy-MM");
                 _querys.Add(Expression.Ge("STR_STATISMONTH", dataB));
                 _querys.Add(Expression.Le("STR_STATISMONTH", dataE));
 
@@ -862,7 +862,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_JYE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -873,18 +873,18 @@ namespace OwLib
             }
         }
 
-        public static DataSet GetBondCmpyCount(string STR_SECENAME)
+        public static DataSet GetBondCmpyCount(String STR_SECENAME)
         {
             try
             {
 
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_SECENAME))
+                if (!String.IsNullOrEmpty(STR_SECENAME))
                     _querys.Add(Expression.Eq("STR_SECODE", HttpUtility.UrlDecode(STR_SECENAME)));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_SALINFO, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_SALINFO.ToString());
                 return _DS.Data;
             }
@@ -906,31 +906,31 @@ namespace OwLib
         /// 营业部大全
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetDeptMsgList(string STR_SECNAME, string STR_SALNAME, string STR_PROVINCE, string STR_CITY,
-            string order, string sort, int pageIndex, int limit)
+        public static DataSet GetDeptMsgList(String STR_SECNAME, String STR_SALNAME, String STR_PROVINCE, String STR_CITY,
+            String order, String sort, int pageIndex, int limit)
         {
             try
             {
 
                 List<Expression> _querys = new List<Expression>();
 
-                if (!string.IsNullOrEmpty(STR_SECNAME))
+                if (!String.IsNullOrEmpty(STR_SECNAME))
                     _querys.Add(Expression.Eq("STR_SECNAME", HttpUtility.UrlDecode(STR_SECNAME)));
 
-                if (!string.IsNullOrEmpty(STR_SALNAME))
-                    _querys.Add(Expression.Like("STR_SALNAME", string.Format("%{0}%", HttpUtility.UrlDecode(STR_SALNAME))));
+                if (!String.IsNullOrEmpty(STR_SALNAME))
+                    _querys.Add(Expression.Like("STR_SALNAME", String.Format("%{0}%", HttpUtility.UrlDecode(STR_SALNAME))));
 
-                if (!string.IsNullOrEmpty(STR_PROVINCE))
+                if (!String.IsNullOrEmpty(STR_PROVINCE))
                     _querys.Add(Expression.Eq("STR_PROVINCE", HttpUtility.UrlDecode(STR_PROVINCE)));
 
-                if (!string.IsNullOrEmpty(STR_CITY))
+                if (!String.IsNullOrEmpty(STR_CITY))
                     _querys.Add(Expression.Eq("STR_CITY", HttpUtility.UrlDecode(STR_CITY)));
 
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                if (!string.IsNullOrEmpty(sort))
+                if (!String.IsNullOrEmpty(sort))
                 {
-                    if (!string.IsNullOrEmpty(order) && order.Equals("asc"))
+                    if (!String.IsNullOrEmpty(order) && order.Equals("asc"))
                     {
                         _sorts.Add(new Order(sort, true));
                     }
@@ -944,7 +944,7 @@ namespace OwLib
                     _sorts.Add(new Order("STR_SECENAME", true));
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 PagingData _DS = DataAccess.QueryByStatisticForPaging(WebDataSource.CUST_SAL_INFO, _fileds, _querys, _sorts, _selectors, pageIndex, limit, WebDataSource.CUST_SAL_INFO.ToString());
                 DataSet ds = new DataSet();
                 ds.Tables.Add(_DS.ResultData);
@@ -962,19 +962,19 @@ namespace OwLib
         /// 营业部大全 比较
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetDeptCompare(string STR_SECODEList)
+        public static DataSet GetDeptCompare(String STR_SECODEList)
         {
             try
             {
 
                 List<Expression> _querys = new List<Expression>();
 
-                if (!string.IsNullOrEmpty(STR_SECODEList))
+                if (!String.IsNullOrEmpty(STR_SECODEList))
                     _querys.Add(Expression.In("STR_SALCODE", STR_SECODEList.Split(',')));
 
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SAL_COMPARE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SAL_COMPARE.ToString());
                 return _DS.Data;
             }
@@ -989,17 +989,17 @@ namespace OwLib
         /// 营业部大全 绘图
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetDeptChart(string STR_SECODEList)
+        public static DataSet GetDeptChart(String STR_SECODEList)
         {
             try
             {
 
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_SECODEList))
+                if (!String.IsNullOrEmpty(STR_SECODEList))
                     _querys.Add(Expression.In("STR_SALCODE", STR_SECODEList.Split(',')));
 
-                string dataE = CommDao.SafeToDateString(DateTime.Now, "yyyy-MM");
-                string dataB = CommDao.SafeToDateString(DateTime.Now.AddMonths(-12), "yyyy-MM");
+                String dataE = CommDao.SafeToDateString(DateTime.Now, "yyyy-MM");
+                String dataB = CommDao.SafeToDateString(DateTime.Now.AddMonths(-12), "yyyy-MM");
                 _querys.Add(Expression.Ge("STR_STATISMONTH", dataB));
                 _querys.Add(Expression.Le("STR_STATISMONTH", dataE));
 
@@ -1007,7 +1007,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SAL_JYE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -1025,7 +1025,7 @@ namespace OwLib
         /// <summary>
         /// 获取公司详细
         /// </summary>
-        public static DataSet GetBondCompanyDetail(string STR_SECODE)
+        public static DataSet GetBondCompanyDetail(String STR_SECODE)
         {
             try
             {
@@ -1034,7 +1034,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_INFODETAIL, _fileds, _querys, _sorts, _selectors, 1, 1);
                 return _DS;
             }
@@ -1048,20 +1048,20 @@ namespace OwLib
         /// <summary>
         /// 财务数据
         /// </summary>
-        public static DataSet GetBondFinance(string STR_REPORTTYPE, string STR_SECODE)
+        public static DataSet GetBondFinance(String STR_REPORTTYPE, String STR_SECODE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_REPORTTYPE))
+                if (!String.IsNullOrEmpty(STR_REPORTTYPE))
                     _querys.Add(Expression.Eq("STR_REPORTTYPE", HttpUtility.UrlDecode(STR_REPORTTYPE)));
-                if (!string.IsNullOrEmpty(STR_SECODE))
+                if (!String.IsNullOrEmpty(STR_SECODE))
                     _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_REPORTDATE", false));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_STM, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -1075,20 +1075,20 @@ namespace OwLib
         /// <summary>
         /// 资产负债表
         /// </summary>
-        public static DataSet GetBondAssets(string STR_REPORTTYPE, string STR_SECODE)
+        public static DataSet GetBondAssets(String STR_REPORTTYPE, String STR_SECODE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_REPORTTYPE))
+                if (!String.IsNullOrEmpty(STR_REPORTTYPE))
                     _querys.Add(Expression.Eq("STR_REPORTTYPE", HttpUtility.UrlDecode(STR_REPORTTYPE)));
-                if (!string.IsNullOrEmpty(STR_SECODE))
+                if (!String.IsNullOrEmpty(STR_SECODE))
                     _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_REPORTDATE", false));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_BLANCE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -1102,19 +1102,19 @@ namespace OwLib
         /// <summary>
         /// 基本报表
         /// </summary>
-        public static DataSet GetBondBaseFin(string STR_MARKET, string STR_SECODE)
+        public static DataSet GetBondBaseFin(String STR_MARKET, String STR_SECODE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_MARKET))
+                if (!String.IsNullOrEmpty(STR_MARKET))
                     _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
-                if (!string.IsNullOrEmpty(STR_SECODE))
+                if (!String.IsNullOrEmpty(STR_SECODE))
                     _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_BASIC, _fileds, _querys, _sorts, _selectors, 1, 1, WebDataSource.CUST_SEC_BASIC.ToString());
                 return _DS.Data;
             }
@@ -1128,13 +1128,13 @@ namespace OwLib
         /// <summary>
         /// 历史表现
         /// </summary>
-        public static DataSet GetBondHisList(string STR_MARKET, string STR_SECODE, string STR_STATISMONTH)
+        public static DataSet GetBondHisList(String STR_MARKET, String STR_SECODE, String STR_STATISMONTH)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
                 DateTime dateTime = Convert.ToDateTime(STR_STATISMONTH + "-01");
-                string monthLow = dateTime.AddMonths(-11).ToString("yyyy-MM");
+                String monthLow = dateTime.AddMonths(-11).ToString("yyyy-MM");
                 _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
                 _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                 _querys.Add(Expression.Le("STR_STATISMONTH", STR_STATISMONTH));
@@ -1144,7 +1144,7 @@ namespace OwLib
 
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_OLDDATA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_OLDDATA.ToString());
 
@@ -1155,7 +1155,7 @@ namespace OwLib
                 List<Expression> _selectors1 = new List<Expression>();
                 List<Order> _sorts1 = new List<Order>();
                 _sorts1.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds1 = new string[] { };
+                String[] _fileds1 = new String[] { };
                 DataSet _DSBJ = DataAccess.Query(WebDataSource.CUST_SEC_BJ, _fileds1, _querys1, _sorts1, _selectors1, 1, int.MaxValue);
 
                 return _DSBJ;
@@ -1170,7 +1170,7 @@ namespace OwLib
         /// <summary>
         /// 旗下比较 全部
         /// </summary>
-        public static DataSet GetBondAllBootComp(string STR_SECODE, string type)
+        public static DataSet GetBondAllBootComp(String STR_SECODE, String type)
         {
             try
             {
@@ -1183,7 +1183,7 @@ namespace OwLib
                         _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                         List<Order> _sorts = new List<Order>();
                         _sorts.Add(new Order("INT_RANK_JYE3", true));
-                        string[] _fileds = new string[] { };
+                        String[] _fileds = new String[] { };
                         List<Expression> _selectors = new List<Expression>();
                         ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_SALJYETRADE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_SALJYETRADE.ToString());
                         return _DS.Data;
@@ -1197,7 +1197,7 @@ namespace OwLib
                         _querys1.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                         List<Order> _sorts1 = new List<Order>();
                         _sorts1.Add(new Order("INT_RANK_FE3", true));
-                        string[] _fileds1 = new string[] { };
+                        String[] _fileds1 = new String[] { };
                         List<Expression> _selectors1 = new List<Expression>();
                         ResultData _DS1 = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_SALFETRADE, _fileds1, _querys1, _sorts1, _selectors1, 1, int.MaxValue, WebDataSource.CUST_SEC_SALFETRADE.ToString());
                         return _DS1.Data;
@@ -1211,7 +1211,7 @@ namespace OwLib
                         _querys2.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                         List<Order> _sorts2 = new List<Order>();
                         _sorts2.Add(new Order("INT_RANK_DW3", true));
-                        string[] _fileds2 = new string[] { };
+                        String[] _fileds2 = new String[] { };
                         List<Expression> _selectors2 = new List<Expression>();
                         ResultData _DS2 = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_SALDWTRADE, _fileds2, _querys2, _sorts2, _selectors2, 1, int.MaxValue, WebDataSource.CUST_SEC_SALDWTRADE.ToString());
                         return _DS2.Data;
@@ -1231,7 +1231,7 @@ namespace OwLib
         /// <summary>
         /// 历史更多
         /// </summary>
-        public static DataSet GetBondAllHis(string STR_SECODE, string STR_MARKET, string type)
+        public static DataSet GetBondAllHis(String STR_SECODE, String STR_MARKET, String type)
         {
             try
             {
@@ -1242,7 +1242,7 @@ namespace OwLib
                     _querys.Add(Expression.Eq("STR_SECODE", STR_SECODE));
                     List<Expression> _selectors = new List<Expression>();
                     List<Order> _sorts = new List<Order>();
-                    string[] _fileds = new string[] { };
+                    String[] _fileds = new String[] { };
                     _sorts.Add(new Order("STR_STATISMONTH", false));
                     ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_OLDDATA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_OLDDATA.ToString());
                     return _DS.Data;
@@ -1256,7 +1256,7 @@ namespace OwLib
                     List<Expression> _selectors1 = new List<Expression>();
                     List<Order> _sorts1 = new List<Order>();
                     _sorts1.Add(new Order("STR_STATISMONTH", false));
-                    string[] _fileds1 = new string[] { };
+                    String[] _fileds1 = new String[] { };
                     DataSet _DSBJ = DataAccess.Query(WebDataSource.CUST_SEC_BJ, _fileds1, _querys1, _sorts1, _selectors1, 1, int.MaxValue);
                     return _DSBJ;
                 }
@@ -1275,7 +1275,7 @@ namespace OwLib
         /// <summary>
         /// 基本信息
         /// </summary>
-        public static DataSet GetBaseDeptMsg(string STR_SALCODE)
+        public static DataSet GetBaseDeptMsg(String STR_SALCODE)
         {
             try
             {
@@ -1285,7 +1285,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SAL_INFODETAIL, _fileds, _querys, _sorts, _selectors, 1, 1, WebDataSource.CUST_SAL_INFODETAIL.ToString());
                 return _DS.Data;
             }
@@ -1298,18 +1298,18 @@ namespace OwLib
         /// <summary>
         /// 基本报表
         /// </summary>
-        public static DataSet GetDeptBaseFin(string STR_SALCODE)
+        public static DataSet GetDeptBaseFin(String STR_SALCODE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
                 _querys.Add(Expression.Eq("STR_MARKET", "深市"));
-                if (!string.IsNullOrEmpty(STR_SALCODE))
+                if (!String.IsNullOrEmpty(STR_SALCODE))
                     _querys.Add(Expression.Eq("STR_SALCODE", STR_SALCODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SAL_BASIC, _fileds, _querys, _sorts, _selectors, 1, 1, WebDataSource.CUST_SAL_BASIC.ToString());
                 return _DS.Data;
             }
@@ -1323,13 +1323,13 @@ namespace OwLib
         /// <summary>
         /// 历史表现
         /// </summary>
-        public static DataSet GetDeptHisList(string STR_MARKET, string STR_SALCODE, string STR_STATISMONTH, string STR_REPORTTYPE)
+        public static DataSet GetDeptHisList(String STR_MARKET, String STR_SALCODE, String STR_STATISMONTH, String STR_REPORTTYPE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
                 DateTime dateTime = Convert.ToDateTime(STR_STATISMONTH + "-01");
-                string monthLow = dateTime.AddMonths(-11).ToString("yyyy-MM");
+                String monthLow = dateTime.AddMonths(-11).ToString("yyyy-MM");
                 _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
                 _querys.Add(Expression.Eq("STR_REPORTTYPE", HttpUtility.UrlDecode(STR_REPORTTYPE)));
                 _querys.Add(Expression.Eq("STR_SALCODE", STR_SALCODE));
@@ -1340,7 +1340,7 @@ namespace OwLib
                 }
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SAL_OLDDATA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SAL_OLDDATA.ToString());
                 return _DS.Data;
@@ -1355,7 +1355,7 @@ namespace OwLib
         /// <summary>
         /// 历史更多
         /// </summary>
-        public static DataSet GetDeptAllHis(string STR_SALCODE, string STR_MARKET, string STR_REPORTTYPE, string type)
+        public static DataSet GetDeptAllHis(String STR_SALCODE, String STR_MARKET, String STR_REPORTTYPE, String type)
         {
             try
             {
@@ -1365,7 +1365,7 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_SALCODE", STR_SALCODE));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 _sorts.Add(new Order("STR_STATISMONTH", false));
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SAL_OLDDATA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SAL_OLDDATA.ToString());
                 return _DS.Data;
@@ -1394,7 +1394,7 @@ namespace OwLib
         /// 证券账户变动本期分析
         /// </summary>
 
-        public static DataSet GetOpenAcount(string STR_MARKET, string STR_SECTYPE)
+        public static DataSet GetOpenAcount(String STR_MARKET, String STR_SECTYPE)
         {
             try
             {
@@ -1404,7 +1404,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("INT_INVESTORRANK", true));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_ST_INVESTOROA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_ST_INVESTOROA.ToString());
                 return _DS.Data;
@@ -1420,7 +1420,7 @@ namespace OwLib
         /// <summary>
         /// 证券账户变动本期分析  开户主题详细信息
         /// </summary>
-        public static DataSet GetOpenAcountDetail(string STR_MARKET, string STR_SECTYPE, string STR_INVESTORTYPE, string STR_STATISMONTH)
+        public static DataSet GetOpenAcountDetail(String STR_MARKET, String STR_SECTYPE, String STR_INVESTORTYPE, String STR_STATISMONTH)
         {
             try
             {
@@ -1433,7 +1433,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_INVESTOROADETAIL, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1448,7 +1448,7 @@ namespace OwLib
         /// <summary>
         /// 证券账户变动本期分析  开户主题详细信息  全部  弹窗
         /// </summary>
-        public static DataSet GetOpenAcountAll(string STR_MARKET, string STR_SECTYPE, string STR_INVESTORTYPE)
+        public static DataSet GetOpenAcountAll(String STR_MARKET, String STR_SECTYPE, String STR_INVESTORTYPE)
         {
             try
             {
@@ -1459,7 +1459,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_INVESTOROADETAIL, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1475,7 +1475,7 @@ namespace OwLib
         /// <summary>
         /// A股年龄分布
         /// </summary>
-        public static DataSet GetAStockAge(string STR_MARKET)
+        public static DataSet GetAStockAge(String STR_MARKET)
         {
             try
             {
@@ -1484,7 +1484,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_ASSETREDN, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1497,20 +1497,20 @@ namespace OwLib
             }
         }
 
-        public static DataSet GetAStockMoney(string STR_MARKET, string STR_STATISMONTH)
+        public static DataSet GetAStockMoney(String STR_MARKET, String STR_STATISMONTH)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
                 _querys.Add(Expression.Eq("STR_MARKET", STR_MARKET));
-                //if (string.IsNullOrEmpty(STR_STATISMONTH))
+                //if (String.IsNullOrEmpty(STR_STATISMONTH))
                 //    STR_STATISMONTH = DateTime.Now.ToString("yyyy-MM");
                 //_querys.Add(Expression.Le("STR_STATISMONTH", STR_STATISMONTH));
                 //_querys.Add(Expression.Ge("STR_STATISMONTH", Convert.ToDateTime(STR_STATISMONTH + "-01").AddMonths(-11).ToString("yyyy-MM")));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_ASMVDIST, _fileds, _querys, _sorts, _selectors, 1, 12);
                 return _DS;
@@ -1526,7 +1526,7 @@ namespace OwLib
         /// <summary>
         /// A股市值分布
         /// </summary>
-        public static DataSet GetAStockMoneyAll(string STR_MARKET)
+        public static DataSet GetAStockMoneyAll(String STR_MARKET)
         {
             try
             {
@@ -1535,7 +1535,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_ASMVDIST, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1550,7 +1550,7 @@ namespace OwLib
         /// <summary>
         /// A股开户地区分布
         /// </summary>
-        public static DataSet GetOpenArea(string STR_MARKET)
+        public static DataSet GetOpenArea(String STR_MARKET)
         {
             try
             {
@@ -1558,7 +1558,7 @@ namespace OwLib
                 _querys.Add(Expression.Eq("STR_MARKET", STR_MARKET));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_ST_TREGIONFB, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_ST_TREGIONFB.ToString());
                 return _DS.Data;
@@ -1574,21 +1574,21 @@ namespace OwLib
         /// <summary>
         /// A股开户地区分布 详细 
         /// </summary>
-        public static DataSet GetOpenAreaDetail(string STR_MARKET, string STR_REGNANE, string STR_STATISMONTH)
+        public static DataSet GetOpenAreaDetail(String STR_MARKET, String STR_REGNANE, String STR_STATISMONTH)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
                 _querys.Add(Expression.Eq("STR_MARKET", HttpUtility.UrlDecode(STR_MARKET)));
                 _querys.Add(Expression.Eq("STR_REGNANE", HttpUtility.UrlDecode(STR_REGNANE)));
-                if (string.IsNullOrEmpty(STR_STATISMONTH))
+                if (String.IsNullOrEmpty(STR_STATISMONTH))
                     STR_STATISMONTH = DateTime.Now.ToString("yyyy-MM");
                 _querys.Add(Expression.Le("STR_STATISMONTH", STR_STATISMONTH));
                 _querys.Add(Expression.Ge("STR_STATISMONTH", Convert.ToDateTime(STR_STATISMONTH + "-01").AddMonths(-11).ToString("yyyy-MM")));
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_TREGIONFBDETAIL, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1603,7 +1603,7 @@ namespace OwLib
         /// <summary>
         /// A股开户地区分布 详细 
         /// </summary>
-        public static DataSet GetOpenAreaAll(string STR_MARKET, string STR_REGNANE)
+        public static DataSet GetOpenAreaAll(String STR_MARKET, String STR_REGNANE)
         {
             try
             {
@@ -1613,7 +1613,7 @@ namespace OwLib
                 List<Expression> _selectors = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_STATISMONTH", false));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_ST_TREGIONFBDETAIL, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
@@ -1643,7 +1643,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_SECENAME", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.CUST_SEC_INFO, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue, WebDataSource.CUST_SEC_INFO.ToString());
                 return _DS.Data;
             }
@@ -1659,12 +1659,12 @@ namespace OwLib
         /// 获取城市  
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetCityList(string STR_PROVINCECODE)
+        public static DataSet GetCityList(String STR_PROVINCECODE)
         {
             try
             {
                 List<Expression> _querys = new List<Expression>();
-                if (!string.IsNullOrEmpty(STR_PROVINCECODE))
+                if (!String.IsNullOrEmpty(STR_PROVINCECODE))
                 {
                     _querys.Add(Expression.Eq("STR_PROVINCECODE", STR_PROVINCECODE));
                 }
@@ -1672,7 +1672,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_CITY", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_CITY, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -1697,7 +1697,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_CITY", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_PROVINCE, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }
@@ -1723,7 +1723,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_CITY", true));
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet _DS = DataAccess.Query(WebDataSource.CUST_SEC_CITY, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 return _DS;
             }

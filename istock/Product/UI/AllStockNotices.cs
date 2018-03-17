@@ -145,9 +145,9 @@ namespace OwLib
                 if (cell.Grid == m_gridAllStockNotices)
                 {
                     NoticeListNodeBind notice = cell.Row.Tag as NoticeListNodeBind;
-                    string url = notice.url;
+                    String url = notice.url;
                     Process.Start(url);
-                    //string text = StockNewsDataHelper.GetRealTimeInfoByCode(cell.Row.GetCell("colN4").GetString());
+                    //String text = StockNewsDataHelper.GetRealTimeInfoByCode(cell.Row.GetCell("colN4").GetString());
                     //MessageBox.Show(text);
                 }
             }

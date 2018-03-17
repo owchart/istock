@@ -38,28 +38,28 @@ namespace OwLib
         /// <summary>
         /// 添加键和值
         /// </summary>
-        public int Add(string key, string value)
+        public int Add(String key, String value)
         {
             return KeyValues.Add(key, value);
         }
         /// <summary>
         /// 插入键和值
         /// </summary>
-        public void Insert(int index, string key, string value)
+        public void Insert(int index, String key, String value)
         {
             KeyValues.Insert(index, key, value);
         }
         /// <summary>
         /// 删除指定键的项
         /// </summary>
-        public bool RemoveByKey(string key)
+        public bool RemoveByKey(String key)
         {
             return KeyValues.RemoveByKey(key);
         }
         /// <summary>
         /// 删除指定值的项
         /// </summary>
-        public void RemoveByValue(string value)
+        public void RemoveByValue(String value)
         {
             KeyValues.RemoveByObject(value);
         }
@@ -73,14 +73,14 @@ namespace OwLib
         /// <summary>
         /// 由键获取值
         /// </summary>
-        public string GetValue(string key)
+        public String GetValue(String key)
         {
-            return (string)(KeyValues.GetObject(key));
+            return (String)(KeyValues.GetObject(key));
         }
         /// <summary>
         /// 设置对应键对应的值
         /// </summary>
-        public bool SetValue(string key, string value)
+        public bool SetValue(String key, String value)
         {
             return KeyValues.SetObject(key, value);
         }
@@ -88,7 +88,7 @@ namespace OwLib
         /// <summary>
         /// 获取对应键的索引号
         /// </summary>
-        public int IndexOf(string key)
+        public int IndexOf(String key)
         {
             return KeyValues.IndexOf(key);
         }
@@ -96,7 +96,7 @@ namespace OwLib
         /// <summary>
         /// 由索引号获取键
         /// </summary>
-        public string GetKey(int index)
+        public String GetKey(int index)
         {
             return KeyValues.GetKey(index);
         }
@@ -104,9 +104,9 @@ namespace OwLib
         /// <summary>
         /// 由索引值获取值
         /// </summary>
-        public string GetValue(int index)
+        public String GetValue(int index)
         {
-            return (string)KeyValues.GetObject(index);
+            return (String)KeyValues.GetObject(index);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace OwLib
         /// <summary>
         /// 将键和值作为整体添加到集合中
         /// </summary>
-        public int Add(string key, T obj)
+        public int Add(String key, T obj)
         {
             return KeyObjects.Add(new KeyValueObject<T>(key, obj));
         }
@@ -168,7 +168,7 @@ namespace OwLib
         /// <summary>
         /// 将键和值作为整体插入到集合中的指定位置
         /// </summary>
-        public void Insert(int index, string key, T obj)
+        public void Insert(int index, String key, T obj)
         {
             KeyObjects.Insert(index, new KeyValueObject<T>(key, obj));
         }
@@ -176,7 +176,7 @@ namespace OwLib
         /// <summary>
         /// 从集合中删除有指定键的元素
         /// </summary>
-        public bool RemoveByKey(string key)
+        public bool RemoveByKey(String key)
         {
             bool result = false;
             int index = IndexOf(key);
@@ -216,7 +216,7 @@ namespace OwLib
         /// <summary>
         /// 从集合中获取拥有指定键的元素的值
         /// </summary>
-        public T GetObject(string key)
+        public T GetObject(String key)
         {
             T result = default(T);
             int index = IndexOf(key);
@@ -227,7 +227,7 @@ namespace OwLib
         /// <summary>
         /// 从集合中设置拥有指定键的元素的值
         /// </summary>
-        public bool SetObject(string key, T obj)
+        public bool SetObject(String key, T obj)
         {
             bool result = false;
             int index = IndexOf(key);
@@ -242,7 +242,7 @@ namespace OwLib
         /// <summary>
         /// 从集合中获取拥有指定键的元素的索引号
         /// </summary>
-        public int IndexOf(string key)
+        public int IndexOf(String key)
         {
             for (int result = 0; result <= KeyObjects.Count - 1; result++)
             {
@@ -265,7 +265,7 @@ namespace OwLib
         /// <summary>
         /// 判断拥有指定键的元素是否存在
         /// </summary>
-        public bool IsExists(string key)
+        public bool IsExists(String key)
         {
             return (IndexOf(key) != -1);
         }
@@ -273,7 +273,7 @@ namespace OwLib
         /// <summary>
         /// 获取指定索引处元素的键
         /// </summary>
-        public string GetKey(int index)
+        public String GetKey(int index)
         {
             return ((KeyValueObject<T>)KeyObjects[index]).Key;
         }
@@ -305,7 +305,7 @@ namespace OwLib
         /// <summary>
         /// 构造函数
         /// </summary>
-        public KeyValueObject(string key, T value)
+        public KeyValueObject(String key, T value)
         {
             this.key = key;
             this.value = value;
@@ -313,7 +313,7 @@ namespace OwLib
         /// <summary>
         /// 键
         /// </summary>
-        public string Key
+        public String Key
         {
             get
             {
@@ -335,7 +335,7 @@ namespace OwLib
             }
         }
 
-        private readonly string key;
+        private readonly String key;
         private T value;
     }
 
@@ -345,7 +345,7 @@ namespace OwLib
     /// <summary>
     /// 
     /// </summary>
-    public sealed class KeyObjectDictionary<T> : IEnumerable<KeyValuePair<string, T>>
+    public sealed class KeyObjectDictionary<T> : IEnumerable<KeyValuePair<String, T>>
     {
         /// <summary>
         /// 清空集合
@@ -367,7 +367,7 @@ namespace OwLib
         /// <summary>
         /// 判断是否包含指定的键
         /// </summary>
-        public bool ContainsKey(string key)
+        public bool ContainsKey(String key)
         {
             return KeyObjects.ContainsKey(key);
         }
@@ -381,7 +381,7 @@ namespace OwLib
         /// <summary>
         /// 获取指定键的值
         /// </summary>
-        public T this[string key]
+        public T this[String key]
         {
             get
             {
@@ -395,21 +395,21 @@ namespace OwLib
         /// <summary>
         /// 添加键值
         /// </summary>
-        public void Add(string key, T value)
+        public void Add(String key, T value)
         {
             KeyObjects.Add(key, value);
         }
         /// <summary>
         /// 删除指定键的项
         /// </summary>
-        public bool Remove(string key)
+        public bool Remove(String key)
         {
             return KeyObjects.Remove(key);
         }
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerator<KeyValuePair<string, T>> GetEnumerator()
+        public IEnumerator<KeyValuePair<String, T>> GetEnumerator()
         {
             return KeyObjects.GetEnumerator();
         }
@@ -417,7 +417,7 @@ namespace OwLib
         {
             return GetEnumerator();
         }
-        private Dictionary<string, T> KeyObjects = new Dictionary<string, T>();
+        private Dictionary<String, T> KeyObjects = new Dictionary<String, T>();
     }
 
     #endregion

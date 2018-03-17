@@ -29,7 +29,7 @@ namespace OwLib
                 //dc.DoTimerElapsed();
 
 
-                //var codes = dc.GetQuoteCodeList(new List<string>() {"600000.SH"}, FieldIndex.Code);
+                //var codes = dc.GetQuoteCodeList(new List<String>() {"600000.SH"}, FieldIndex.Code);
                 //订阅一个指数行情
 
                 //……
@@ -58,7 +58,7 @@ namespace OwLib
         private static void LoadEM()
         {
             int port = 1860;
-            string host = "114.80.230.29";//服务器端ip地址
+            String host = "114.80.230.29";//服务器端ip地址
 
             IPAddress ip = IPAddress.Parse(host);
             IPEndPoint ipe = new IPEndPoint(ip, port);
@@ -87,6 +87,8 @@ namespace OwLib
             
         }
 
+        private static Dictionary<String, OneStockHisKLineData> m_queryHistoryDatas = new Dictionary<String, OneStockHisKLineData>();
+
         /// <summary>
         /// K线
         /// </summary>
@@ -101,8 +103,22 @@ namespace OwLib
                 OneStockHisKLineData oneStockHisKLineData = new OneStockHisKLineData(innerCode,
                     cycle, 0, 0);
                 oneStockHisKLineData._reqKLineDataRange = ReqKLineDataRange.All;
+                m_queryHistoryDatas[code] = oneStockHisKLineData;
                 oneStockHisKLineData.Start();
             }   
+        }
+
+        /// <summary>
+        /// 退出K线
+        /// </summary>
+        /// <param name="code"></param>
+        public static void QuitHistoryDatas(String code)
+        {
+            if (code != null && m_queryHistoryDatas.ContainsKey(code))
+            {
+                m_queryHistoryDatas[code].Quit();
+                m_queryHistoryDatas.Remove(code);
+            }
         }
 
         /// <summary>
@@ -125,7 +141,7 @@ namespace OwLib
             ConnectManager2.CreateInstance().Request(reqShortLine);
         }
 
-        private static Dictionary<String, TrendData> m_queryTrendLines = new Dictionary<string, TrendData>();
+        private static Dictionary<String, TrendData> m_queryTrendLines = new Dictionary<String, TrendData>();
 
         /// <summary>
         /// 趋势线
@@ -146,13 +162,10 @@ namespace OwLib
 
         public static void QuitTrendLine(String code)
         {
-            if (code != null)
+            if (code != null && m_queryTrendLines.ContainsKey(code))
             {
-                if (m_queryTrendLines.ContainsKey(code))
-                {
-                    m_queryTrendLines[code].Quit();
-                    m_queryTrendLines.Remove(code);
-                }
+                m_queryTrendLines[code].Quit();
+                m_queryTrendLines.Remove(code);
             }
         }
 
@@ -212,7 +225,7 @@ namespace OwLib
             }
         }
 
-        private static Dictionary<String, OneStockDetailData> m_queryLv2s = new Dictionary<string, OneStockDetailData>();
+        private static Dictionary<String, OneStockDetailData> m_queryLv2s = new Dictionary<String, OneStockDetailData>();
 
         /// <summary>
         /// 查询LV2行情
@@ -234,13 +247,10 @@ namespace OwLib
 
         public static void QuitLV2(String code)
         {
-            if (code != null)
+            if (code != null && m_queryLv2s.ContainsKey(code))
             {
-                if (m_queryLv2s.ContainsKey(code))
-                {
-                    m_queryLv2s[code].Quit();
-                    m_queryLv2s.Remove(code);
-                }
+                m_queryLv2s[code].Quit();
+                m_queryLv2s.Remove(code);
             }
         }
 

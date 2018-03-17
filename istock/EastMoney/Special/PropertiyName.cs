@@ -16,13 +16,13 @@ namespace OwLib
         /// 获取或设置列名
         /// </summary>
 		[XmlAttribute]
-		public string NameOfCaption { get; set; }
+		public String NameOfCaption { get; set; }
 
         /// <summary>
         /// 获取或设置单元名
         /// </summary>
 		[XmlAttribute]
-		public string Unit { get; set; }
+		public String Unit { get; set; }
 
 		/// <summary>
 		/// 
@@ -42,13 +42,13 @@ namespace OwLib
         /// 获取或设置类型
         /// </summary>
 		[XmlAttribute]
-		public string Style { get; set; }
+		public String Style { get; set; }
 
         /// <summary>
         /// 获取或设置列名
         /// </summary>
 		[XmlAttribute]
-		public string BandName
+		public String BandName
 		{ get; set; }
         /// <summary>
         /// 获取或设置过滤条件
@@ -65,7 +65,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置数值格式化字符串
         /// </summary>
-        public string FormatString { get; set; }
+        public String FormatString { get; set; }
         /// <summary>
         /// 是否选中
         /// </summary>
@@ -75,13 +75,13 @@ namespace OwLib
 		/// 属性名称，用于传值
 		/// </summary>
 		[XmlElement]
-		public string Name
+		public String Name
 		{ get; set; }
 		/// <summary>
 		/// 属性标题，用于显示
 		/// </summary>
 		[XmlElement]
-		public string Caption
+		public String Caption
 		{ get; set; }
 
 		#region 行列转置设置
@@ -110,7 +110,7 @@ namespace OwLib
         /// 重写的转换成字符串方法
         /// </summary>
         /// <returns></returns>
-		public override string ToString()
+		public override String ToString()
 		{
 			return Caption;
 		}

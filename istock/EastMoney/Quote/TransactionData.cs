@@ -12,8 +12,8 @@ namespace OwLib {
         /// </summary>
 		public class TransactionDataArgs:EventArgs {
             private int _code1;
-            private string _name;
-            private string _message;
+            private String _name;
+            private String _message;
 
             /// <summary>
             /// TransactionDataArgs
@@ -21,7 +21,7 @@ namespace OwLib {
             /// <param name="code"></param>
             /// <param name="name"></param>
             /// <param name="message"></param>
-            public TransactionDataArgs(int code, string name, string message)
+            public TransactionDataArgs(int code, String name, String message)
             {
 				this.Code = code;
 				this.Name = name;
@@ -39,7 +39,7 @@ namespace OwLib {
             /// <summary>
             /// Name
             /// </summary>
-			public string Name
+			public String Name
             {
                 get { return _name; }
                 set { _name = value; }
@@ -48,7 +48,7 @@ namespace OwLib {
             /// <summary>
             /// Message
             /// </summary>
-			public string Message
+			public String Message
             {
                 get { return _message; }
                 set { _message = value; }

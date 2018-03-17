@@ -5,12 +5,12 @@ namespace OwLib
     [Serializable]
     public class ModSpecialtopicCategory : IComparable
     {
-        private string _cateGoryCode;
-        private string _categoryEnName;
-        private string _categoryName;
-        private string _descRiption;
-        private string _id;
-        private string _pCateGoryCode;
+        private String _cateGoryCode;
+        private String _categoryEnName;
+        private String _categoryName;
+        private String _descRiption;
+        private String _id;
+        private String _pCateGoryCode;
         private int _sortCode;
         private double _updateID;
 
@@ -28,7 +28,7 @@ namespace OwLib
             return 1;
         }
 
-        public string CateGoryCode
+        public String CateGoryCode
         {
             get
             {
@@ -40,7 +40,7 @@ namespace OwLib
             }
         }
 
-        public string CategoryEnName
+        public String CategoryEnName
         {
             get
             {
@@ -52,7 +52,7 @@ namespace OwLib
             }
         }
 
-        public string CategoryName
+        public String CategoryName
         {
             get
             {
@@ -64,7 +64,7 @@ namespace OwLib
             }
         }
 
-        public string DescRiption
+        public String DescRiption
         {
             get
             {
@@ -76,7 +76,7 @@ namespace OwLib
             }
         }
 
-        public string ID
+        public String ID
         {
             get
             {
@@ -88,7 +88,7 @@ namespace OwLib
             }
         }
 
-        public string PCateGoryCode
+        public String PCateGoryCode
         {
             get
             {

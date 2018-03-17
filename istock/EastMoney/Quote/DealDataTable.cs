@@ -88,7 +88,7 @@ namespace OwLib
         /// <param name="dataPacket"></param>
         public override void SetData(DataPacket dataPacket)
         {
-            //string testname = typeof(dataPacket).FullName;
+            //String testname = typeof(dataPacket).FullName;
 
             if (dataPacket is ResDealSubscribeDataPacket)
                 SetStockDealData(((ResDealSubscribeDataPacket)dataPacket).OneStockDealDatas);

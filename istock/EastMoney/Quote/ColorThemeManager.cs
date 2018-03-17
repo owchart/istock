@@ -17,7 +17,7 @@ namespace OwLib {
             private set { _currentColorTheme = value; }
         }
 
-        private static readonly Dictionary<string, ColorTheme> ColorThemes = new Dictionary<string, ColorTheme>();
+        private static readonly Dictionary<String, ColorTheme> ColorThemes = new Dictionary<String, ColorTheme>();
 		private static readonly ColorTheme EmColorTheme = new ColorTheme("EM");
 		private static readonly ColorTheme NetColorTheme = new ColorTheme("Net");
         private static ColorTheme _currentColorTheme;
@@ -429,7 +429,7 @@ namespace OwLib {
         /// <summary>
         /// 设置当前的颜色主题
         /// </summary>
-		public static void SetCurrentColorThem(string colorThemeName) {
+		public static void SetCurrentColorThem(String colorThemeName) {
 			if(ColorThemes.ContainsKey(colorThemeName))
 				CurrentColorTheme = ColorThemes[colorThemeName];
 		}
@@ -444,7 +444,7 @@ namespace OwLib {
 		/// <summary>
 		///   ColorTheme的名称
 		/// </summary>
-		public string ColorPlan
+		public String ColorPlan
 		{
 		    get { return _colorPlan; }
 		    private set { _colorPlan = value; }
@@ -454,7 +454,7 @@ namespace OwLib {
 		///   根据一个名字创建一个ColorTheme
 		/// </summary>
         /// <param name = "colorPlan"></param>
-		public ColorTheme(string colorPlan) {
+		public ColorTheme(String colorPlan) {
 			ColorPlan = colorPlan;
 		}
 
@@ -1550,6 +1550,6 @@ namespace OwLib {
         /// </summary>
         public Color DeepAnalysisQ4;
 
-        private string _colorPlan;
+        private String _colorPlan;
 	}
 }

@@ -34,7 +34,7 @@ namespace OwLib
         /// <param name="page">页数</param>
         /// <param name="pageSize">每页显示多少条</param>
         /// <returns></returns>
-        public static DataSet Query(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
+        public static DataSet Query(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace OwLib
         /// <param name="pageSize">每页显示多少条</param>
         /// <param name="statisticsEngName">统计的名称</param>
         /// <returns></returns>
-        public static ResultData QueryByStatistic(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, string statisticsEngName)
+        public static ResultData QueryByStatistic(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, String statisticsEngName)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace OwLib
         /// <param name="page">页数</param>
         /// <param name="pageSize">每页显示多少条</param>
         /// <returns></returns>
-        public static ResultData QueryByStatistic(string dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
+        public static ResultData QueryByStatistic(String dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace OwLib
         /// <param name="pageSize">每页显示多少条</param>
         /// <param name="statisticsEngName">统计的名称</param>
         /// <returns></returns>
-        public static PagingData QueryByStatisticForPaging(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, string statisticsEngName)
+        public static PagingData QueryByStatisticForPaging(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, String statisticsEngName)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace OwLib
             }
             catch (Exception ex)
             {
-                string errMsg = string.Empty;
+                String errMsg = String.Empty;
                 errMsg += "dataSource：" + dataSource.ToString();
                 errMsg += ",fileds：";
                 for (int i = 0; i < fileds.Length; i++)
@@ -163,7 +163,7 @@ namespace OwLib
             }
             catch (Exception ex)
             {
-                string errMsg = string.Empty;
+                String errMsg = String.Empty;
                 foreach (DataTransmission DT in DTList)
                 {
                     errMsg += "dataSource：" + DT.DataSource.ToString();
@@ -205,7 +205,7 @@ namespace OwLib
             }
             catch (Exception ex)
             {
-                string errMsg = string.Empty;
+                String errMsg = String.Empty;
                 errMsg += "dataSource：" + DT.DataSource.ToString();
                 errMsg += ",fileds：";
                 for (int i = 0; i < DT.Fields.Length; i++)
@@ -245,7 +245,7 @@ namespace OwLib
             }
             catch (Exception ex)
             {
-                string errMsg = string.Empty;
+                String errMsg = String.Empty;
                 errMsg += "dataSource：" + DT.DataSource.ToString();
                 errMsg += ",fileds：";
                 for (int i = 0; i < DT.Fields.Length; i++)
@@ -281,7 +281,7 @@ namespace OwLib
         /// <param name="page">页数</param>
         /// <param name="pageSize">每页显示多少条</param>
         /// <returns></returns>
-        public static PagingData PQuery(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
+        public static PagingData PQuery(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace OwLib
             catch (Exception ex)
             {
 
-                string errMsg = string.Empty;
+                String errMsg = String.Empty;
                 errMsg += "dataSource：" + dataSource.ToString();
                 errMsg += ",fileds：";
                 for (int i = 0; i < fileds.Length; i++)
@@ -323,7 +323,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static object QueryIndex(Dictionary<string, string> obj)
+        public static object QueryIndex(Dictionary<String, String> obj)
         {
             try
             {
@@ -333,8 +333,8 @@ namespace OwLib
             }
             catch (Exception ex)
             {
-                string _str = string.Empty;
-                foreach (KeyValuePair<string, string> entry in obj)
+                String _str = String.Empty;
+                foreach (KeyValuePair<String, String> entry in obj)
                 {
                     _str += "{[" + entry.Key.ToString();
                     _str += entry.Value.ToString() + "]}\n";
@@ -350,7 +350,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static object QueryIndex(string obj)
+        public static object QueryIndex(String obj)
         {
             try
             {
@@ -392,20 +392,20 @@ namespace OwLib
         /// <summary>
         /// 获取二维表的报告期
         /// 获取二维表父报表下所有时间报告期：
-        ///string tcmd = "$-edbrpt\r\n$BIVRPTIDS(name=PARENTREPORTID)\r\n";
+        ///String tcmd = "$-edbrpt\r\n$BIVRPTIDS(name=PARENTREPORTID)\r\n";
         ///BIVRPTIDS 为获取父报表的命令，返回为所有子报表的时间，返回DataTable,table名PARENTREPORTID
         ///例如：$-edbrpt\r\n$BIVRPTIDS(name=RPT00004)\r\n
         ///返回datatable  里面值为  2012-06-01
         /// </summary>
         /// <param name="cmd">$-edbrpt\r\n$BIVRPTIDS(name=RPT00004)\r\n</param>
         /// <returns>2012-06-01</returns>
-        public static List<string> QueryMacroParentReportDate(MacroIndicateParam param)
+        public static List<String> QueryMacroParentReportDate(MacroIndicateParam param)
         {
             try
             {
                 //DataQuery _DQ = new DataQuery();
                 DateTime dt = DateTime.Now;
-                List<string> strList=new List<string>();
+                List<String> strList=new List<String>();
                 DataSet ds=(DataSet)IDataQuery.QueryMacroIndicate("$-edbrpt\r\n$BIVRPTIDS(name=" + param.ToString() + ")\r\n");
                 foreach(DataRow row in ds.Tables[0].Rows)
                 {
@@ -425,7 +425,7 @@ namespace OwLib
         /// 通过报告期获取二维表的数数据
         /// 获取某一个子报表的的报表
         ///命令：
-        ///string tcmd = "$-edbrpt\r\n$BIVRPT(name=SONREPORTID)\r\n"; 
+        ///String tcmd = "$-edbrpt\r\n$BIVRPT(name=SONREPORTID)\r\n"; 
         ///SONREPORTID 是子报表的ID，格式是PARENTREPORTID_DATE  例如:RPT00004_2012-06-01
         /// </summary>
         /// <param name="param"></param>
@@ -451,7 +451,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static object QueryIndicate(string obj)
+        public static object QueryIndicate(String obj)
         {
             try
             {
@@ -513,7 +513,7 @@ namespace OwLib
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static DataSet QueryStockIndicate(string param)
+        public static DataSet QueryStockIndicate(String param)
         {
             try
             {
@@ -535,7 +535,7 @@ namespace OwLib
         /// <param name="sourceName">源名</param>
         /// <param name="objList">写入的对象集合</param>
         /// <returns></returns>
-        public static bool MongoInsert(string sourceName, List<object> objList)
+        public static bool MongoInsert(String sourceName, List<object> objList)
         {
             bool ret = false;
             try
@@ -557,7 +557,7 @@ namespace OwLib
         /// <param name="sourceName">源名</param>
         /// <param name="exp">expressiong 条件</param>
         /// <returns></returns>
-        public static bool MongoDelete(string sourceName, List<Expression> exp)
+        public static bool MongoDelete(String sourceName, List<Expression> exp)
         {
             bool ret = false;
             try
@@ -585,7 +585,7 @@ namespace OwLib
         /// <param name="pageSize"></param>
         /// <param name="isPaging"></param>
         /// <returns></returns>
-        public static List<T> MongoQuery<T>(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool isPaging)
+        public static List<T> MongoQuery<T>(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool isPaging)
         {
             try
             {
@@ -613,7 +613,7 @@ namespace OwLib
         /// <param name="isPaging"></param>
         /// <param name="total">总记录数</param>
         /// <returns></returns>
-        public static List<T> MongoQueryPaging<T>(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool isPaging, out long total)
+        public static List<T> MongoQueryPaging<T>(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool isPaging, out long total)
         {
             try
             {
@@ -655,7 +655,7 @@ namespace OwLib
         /// <param name="exp">List<Expression></param>
         /// <param name="obj">更新对象<object></param>
         /// <returns></returns>
-        public static bool MongoUpdate(string sourceName, List<Expression> exp, object obj)
+        public static bool MongoUpdate(String sourceName, List<Expression> exp, object obj)
         {
             bool ret = false;
             try
@@ -684,7 +684,7 @@ namespace OwLib
         /// <param name="IsPaging">是否分页（只在统计分页方法的时候有效）</param>
         /// <param name="statisticsEngName">统计的名称</param>
         /// <returns></returns>
-        public static DataTransmission GetData(WebDataSource dataSource, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, string statisticsEngName)
+        public static DataTransmission GetData(WebDataSource dataSource, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, String statisticsEngName)
         {
             DataTransmission data = GetData(dataSource.ToString(), fileds, filters, orders, selectors, page, pageSize, IsPaging, statisticsEngName);
             return data;
@@ -702,7 +702,7 @@ namespace OwLib
         /// <param name="IsPaging">是否分页（只在统计分页方法的时候有效）</param>
         /// <param name="statisticsEngName">统计的名称</param>
         /// <returns></returns>
-        public static DataTransmission GetData(string dataSourceStr, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, string statisticsEngName)
+        public static DataTransmission GetData(String dataSourceStr, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, String statisticsEngName)
         {
             DataTransmission data = new DataTransmission();
             data.DataSource = dataSourceStr;
@@ -717,7 +717,7 @@ namespace OwLib
             data.StatisticsEngName = statisticsEngName;
             return data;
         }
-        public static DataTransmission GetData(string dataSourceStr, string dataTableName, string[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, string statisticsEngName)
+        public static DataTransmission GetData(String dataSourceStr, String dataTableName, String[] fileds, List<Expression> filters, List<Order> orders, List<Expression> selectors, int page, int pageSize, bool IsPaging, String statisticsEngName)
         {
             DataTransmission data = new DataTransmission();
             data.DataSource = dataSourceStr;
@@ -738,7 +738,7 @@ namespace OwLib
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static String GetRealTimeInfo(string url)
+        public static String GetRealTimeInfo(String url)
         {
             try
             {

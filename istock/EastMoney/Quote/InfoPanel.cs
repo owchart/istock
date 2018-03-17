@@ -82,11 +82,11 @@ namespace OwLib {
             IsSplitter = false;
 		}
 
-        private string _name;
+        private String _name;
         /// <summary>
         /// 名称
         /// </summary>
-		public string Name {
+		public String Name {
             get { return _name; }
             set { this._name = value; }
         }
@@ -200,11 +200,11 @@ namespace OwLib {
 			VLine = false;
 		}
 
-        private string _name;
+        private String _name;
         /// <summary>
         /// 名称
         /// </summary>
-		public string Name {
+		public String Name {
             get { return _name; }
             set { this._name = value; }
         }
@@ -238,11 +238,11 @@ namespace OwLib {
 		public InfoPanelChart() {
 			Rows = new List<InfoPanelChartRow>();
 		}
-        private string _name;
+        private String _name;
         /// <summary>
         /// 名称
         /// </summary>
-		public string Name {
+		public String Name {
             get { return _name; }
             set { this._name = value; }
         }
@@ -351,11 +351,11 @@ namespace OwLib {
             MarginBottom = 0;
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
 		/// 项名称
 		/// </summary>
-		public string Caption {
+		public String Caption {
             get { return _caption; }
             set { this._caption = value; }
         }
@@ -369,11 +369,11 @@ namespace OwLib {
             set { this._captionAlgin = value; }
         }
 
-        private string _valueField;
+        private String _valueField;
 		/// <summary>
 		/// 值域
 		/// </summary>
-		public string ValueField {
+		public String ValueField {
             get { return _valueField; }
             set { this._valueField = value; }
         }
@@ -450,14 +450,14 @@ namespace OwLib {
             set { this._markLocation = value; }
         }
 
-        private string _markStr;
+        private String _markStr;
         /// <summary>
         /// 角标内容
         /// </summary>
-        public string MarkValue{
+        public String MarkValue{
             get{
                 if (MarkLocation == MarkLocation.None){
-                    return string.Empty;
+                    return String.Empty;
                 }
                 return _markStr;
             }
@@ -525,38 +525,38 @@ namespace OwLib {
 	/// </summary>
 	public class NewsReportItem {
 
-        private string _date;
+        private String _date;
         /// <summary>
         /// 日期
         /// </summary>
-		public string Date {
+		public String Date {
             get { return _date; }
             set { this._date = value; }
         }
 
-        private string _category;
+        private String _category;
         /// <summary>
         /// 类别
         /// </summary>
-		public string Category {
+		public String Category {
             get { return _category; }
             set { this._category = value; }
         }
 
-        private string _title;
+        private String _title;
         /// <summary>
         /// 标题
         /// </summary>
-		public string Title {
+		public String Title {
             get { return _title; }
             set { this._title = value; }
         }
 
-        private string _content;
+        private String _content;
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content { 
+        public String Content { 
             get { return _content; }
             set { this._content = value; }
         }
@@ -564,27 +564,27 @@ namespace OwLib {
 
     public class TopBannerMenuItem {
         public TopBannerMenuItem() {
-            Caption = string.Empty;
-            Url = string.Empty;
-            UrlTitle = string.Empty;
+            Caption = String.Empty;
+            Url = String.Empty;
+            UrlTitle = String.Empty;
             Width = 0;
             IsSelected = false;
         }
 
-        private string _caption;
-        public string Caption {
+        private String _caption;
+        public String Caption {
             get { return _caption; }
             set { this._caption = value; }
         }
 
-        private string _url;
-        public string Url {
+        private String _url;
+        public String Url {
             get { return _url; }
             set { this._url = value; }
         }
 
-        private string _urlTitle;
-        public string UrlTitle {
+        private String _urlTitle;
+        public String UrlTitle {
             get { return _urlTitle; }
             set { this._urlTitle = value; }
         }

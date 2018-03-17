@@ -24,9 +24,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(int obj, string formatstr)
+        public static String Format(int obj, String formatstr)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -44,7 +44,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(int obj, int n)
+        public static String Format(int obj, int n)
         {
             return Format(obj, "N" + n);
         }
@@ -55,7 +55,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(int obj, int n)
+        public static String Percent(int obj, int n)
         {
             return Format(obj, "P" + n);
         }
@@ -66,7 +66,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(int obj, int n)
+        public static String Currency(int obj, int n)
         {
             return Format(obj, "C" + n);
         }
@@ -78,9 +78,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, short obj)
+        public static String Format(String formatstr, short obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -98,7 +98,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(short obj, int n)
+        public static String Format(short obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -109,7 +109,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(short obj, int n)
+        public static String Percent(short obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -120,7 +120,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(short obj, int n)
+        public static String Currency(short obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -133,9 +133,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, long obj)
+        public static String Format(String formatstr, long obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -153,7 +153,7 @@ namespace OwLib
         /// <param name="obj">长整型数</param>
         /// <param name="n"></param>
         /// <returns>格式化结果</returns>
-        public static string Format(long obj, int n)
+        public static String Format(long obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -163,7 +163,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(long obj, int n)
+        public static String Percent(long obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -174,7 +174,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(long obj, int n)
+        public static String Currency(long obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -185,9 +185,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, Decimal obj)
+        public static String Format(String formatstr, Decimal obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -205,7 +205,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(Decimal obj, int n)
+        public static String Format(Decimal obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -216,7 +216,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(Decimal obj, int n)
+        public static String Percent(Decimal obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -227,7 +227,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(Decimal obj, int n)
+        public static String Currency(Decimal obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -239,9 +239,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, float obj)
+        public static String Format(String formatstr, float obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -259,7 +259,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(float obj, int n)
+        public static String Format(float obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -270,7 +270,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(float obj, int n)
+        public static String Percent(float obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -281,7 +281,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(float obj, int n)
+        public static String Currency(float obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -293,9 +293,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, double obj)
+        public static String Format(String formatstr, double obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -313,7 +313,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(double obj, int n)
+        public static String Format(double obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -324,7 +324,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(double obj, int n)
+        public static String Percent(double obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -335,7 +335,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(double obj, int n)
+        public static String Currency(double obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -347,9 +347,9 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="defaultstr"></param>
         /// <returns></returns>
-        public static string Format(string formatstr, object obj, string defaultstr)
+        public static String Format(String formatstr, object obj, String defaultstr)
         {
-            string result = "";
+            String result = "";
             if (obj == null || obj == DBNull.Value)
                 result = defaultstr;
             else
@@ -372,7 +372,7 @@ namespace OwLib
         /// <param name="formatstr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string Format(string formatstr, object obj)
+        public static String Format(String formatstr, object obj)
         {
             return Format(formatstr, obj, "--");
         }
@@ -383,7 +383,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(object obj, int n)
+        public static String Format(object obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -395,7 +395,7 @@ namespace OwLib
         /// <param name="n"></param>
         /// <param name="defaultstr"></param>
         /// <returns></returns>
-        public static string Format(object obj, int n, string defaultstr)
+        public static String Format(object obj, int n, String defaultstr)
         {
             return Format("N" + n, obj, defaultstr);
         }
@@ -406,7 +406,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(object obj, int n)
+        public static String Percent(object obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -417,7 +417,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(object obj, int n)
+        public static String Currency(object obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -430,9 +430,9 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="defaultstr"></param>
         /// <returns></returns>
-        public static string Format(string formatstr, string obj, string defaultstr)
+        public static String Format(String formatstr, String obj, String defaultstr)
         {
-            string result = "";
+            String result = "";
             if (obj == null)
                 result = defaultstr;
             else
@@ -455,7 +455,7 @@ namespace OwLib
         /// <param name="formatstr">格式化字符串</param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string Format(string formatstr, string obj)
+        public static String Format(String formatstr, String obj)
         {
             return Format(formatstr, obj, "--");
         }
@@ -466,7 +466,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Format(string obj, int n)
+        public static String Format(String obj, int n)
         {
             return Format("N" + n, obj);
         }
@@ -478,7 +478,7 @@ namespace OwLib
         /// <param name="n"></param>
         /// <param name="defaultstr"></param>
         /// <returns></returns>
-        public static string Format(string obj, int n, string defaultstr)
+        public static String Format(String obj, int n, String defaultstr)
         {
             return Format("N" + n, obj, defaultstr);
         }
@@ -489,7 +489,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Percent(string obj, int n)
+        public static String Percent(String obj, int n)
         {
             return Format("P" + n, obj);
         }
@@ -500,7 +500,7 @@ namespace OwLib
         /// <param name="obj"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Currency(string obj, int n)
+        public static String Currency(String obj, int n)
         {
             return Format("C" + n, obj);
         }
@@ -539,9 +539,9 @@ namespace OwLib
         /// <param name="formatstr">格式</param>
         /// <param name="obj">要格式的数据</param>
         /// <returns>返回格式后的数据</returns>
-        public static string Format(string formatstr, DateTime obj)
+        public static String Format(String formatstr, DateTime obj)
         {
-            string result = "";
+            String result = "";
             try
             {
                 result = obj.ToString(formatstr);
@@ -560,7 +560,7 @@ namespace OwLib
         /// <param name="formatstr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(string formatstr, DateTime obj)
+        public static String FormatDate(String formatstr, DateTime obj)
         {
             if (obj.Year == 1900)
                 return "1900-01-01";
@@ -573,7 +573,7 @@ namespace OwLib
         /// <param name="formatstr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(string formatstr, string obj)
+        public static String FormatDate(String formatstr, String obj)
         {
             if (obj.IndexOf("1900") == 0)
                 return "1900-01-01";
@@ -586,7 +586,7 @@ namespace OwLib
         /// <param name="formatstr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(string formatstr, object obj)
+        public static String FormatDate(String formatstr, object obj)
         {
             DateTime obj1 = Normal.ParseDateTime(obj);
             return FormatDate(formatstr, obj1);
@@ -597,7 +597,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(DateTime obj)
+        public static String FormatDate(DateTime obj)
         {
             return FormatDate("yyyy-MM-dd", obj);
         }
@@ -607,7 +607,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(string obj)
+        public static String FormatDate(String obj)
         {
             return FormatDate("yyyy-MM-dd", obj);
         }
@@ -617,7 +617,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDate(object obj)
+        public static String FormatDate(object obj)
         {
             return FormatDate("yyyy-MM-dd", obj);
         }
@@ -627,7 +627,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDateTime(DateTime obj)
+        public static String FormatDateTime(DateTime obj)
         {
             return FormatDate("yyyy-MM-dd HH:mm:ss", obj);
         }
@@ -637,7 +637,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDateTime(string obj)
+        public static String FormatDateTime(String obj)
         {
             return FormatDate("yyyy-MM-dd HH:mm:ss", obj);
         }
@@ -647,7 +647,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string FormatDateTime(object obj)
+        public static String FormatDateTime(object obj)
         {
             return FormatDate("yyyy-MM-dd HH:mm:ss", obj);
         }

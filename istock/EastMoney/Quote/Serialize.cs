@@ -27,11 +27,11 @@ namespace OwLib {
         /// <summary>
         /// 名称
         /// </summary>
-		public string name;
+		public String name;
         /// <summary>
         /// 
         /// </summary>
-		public string des;
+		public String des;
         /// <summary>
         /// 
         /// </summary>
@@ -59,23 +59,23 @@ namespace OwLib {
         /// <summary>
         /// 密码
         /// </summary>
-		public string password;
+		public String password;
         /// <summary>
         /// 
         /// </summary>
-		public string src;
+		public String src;
         /// <summary>
         /// 
         /// </summary>
-		public string paramtip;
+		public String paramtip;
         /// <summary>
         /// 
         /// </summary>
-		public string help;
+		public String help;
         /// <summary>
         /// 
         /// </summary>
-		public string flag;
+		public String flag;
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +100,7 @@ namespace OwLib {
         /// <summary>
         /// 名称
         /// </summary>
-		public string name;
+		public String name;
         /// <summary>
         /// 最小值
         /// </summary>

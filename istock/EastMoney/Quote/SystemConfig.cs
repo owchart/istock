@@ -12,19 +12,19 @@ namespace OwLib
         /// <summary>
         /// 连接模式
         /// </summary>
-        public string ConnectMode ;
+        public String ConnectMode ;
         /// <summary>
         /// TCP地址
         /// </summary>
-        public string TcpAddress ;
+        public String TcpAddress ;
         /// <summary>
         /// TCP端口
         /// </summary>
-        public string TcpPort ;
+        public String TcpPort ;
         /// <summary>
         /// http连接字符串
         /// </summary>
-        public string HttpConnectStr ;
+        public String HttpConnectStr ;
     }
 
     ///<summary>
@@ -39,7 +39,7 @@ namespace OwLib
             LastSortMode = SortMode.Mode_Code;
             LastSortFieldName = "DifferRange";
             LastSelectedBlockId = -1;
-            IndexNames = new List<string>(30);
+            IndexNames = new List<String>(30);
             IndexNames.Add("indexkline");
             IndexNames.Add("indexvol");
             IndexNames.Add("indexmacd");
@@ -155,7 +155,7 @@ namespace OwLib
         /// <summary>
         /// 最后一次排序的指标
         /// </summary>
-        public static string LastSortFieldName ;
+        public static String LastSortFieldName ;
 
         /// <summary>
         /// 最后一次排序的顺序
@@ -164,14 +164,14 @@ namespace OwLib
         /// <summary>
         /// 最后一次报价显示的TabName
         /// </summary>
-        public static string LastQuoteTabName ;
+        public static String LastQuoteTabName ;
 
         /// <summary>
         /// 已过时，未使用，在手机终端使用的最后一次选择的非自选股的板块名
         /// </summary>
-        private static string _lastSelectBlockNameNonZixuan;
+        private static String _lastSelectBlockNameNonZixuan;
 
-        public static string LastSelectBlockNameNonZixuan
+        public static String LastSelectBlockNameNonZixuan
         {
             get { return SystemConfig._lastSelectBlockNameNonZixuan; }
             set { SystemConfig._lastSelectBlockNameNonZixuan = value; }
@@ -187,7 +187,7 @@ namespace OwLib
         /// <summary>
         /// 缺省情况下5个窗口的缺省指标名
         /// </summary>
-        public static List<string> IndexNames ;
+        public static List<String> IndexNames ;
         #endregion
 
 

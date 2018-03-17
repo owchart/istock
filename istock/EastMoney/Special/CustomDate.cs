@@ -13,7 +13,7 @@ namespace OwLib
         /// 时间单位类型，如年，月，日
         /// </summary>
 		[XmlAttribute]
-		public string CalType { get; set; }
+		public String CalType { get; set; }
 
         /// <summary>
         /// 对应的时间单位的值，如年：2013，月：12
@@ -45,7 +45,7 @@ namespace OwLib
         /// 偏移量的单位类型（年，季，月，周，日）
         /// </summary>
         [XmlAttribute]
-        public string MaxValueType { get; set; }
+        public String MaxValueType { get; set; }
 
         /// <summary>
         /// 过滤值的类型（时间(0)，整型(1)or字符串类型(2)），通过该值来确定过滤值

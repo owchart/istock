@@ -18,9 +18,9 @@ namespace OwLib
         /// <param name="ExportTypeStr">“输出类型”(ExportType)属性字符串</param>
         /// <param name="fieldIndex">其对应的的FieldIndex</param>
         /// <returns></returns>
-        public static Type GetExportType(string ExportTypeStr, FieldIndex fieldIndex)
+        public static Type GetExportType(String ExportTypeStr, FieldIndex fieldIndex)
         {
-            if (string.IsNullOrEmpty(ExportTypeStr))
+            if (String.IsNullOrEmpty(ExportTypeStr))
             {
                 short fieldIndexSeq = (short)fieldIndex;
 
@@ -122,7 +122,7 @@ namespace OwLib
         /// <summary>
         /// 界面字段对应的颜色设置信息
         /// </summary>
-        public List<string> ColorSetting;
+        public List<String> ColorSetting;
 
         /// <summary>
         /// 输出格式
@@ -162,7 +162,7 @@ namespace OwLib
         /// </summary>
         H,
         /// <summary>
-        /// 判断为零的话指标返回string.Empty
+        /// 判断为零的话指标返回String.Empty
         /// </summary>
         E
     }
@@ -175,7 +175,7 @@ namespace OwLib
         /// <summary>
         /// 横线字符串
         /// </summary>
-        public static string HorStr = "─";
+        public static String HorStr = "─";
         /// <summary>
         /// 判零规则的构造函数
         /// </summary>
@@ -193,7 +193,7 @@ namespace OwLib
         /// </summary>
         public CompareTarget CompareTarget;
         /// <summary>
-        /// 若为零的标识符“─”或者string.Empty
+        /// 若为零的标识符“─”或者String.Empty
         /// </summary>
         public ZeroTypeFlag ZeroTypeFlag;
 
@@ -205,7 +205,7 @@ namespace OwLib
         /// <summary>
         /// 返回String.Empty还是横线
         /// </summary>
-        public string ZeroStr { get { return ZeroTypeFlag == ZeroTypeFlag.E ? string.Empty : HorStr; } }
+        public String ZeroStr { get { return ZeroTypeFlag == ZeroTypeFlag.E ? String.Empty : HorStr; } }
 
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace OwLib
         /// <param name="originalData">原始值</param>
         /// <param name="comparedIndexValue">判零的比较字段的值</param>
         /// <returns></returns>
-        public bool IsZero(string originalData, float comparedIndexValue)
+        public bool IsZero(String originalData, float comparedIndexValue)
         {
             if (CompareTarget == CompareTarget.SpecialFieldIndex)
                 return comparedIndexValue >= -float.Epsilon
@@ -268,7 +268,7 @@ namespace OwLib
         /// <param name="calMethod"></param>
         /// <param name="zoomNum"></param>
         /// <param name="numFormat"></param>
-        public CalculateRule(CalMethod calMethod, float zoomNum, string numFormat)
+        public CalculateRule(CalMethod calMethod, float zoomNum, String numFormat)
         {
             this.CalMethod = calMethod;
             this.ZoomNum = zoomNum;
@@ -286,15 +286,15 @@ namespace OwLib
         /// <summary>
         /// 保留小数位(eg. "F2")
         /// </summary>
-        public string NumFormat;
+        public String NumFormat;
         /// <summary>
         /// 获得计算后的结果
         /// </summary>
         /// <param name="originalData"></param>
         /// <returns></returns>
-        public string GetCalculatedString(string originalData)
+        public String GetCalculatedString(String originalData)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             double tempValue;
 
             if (double.TryParse(originalData, out tempValue))
@@ -337,20 +337,20 @@ namespace OwLib
         /// NRule的构造函数
         /// </summary>
         /// <param name="format"></param>
-        public NRule(string format)
+        public NRule(String format)
         { this.FormatStr = format; }
 
         /// <summary>
         /// 精度保留格式
         /// </summary>
-        public string FormatStr;
+        public String FormatStr;
 
         /// <summary>
         /// 获得精度保留后的字符串
         /// </summary>
         /// <param name="strValue"></param>
         /// <returns></returns>
-        public string GetNFormatString(string strValue)
+        public String GetNFormatString(String strValue)
         {
             double tempValue;
             if (double.TryParse(strValue, out tempValue))
@@ -376,21 +376,21 @@ namespace OwLib
         /// PRule
         /// </summary>
         /// <param name="profix"></param>
-        public PRule(string profix)
+        public PRule(String profix)
         { this.Profix = profix; }
         /// <summary>
         /// 前缀内容
         /// </summary>
-        public string Profix;
+        public String Profix;
 
         /// <summary>
         /// 获得运行前缀规则后的格式字符串
         /// </summary>
         /// <param name="originalData"></param>
         /// <returns></returns>
-        public string GetProfixedString(string originalData)
+        public String GetProfixedString(String originalData)
         {
-            string result = originalData;
+            String result = originalData;
 
             double value;
             if (Profix.Equals("$0"))
@@ -398,12 +398,12 @@ namespace OwLib
                 if (double.TryParse(originalData, out value))
                 {
                     if (value > 0)
-                        result = string.Format("+{0}", originalData);
+                        result = String.Format("+{0}", originalData);
                 }
             }
             else
             {
-                result = string.Format("{0}{1}", Profix, originalData);
+                result = String.Format("{0}{1}", Profix, originalData);
             }
 
             return result;
@@ -418,22 +418,22 @@ namespace OwLib
         /// 后缀规则
         /// </summary>
         /// <param name="suffix"></param>
-        public QRule(string suffix)
+        public QRule(String suffix)
         { this.Suffix = suffix; }
         /// <summary>
         /// 后缀
         /// </summary>
-        public string Suffix;
+        public String Suffix;
 
         /// <summary>
         /// 获得运行后缀规则后的格式字符串
         /// </summary>
         /// <param name="originalData"></param>
         /// <returns></returns>
-        public string GetSuffixedString(string originalData)
+        public String GetSuffixedString(String originalData)
         {
 
-            return string.Format("{0}{1}", originalData, Suffix);
+            return String.Format("{0}{1}", originalData, Suffix);
         }
     }
     /// <summary>
@@ -445,21 +445,21 @@ namespace OwLib
         /// 特殊规则构造函数
         /// </summary>
         /// <param name="specialContent"></param>
-        public SRule(string specialContent)
+        public SRule(String specialContent)
         { this.SpecialContent = specialContent; }
         /// <summary>
         /// 特殊规则内容20
         /// </summary>
-        public string SpecialContent;
+        public String SpecialContent;
 
         /// <summary>
         /// 获得运行后缀规则后的格式字符串
         /// </summary>
         /// <param name="originalData"></param>
         /// <returns></returns>
-        public string GetSpecialedString(string originalData)
+        public String GetSpecialedString(String originalData)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             int data;
             double dData;
             long lData;
@@ -490,57 +490,57 @@ namespace OwLib
                     if (double.TryParse(originalData, out dData))
                     {
                         if ((dData < 10000 && dData > 0) || (dData > -10000 && dData < 0))
-                            return string.Format("{0:F0}", dData);
+                            return String.Format("{0:F0}", dData);
 
                         dData /= 10000;
                         if (dData >= 1000000 || dData <= -1000000) //100亿
                         {
                             dData /= 10000;
-                            result = string.Format("{0:F0}亿", dData);
+                            result = String.Format("{0:F0}亿", dData);
                         }
                         else if (dData >= 10000 || dData <= -10000) //99.99亿
                         {
                             dData /= 10000;
-                            result = string.Format("{0:F2}亿", dData);
+                            result = String.Format("{0:F2}亿", dData);
 
                         }
                         else if (dData >= 100 || dData <= -100) //100~9999万
                         {
-                            result = string.Format("{0:F0}万", dData);
+                            result = String.Format("{0:F0}万", dData);
                         }
                         else if (dData >= 1 || dData <= -1) //99.99万
                         {
-                            result = string.Format("{0:F2}万", dData);
+                            result = String.Format("{0:F2}万", dData);
                         }
                         else
-                            result = string.Format("{0:F0}", dData);
+                            result = String.Format("{0:F0}", dData);
                     }
                     else if (long.TryParse(originalData, out lData))
                     {
                         if ((lData < 10000 && lData > 0) || (lData > -10000 && lData < 0))
-                            return string.Format("{0:F0}", lData);
+                            return String.Format("{0:F0}", lData);
                         lData /= 10000;
                         if (lData >= 1000000 || lData <= -1000000) //100亿
                         {
                             lData /= 10000;
-                            result = string.Format("{0:F0}亿", lData);
+                            result = String.Format("{0:F0}亿", lData);
                         }
                         else if (lData >= 10000 || lData <= -10000) //99.99亿
                         {
                             lData /= 10000;
-                            result = string.Format("{0:F2}亿", lData);
+                            result = String.Format("{0:F2}亿", lData);
 
                         }
                         else if (lData >= 100 || lData <= -100) //100~9999万
                         {
-                            result = string.Format("{0:F0}万", lData);
+                            result = String.Format("{0:F0}万", lData);
                         }
                         else if (lData >= 1 || lData <= -1) //99.99万
                         {
-                            result = string.Format("{0:F2}万", lData);
+                            result = String.Format("{0:F2}万", lData);
                         }
                         else
-                            result = string.Format("{0:F0}", lData);
+                            result = String.Format("{0:F0}", lData);
                     }
                     break;
 
@@ -586,32 +586,32 @@ namespace OwLib
     public static class FieldInfoCfgFileIO
     {
         #region 配置文件属性名称
-        private const string FieldIndexAttriName = "Field";
-        private const string NameAttriName = "Name";
-        private const string FormatAttriName = "Format";
-        private const string ColorAttriName = "Color";
-        private const string ExportTypeAttriName = "ExportType";
-        private const string ExportFormatAttriName = "ExportFormat";
+        private const String FieldIndexAttriName = "Field";
+        private const String NameAttriName = "Name";
+        private const String FormatAttriName = "Format";
+        private const String ColorAttriName = "Color";
+        private const String ExportTypeAttriName = "ExportType";
+        private const String ExportFormatAttriName = "ExportFormat";
         #endregion
 
-        private const string SecondDefaultNode = "/AllMarket/Default";
-        private const string SecondMarketNode = "/AllMarket/Market";
-        private const string ColorStartChart = "$";
+        private const String SecondDefaultNode = "/AllMarket/Default";
+        private const String SecondMarketNode = "/AllMarket/Market";
+        private const String ColorStartChart = "$";
 
-        private static readonly string QuoteFieldFilePath
+        private static readonly String QuoteFieldFilePath
             = Path.Combine(PathUtilities.CfgPath, "QuoteField.xml");
 
         /// <summary>
         /// 默认字段配置信息
         /// Key->配置文件中的Name属性; Value->该Name字段配置信息
         /// </summary>
-        public static Dictionary<string, FieldInfo> DicDefaultFieldInfo;
+        public static Dictionary<String, FieldInfo> DicDefaultFieldInfo;
 
         /// <summary>
         /// 特殊市场字段配置信息
         /// Key->配置文件中的市场属性; Value->该市场MarketType下的所有Name:配置信息对
         /// </summary>
-        public static Dictionary<MarketType, Dictionary<string, FieldInfo>> DicMarketFieldInfo;
+        public static Dictionary<MarketType, Dictionary<String, FieldInfo>> DicMarketFieldInfo;
 
 
 
@@ -660,9 +660,9 @@ namespace OwLib
         }
 
 
-        private static Dictionary<string, FieldInfo> GetDefaultFieldInfo(XmlDocument doc)
+        private static Dictionary<String, FieldInfo> GetDefaultFieldInfo(XmlDocument doc)
         {
-            Dictionary<string, FieldInfo> dic = new Dictionary<string, FieldInfo>();
+            Dictionary<String, FieldInfo> dic = new Dictionary<String, FieldInfo>();
             // Set default dictionary:
             XmlNode root = doc.SelectSingleNode(SecondDefaultNode);
 
@@ -689,9 +689,9 @@ namespace OwLib
         /// <param name="pareentNode"></param>
         ///  <param name="dic">返回字典</param>
         /// <returns></returns>
-        private static bool TryGetAllColFieldInfo(XmlNode pareentNode, out Dictionary<string, FieldInfo> dic)
+        private static bool TryGetAllColFieldInfo(XmlNode pareentNode, out Dictionary<String, FieldInfo> dic)
         {
-            dic = new Dictionary<string, FieldInfo>();
+            dic = new Dictionary<String, FieldInfo>();
 
             if (pareentNode == null)
                 return false;
@@ -708,7 +708,7 @@ namespace OwLib
             {
                 if (node.NodeType == XmlNodeType.Element)
                 {
-                    string name = node.Attributes[NameAttriName].Value;
+                    String name = node.Attributes[NameAttriName].Value;
 
                     // Assign the info
                     info = GetFieldInfoByNode(node);
@@ -720,23 +720,23 @@ namespace OwLib
             return true;
         }
 
-        private static Dictionary<MarketType, Dictionary<string, FieldInfo>> GetMarketFieldInfo
+        private static Dictionary<MarketType, Dictionary<String, FieldInfo>> GetMarketFieldInfo
             (XmlDocument doc)
         {
-            Dictionary<MarketType, Dictionary<string, FieldInfo>> marketDic =
-                new Dictionary<MarketType, Dictionary<string, FieldInfo>>();
+            Dictionary<MarketType, Dictionary<String, FieldInfo>> marketDic =
+                new Dictionary<MarketType, Dictionary<String, FieldInfo>>();
             // Set default dictionary:
             XmlNodeList marketNodes = doc.SelectNodes(SecondMarketNode);
 
-            Dictionary<string, FieldInfo> dic;
+            Dictionary<String, FieldInfo> dic;
             foreach (XmlNode node in marketNodes)
             {
                 if (TryGetAllColFieldInfo(node, out dic))
                 {
-                    string marketsStr = node.Attributes[NameAttriName].Value;
-                    string[] markets = marketsStr.Split(',');
+                    String marketsStr = node.Attributes[NameAttriName].Value;
+                    String[] markets = marketsStr.Split(',');
 
-                    foreach (string marketStr in markets)
+                    foreach (String marketStr in markets)
                     {
                         MarketType market = (MarketType)Enum.Parse(typeof(MarketType), marketStr);
 
@@ -755,11 +755,11 @@ namespace OwLib
             try
             {
                 // Assign the info
-                string nameStr = node.Attributes[NameAttriName].Value;
+                String nameStr = node.Attributes[NameAttriName].Value;
                 XmlAttribute fieldIndexObj = node.Attributes[FieldIndexAttriName];
-                string fieldIndexStr = fieldIndexObj == null ? nameStr : fieldIndexObj.Value;
-                string colorStr = node.Attributes[ColorAttriName].Value;
-                string formatStr = node.Attributes[FormatAttriName].Value;
+                String fieldIndexStr = fieldIndexObj == null ? nameStr : fieldIndexObj.Value;
+                String colorStr = node.Attributes[ColorAttriName].Value;
+                String formatStr = node.Attributes[FormatAttriName].Value;
 
                 FieldIndex fieldIndex = (FieldIndex)Enum.Parse(typeof(FieldIndex), fieldIndexStr);
                 result.FieldIndex = fieldIndex;
@@ -770,7 +770,7 @@ namespace OwLib
                 //
                 // 导出数据类型
                 XmlAttribute exportTypeAttri = node.Attributes[ExportTypeAttriName];
-                string exportTypeAttriStr = exportTypeAttri == null ? string.Empty : exportTypeAttri.Value;
+                String exportTypeAttriStr = exportTypeAttri == null ? String.Empty : exportTypeAttri.Value;
                 result.ExportType = FieldInfoCfgHelper.GetExportType(exportTypeAttriStr, fieldIndex);
                 //
                 // 导出数据格式
@@ -790,9 +790,9 @@ namespace OwLib
         /// </summary>
         /// <param name="colorAttri"></param>
         /// <returns></returns>
-        private static List<string> GetColorSetting(string colorAttri)
+        private static List<String> GetColorSetting(String colorAttri)
         {
-            List<string> result = new List<string>(2);
+            List<String> result = new List<String>(2);
 
             // Start with normal letter.
             if( (64 < colorAttri[0] && colorAttri[0] < 91)
@@ -804,7 +804,7 @@ namespace OwLib
 
             // Start with $(# ... etc.) 
             result.Add(colorAttri[0].ToString());
-            string leftStr = colorAttri.Substring(1);
+            String leftStr = colorAttri.Substring(1);
             result.Add(leftStr);           
 
             return result;
@@ -815,20 +815,20 @@ namespace OwLib
         /// </summary>
         /// <param name="formatAttri"></param>
         /// <returns></returns>
-        private static List<List<string>> GetFormatSetting(string formatAttri)
+        private static List<List<String>> GetFormatSetting(String formatAttri)
         {
-            List<List<string>> result = new List<List<string>>(3);
-            if (string.IsNullOrEmpty(formatAttri))
+            List<List<String>> result = new List<List<String>>(3);
+            if (String.IsNullOrEmpty(formatAttri))
                 return result;
-            string[] formats = formatAttri.Split(',');
+            String[] formats = formatAttri.Split(',');
 
             if (formats.Length == 0)
                 return result;
 
-            foreach (string eachFormat in formats)
+            foreach (String eachFormat in formats)
             {
-                string[] subFormats = eachFormat.Split(':');
-                List<string> subFormatList = new List<string>(subFormats);
+                String[] subFormats = eachFormat.Split(':');
+                List<String> subFormatList = new List<String>(subFormats);
                 result.Add(subFormatList);
             }
 
@@ -841,29 +841,29 @@ namespace OwLib
         /// </summary>
         /// <param name="formatAttri">配置文件中formate的属性字符串</param>
         /// <returns>Format对象</returns>
-        private static Format GetFormat(string formatAttri)
+        private static Format GetFormat(String formatAttri)
         {
             Format result = new Format();
 
-            if (string.IsNullOrEmpty(formatAttri))
+            if (String.IsNullOrEmpty(formatAttri))
                 return result;
 
-            string[] formats = formatAttri.Split(',');
+            String[] formats = formatAttri.Split(',');
             if (formats.Length == 0)
                 return result;
 
-            foreach (string eachFormat in formats)
+            foreach (String eachFormat in formats)
             {
-                string[] subFormats = eachFormat.Split(':');
+                String[] subFormats = eachFormat.Split(':');
 
                 if (subFormats.Length < 2)
                 {
-                    LogUtilities.LogMessage(eachFormat + " is incorrect format string!");
+                    LogUtilities.LogMessage(eachFormat + " is incorrect format String!");
                     continue;
                 }
 
-                string formatFlag = subFormats[0];
-                string formatConetent = subFormats[1];
+                String formatFlag = subFormats[0];
+                String formatConetent = subFormats[1];
 
                 switch (formatFlag)
                 {

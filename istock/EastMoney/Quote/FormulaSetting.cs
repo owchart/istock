@@ -18,7 +18,7 @@ namespace OwLib {
             /// <summary>
             /// 名称
             /// </summary>
-			public string Name ;
+			public String Name ;
 		}
         /// <summary>
         /// 
@@ -31,7 +31,7 @@ namespace OwLib {
             /// <summary>
             /// 名称
             /// </summary>
-			public string Name ;
+			public String Name ;
 		}
         /// <summary>
         /// 
@@ -50,7 +50,7 @@ namespace OwLib {
             /// <summary>
             /// NAME
             /// </summary>
-            public string Name ;
+            public String Name ;
             /// <summary>
             /// 
             /// </summary>
@@ -83,15 +83,15 @@ namespace OwLib {
             /// <summary>
             /// 名称
             /// </summary>
-			public string Name ;
+			public String Name ;
             /// <summary>
             /// 描述
             /// </summary>
-			public string Description ;
+			public String Description ;
             /// <summary>
             /// 
             /// </summary>
-			public string Usage ;
+			public String Usage ;
 		}
         /// <summary>
         /// 类别
@@ -106,7 +106,7 @@ namespace OwLib {
             /// <summary>
             /// 名称
             /// </summary>
-			public string Name ;
+			public String Name ;
             /// <summary>
             /// 功能
             /// </summary>

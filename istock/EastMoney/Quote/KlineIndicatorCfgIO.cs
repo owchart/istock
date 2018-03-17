@@ -11,15 +11,15 @@ namespace OwLib
     public class KlineIndicatorCfgIO
     {
         
-        private static readonly string xmlFilePath = PathUtilities.CfgPath + "KLineIndicatorConfig.xml";
+        private static readonly String xmlFilePath = PathUtilities.CfgPath + "KLineIndicatorConfig.xml";
         /// <summary>
         /// GetAllKLineIndicatorCfgData
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, List<KlineIndicator>> GetAllKLineIndicatorCfgData()
+        public static Dictionary<String, List<KlineIndicator>> GetAllKLineIndicatorCfgData()
         {
-            Dictionary<string, List<KlineIndicator>> result =
-                new Dictionary<string, List<KlineIndicator>>();
+            Dictionary<String, List<KlineIndicator>> result =
+                new Dictionary<String, List<KlineIndicator>>();
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlFilePath);
             XmlNode root = xmlDoc.SelectSingleNode("Index");
@@ -29,8 +29,8 @@ namespace OwLib
             {
                 if (node.Name == "#comment")
                     continue;
-                string id = node.Attributes["id"].Value;
-                string name = node.Attributes["name"].Value;
+                String id = node.Attributes["id"].Value;
+                String name = node.Attributes["name"].Value;
 
                 list = new List<KlineIndicator>();
 
@@ -54,13 +54,13 @@ namespace OwLib
     /// </summary>
     public class KlineIndicator
     {
-        private string _name;
-        private string _text;
+        private String _name;
+        private String _text;
 
         /// <summary>
         /// name
         /// </summary>
-        public string name
+        public String name
         {
             get { return _name; }
             set { _name = value; }
@@ -69,7 +69,7 @@ namespace OwLib
         /// <summary>
         /// text
         /// </summary>
-        public string text
+        public String text
         {
             get { return _text; }
             set { _text = value; }

@@ -11,7 +11,7 @@ namespace OwLib
     /// </summary>
     public static class SysCfgFileIO
     {
-        private static readonly string FileName = PathUtilities.CfgPath + "SysCfg.xml";
+        private static readonly String FileName = PathUtilities.CfgPath + "SysCfg.xml";
         /// <summary>
         /// GetUserInfo
         /// </summary>

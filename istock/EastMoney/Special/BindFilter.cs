@@ -16,31 +16,31 @@ namespace OwLib
         /// 获取或设置源名
         /// </summary>
 		[XmlElement]
-		public string SourceName { get; set; }
+		public String SourceName { get; set; }
 
         /// <summary>
         /// 获取或设置列名称
         /// </summary>
 		[XmlElement]
-		public string TextColumn { get; set; }
+		public String TextColumn { get; set; }
 
         /// <summary>
         /// 获取或设置列值
         /// </summary>
 		[XmlElement]
-		public string ValueColumn { get; set; }
+		public String ValueColumn { get; set; }
 
         /// <summary>
         /// 获取或设置变化的过滤值名
         /// </summary>
 		[XmlElement]
-		public string ChangedFilterName { get; set; }
+		public String ChangedFilterName { get; set; }
 
         /// <summary>
         /// 获取或设置默认的过滤值名
         /// </summary>
 		[XmlElement]
-		public string DefaultFilterName { get; set; }
+		public String DefaultFilterName { get; set; }
 
         /// <summary>
         /// 获取或设置是否发送过滤条件
@@ -64,7 +64,7 @@ namespace OwLib
         /// 获取或设置排序名
         /// </summary>
         [XmlElement]
-        public string OrderName { get; set; }
+        public String OrderName { get; set; }
 
         /// <summary>
         /// 读取xml配置信息给对象赋值

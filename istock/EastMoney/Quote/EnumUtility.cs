@@ -10,7 +10,7 @@ namespace OwLib {
 		/// <summary>
 		/// 由InfoMine值获取中文名称
 		/// </summary>
-		public static string GetInfoMineString(InfoMineOrg info) {
+		public static String GetInfoMineString(InfoMineOrg info) {
 			switch(info) {
                 case InfoMineOrg.News:
 					return "新闻";
@@ -19,13 +19,13 @@ namespace OwLib {
                 case InfoMineOrg.Report:
 					return "研报";
 				default:
-					return string.Empty;
+					return String.Empty;
 			}
 		}
 		/// <summary>
 		/// 由ShortLineType值获取中文名称
 		/// </summary>
-		public static string GetShortLineTypeString(ShortLineType type) {
+		public static String GetShortLineTypeString(ShortLineType type) {
 			switch(type) {
 				case ShortLineType.SurgedLimit:
 					return "封涨停板";
@@ -64,7 +64,7 @@ namespace OwLib {
 				case ShortLineType.MultiSameBidOrders:
 					return "卖单分单";
 				default:
-					return string.Empty;
+					return String.Empty;
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace OwLib {
 		/// </summary>
 		/// <param name="caption"></param>
 		/// <returns></returns>
-		public static ShortLineType GetShortLineType(string caption) {
+		public static ShortLineType GetShortLineType(String caption) {
 			switch(caption) {
 				case "封涨停板": return ShortLineType.SurgedLimit;
 				case "封跌停板":
@@ -119,7 +119,7 @@ namespace OwLib {
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static string GetEmRatingValueString(EmratingValue type)
+        public static String GetEmRatingValueString(EmratingValue type)
         {
             switch (type)
             {
@@ -138,7 +138,7 @@ namespace OwLib {
                 case EmratingValue.Sell:
                     return "卖出";
                 default:
-                    return string.Empty;
+                    return String.Empty;
             }
         }
 	}

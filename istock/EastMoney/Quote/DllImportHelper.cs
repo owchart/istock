@@ -52,7 +52,7 @@ namespace OwLib
             }
         }
 
-        public static string GetFieldDataString(int code, FieldIndex field)
+        public static String GetFieldDataString(int code, FieldIndex field)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace OwLib
             }
             catch (Exception)
             {
-                return string.Empty;
+                return String.Empty;
             }
         }
 
@@ -152,7 +152,7 @@ namespace OwLib
                         }
                     case SetFuncFlag.SetString:
                         {
-                            string s = Convert.ToString(fieldValue);
+                            String s = Convert.ToString(fieldValue);
                             DetailData.FieldIndexDataString[code][field] = s;
                             return;
                         }

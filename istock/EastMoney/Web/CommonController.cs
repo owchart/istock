@@ -25,7 +25,7 @@ namespace OwLib
         /// <param name="reportDateField"></param>
         /// <param name="dateRangeType">//0:按照自然年度;1:按照最近x期数(针对近x年的情况);2:多取一年数据，然后过滤(针对近x年的情况),int dateRangeType=0</param>
         /// <returns></returns>
-        public static List<Expression> GetDateRangeExpression(string yearList, string reportTypeList, int type = 0, string reportDateField = "ENDDATE")
+        public static List<Expression> GetDateRangeExpression(String yearList, String reportTypeList, int type = 0, String reportDateField = "ENDDATE")
         {
             List<Expression> expressionList = new List<Expression>();
             List<object> rangeList = new List<object>();
@@ -106,7 +106,7 @@ namespace OwLib
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        private static int GetMonth(string p)
+        private static int GetMonth(String p)
         {
             int result = 3;
 
@@ -139,7 +139,7 @@ namespace OwLib
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        private static int GetDay(string p)
+        private static int GetDay(String p)
         {
             int result = 30;
 
@@ -176,9 +176,9 @@ namespace OwLib
         /// <param name="reportDateField"></param>
         /// <param name="dateRangeType">//0:按照自然年度;1:按照最近x期数(针对近x年的情况);2:多取一年数据，然后过滤(针对近x年的情况),int dateRangeType=0</param>
         /// <returns></returns>
-        public static Dictionary<string, string> GetDateRangeExpressionForReport(string yearList, string reportTypeList, int type = 0, string sort = "desc", string reportDateField = "ReportDate")
+        public static Dictionary<String, String> GetDateRangeExpressionForReport(String yearList, String reportTypeList, int type = 0, String sort = "desc", String reportDateField = "ReportDate")
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
+            Dictionary<String, String> result = new Dictionary<String, String>();
             int yearCount = String.IsNullOrEmpty(yearList) ? 0 : yearList.Split(',').Length;
 
             if (type == 0)
@@ -191,8 +191,8 @@ namespace OwLib
             }
             else if (type == 2)
             {
-                string temp_years = string.Empty;
-                string temp_reports = string.Empty;
+                String temp_years = String.Empty;
+                String temp_reports = String.Empty;
                 reportTypeList.Split(',').ToList().ForEach(c =>
                 {
                     temp_years += c.Split('_')[0] + ",";
@@ -211,11 +211,11 @@ namespace OwLib
         }
 
 
-        public static string transferParamToDateTimeString(string yearList, string reportType, string sort)
+        public static String transferParamToDateTimeString(String yearList, String reportType, String sort)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             String[] years, reports;
-            if (!string.IsNullOrEmpty(yearList) && !string.IsNullOrEmpty(reportType))
+            if (!String.IsNullOrEmpty(yearList) && !String.IsNullOrEmpty(reportType))
             {
                 if (sort.Equals("desc"))
                 {
@@ -229,9 +229,9 @@ namespace OwLib
                     reports = reportType.Split(',');
                     Array.Reverse(reports);
                 }
-                foreach (string item in years)
+                foreach (String item in years)
                 {
-                    foreach (string reportItem in reports)
+                    foreach (String reportItem in reports)
                     {
                         switch (reportItem)
                         {
@@ -268,9 +268,9 @@ namespace OwLib
         /// <param name="reportDateField"></param>
         /// <param name="dateRangeType">//0:按照自然年度;1:按照最近x期数(针对近x年的情况);2:多取一年数据，然后过滤(针对近x年的情况),int dateRangeType=0</param>
         /// <returns></returns>
-        public static Dictionary<string, string> GetDateRangeDic(string yearList, string reportTypeList, int type = 0, string reportDateField = "TradeDate")
+        public static Dictionary<String, String> GetDateRangeDic(String yearList, String reportTypeList, int type = 0, String reportDateField = "TradeDate")
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
+            Dictionary<String, String> result = new Dictionary<String, String>();
             int yearCount = String.IsNullOrEmpty(yearList) ? 0 : yearList.Split(',').Length;
 
             if (type == 0)

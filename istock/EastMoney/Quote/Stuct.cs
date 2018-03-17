@@ -12,7 +12,7 @@ namespace OwLib {
 
 		/// char[50]
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 50)]
-		public string name;
+		public String name;
 		//[MarshalAs(UnmanagedType.ByValArray, SizeConst = 50)]
 		//public byte[] name;
 
@@ -64,11 +64,11 @@ namespace OwLib {
 
 		/// char[50]
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 50)]
-		public string name;
+		public String name;
 
 		/// char[100]
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 100)]
-		public string des;
+		public String des;
 
 		/// int
 		public int subtype;
@@ -129,7 +129,7 @@ namespace OwLib {
 
 		/// char[2048]
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2048)]
-		public string message;
+		public String message;
 	}
 
     /// <summary>
@@ -435,7 +435,7 @@ namespace OwLib {
 
 		/// char*
 		[MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStr)]
-		public string text;
+		public String text;
 	}
     /// <summary>
     /// 
@@ -623,7 +623,7 @@ namespace OwLib {
         /// 名称
         /// </summary>
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 200)]
-		public string name;
+		public String name;
 		/// DECORATION
 		public DECORATION dec;
 

@@ -13,59 +13,59 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        string Name { get; set; }
+        String Name { get; set; }
         /// <summary>
         /// 判断是否包含
         /// </summary>
-        bool ContainsAttribute(string key);
+        bool ContainsAttribute(String key);
         /// <summary>
         /// 获取布尔型
         /// </summary>
-        bool GetBoolean(string key);
+        bool GetBoolean(String key);
         /// <summary>
         /// 设置布尔型
         /// </summary>
-        void SetBoolean(string key, bool value);
+        void SetBoolean(String key, bool value);
         /// <summary>
         /// 获取整型
         /// </summary>
-        int GetInteger(string key);
+        int GetInteger(String key);
         /// <summary>
         /// 设置整型
         /// </summary>
-        void SetInteger(string key, int value);
+        void SetInteger(String key, int value);
         /// <summary>
         /// 获取浮点
         /// </summary>
-        double GetFloat(string key);
+        double GetFloat(String key);
         /// <summary>
         /// 设置浮点
         /// </summary>
-        void SetFloat(string key, double value);
+        void SetFloat(String key, double value);
         /// <summary>
         /// 获取字符串
         /// </summary>
-        string GetString(string key);
+        String GetString(String key);
         /// <summary>
         /// 设置字符串
         /// </summary>
-        void SetString(string key, string value);
+        void SetString(String key, String value);
         /// <summary>
         /// 获取DateTime
         /// </summary>
-        DateTime GetDateTime(string key);
+        DateTime GetDateTime(String key);
         /// <summary>
         /// 设置DateTime
         /// </summary>
-        void SetDateTime(string key, DateTime value);
+        void SetDateTime(String key, DateTime value);
         /// <summary>
         /// 
         /// </summary>
-        Object GetEnumValue(string key, Type enumType);
+        Object GetEnumValue(String key, Type enumType);
         /// <summary>
         /// 
         /// </summary>
-        void SetEnumValue(string key, Type enumType, Object value);
+        void SetEnumValue(String key, Type enumType, Object value);
         /// <summary>
         /// 
         /// </summary>
@@ -73,15 +73,15 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        string GetAttributeName(int index);
+        String GetAttributeName(int index);
         /// <summary>
         /// 
         /// </summary>
-        string GetAttributeValue(int index);
+        String GetAttributeValue(int index);
         /// <summary>
         /// 
         /// </summary>
-        IMemento CreateChild(string key);
+        IMemento CreateChild(String key);
         /// <summary>
         /// 
         /// </summary>
@@ -89,7 +89,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        IMemento GetChild(string key);
+        IMemento GetChild(String key);
         /// <summary>
         /// 
         /// </summary>
@@ -213,7 +213,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public Memento(string name)
+        public Memento(String name)
             : this()
         {
             this.name = name;
@@ -221,7 +221,7 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name
+        public String Name
         {
             get
             {
@@ -235,96 +235,96 @@ namespace OwLib
         /// <summary>
         /// 是否包含指定键
         /// </summary>
-        public bool ContainsAttribute(string key)
+        public bool ContainsAttribute(String key)
         {
             return (Attributes.IndexOf(key) > -1);
         }
         /// <summary>
         /// 由键获取布尔型
         /// </summary>
-        public bool GetBoolean(string key)
+        public bool GetBoolean(String key)
         {
             return Convert.ToBoolean(Attributes.GetValue(key));
         }
         /// <summary>
         /// 由键设置布尔型
         /// </summary>
-        public void SetBoolean(string key, bool value)
+        public void SetBoolean(String key, bool value)
         {
             Attributes.Add(key, Convert.ToString(value));
         }
         /// <summary>
         /// 获取整型
         /// </summary>
-        public int GetInteger(string key)
+        public int GetInteger(String key)
         {
             return Convert.ToInt32(Attributes.GetValue(key));
         }
         /// <summary>
         /// 设置整型
         /// </summary>
-        public void SetInteger(string key, int value)
+        public void SetInteger(String key, int value)
         {
             Attributes.Add(key, Convert.ToString(value));
         }
         /// <summary>
         /// 获取浮点
         /// </summary>
-        public double GetFloat(string key)
+        public double GetFloat(String key)
         {
             return Convert.ToDouble(Attributes.GetValue(key));
         }
         /// <summary>
         /// 设置浮点
         /// </summary>
-        public void SetFloat(string key, double value)
+        public void SetFloat(String key, double value)
         {
             Attributes.Add(key, Convert.ToString(value));
         }
         /// <summary>
         /// 获取字符串
         /// </summary>
-        public string GetString(string key)
+        public String GetString(String key)
         {
             return Attributes.GetValue(key);
         }
         /// <summary>
         /// 设置字符串
         /// </summary>
-        public void SetString(string key, string value)
+        public void SetString(String key, String value)
         {
             Attributes.Add(key, value);
         }
         /// <summary>
         /// 获取DateTime
         /// </summary>
-        public DateTime GetDateTime(string key)
+        public DateTime GetDateTime(String key)
         {
-            string dateTimeStr = Attributes.GetValue(key);
+            String dateTimeStr = Attributes.GetValue(key);
             return Convert.ToDateTime(dateTimeStr);
         }
         /// <summary>
         /// 设置DateTime
         /// </summary>
-        public void SetDateTime(string key, DateTime value)
+        public void SetDateTime(String key, DateTime value)
         {
-            string dateTimeStr = value.ToLongTimeString();
+            String dateTimeStr = value.ToLongTimeString();
             SetString(key, dateTimeStr);
         }
         /// <summary>
         /// 
         /// </summary>
-        public Object GetEnumValue(string key, Type enumType)
+        public Object GetEnumValue(String key, Type enumType)
         {
-            string enumStr = Attributes.GetValue(key);
+            String enumStr = Attributes.GetValue(key);
             return Enum.Parse(enumType, enumStr);
         }
         /// <summary>
         /// 
         /// </summary>
-        public void SetEnumValue(string key, Type enumType, Object value)
+        public void SetEnumValue(String key, Type enumType, Object value)
         {
-            string enumStr = Enum.GetName(enumType, value);
+            String enumStr = Enum.GetName(enumType, value);
             SetString(key, enumStr);
         }
         /// <summary>
@@ -337,21 +337,21 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public string GetAttributeName(int index)
+        public String GetAttributeName(int index)
         {
             return Attributes.GetKey(index);
         }
         /// <summary>
         /// 
         /// </summary>
-        public string GetAttributeValue(int index)
+        public String GetAttributeValue(int index)
         {
             return Attributes.GetValue(index);
         }
         /// <summary>
         /// 
         /// </summary>
-        public IMemento CreateChild(string key)
+        public IMemento CreateChild(String key)
         {
             IMemento result = new Memento();
             result.Name = key;
@@ -371,7 +371,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public IMemento GetChild(string key)
+        public IMemento GetChild(String key)
         {
             return SubMementos.GetObject(key) as IMemento;
         }
@@ -383,7 +383,7 @@ namespace OwLib
             return SubMementos.GetObject(index) as IMemento;
         }
 
-        private string name;
+        private String name;
         private KeyValueCollection Attributes;
         private KeyObjectCollection SubMementos;
     }
@@ -416,7 +416,7 @@ namespace OwLib
             while (attrEnumerator.MoveNext())
             {
                 XmlAttribute xmlAttribute = (XmlAttribute)attrEnumerator.Current;
-                if (!string.IsNullOrEmpty(xmlAttribute.Value))
+                if (!String.IsNullOrEmpty(xmlAttribute.Value))
                 {
                     memento.SetString(xmlAttribute.Name, xmlAttribute.Value);
                 }
@@ -501,7 +501,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public XmlFileSerializer(string filename)
+        public XmlFileSerializer(String filename)
         {
             this.filename = filename;
         }
@@ -533,7 +533,7 @@ namespace OwLib
             stream.Close();
         }
 
-        private readonly string filename;
+        private readonly String filename;
     }
 
     #endregion

@@ -25,7 +25,7 @@ namespace OwLib
             set { BlockService.blocks = value; }
         }
 
-        private static Dictionary<String, List<DMBlockDetailItem>> blockDetails = new Dictionary<string, List<DMBlockDetailItem>>();
+        private static Dictionary<String, List<DMBlockDetailItem>> blockDetails = new Dictionary<String, List<DMBlockDetailItem>>();
 
         /// <summary>
         /// 获取或设置板块明细

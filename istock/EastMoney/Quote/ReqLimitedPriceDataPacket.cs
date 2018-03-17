@@ -8,7 +8,7 @@ namespace OwLib
     {
         private int _code;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
 
         public ReqLimitedPriceDataPacket()
         {

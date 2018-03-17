@@ -44,7 +44,7 @@ namespace OwLib
         /// 写日志 记录调试日志 目录Log\LogDebug
         /// </summary>
         /// <param name="info">调试信息</param>
-        public static void WriteDebugLog(string info)
+        public static void WriteDebugLog(String info)
         {
             if (logdebug.IsDebugEnabled)
             {
@@ -54,7 +54,7 @@ namespace OwLib
                 }
             }
         }
-        public static void WriteDebugLog(string info,DateTime dt1,DateTime dt2,int tip)
+        public static void WriteDebugLog(String info,DateTime dt1,DateTime dt2,int tip)
         {
             TimeSpan sp1 = new TimeSpan(dt1.Ticks);
             TimeSpan sp2 = new TimeSpan(dt2.Ticks);
@@ -72,7 +72,7 @@ namespace OwLib
         /// 写日志 记录调试日志 目录Log\LogInfo
         /// </summary>
         /// <param name="info">调试信息</param>
-        public static void WriteLog(string info)  
+        public static void WriteLog(String info)  
         {  
             if(loginfo.IsInfoEnabled)  
             {
@@ -88,7 +88,7 @@ namespace OwLib
         /// </summary>
         /// <param name="info">调试信息</param>
         /// <param name="ex">异常</param>
-        public static void WriteLog(string info,Exception ex)  
+        public static void WriteLog(String info,Exception ex)  
         {  
             if(logerror.IsErrorEnabled)  
             {

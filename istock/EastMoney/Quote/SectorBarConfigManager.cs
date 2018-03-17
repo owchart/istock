@@ -9,51 +9,51 @@ namespace OwLib
         /// <summary>
         /// A股
         /// </summary>
-        public static readonly string SB_AStock = "AStock";
+        public static readonly String SB_AStock = "AStock";
         /// <summary>
         /// 指数
         /// </summary>
-        public static readonly string SB_Index = "Index";
+        public static readonly String SB_Index = "Index";
         /// <summary>
         /// 港股
         /// </summary>
-        public static readonly string SB_HKStock = "HKStock";
+        public static readonly String SB_HKStock = "HKStock";
         /// <summary>
         /// 美股
         /// </summary>
-        public static readonly string SB_USAStock = "USAStock";
+        public static readonly String SB_USAStock = "USAStock";
         /// <summary>
         /// 债券
         /// </summary>
-        public static readonly string SB_Bond = "Bond";
+        public static readonly String SB_Bond = "Bond";
         /// <summary>
         /// 利率
         /// </summary>
-        public static readonly string SB_InterestRate = "InterestRate";
+        public static readonly String SB_InterestRate = "InterestRate";
         /// <summary>
         /// 外汇
         /// </summary>
-        public static readonly string SB_Exchange = "Exchange";
+        public static readonly String SB_Exchange = "Exchange";
         /// <summary>
         /// 股指期货
         /// </summary>
-        public static readonly string SB_IndexFuture = "IndexFuture";
+        public static readonly String SB_IndexFuture = "IndexFuture";
         /// <summary>
         /// 商品期货
         /// </summary>
-        public static readonly string SB_Future = "Future";
+        public static readonly String SB_Future = "Future";
         /// <summary>
         /// 基金
         /// </summary>
-        public static readonly string SB_Fund = "Fund";
+        public static readonly String SB_Fund = "Fund";
         /// <summary>
         /// 理财产品
         /// </summary>
-        public static readonly string SB_FinancialManager = "FinancialManager";
+        public static readonly String SB_FinancialManager = "FinancialManager";
         /// <summary>
         /// 默认
         /// </summary>
-        public static readonly string SB_Default = "Default";
+        public static readonly String SB_Default = "Default";
     }
 
     /// <summary>
@@ -64,19 +64,19 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name ;
+        public String Name ;
         /// <summary>
         /// 板块名称
         /// </summary>
-        public string SectorName ;
+        public String SectorName ;
         /// <summary>
         /// 板块ID
         /// </summary>
-        public string SectorID ;
+        public String SectorID ;
         /// <summary>
         /// 
         /// </summary>
-        public string VTabFlag ;
+        public String VTabFlag ;
         /// <summary>
         /// 
         /// </summary>
@@ -117,7 +117,7 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name ;
+        public String Name ;
         /// <summary>
         /// 
         /// </summary>
@@ -157,7 +157,7 @@ namespace OwLib
         public override void LoadState(IMemento memento)
         {
             Name = memento.GetString("Name");
-            string typeInfo = memento.GetString("MenuBoxStripType");
+            String typeInfo = memento.GetString("MenuBoxStripType");
             Assembly assembly = Assembly.Load(typeInfo.Split(',')[1]);
             MenuBoxStripType = assembly.GetType(typeInfo.Split(',')[0]);
 
@@ -203,9 +203,9 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        private string _name;
+        private String _name;
 
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }
@@ -213,9 +213,9 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        private string _text;
+        private String _text;
 
-        public string Text
+        public String Text
         {
             get { return _text; }
             set { _text = value; }
@@ -223,9 +223,9 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        private string _refSector;
+        private String _refSector;
 
-        public string RefSector
+        public String RefSector
         {
             get { return _refSector; }
             set { _refSector = value; }
@@ -271,7 +271,7 @@ namespace OwLib
             Name = memento.GetString("Name");
             Text = memento.GetString("Text");
             RefSector = memento.GetString("RefSector");
-            string typeInfo = memento.GetString("MenuBoxItemType");
+            String typeInfo = memento.GetString("MenuBoxItemType");
 
             Assembly assembly = LoadAssembly(typeInfo.Split(',')[1]);
             MenuBoxItemType = assembly.GetType(typeInfo.Split(',')[0]);
@@ -292,7 +292,7 @@ namespace OwLib
             }
         }
 
-        private Assembly LoadAssembly(string assemblyName)
+        private Assembly LoadAssembly(String assemblyName)
         {
             Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
             for (int index = 0; index < ass.Length; index++)
@@ -314,11 +314,11 @@ namespace OwLib
         /// <summary>
         /// 按钮TEXT
         /// </summary>
-        public string MenuText ;
+        public String MenuText ;
         /// <summary>
         /// 按钮值
         /// </summary>
-        public string MenuValue ;
+        public String MenuValue ;
         /// <summary>
         /// 是否选择
         /// </summary>
@@ -356,14 +356,14 @@ namespace OwLib
     /// </summary>
     public class SectorBarConfigManager : PersistableObject
     {
-        private static readonly string _ConfigFile = PathUtilities.CfgPath + "SectorMenuBox_V2.config";
+        private static readonly String _ConfigFile = PathUtilities.CfgPath + "SectorMenuBox_V2.config";
         private static SectorBarConfigManager _Instance;
         /// <summary>
         /// 按钮集合
         /// </summary>
-        private Dictionary<string, List<SectorBarButtonDescription>> _sectorBarDesps;
+        private Dictionary<String, List<SectorBarButtonDescription>> _sectorBarDesps;
 
-        public Dictionary<string, List<SectorBarButtonDescription>> SectorBarDesps
+        public Dictionary<String, List<SectorBarButtonDescription>> SectorBarDesps
         {
             get { return _sectorBarDesps; }
             set { _sectorBarDesps = value; }
@@ -373,7 +373,7 @@ namespace OwLib
         /// </summary>
         private SectorBarConfigManager()
         {
-            SectorBarDesps = new Dictionary<string, List<SectorBarButtonDescription>>();
+            SectorBarDesps = new Dictionary<String, List<SectorBarButtonDescription>>();
         }
         public static SectorBarConfigManager GetInstance()
         {
@@ -407,8 +407,8 @@ namespace OwLib
             for (int Index = 0; Index < memento.ChildCount; Index++)
             {
                 IMemento childMemento = memento.GetChild(Index);
-                string sectorBarType = childMemento.GetString("BarType") ?? string.Empty;
-                if (string.IsNullOrEmpty(sectorBarType))
+                String sectorBarType = childMemento.GetString("BarType") ?? String.Empty;
+                if (String.IsNullOrEmpty(sectorBarType))
                 {
                     continue;
                 }

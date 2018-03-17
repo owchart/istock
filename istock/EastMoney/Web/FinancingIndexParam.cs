@@ -6,22 +6,22 @@ namespace OwLib
 {
     public class FinancingIndexParam
     {
-        private string _name;
+        private String _name;
 
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        private Dictionary<string, string> _dic;
+        private Dictionary<String, String> _dic;
 
-        public Dictionary<string, string> Dic
+        public Dictionary<String, String> Dic
         {
             get { return _dic; }
             set { _dic = value; }
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("$-rpt");

@@ -388,7 +388,7 @@ namespace OwLib
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName;
+        public String UserName;
         /// <summary>
         /// 每个sim卡的卡号
         /// </summary>
@@ -408,7 +408,7 @@ namespace OwLib
         /// <summary>
         /// webF10的地址 ，应vip用户要求，进行设置
         /// </summary>
-        public string WebF10Address;
+        public String WebF10Address;
 
         /// <summary>
         /// 收到单点登入的消息后，
@@ -737,7 +737,7 @@ namespace OwLib
                                                                     {FieldIndex.IndustryBlockCode,InitValue},
                                                                     {FieldIndex.ZSZ,InitValue},
                                                                     {FieldIndex.LTSZ,InitValue},
-                                                                    {FieldIndex.AllBlockCode,new List<string>()},
+                                                                    {FieldIndex.AllBlockCode,new List<String>()},
                                                                     {FieldIndex.StockMarektType,MarketType.NA},
                                                                     {FieldIndex.UpDay,InitValue},
                                                                     {FieldIndex.DifferRange20D, InitValue},
@@ -1612,7 +1612,7 @@ namespace OwLib
         /// <summary>
         /// 开平性质
         /// </summary>
-        public string OpenCloseStatus;
+        public String OpenCloseStatus;
     }
 
     /// <summary>
@@ -2065,7 +2065,7 @@ namespace OwLib
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name;
+        public String Name;
         /// <summary>
         /// 
         /// </summary>
@@ -2127,7 +2127,7 @@ namespace OwLib
         /// <summary>
         /// 内容
         /// </summary>
-        public string Context;
+        public String Context;
     }
 
     #endregion
@@ -2159,15 +2159,15 @@ namespace OwLib
     /// </summary>
     public class BlockDataRec
     {
-        private Dictionary<string, string> _areaBlock;
+        private Dictionary<String, String> _areaBlock;
         private Dictionary<EnumBlockType, List<int>> _blockItems;
-        private Dictionary<string, string> _conceptionBlock;
-        private Dictionary<string, string> _industryBlock;
+        private Dictionary<String, String> _conceptionBlock;
+        private Dictionary<String, String> _industryBlock;
 
         /// <summary>
         /// 行业板块，<中文名称,blockid>
         /// </summary>
-        public Dictionary<string, string> IndustryBlock
+        public Dictionary<String, String> IndustryBlock
         {
             get { return _industryBlock; }
             private set { _industryBlock = value; }
@@ -2176,7 +2176,7 @@ namespace OwLib
         /// <summary>
         /// 地区板块<中文名称,blockid>
         /// </summary>
-        public Dictionary<string, string> AreaBlock
+        public Dictionary<String, String> AreaBlock
         {
             get { return _areaBlock; }
             private set { _areaBlock = value; }
@@ -2185,7 +2185,7 @@ namespace OwLib
         /// <summary>
         /// 概念板块<中文名称,blockid>
         /// </summary>
-        public Dictionary<string, string> ConceptionBlock
+        public Dictionary<String, String> ConceptionBlock
         {
             get { return _conceptionBlock; }
             private set { _conceptionBlock = value; }
@@ -2203,7 +2203,7 @@ namespace OwLib
         /// <summary>
         /// 获取板块成分
         /// </summary>
-        public Dictionary<string, string> GetBlockItems(string blockType)
+        public Dictionary<String, String> GetBlockItems(String blockType)
         {
             switch (blockType)
             {
@@ -2234,7 +2234,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public BlockDataRec(Dictionary<string, string> industry, Dictionary<string, string> area, Dictionary<string, string> conception)
+        public BlockDataRec(Dictionary<String, String> industry, Dictionary<String, String> area, Dictionary<String, String> conception)
         {
             IndustryBlock = industry;
             AreaBlock = area;
@@ -2276,13 +2276,13 @@ namespace OwLib
     //    public int Date ;
 
     //    /// <summary>
-    //    /// 按市场分的结构，string指ReqMarketType
+    //    /// 按市场分的结构，String指ReqMarketType
     //    /// </summary>
-    //    public Dictionary<string, OneBlockItem> MarketBlock ;
+    //    public Dictionary<String, OneBlockItem> MarketBlock ;
 
     //    public StockDictDataRec()
     //    {
-    //        MarketBlock = new Dictionary<string, OneBlockItem>();
+    //        MarketBlock = new Dictionary<String, OneBlockItem>();
     //    }
     //}
     #endregion
@@ -2342,7 +2342,7 @@ namespace OwLib
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title;
+        public String Title;
         /// <summary>
         /// 日期
         /// </summary>
@@ -2354,7 +2354,7 @@ namespace OwLib
         /// <summary>
         /// url
         /// </summary>
-        public string ContentUrl;
+        public String ContentUrl;
         /// <summary>
         /// 是否点击查看过
         /// </summary>
@@ -2400,7 +2400,7 @@ namespace OwLib
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title;
+        public String Title;
         /// <summary>
         /// 日期
         /// </summary>
@@ -2416,11 +2416,11 @@ namespace OwLib
         /// <summary>
         /// 资讯编码
         /// </summary>
-        public string InfoCode;
+        public String InfoCode;
         /// <summary>
         /// 新闻公告中表示来源，研报表示机构名称
         /// </summary>
-        public string MediaName;
+        public String MediaName;
 
         /// <summary>
         /// 星级
@@ -2435,7 +2435,7 @@ namespace OwLib
         /// <summary>
         /// url
         /// </summary>
-        public string Url;
+        public String Url;
 
         /// <summary>
         /// 是否置顶
@@ -2472,7 +2472,7 @@ namespace OwLib
         /// <summary>
         /// 机构名称
         /// </summary>
-        public string InsSName;
+        public String InsSName;
     }
 
     /// <summary>
@@ -2481,7 +2481,7 @@ namespace OwLib
     public class CustomStockNewsParam
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         public int DateStart, TimeStart, DateEnd, TimeEnd;
         /// <summary>
         /// 是否
@@ -2502,7 +2502,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
                 DataPacket.ParseCode(emcode, out tmp, out _shortCode);
@@ -2521,7 +2521,7 @@ namespace OwLib
         /// </summary>
         /// <param name="shortCode"></param>
         /// <param name="market"></param>
-        public void GetCode(out string shortCode, out byte market)
+        public void GetCode(out String shortCode, out byte market)
         {
             shortCode = _shortCode;
             market = _market;
@@ -2573,7 +2573,7 @@ namespace OwLib
         /// <summary>
         /// 链接
         /// </summary>
-        public string Url;
+        public String Url;
 
         /// <summary>
         /// 撰写时间(yyyymmdd)
@@ -2583,17 +2583,17 @@ namespace OwLib
         /// <summary>
         /// 评级
         /// </summary>
-        public string Rate;
+        public String Rate;
 
         /// <summary>
         /// 机构名称
         /// </summary>
-        public string OrgName;
+        public String OrgName;
 
         /// <summary>
         /// 研报标题
         /// </summary>
-        public string Title;
+        public String Title;
 
         /// <summary>
         /// 机构影响力
@@ -2685,12 +2685,12 @@ namespace OwLib
         /// <summary>
         /// 资讯编码
         /// </summary>
-        public string InfoCode;
+        public String InfoCode;
 
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title;
+        public String Title;
 
         /// <summary>
         /// 日期
@@ -2710,7 +2710,7 @@ namespace OwLib
         /// <summary>
         /// 机构名称
         /// </summary>
-        public string MediaName;
+        public String MediaName;
 
         /// <summary>
         /// 星级
@@ -2725,7 +2725,7 @@ namespace OwLib
         /// <summary>
         /// url
         /// </summary>
-        public string Url;
+        public String Url;
     }
     /// <summary>
     /// (全景图上的)研究报告中个股评级条目
@@ -2735,15 +2735,15 @@ namespace OwLib
         /// <summary>
         /// 编码
         /// </summary>
-        public string InfoCode;
+        public String InfoCode;
         /// <summary>
         /// 股票代码（不带后缀）
         /// </summary>
-        public string SecuCode;
+        public String SecuCode;
         /// <summary>
         /// 股票名称
         /// </summary>
-        public string SecuSName;
+        public String SecuSName;
         /// <summary>
         /// 股票内码
         /// </summary>
@@ -2755,7 +2755,7 @@ namespace OwLib
         /// <summary>
         /// 机构名称
         /// </summary>
-        public string InsSName;
+        public String InsSName;
         /// <summary>
         /// 日期
         /// </summary>
@@ -2774,23 +2774,23 @@ namespace OwLib
         /// <summary>
         /// 债券交易日期, 格式 "yyyy-MM-dd"
         /// </summary>
-        public string BondDate;
+        public String BondDate;
         /// <summary>
         /// 利率(%)
         /// </summary>
-        public string CouponRate;
+        public String CouponRate;
         /// <summary>
         /// 发行总量(亿元)
         /// </summary>
-        public string IssueVol;
+        public String IssueVol;
         /// <summary>
         /// 期限
         /// </summary>
-        public string Period;
+        public String Period;
         /// <summary>
         /// 操作类型
         /// </summary>
-        public string OType;
+        public String OType;
     }
     #endregion
 
@@ -3181,7 +3181,7 @@ namespace OwLib
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content;
+        public String Content;
     }
     #endregion
 
@@ -3292,12 +3292,12 @@ namespace OwLib
         /// <summary>
         /// 旧名
         /// </summary>
-        public string OldName;
+        public String OldName;
 
         /// <summary>
         /// 新名
         /// </summary>
-        public string NewName;
+        public String NewName;
     }
 
     /// <summary>
@@ -3359,7 +3359,7 @@ namespace OwLib
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title;
+        public String Title;
 
         /// <summary>
         /// 最后更新日期
@@ -3389,7 +3389,7 @@ namespace OwLib
         /// <summary>
         /// url
         /// </summary>
-        public string Url;
+        public String Url;
 
         /// <summary>
         /// 是否点击查看过
@@ -3405,12 +3405,12 @@ namespace OwLib
         /// <summary>
         /// 资讯编码
         /// </summary>
-        public string InfoCode;
+        public String InfoCode;
 
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title;
+        public String Title;
 
         /// <summary>
         /// 日期
@@ -3425,7 +3425,7 @@ namespace OwLib
         /// <summary>
         /// 来源
         /// </summary>
-        public string MediaName;
+        public String MediaName;
 
         /// <summary>
         /// 是否点击查看过
@@ -3434,7 +3434,7 @@ namespace OwLib
         /// <summary>
         /// url
         /// </summary>
-        public string Url;
+        public String Url;
 
         public OneNews24HOrgDataRec DeepCopy()
         {
@@ -3585,7 +3585,7 @@ namespace OwLib
         /// <summary>
         /// 基金经理
         /// </summary>
-        public string ManagerName;
+        public String ManagerName;
 
         /// <summary>
         /// 任职日期
@@ -3610,7 +3610,7 @@ namespace OwLib
         /// <summary>
         /// 同类排名
         /// </summary>
-        public string Rank;
+        public String Rank;
 
         /// <summary>
         /// 超基准总回报
@@ -4220,7 +4220,7 @@ namespace OwLib
         /// <summary>
         /// 报价方
         /// </summary>
-        public string BidInitiator;//报价方
+        public String BidInitiator;//报价方
         /// <summary>
         /// clean报价
         /// </summary>
@@ -4252,7 +4252,7 @@ namespace OwLib
         /// <summary>
         /// 报价方
         /// </summary>
-        public string OfferInitiator;//报价方
+        public String OfferInitiator;//报价方
         /// <summary>
         /// clean报价
         /// </summary>
@@ -4294,7 +4294,7 @@ namespace OwLib
         /// <summary>
         /// 报价行
         /// </summary>
-        public string OfferBank;//报价行
+        public String OfferBank;//报价行
 
         /// <summary>
         /// 涨跌bp
@@ -4356,15 +4356,15 @@ namespace OwLib
         ///// <summary>
         ///// 股票代码
         ///// </summary>
-        //public string EMCode;
+        //public String EMCode;
         /// <summary>
         /// 宏观指标Id
         /// </summary>
-        public string MacroId;
+        public String MacroId;
         /// <summary>
         /// 宏观指标名称
         /// </summary>
-        public string MacroName;
+        public String MacroName;
         /// <summary>
         /// 是否自定义指标
         /// </summary>

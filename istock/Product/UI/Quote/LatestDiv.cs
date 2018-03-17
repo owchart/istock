@@ -82,7 +82,7 @@ namespace OwLib
             set
             {
                 m_latestData.Copy(value);
-                if (m_chart != null)
+                if (m_chart != null && m_chart.Cycle > 0)
                 {
                     List<SecurityLatestData> datas = new List<SecurityLatestData>();
                     datas.Add(value);

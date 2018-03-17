@@ -13,7 +13,7 @@ namespace OwLib
     /// 文件下载完成委托
     /// </summary>
     /// <param name="fileName"></param>
-    public delegate void DownFileCompleted(string fileName);
+    public delegate void DownFileCompleted(String fileName);
 
     /// <summary>
     /// 加载专题数据
@@ -85,10 +85,10 @@ namespace OwLib
         /// <summary>
         /// 专题树菜单缓存集合
         /// </summary>
-        private static Dictionary<string, DataTable> dictionaryTreeData =
-            new Dictionary<string,DataTable>();
-        private static Dictionary<string, DataRow> modSpecialtopics = new Dictionary<string, DataRow>();
-        private static Dictionary<string, List<DataRow>> CatKeymodSpecialtopics = new Dictionary<string, List<DataRow>>();
+        private static Dictionary<String, DataTable> dictionaryTreeData =
+            new Dictionary<String,DataTable>();
+        private static Dictionary<String, DataRow> modSpecialtopics = new Dictionary<String, DataRow>();
+        private static Dictionary<String, List<DataRow>> CatKeymodSpecialtopics = new Dictionary<String, List<DataRow>>();
 
         /// <summary>
         /// 专题分类初始化
@@ -97,7 +97,7 @@ namespace OwLib
         /// <param name="dt">数据表</param>
         /// <param name="categrrycode">分类code</param>
         private static void InitSpecialTopicCategory(List<DataRow> iclist, DataTable dt,
-                                                     string categrrycode)
+                                                     String categrrycode)
         {
             if (dt == null || dt.Rows.Count == 0)
                 return;
@@ -312,8 +312,8 @@ namespace OwLib
         public static XmlNodeList GetSameSpecialCodesRoot()
         {
             var xdoc = new XmlDocument();
-            //string filename = string.Format("{0}\\NecessaryData\\{1}", pathHelper.DataDir, "SameSpecialCodesMapping.xml");
-            string filename = Path.Combine("", @"SpecialCombox\SameSpecialCodesMapping.xml");
+            //String filename = String.Format("{0}\\NecessaryData\\{1}", pathHelper.DataDir, "SameSpecialCodesMapping.xml");
+            String filename = Path.Combine("", @"SpecialCombox\SameSpecialCodesMapping.xml");
             if (!File.Exists(filename))
                 filename = Path.Combine("", @"SpecialCombox\SameSpecialCodesMapping.xml");
             if (!File.Exists(filename))
@@ -336,7 +336,7 @@ namespace OwLib
                 SameSpecialCodelistNodes = GetSameSpecialCodesRoot();
                 for (int i = 0; i < SameSpecialCodelistNodes.Count; i++)
                 {
-                    string key = SameSpecialCodelistNodes[i].Attributes["CurCode"].Value;
+                    String key = SameSpecialCodelistNodes[i].Attributes["CurCode"].Value;
                     CommonContant.SameSpecialCodes[key] = SameSpecialCodelistNodes[i].Attributes["SourceCode"].Value;
                 }
             }
@@ -357,7 +357,7 @@ namespace OwLib
             modSpecialtopics.Clear();
             if (CatKeymodSpecialtopics == null)
             {
-                CatKeymodSpecialtopics = new Dictionary<string, List<DataRow>>();
+                CatKeymodSpecialtopics = new Dictionary<String, List<DataRow>>();
             }
             InitSpecialTreeData();
         }
@@ -367,11 +367,11 @@ namespace OwLib
         /// </summary>
         /// <param name="codename">专题树编号</param>
         /// <returns>专题树节点组合</returns>
-        public static DataTable Loaddata(string codename)
+        public static DataTable Loaddata(String codename)
         {
             if (dictionaryTreeData == null)
             {
-                dictionaryTreeData = new Dictionary<string, DataTable>();
+                dictionaryTreeData = new Dictionary<String, DataTable>();
             }
             if (dictionaryTreeData.ContainsKey(codename))
             {
@@ -400,7 +400,7 @@ namespace OwLib
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static DataRow GetModSpecialtopicForSpecialtopicCode(string code)
+        public static DataRow GetModSpecialtopicForSpecialtopicCode(String code)
         {
             if (modSpecialtopics.ContainsKey(code))
                 return modSpecialtopics[code];
@@ -416,10 +416,10 @@ namespace OwLib
         public static void InitBindingType(DataTable res, List<DataRow> icList,
                                            List<DataRow> indCategoryList)
         {
-            res.Columns.Add("ID", typeof (string));
-            res.Columns.Add("ParentID", typeof (string));
-            res.Columns.Add("Name", typeof (string));
-            res.Columns.Add("Category", typeof (string));
+            res.Columns.Add("ID", typeof (String));
+            res.Columns.Add("ParentID", typeof (String));
+            res.Columns.Add("Name", typeof (String));
+            res.Columns.Add("Category", typeof (String));
 
             foreach (DataRow specialtopic in icList)
             {

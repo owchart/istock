@@ -108,7 +108,7 @@ namespace OwLibSV
                 datas.Add(newData);
                 CTable dataSource = indicator.DataSource;
                 int[] fields = new int[] { KeyFields.CLOSE_INDEX, KeyFields.HIGH_INDEX, KeyFields.LOW_INDEX, KeyFields.OPEN_INDEX, KeyFields.VOL_INDEX, KeyFields.AMOUNT_INDEX };
-                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, indicators, fields, datas, false);
+                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, indicators, fields, datas);
                 datas.Clear();
                 int rowsCount = dataSource.RowsCount;
                 int variablesSize = indicator.MainVariables.Count;

@@ -14,7 +14,7 @@ namespace OwLib
     public static class LogUtilities
     {
         static int _date = TimeUtilities.GetLastTradeDateInt();
-        static readonly string FileName = PathUtilities.LogPath + @"\quote" + _date.ToString() + "Log.txt";
+        static readonly String FileName = PathUtilities.LogPath + @"\quote" + _date.ToString() + "Log.txt";
         static TextWriter _tw;
         static int _grade;
 
@@ -40,7 +40,7 @@ namespace OwLib
         /// <summary>
         /// [Conditional("DEBUG")]
         /// </summary>
-        public static void LogMessage(string message, int importentGrade)
+        public static void LogMessage(String message, int importentGrade)
         {
             if (importentGrade > _grade)
             {
@@ -51,7 +51,7 @@ namespace OwLib
         /// <summary>
         /// [Conditional("ISLOG")]
         /// </summary>
-        public static void LogMessage(string message)
+        public static void LogMessage(String message)
         {
             EmLog.Write("行情",message,LogScope.Debug);
             //if (_tw != null)
@@ -59,7 +59,7 @@ namespace OwLib
             //    if (_date != TimeUtilities.GetLastTradeDateInt())
             //    {
             //        _tw.Close();
-            //        string fileName = PathUtilities.LogPath + @"\quote" + TimeUtilities.GetLastTradeDateInt().ToString() + "Log.txt";
+            //        String fileName = PathUtilities.LogPath + @"\quote" + TimeUtilities.GetLastTradeDateInt().ToString() + "Log.txt";
             //        Debug.Print("path=" + fileName);
             //        _tw = new StreamWriter(fileName, true, Encoding.Default);
             //        _date = TimeUtilities.GetLastTradeDateInt();

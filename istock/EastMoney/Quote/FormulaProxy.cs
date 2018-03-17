@@ -41,7 +41,7 @@ namespace OwLib {
 		/// <param name="formula"></param>
 		/// <returns></returns>
 		[DllImport("EmfcProxy.dll", EntryPoint = "FM_FORMULA_DB_GetFormulaByName", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool GetDbFormulaByName ( int type, string name, ref Formula formula );
+		public static extern bool GetDbFormulaByName ( int type, String name, ref Formula formula );
 		/// <summary>
 		/// 根据index从数据库获取公式
 		/// </summary>
@@ -59,7 +59,7 @@ namespace OwLib {
 		/// <param name="paracount"></param>
 		/// <param name="result"></param>
 		[DllImport("EmfcProxy.dll", EntryPoint = "FM_TestFormula", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void TestFormula ( string src, int srcLen, string[] paras, int paracount, ref TestFormulaResult result );
+		public static extern void TestFormula ( String src, int srcLen, String[] paras, int paracount, ref TestFormulaResult result );
 		/// <summary>
 		/// 执行公式计算
 		/// </summary>
@@ -76,7 +76,7 @@ namespace OwLib {
 		/// <param name="nLen"></param>
 		/// <returns></returns>
 		[DllImport("EmfcProxy.dll", EntryPoint = "FM_ExecuteFormula", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool ExecuteFormula ( int openday, int zq, int sc, string code, FORMULA_TIME begin, FORMULA_TIME end, int type, string name, string errmsg, ref FmFormulaOutput finaloutput, int nLen );
+		public static extern bool ExecuteFormula ( int openday, int zq, int sc, String code, FORMULA_TIME begin, FORMULA_TIME end, int type, String name, String errmsg, ref FmFormulaOutput finaloutput, int nLen );
 		/// <summary>
 		/// 把K线数据传入执行公式计算
 		/// </summary>
@@ -94,7 +94,7 @@ namespace OwLib {
 		/// <param name="nLen"></param>
 		/// <returns></returns>
 		[DllImport("EmfcProxy.dll", EntryPoint = "FM_ExecuteFormulaWithKLine", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool ExecuteFormula ( int openday, int zq, int sc, string code, FORMULA_TIME begin, FORMULA_TIME end, int type, Kline[] kline, string name, string errmsg, ref FmFormulaOutput finaloutput, int nLen );
+		public static extern bool ExecuteFormula ( int openday, int zq, int sc, String code, FORMULA_TIME begin, FORMULA_TIME end, int type, Kline[] kline, String name, String errmsg, ref FmFormulaOutput finaloutput, int nLen );
 
         /// <summary>
         /// 把K线数据和公式传入执行公式计算
@@ -112,9 +112,9 @@ namespace OwLib {
         /// <param name="nLen"></param>
         /// <returns></returns>
         [DllImport("EmfcProxy.dll",EntryPoint = "FM_ExecuteFormulaWithKLineAndFormula",CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool ExecuteFormulaWithKLineAndFormula(int openday, int zq, int sc, string code,
+        public static extern bool ExecuteFormulaWithKLineAndFormula(int openday, int zq, int sc, String code,
                                                                        FORMULA_TIME begin, FORMULA_TIME end,
-                                                                       Kline[] kline, Formula f, string errmsg,
+                                                                       Kline[] kline, Formula f, String errmsg,
                                                                        ref FmFormulaOutput finaloutput, int nLen);
 		/// <summary>
 		/// 从数据库中删除公式
@@ -156,7 +156,7 @@ namespace OwLib {
         /// <param name="errmsg"></param>
         /// <returns></returns>
         [DllImport("EmfcProxy.dll", EntryPoint = "FM_ExecuteFormulaWithExtraConst", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool ExecuteFormulaWithExtraConst(int openday, int zq, int sc, string code, FORMULA_TIME begin, FORMULA_TIME end, Kline[] kline, Formula f, FM_FORMULA_EXTRA_CONST[] data, int datalen, ref FmFormulaOutput finaloutput, int nlen, string errmsg);
+        public static extern bool ExecuteFormulaWithExtraConst(int openday, int zq, int sc, String code, FORMULA_TIME begin, FORMULA_TIME end, Kline[] kline, Formula f, FM_FORMULA_EXTRA_CONST[] data, int datalen, ref FmFormulaOutput finaloutput, int nlen, String errmsg);
 
         /// <summary>
         /// 计算表达式
@@ -169,7 +169,7 @@ namespace OwLib {
         /// <param name="errmsg"></param>
         /// <returns></returns>
         [DllImport("EmfcProxy.dll", EntryPoint = "FM_ExecuteFormulaWithExtraConstWithoutKline", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool ExecuteFormulaWithExtraConst(Formula f, FM_FORMULA_EXTRA_CONST[] data, int datalen, ref FmFormulaOutput finaloutput, int nlen, string errmsg);
+        public static extern bool ExecuteFormulaWithExtraConst(Formula f, FM_FORMULA_EXTRA_CONST[] data, int datalen, ref FmFormulaOutput finaloutput, int nlen, String errmsg);
 
 		/// <summary>
 		/// 导出公式
@@ -177,7 +177,7 @@ namespace OwLib {
 		/// <param name="f"></param>
 		/// <param name="filename"></param>
 		/// <returns></returns>
-		public static bool ExportFormula (Formula f, string filename ) {
+		public static bool ExportFormula (Formula f, String filename ) {
 			try {
 				SerializeFormula serializeFormula = new SerializeFormula();
 				serializeFormula.des = f.des;
@@ -218,7 +218,7 @@ namespace OwLib {
 		/// </summary>
 		/// <param name="filename"></param>
 		/// <returns></returns>
-		public static SerializeFormula ImportFormula ( string filename ) {
+		public static SerializeFormula ImportFormula ( String filename ) {
 			try {
 				BinaryFormatter deserializer = new BinaryFormatter();
 				FileStream file = new FileStream(filename, FileMode.Open);
@@ -252,7 +252,7 @@ namespace OwLib {
 			for (int i = 0; i < count; i++) {
 				Formula formula = new Formula();
 				GetDbFormula(i, ref formula);
-				string flag = Marshal.PtrToStringAnsi(formula.flag);
+				String flag = Marshal.PtrToStringAnsi(formula.flag);
 				if (flag.Contains("[C]")) {
 					result.Add(formula);
 				}
@@ -270,7 +270,7 @@ namespace OwLib {
 			for (int i = 0; i < count; i++) {
 				Formula formula = new Formula();
 				GetDbFormula(i, ref formula);
-				string flag = Marshal.PtrToStringAnsi(formula.flag);
+				String flag = Marshal.PtrToStringAnsi(formula.flag);
 				if (flag.Contains("[U]")) {
 					result.Add(formula);
 				}
@@ -287,7 +287,7 @@ namespace OwLib {
 			for (int i = 0; i < count; i++) {
 				Formula formula = new Formula();
 				GetDbFormula(i, ref formula);
-				string flag = Marshal.PtrToStringAnsi(formula.flag);
+				String flag = Marshal.PtrToStringAnsi(formula.flag);
 				if (flag.Contains("[S]")) {
 					result.Add(formula);
 				}

@@ -15,14 +15,14 @@ namespace OwLib
         /// 返回值结构
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Dictionary<string, List<TabData>>> GetAllTabCfgData()
+        public static Dictionary<String, Dictionary<String, List<TabData>>> GetAllTabCfgData()
         {
-            Dictionary<string, Dictionary<string, List<TabData>>> result =
-                new Dictionary<string, Dictionary<string, List<TabData>>>();
+            Dictionary<String, Dictionary<String, List<TabData>>> result =
+                new Dictionary<String, Dictionary<String, List<TabData>>>();
             XmlDocument doc = new XmlDocument();
             try
             {
-                string filePath = PathUtilities.CfgPath + "TabConfig.xml";
+                String filePath = PathUtilities.CfgPath + "TabConfig.xml";
                 doc.Load(filePath);
                 result.Add("StockTab", GetNodeData("StockTab"));
                 result.Add("InfoTab", GetNodeData("InfoTab"));
@@ -48,11 +48,11 @@ namespace OwLib
             return result;
         }
 
-        private static Dictionary<string, List<TabData>> GetNodeData(string nodeName)
+        private static Dictionary<String, List<TabData>> GetNodeData(String nodeName)
         {
-            Dictionary<string, List<TabData>> result = new Dictionary<string, List<TabData>>();
+            Dictionary<String, List<TabData>> result = new Dictionary<String, List<TabData>>();
             XmlDocument doc = new XmlDocument();
-            string filePath = PathUtilities.CfgPath + "TabConfig.xml";
+            String filePath = PathUtilities.CfgPath + "TabConfig.xml";
             doc.Load(filePath);
             XmlNode root = doc.SelectSingleNode("Tabs/" + nodeName);
             if (root != null)
@@ -94,14 +94,14 @@ namespace OwLib
     /// </summary>
     public class TabData
     {
-        private string _id;
+        private String _id;
         private int _index;
-        private string _name;
+        private String _name;
 
         /// <summary>
         /// Id
         /// </summary>
-        public string Id
+        public String Id
         {
             get { return _id; }
             set { _id = value; }
@@ -119,7 +119,7 @@ namespace OwLib
         /// <summary>
         /// Name
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }
@@ -129,7 +129,7 @@ namespace OwLib
         {
         }
 
-        public TabData(int index, string id, string name)
+        public TabData(int index, String id, String name)
         {
             _index = index;
             _id = id;

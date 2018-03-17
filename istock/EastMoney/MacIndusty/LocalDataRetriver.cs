@@ -10,8 +10,8 @@ namespace OwLib
     public static class LocalDataRetriver
     {
         public static bool _isReadSuccess = true;
-        private static readonly string LocalStorageRootDir = Path.Combine(Application.StartupPath, "NecessaryData");
-        private const string NecessaryData = "NecessaryData";
+        private static readonly String LocalStorageRootDir = Path.Combine(Application.StartupPath, "NecessaryData");
+        private const String NecessaryData = "NecessaryData";
 
         static LocalDataRetriver()
         {
@@ -22,8 +22,8 @@ namespace OwLib
             DataTable table = null;
             try
             {
-                string str = MongoDBConstant.DicTreeSource[treeType];
-                string path = Path.Combine(LocalStorageRootDir, str);
+                String str = MongoDBConstant.DicTreeSource[treeType];
+                String path = Path.Combine(LocalStorageRootDir, str);
                 if (!File.Exists(path))
                 {
                     //EMLoggerHelper.Write("File name '{0}' have not been found(path:'{1}')!", new object[] { str, path });

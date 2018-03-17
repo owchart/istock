@@ -12,19 +12,19 @@ namespace OwLib
     /// </summary>
     public class BaseDataSocketModel
     {
-        public BaseDataSocketModel(string type)
+        public BaseDataSocketModel(String type)
         {
             this.request = "getBaseData";
             this.type = type;
         }
-        public BaseDataSocketModel(string request, string type)
+        public BaseDataSocketModel(String request, String type)
         {
             this.request = request;
             this.type = type;
         }
 
-        public string request { get; set; }
-        public string type { get; set; }
+        public String request { get; set; }
+        public String type { get; set; }
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ namespace OwLib
         /// 获取左侧研报树
         /// </summary>
         /// <returns></returns>
-        public static String GetLeftTree(string cid)
+        public static String GetLeftTree(String cid)
         {
             String result = String.Empty;
             SocketModel queryModel = new SocketModel("H3", cid);
@@ -62,8 +62,8 @@ namespace OwLib
         /// <param name="sort"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static String GetReportByTreeNode(string cid, string request, string id, string pageIndex, string limit, string sort,
-                                        string order, string otherparams)
+        public static String GetReportByTreeNode(String cid, String request, String id, String pageIndex, String limit, String sort,
+                                        String order, String otherparams)
         {
             String result = String.Empty;
             //String terms = String.Empty;
@@ -100,20 +100,20 @@ namespace OwLib
         /// <param name="authornames"></param>
         /// <param name="authorgroup"></param>
         /// <returns></returns>
-        private static string GetTerms(string date, string title, string text, string authornames, string authorgroup)
+        private static String GetTerms(String date, String title, String text, String authornames, String authorgroup)
         {
             String terms = String.Empty;
             String authornamesstr = String.Empty;
             String authorgroupsstr = String.Empty;
-            string authquery = String.Empty;
+            String authquery = String.Empty;
             if (!String.IsNullOrEmpty(date))
             {
                 //add by lym
                 try
                 {
                     date = date.Replace("99:99:99", "23:59:59");
-                    string startdate = string.Empty;
-                    string enddate = string.Empty;
+                    String startdate = String.Empty;
+                    String enddate = String.Empty;
                     startdate = Convert.ToDateTime(date.Substring(0, date.IndexOf(" TO ")).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T00:00:00Z";
                     enddate = Convert.ToDateTime(date.Substring(date.IndexOf(" TO ") + 4).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T23:59:59Z";
                     date = startdate + " TO " + enddate;
@@ -147,21 +147,21 @@ namespace OwLib
                 }
 
             }
-            foreach (string item in GetParams(authornames))
+            foreach (String item in GetParams(authornames))
             {
                 authornamesstr += " OR author:" + item;
             }
-            foreach (string item in GetParams(authorgroup))
+            foreach (String item in GetParams(authorgroup))
             {
                 authorgroupsstr += " OR (" + item + ")";
             }
-            if (!string.IsNullOrEmpty(authornamesstr))
+            if (!String.IsNullOrEmpty(authornamesstr))
             {
                 authornamesstr = authornamesstr.Remove(0, 4);
             }
-            if (!string.IsNullOrEmpty(authorgroupsstr))
+            if (!String.IsNullOrEmpty(authorgroupsstr))
             {
-                if (!string.IsNullOrEmpty(authornamesstr))
+                if (!String.IsNullOrEmpty(authornamesstr))
                 {
                     authquery = "(" + authornamesstr + ")" + authorgroupsstr;
                 }
@@ -172,7 +172,7 @@ namespace OwLib
             }
             else
             {
-                if (!string.IsNullOrEmpty(authornamesstr))
+                if (!String.IsNullOrEmpty(authornamesstr))
                 {
                     authquery = authornamesstr;
                 }
@@ -218,12 +218,12 @@ namespace OwLib
         /// <param name="limit"></param>
         /// <param name="MultiQueryLength">高级搜索的条件个数</param>
         /// <returns></returns>
-        public static String SearchByMultiQuery(string types, string orgs, string authors, string authornames, string authorgroup, string securitycodes, string industrys,
-                                string concepts, string ratings, string ratingchanges, string date, string title,
-                                string text, string columnType, string pageIndex, string limit, int MultiQueryLength)
+        public static String SearchByMultiQuery(String types, String orgs, String authors, String authornames, String authorgroup, String securitycodes, String industrys,
+                                String concepts, String ratings, String ratingchanges, String date, String title,
+                                String text, String columnType, String pageIndex, String limit, int MultiQueryLength)
         {
             List<ReportSktSrhQryModel> reportQryList = new List<ReportSktSrhQryModel>();
-            string[] terms = new string[MultiQueryLength];
+            String[] terms = new String[MultiQueryLength];
             for (int i = 0; i < MultiQueryLength; i++)
             {
                 terms[i] = GetTerms(GetParams(date, i), GetParams(title, i), GetParams(text, i), GetParams(authornames, i), GetParams(authorgroup, i));
@@ -269,11 +269,11 @@ namespace OwLib
         /// <param name="pageIndex"></param>
         /// <param name="limit"></param>
         /// <returns></returns>
-        public static String Search(string types, string orgs, string authors, string authornames, string authorgroup, string securitycodes, string industrys,
-                                string concepts, string ratings, string ratingchanges, string date, string title,
-                                string text, string columnType, string pageIndex, string limit)
+        public static String Search(String types, String orgs, String authors, String authornames, String authorgroup, String securitycodes, String industrys,
+                                String concepts, String ratings, String ratingchanges, String date, String title,
+                                String text, String columnType, String pageIndex, String limit)
         {
-            string terms = string.Empty;
+            String terms = String.Empty;
             terms = GetTerms(date, title, text, authornames, authorgroup);
             SktSrhModel<ReportSktSrhQryModel> queryModel = new SktSrhModel<ReportSktSrhQryModel>("H3", pageIndex, limit,
                                                                            new ReportSktSrhQryModel(GetParams(types), GetParams(orgs),
@@ -299,15 +299,15 @@ namespace OwLib
         /// </summary>
         /// <param name="infocodes"></param>
         /// <returns></returns>
-        public static string GetDetailList(string infocodes)
+        public static String GetDetailList(String infocodes)
         {
             String result = String.Empty;
             //String terms = String.Empty;
-            //foreach (string item in infocodes.Split(','))
+            //foreach (String item in infocodes.Split(','))
             //{
             //    terms += " OR infocode:" + item;
             //}
-            //if (!string.IsNullOrEmpty(terms))
+            //if (!String.IsNullOrEmpty(terms))
             //{
             //    terms = terms.Remove(0, 4);
             //    terms = "(" + terms + ")";
@@ -334,7 +334,7 @@ namespace OwLib
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static String GetBaseData(string type)
+        public static String GetBaseData(String type)
         {
             String result = String.Empty;
 
@@ -363,8 +363,8 @@ namespace OwLib
         /// <param name="order"></param>
         /// <param name="otherparams"></param>
         /// <returns></returns>
-        public static string GetReportStatisticList(string id, string code, string industrycode, string orgcode, string timestamp,
-            string pageIndex, string limit, string sort, string order, string otherparams)
+        public static String GetReportStatisticList(String id, String code, String industrycode, String orgcode, String timestamp,
+            String pageIndex, String limit, String sort, String order, String otherparams)
         {
             String result = String.Empty;
 
@@ -397,8 +397,8 @@ namespace OwLib
         /// <summary>
         /// 获取自选股研报列表
         /// </summary>
-        public static String GetReportBySelectStock(string cid, string request, string id, string pageIndex, string limit, string sort,
-                                        string order, string codes)
+        public static String GetReportBySelectStock(String cid, String request, String id, String pageIndex, String limit, String sort,
+                                        String order, String codes)
         {
             String result = String.Empty;
             var queryModel = new { request = "getQueryUserSecu", h = "H3", pageNo = pageIndex, pageSize = limit, codes = codes.Split(',') };
@@ -420,9 +420,9 @@ namespace OwLib
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        private static string[] GetParams(string param)
+        private static String[] GetParams(String param)
         {
-            string[] result = new string[0];
+            String[] result = new String[0];
             if (!String.IsNullOrEmpty(param))
             {
                 result = param.Split(',');
@@ -437,9 +437,9 @@ namespace OwLib
         /// <param name="index">返回分割后索引位置数据</param>
         /// <param name="splitchar">分隔符 默认|</param>
         /// <returns></returns>
-        private static string GetParams(string param, int index, char splitchar = '|')
+        private static String GetParams(String param, int index, char splitchar = '|')
         {
-            string result = string.Empty;
+            String result = String.Empty;
             try
             {
                 if (!String.IsNullOrEmpty(param))
@@ -461,15 +461,15 @@ namespace OwLib
         /// <param name="index">获取索引位置</param>
         /// <param name="splitchar">分隔符 默认|</param>
         /// <returns></returns>
-        private static string[] GetParamsByMultiQuery(string param, int index, char splitchar = '|')
+        private static String[] GetParamsByMultiQuery(String param, int index, char splitchar = '|')
         {
-            string[] result = new string[0];
+            String[] result = new String[0];
             try
             {
                 if (!String.IsNullOrEmpty(param))
                 {
-                    string[] paramArray = param.Split(splitchar);
-                    if (paramArray.Length >= index && !string.IsNullOrEmpty(paramArray[index]))
+                    String[] paramArray = param.Split(splitchar);
+                    if (paramArray.Length >= index && !String.IsNullOrEmpty(paramArray[index]))
                     {
                         result = paramArray[index].Split(',');
                     }
@@ -485,9 +485,9 @@ namespace OwLib
         /// <summary>
         /// 获取实时资讯详细信息
         /// </summary>
-        public static string GetRealTimeInfoByCode(string infoCode)
+        public static String GetRealTimeInfoByCode(String infoCode)
         {
-            string content = "";
+            String content = "";
             try
             {
                 String url = "http://mainbody.jg.eastmoney.com/nrsweb/service.action?token=&serviceType=C&dataType=json&h=H3";

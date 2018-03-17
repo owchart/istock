@@ -21,7 +21,7 @@ namespace OwLib
             this._pCategoryCode = pCategoryCode;
         }
 
-        public override string Coding()
+        public override String Coding()
         {
             switch (this.Browser)
             {
@@ -70,7 +70,7 @@ namespace OwLib
                     this._pCategoryCode = "107";
                     break;
             }
-            return string.Format("1003°ÚUniqueId°ÚIndicatorService°Ú[PreVersion]°Ú[NowVersion]°Ú3,{0}", this._pCategoryCode);
+            return String.Format("1003°ÚUniqueId°ÚIndicatorService°Ú[PreVersion]°Ú[NowVersion]°Ú3,{0}", this._pCategoryCode);
         }
 
         public override bool Decoding(byte[] bytes)
@@ -84,12 +84,12 @@ namespace OwLib
             {
                 List<NodeData> nodeList = new List<NodeData>();
                 char[] separator = new char[] { '}' };
-                string[] strArray = Encoding.UTF8.GetString(bytes).Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                String[] strArray = Encoding.UTF8.GetString(bytes).Split(separator, StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < strArray.Length; i++)
                 {
                     NodeData data1;
                     char[] chArray2 = new char[] { '°Ú' };
-                    string[] strArray2 = strArray[i].Split(chArray2, StringSplitOptions.RemoveEmptyEntries);
+                    String[] strArray2 = strArray[i].Split(chArray2, StringSplitOptions.RemoveEmptyEntries);
                     if (this.Browser == BrowserType.STOCK)
                     {
                         if (!strArray2[0].StartsWith("101004"))

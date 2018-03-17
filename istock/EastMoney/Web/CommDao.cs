@@ -60,7 +60,7 @@ namespace OwLib
         /// <param name="str">需要处理的对象</param>
         /// <param name="str_empty">空和异常显示指定字符串str_empty</param>
         /// <returns></returns>
-        internal static string SafeToString(object str, string str_empty)
+        internal static String SafeToString(object str, String str_empty)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace OwLib
         /// </summary>
         /// <param name="str">需要处理的对象</param>
         /// <returns></returns>
-        internal static string SafeToString(object str)
+        internal static String SafeToString(object str)
         {
             try
             {
@@ -154,7 +154,7 @@ namespace OwLib
         /// </summary>
         /// <param name="html">html内容</param>
         /// <returns>清理后的html内容</returns>
-        public static string HtmlFilter(string html)
+        public static String HtmlFilter(String html)
         {
             Parser parser = Parser.CreateParser(html, "utf-8");
             NodeFilter scriptNode = new TagNameFilter("script");
@@ -173,7 +173,7 @@ namespace OwLib
         /// <summary>
         /// 索引特殊字符替换
         /// </summary>
-        internal static string SafeToIndexString(string str)
+        internal static String SafeToIndexString(String str)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace OwLib
         /// <param name="str">需要处理的对象</param>
         /// <param name="type">日期格式</param>
         /// <returns></returns>
-        internal static string SafeToDateString(object str, string type)
+        internal static String SafeToDateString(object str, String type)
         {
             try
             {
@@ -213,13 +213,13 @@ namespace OwLib
         /// <param name="str"></param>
         /// <param name="num">小数位</param>
         /// <returns></returns>
-        internal static string SafeToCurrency(object str, int num)
+        internal static String SafeToCurrency(object str, int num)
         {
             if (str != DBNull.Value)
             {
                 try
                 {
-                    return string.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : string.Format("{0:N" + num.ToString() + "}", str);
+                    return String.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : String.Format("{0:N" + num.ToString() + "}", str);
                 }
                 catch
                 {
@@ -235,28 +235,28 @@ namespace OwLib
         /// <param name="rate">汇率</param>
         /// <param name="num">小数位</param>
         /// <returns></returns>
-        internal static string SafeToCurrency(object str, double rate, int num, int precision)
+        internal static String SafeToCurrency(object str, double rate, int num, int precision)
         {
             if (str != null)
             {
 
                 try
                 {
-                    if (!string.IsNullOrEmpty(str.ToString()))
+                    if (!String.IsNullOrEmpty(str.ToString()))
                     {
                         str = Math.Round(Convert.ToDouble(str) / rate, precision);
-                        if (string.Format("{0:N" + num.ToString() + "}", str) == "")
+                        if (String.Format("{0:N" + num.ToString() + "}", str) == "")
                             return "-";
                         else
                         {
-                            return string.Format("{0:N" + num.ToString() + "}", str);
+                            return String.Format("{0:N" + num.ToString() + "}", str);
                         }
                     }
                     else
                     {
                         return "-";
                     }
-                    //return string.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : string.Format("{0:N" + num.ToString() + "}", str);
+                    //return String.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : String.Format("{0:N" + num.ToString() + "}", str);
                 }
                 catch
                 {
@@ -272,28 +272,28 @@ namespace OwLib
         /// <param name="rate">汇率</param>
         /// <param name="num">小数位</param>
         /// <returns></returns>
-        internal static string SafeToCurrency(object str, double rate, int num)
+        internal static String SafeToCurrency(object str, double rate, int num)
         {
             if (str != null)
             {
 
                 try
                 {
-                    if (!string.IsNullOrEmpty(str.ToString()))
+                    if (!String.IsNullOrEmpty(str.ToString()))
                     {
                         str = Math.Round(Convert.ToDouble(str) / rate, _digit);
-                        if (string.Format("{0:N" + num.ToString() + "}", str) == "")
+                        if (String.Format("{0:N" + num.ToString() + "}", str) == "")
                             return "-";
                         else
                         {
-                            return string.Format("{0:N" + num.ToString() + "}", str);
+                            return String.Format("{0:N" + num.ToString() + "}", str);
                         }
                     }
                     else
                     {
                         return "-";
                     }
-                    //return string.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : string.Format("{0:N" + num.ToString() + "}", str);
+                    //return String.Format("{0:N" + num.ToString() + "}", str) == "" ? "-" : String.Format("{0:N" + num.ToString() + "}", str);
                 }
                 catch
                 {

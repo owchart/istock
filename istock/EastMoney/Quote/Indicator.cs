@@ -12,10 +12,10 @@ namespace OwLib {
     {
 	    private bool _flagIndicatorSelected;
 	    private Formulatype _formtype;
-	    private string _indicatorName;
+	    private String _indicatorName;
 	    private int _paraCount;
 	    private FormulaPara[] _paraData;
-	    private string[] _paraTipName;
+	    private String[] _paraTipName;
 	    private PicLocationType _picLoc;
 	    private CoordinateType _picCor;
 	    private List<QuoteDataStru> _quoteData;
@@ -34,7 +34,7 @@ namespace OwLib {
 	    /// <summary>
 	    /// 类型
 	    /// </summary>
-	    public string IndicatorName
+	    public String IndicatorName
 	    {
 	        get { return _indicatorName; }
 	        set { _indicatorName = value; }
@@ -61,7 +61,7 @@ namespace OwLib {
 	    /// <summary>
         /// 设置参数时,值后显示内容
         /// </summary>
-        public string[] ParaTipName
+        public String[] ParaTipName
 	    {
 	        get { return _paraTipName; }
 	        set { _paraTipName = value; }
@@ -124,7 +124,7 @@ namespace OwLib {
 	    /// <summary>
         /// 构造函数
         /// </summary>
-        public EMIndicator(Formulatype formtype, string indicatorName)
+        public EMIndicator(Formulatype formtype, String indicatorName)
         {
             IndicatorRegion = new Region();
             QuoteData=new List<QuoteDataStru>();
@@ -286,13 +286,13 @@ namespace OwLib {
         private Color _quoteColor;
         private List<float> _quoteDataList;
         private PicType _quotePicType;
-        private string _quoteName;
+        private String _quoteName;
         private FormulaFunctionOutput _quoteFunctionList;
 
         /// <summary>
         /// 名称
         /// </summary>
-        public string QuoteName
+        public String QuoteName
         {
             get { return _quoteName; }
             set { _quoteName = value; }

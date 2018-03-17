@@ -138,9 +138,9 @@ namespace OwLib
                 if (cell.Grid == m_gridAllStockNews)
                 {
                     NewsListNode stockNew = cell.Row.Tag as NewsListNode;
-                    string url = stockNew.url;
+                    String url = stockNew.url;
                     Process.Start(url);
-                    //string text = StockNewsDataHelper.GetRealTimeInfoByCode(cell.Row.GetCell("colN4").GetString());
+                    //String text = StockNewsDataHelper.GetRealTimeInfoByCode(cell.Row.GetCell("colN4").GetString());
                     //MessageBox.Show(text);
                 }
             }

@@ -113,7 +113,7 @@ namespace OwLib
             StringBuilder sb = new StringBuilder(102400);
             int len = GetNews(codes, sb);
             String str = sb.ToString();
-            String[] strs = str.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            String[] strs = str.Split(new String[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             int strsSize = strs.Length;
             List<SingleInfo> infos = new List<SingleInfo>();
             for (int i = 0; i < strsSize; i++)
@@ -153,7 +153,7 @@ namespace OwLib
                 SingleInfo singleInfo = cell.Row.Tag as SingleInfo;
                 String type = singleInfo.Type;
                 String infoCode = singleInfo.InfoCode;
-                string url = "";
+                String url = "";
                 if (type == "1")
                 {
                     url = "http://app.jg.eastmoney.com/html_News/DetailOnly.html?infoCode=" + infoCode;

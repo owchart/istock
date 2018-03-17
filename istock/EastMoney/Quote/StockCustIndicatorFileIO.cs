@@ -28,44 +28,44 @@ namespace OwLib
     /// </summary>
     public class StockCustIndicatorFileIO
     {
-        private static readonly string FilePath = PathUtilities.UserPath + @"Kline\" + "StockCustIndicatorCfg.xml";
+        private static readonly String FilePath = PathUtilities.UserPath + @"Kline\" + "StockCustIndicatorCfg.xml";
         /// <summary>
         /// "/indicators"
         /// </summary>
-        private const string RootNodeName = "/indicators";
+        private const String RootNodeName = "/indicators";
         /// <summary>
         /// "/indicators/stock"
         /// </summary>
-        private const string StockNode = "/indicators/stock";
+        private const String StockNode = "/indicators/stock";
         /// <summary>
         /// "/indicators/stock/left"
         /// </summary>
-        private const string LeftIndicatorNodeName = "/indicators/stock/left";
+        private const String LeftIndicatorNodeName = "/indicators/stock/left";
         /// <summary>
         /// "/indicators/stock/right"
         /// </summary>
-        private const string RightIndicatorNodeName = "/indicators/stock/right";
+        private const String RightIndicatorNodeName = "/indicators/stock/right";
         /// <summary>
         /// "code"
         /// </summary>
-        private const string StockAttr = "code";
+        private const String StockAttr = "code";
         /// <summary>
         /// "id"
         /// </summary>
-        private const string idAttr = "id";
+        private const String idAttr = "id";
 
         /// <summary>
         /// left
         /// </summary>
-        private const string LeftPath = "left";
+        private const String LeftPath = "left";
         /// <summary>
         /// right
         /// </summary>
-        private const string RightPath = "right";
+        private const String RightPath = "right";
         /// <summary>
         /// LeafNode: indicator
         /// </summary>
-        private const string FinaNode = "indicator";
+        private const String FinaNode = "indicator";
 
         #region The configer file read interface.
         /// <summary>
@@ -76,10 +76,10 @@ namespace OwLib
         /// <param name="custMacroIds"> Output the customlize macro-indicator Id list</param>
         /// <returns> True for the code have the customlize macro-indicator Id list, otherwise false.</returns>
         public static bool TryGetCustIndicatorIds(int code, IndicateRequestType indicateRequestType,
-            out HashSet<string> custMacroIds)
+            out HashSet<String> custMacroIds)
         {
-            custMacroIds = new HashSet<string>();
-            Dictionary<IndicateRequestType, HashSet<string>> innerDic;
+            custMacroIds = new HashSet<String>();
+            Dictionary<IndicateRequestType, HashSet<String>> innerDic;
 
             return (DicStockCustIndicator.TryGetValue(code, out innerDic)
                 && innerDic.TryGetValue(indicateRequestType, out custMacroIds));
@@ -93,7 +93,7 @@ namespace OwLib
         /// <param name="custIndicatorId"> The macro-indicator id for adding.</param>
         /// <returns> True for the code have been added in the configer file successfully, otherwise false.</returns>
         public static bool TryAddCustIndicatorId(int code, IndicateRequestType indicateRequestType,
-            string custIndicatorId)
+            String custIndicatorId)
         {
             bool success = false;
             // del actions.
@@ -123,13 +123,13 @@ namespace OwLib
 
             try
             {
-                string path = string.Format("{0}[@{1}='{2}']", StockNode, StockAttr, code);
+                String path = String.Format("{0}[@{1}='{2}']", StockNode, StockAttr, code);
                 XmlNode stockNode = doc.SelectSingleNode(path);
                 if (stockNode == null || !stockNode.HasChildNodes)
                 {
                     return false;
                 }
-                string checkNodePath;
+                String checkNodePath;
                 XmlNode checkNode;
                 switch (indicateRequestType)
                 {
@@ -142,7 +142,7 @@ namespace OwLib
                         }
                         // Check if the node exist or not
                         checkNodePath =
-                            string.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
+                            String.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
                         checkNode = leftNode.SelectSingleNode(checkNodePath);
 
                         if (checkNode == null)
@@ -167,7 +167,7 @@ namespace OwLib
                         }
                         // Check if the node exist or not
                         checkNodePath =
-                            string.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
+                            String.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
                         checkNode = rightNode.SelectSingleNode(checkNodePath);
 
                         // When the added node exist in the file, do nothing.
@@ -212,7 +212,7 @@ namespace OwLib
         /// otherwise false.
         /// </returns>
         public static bool TryDelCustIndicatorId(int code, IndicateRequestType indicateRequestType,
-            string custIndicatorId)
+            String custIndicatorId)
         {
             bool success = false;
             // del actions.
@@ -242,13 +242,13 @@ namespace OwLib
 
             try
             {
-                string path = string.Format("{0}[@{1}='{2}']", StockNode, StockAttr, code);
+                String path = String.Format("{0}[@{1}='{2}']", StockNode, StockAttr, code);
                 XmlNode stockNode = doc.SelectSingleNode(path);
                 if (stockNode == null || !stockNode.HasChildNodes)
                 {
                     return false;
                 }
-                string checkNodePath;
+                String checkNodePath;
                 XmlNode checkNode;
 
                 switch (indicateRequestType)
@@ -260,7 +260,7 @@ namespace OwLib
 
                         // Check if the node exist or not
                         checkNodePath =
-                            string.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
+                            String.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
                         checkNode = leftNode.SelectSingleNode(checkNodePath);
                         // When the added node exist in the file, do deleting.
                         if (checkNode != null)
@@ -277,7 +277,7 @@ namespace OwLib
 
                         // Check if the node exist or not
                         checkNodePath =
-                            string.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
+                            String.Format("{0}[@{1}='{2}']", FinaNode, idAttr, custIndicatorId);
                         checkNode = rightNode.SelectSingleNode(checkNodePath);
                         // When the added node exist in the file, do deleting.
                         if (checkNode != null)
@@ -309,7 +309,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public static Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>> DicStockCustIndicator;
+        public static Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>> DicStockCustIndicator;
 
         static StockCustIndicatorFileIO()
         {
@@ -354,10 +354,10 @@ namespace OwLib
             }
         }
 
-        private static Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>> GetStockCustIndicator(XmlDocument doc)
+        private static Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>> GetStockCustIndicator(XmlDocument doc)
         {
-            Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>> dic
-                = new Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>>();
+            Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>> dic
+                = new Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>>();
             // Set default dictionary:
             XmlNodeList stockNodes = doc.SelectNodes(StockNode);
 
@@ -375,9 +375,9 @@ namespace OwLib
         ///  <param name="dic">·µ»Ø×Öµä</param>
         /// <returns></returns>
         private static bool TryGetAllColFieldInfo(XmlNodeList stockNodes,
-            out Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>> dic)
+            out Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>> dic)
         {
-            dic = new Dictionary<int, Dictionary<IndicateRequestType, HashSet<string>>>();
+            dic = new Dictionary<int, Dictionary<IndicateRequestType, HashSet<String>>>();
 
             if (stockNodes == null)
                 return false;
@@ -388,13 +388,13 @@ namespace OwLib
 
 
             FieldInfo info;
-            Dictionary<IndicateRequestType, HashSet<string>> innerDic;
-            HashSet<string> set;
+            Dictionary<IndicateRequestType, HashSet<String>> innerDic;
+            HashSet<String> set;
             foreach (XmlNode stockNode in stockNodes)
             {
                 if (stockNode.NodeType == XmlNodeType.Element)
                 {
-                    string codeStr = stockNode.Attributes[StockAttr].Value;
+                    String codeStr = stockNode.Attributes[StockAttr].Value;
 
                     int code;
                     if (int.TryParse(codeStr, out code) && stockNode.HasChildNodes)
@@ -406,18 +406,18 @@ namespace OwLib
 
                             if (!dic.TryGetValue(code, out innerDic))
                             {
-                                innerDic = new Dictionary<IndicateRequestType, HashSet<string>>(1);
+                                innerDic = new Dictionary<IndicateRequestType, HashSet<String>>(1);
                                 dic[code] = innerDic;
                             }
 
                             if (!innerDic.TryGetValue(IndicateRequestType.LeftIndicatorsReport, out set))
                             {
-                                set = new HashSet<string>();
+                                set = new HashSet<String>();
                                 innerDic[IndicateRequestType.LeftIndicatorsReport] = set;
                             }
                             foreach (XmlNode indicatorNode in LeftIndicatorNode.ChildNodes)
                             {
-                                string indicatorId = indicatorNode.Attributes[idAttr].Value;
+                                String indicatorId = indicatorNode.Attributes[idAttr].Value;
                                 set.Add(indicatorId);
                             }
                         }
@@ -428,18 +428,18 @@ namespace OwLib
                             int capacity = RightIndicatorNode.ChildNodes.Count;
                             if (!dic.TryGetValue(code, out innerDic))
                             {
-                                innerDic = new Dictionary<IndicateRequestType, HashSet<string>>(1);
+                                innerDic = new Dictionary<IndicateRequestType, HashSet<String>>(1);
                                 dic[code] = innerDic;
                             }
 
                             if (!innerDic.TryGetValue(IndicateRequestType.RightIndicatorsReport, out set))
                             {
-                                set = new HashSet<string>();
+                                set = new HashSet<String>();
                                 innerDic[IndicateRequestType.RightIndicatorsReport] = set;
                             }
                             foreach (XmlNode indicatorNode in RightIndicatorNode.ChildNodes)
                             {
-                                string indicatorId = indicatorNode.Attributes[idAttr].Value;
+                                String indicatorId = indicatorNode.Attributes[idAttr].Value;
                                 set.Add(indicatorId);
                             }
                         }

@@ -4,14 +4,14 @@ namespace OwLib
 {
     public class FindIndicator
     {
-        public string content;
-        public string dataSource = string.Empty;
-        public string excludeContent = string.Empty;
+        public String content;
+        public String dataSource = String.Empty;
+        public String excludeContent = String.Empty;
         public FindContentFlag findContentFlag = FindContentFlag.All;
         public FindOptionFlag findOptionFlag;
         public MacroDataType findRange;
-        public string StrfindRange;
-        public string Url = string.Empty;
+        public String StrfindRange;
+        public String Url = String.Empty;
     }
 }
 

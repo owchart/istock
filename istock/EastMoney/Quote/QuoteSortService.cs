@@ -41,7 +41,7 @@ namespace OwLib
             List<FieldValue<float>> fieldSingleList = null;
             List<FieldValue<double>> fieldDoubleList = null;
             List<FieldValue<long>> fieldInt64List = null;
-            List<FieldValue<string>> fieldStringList = null;
+            List<FieldValue<String>> fieldStringList = null;
 
             if (_fieldSort >= 0 && (int)_fieldSort <= 299)
                 fieldInt32List = new List<FieldValue<int>>(codes.Count);
@@ -52,7 +52,7 @@ namespace OwLib
             else if ((int)_fieldSort >= 1000 && (int)_fieldSort <= 1199)
                 fieldInt64List = new List<FieldValue<long>>(codes.Count);
             else if ((int)_fieldSort >= 1200 && (int)_fieldSort <= 8999)
-               fieldStringList = new List<FieldValue<string>>(codes.Count);
+               fieldStringList = new List<FieldValue<String>>(codes.Count);
 
             foreach (int code  in codes)
             {
@@ -111,16 +111,16 @@ namespace OwLib
                 }
                 else if (fieldStringList != null)
                 {
-                    Dictionary<FieldIndex, string> fieldString;
+                    Dictionary<FieldIndex, String> fieldString;
                     if (DetailData.FieldIndexDataString.TryGetValue(code, out fieldString))
                     {
-                        string stringValue;
+                        String stringValue;
                         if (!fieldString.TryGetValue(fieldSort, out stringValue))
-                            stringValue = string.Empty;
-                        fieldStringList.Add(new FieldValue<string>(code, stringValue));
+                            stringValue = String.Empty;
+                        fieldStringList.Add(new FieldValue<String>(code, stringValue));
                     }
                     else
-                        fieldStringList.Add(new FieldValue<string>(code, string.Empty));
+                        fieldStringList.Add(new FieldValue<String>(code, String.Empty));
                 }
             }
 
@@ -133,7 +133,7 @@ namespace OwLib
             else if(fieldInt64List != null)
                 fieldInt64List.Sort(new CompareFieldValue<long>());
             else if(fieldStringList != null)
-                fieldStringList.Sort(new CompareFieldValue<string>());
+                fieldStringList.Sort(new CompareFieldValue<String>());
 
             if (_sortMode == SortMode.Mode_ASC)
             {
@@ -203,13 +203,13 @@ namespace OwLib
         {
             public int Code;
             public T Data;
-            public string ShortCode;
+            public String ShortCode;
 
             public FieldValue(int code, T data)
             {
                 Code = code;
                 Data = data;
-                Dictionary<FieldIndex, string> fieldStirng;
+                Dictionary<FieldIndex, String> fieldStirng;
                 if (DetailData.FieldIndexDataString.TryGetValue(code, out fieldStirng))
                 {
                     fieldStirng.TryGetValue(FieldIndex.Code, out ShortCode);
@@ -304,7 +304,7 @@ namespace OwLib
                         }
                         else
                         {
-                            oneFieldValue.FieldValue = string.Empty;
+                            oneFieldValue.FieldValue = String.Empty;
                         }
                     }
                     object objectCode;
@@ -502,9 +502,9 @@ namespace OwLib
                 //}
                 //if (Convert.ToInt32(_field) >= 1200)
                 //{
-                //    string f1 = Convert.ToString(obj1.FieldValue);
-                //    string f2 = Convert.ToString(obj2.FieldValue);
-                //    CompareTwoItem<string> compareFloat = new CompareTwoItem<string>(f1, f2);
+                //    String f1 = Convert.ToString(obj1.FieldValue);
+                //    String f2 = Convert.ToString(obj2.FieldValue);
+                //    CompareTwoItem<String> compareFloat = new CompareTwoItem<String>(f1, f2);
                 //    return compareFloat.CompareTwo();
                 //}
                 //return 0;

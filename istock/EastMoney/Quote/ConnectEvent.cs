@@ -99,7 +99,7 @@ namespace OwLib
     public class ConnectFailEventArgs : EventArgs
     {
         private IpAddressPort _ap;
-        private string _failReason;
+        private String _failReason;
         private TcpConnection _tcpConnection;
 
         ///<summary>
@@ -107,7 +107,7 @@ namespace OwLib
         ///<param name="tcpConnection"></param>
         ///<param name="ap"></param>
         ///<param name="reason"></param>
-        public ConnectFailEventArgs(TcpConnection tcpConnection, IpAddressPort ap, string reason)
+        public ConnectFailEventArgs(TcpConnection tcpConnection, IpAddressPort ap, String reason)
         {
             TcpConnection = tcpConnection;
             Ap = ap;
@@ -135,7 +135,7 @@ namespace OwLib
         /// <summary>
         /// 失败原因
         /// </summary>
-        public string FailReason
+        public String FailReason
         {
             get { return _failReason; }
             private set { _failReason = value; }

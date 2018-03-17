@@ -11,18 +11,18 @@ namespace OwLib
     /// </summary>
     public class TradeInfoDataHelper
     {
-        public static DataSet GetBusinessDate(string date)
+        public static DataSet GetBusinessDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("DATE_CHANGEDATE", Convert.ToDateTime(date)));
                 List<Order> Order = new List<Order>();
                 //Order s = new Core.Data.Order("STR_CODE", false);
                 //Order.Add(s);
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
 
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_WARNING, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
@@ -37,18 +37,18 @@ namespace OwLib
         /// <summary>
         /// 获取持股变动信息
         /// </summary>
-        public static DataSet GetShareChangeDate(string date)
+        public static DataSet GetShareChangeDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("ENDDATE", Convert.ToDateTime(date)));
                 List<Order> Order = new List<Order>();
                 Order s = new Order("STR_CODE", false);
                 Order.Add(s);
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_SHARECHAGE, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
             }
@@ -62,15 +62,15 @@ namespace OwLib
         /// <summary>
         /// 获取大宗交易信息
         /// </summary>
-        public static DataSet GetBigBuyDate(string date)
+        public static DataSet GetBigBuyDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("TDATE",Convert.ToDateTime(date)));
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_TRADING, _fileds, filter, new List<Order>(), new List<Expression>(), 1, int.MaxValue);
                 return pData;
             }
@@ -84,11 +84,11 @@ namespace OwLib
         /// <summary>
         /// 获取业绩预测信息
         /// </summary>
-        public static DataSet GetPredictPriceDate(string date)
+        public static DataSet GetPredictPriceDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("NOTICEDATE", Convert.ToDateTime(date)));
@@ -96,7 +96,7 @@ namespace OwLib
                 Order s = new Order("STR_CODE", false);
                 Order.Add(s);
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_PREDICT, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
             }
@@ -110,16 +110,16 @@ namespace OwLib
         /// <summary>
         /// 获取财报披露信息(筛选条件？？)
         /// </summary>
-        public static DataSet GetFinancialShowDate(string date)
+        public static DataSet GetFinancialShowDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("DATE_TDATE", Convert.ToDateTime(date)));
                 List<Order> Order = new List<Order>();
-                string[] _fileds = new string[] { "STR_NAME", "STR_CODE", "NOTICETITLE", "INFOCODE", "ATTACHTYPE", "DATE_TDATE", "REPORTTYPE", "REPORTYEAR" };
+                String[] _fileds = new String[] { "STR_NAME", "STR_CODE", "NOTICETITLE", "INFOCODE", "ATTACHTYPE", "DATE_TDATE", "REPORTTYPE", "REPORTYEAR" };
 
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_CBPL, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
@@ -134,18 +134,18 @@ namespace OwLib
         /// <summary>
         /// 获取股份流通
         /// </summary>
-        public static DataSet GetLiftLimitDate(string date)
+        public static DataSet GetLiftLimitDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 filter.Add(Expression.Eq("DATE_DATE1", Convert.ToDateTime(date)));
                 List<Order> Order = new List<Order>();
                 Order s = new Order("STR_CODE", false);
                 Order.Add(s);
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_LIFTING, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
             }
@@ -159,11 +159,11 @@ namespace OwLib
         /// <summary>
         /// 获取分红
         /// </summary>
-        public static DataSet GetDealOutDate(string date)
+        public static DataSet GetDealOutDate(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filter = new List<Expression>();
                 Expression exp1 = Expression.IsNull("DATE_DATE1");
@@ -173,7 +173,7 @@ namespace OwLib
                 List<Order> Order = new List<Order>();
                 Order s = new Order("STR_CODE", false);
                 Order.Add(s);
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DataSet pData = DataAccess.Query(WebDataSource.SPE_STOCKCALENDAR_ALLOT, _fileds, filter, Order, new List<Expression>(), 1, int.MaxValue);
                 return pData;
             }
@@ -189,15 +189,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetHomeData(string date)
+        public static DataSet GetHomeData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));//addday
                 filters.Add(Expression.And(exp2, exp1));
@@ -218,15 +218,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetIssueData(string date)
+        public static DataSet GetIssueData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));
                 filters.Add(Expression.And(exp2, exp1));
@@ -248,15 +248,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetPaymentData(string date)
+        public static DataSet GetPaymentData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));//addday
                 filters.Add(Expression.And(exp2, exp1));
@@ -278,15 +278,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetTransactionData(string date)
+        public static DataSet GetTransactionData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));//addday
                 filters.Add(Expression.And(exp2, exp1));
@@ -308,15 +308,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetRatingChangeData(string date)
+        public static DataSet GetRatingChangeData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));//addday
                 filters.Add(Expression.And(exp2, exp1));
@@ -338,15 +338,15 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetConvertibleBondsData(string date)
+        public static DataSet GetConvertibleBondsData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
-                string[] fileds = new string[] { };
+                String[] fileds = new String[] { };
                 Expression exp1 = Expression.Ge("DAT_ISSUEEDATE", Convert.ToDateTime(date));
                 Expression exp2 = Expression.Le("DAT_ISSUESDATE", Convert.ToDateTime(date));//addday
                 filters.Add(Expression.And(exp2, exp1));
@@ -368,12 +368,12 @@ namespace OwLib
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static DataSet GetFundHomePageData(string date)
+        public static DataSet GetFundHomePageData(String date)
         {
             try
             {
                 List<DataTransmission> _query = new List<DataTransmission>();
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
 
                 //基金上市（开放式和封闭式）
@@ -381,7 +381,7 @@ namespace OwLib
                 Expression exp = Expression.Eq("LISTDATE", Convert.ToDateTime(date));
                 //Expression exp1 = Expression.Eq("STYPE", STYPE);
                 filters.Add(exp);
-                string[] _fileds = new string[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
+                String[] _fileds = new String[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
                 _query.Add(DataAccess.GetData(WebDataSource.IND_FC_FUNDLIST, _fileds, filters, new List<Order>(), new List<Expression>(), 1, int.MaxValue, false, WebDataSource.IND_FC_FUNDLIST.ToString()));
 
                 //基金发行
@@ -395,7 +395,7 @@ namespace OwLib
                 List<Order> Order = new List<Order>();
                 Order s = new Order("STARTDATE", false);
                 Order.Add(s);
-                _fileds = new string[] { };
+                _fileds = new String[] { };
                 _query.Add(DataAccess.GetData(WebDataSource.IND_FC_FUNDDIS, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue, false, WebDataSource.IND_FC_FUNDDIS.ToString()));
                 _query.Add(DataAccess.GetData(WebDataSource.IND_FC_CFUNDDIV, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue, false, WebDataSource.IND_FC_CFUNDDIV.ToString()));
 
@@ -406,7 +406,7 @@ namespace OwLib
                 filters = new List<Expression>();
                 filters.Add(Expression.Ge("DAT_MAXDATE", Convert.ToDateTime(date)));//addday
                 filters.Add(Expression.Le("DAT_MINDATE", Convert.ToDateTime(date)));//addday
-                _fileds = new string[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
+                _fileds = new String[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
                 _query.Add(DataAccess.GetData(WebDataSource.IND_DIVIDENDFUND, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue, false, WebDataSource.IND_DIVIDENDFUND.ToString()));
 
                 //申购赎回
@@ -419,7 +419,7 @@ namespace OwLib
                 Order = new List<Order>();
                 s = new Order("STARTDATE", false);
                 Order.Add(s);
-                _fileds = new string[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "STARTDATE", "ENDDATE", "REASONDES", "DATETYPE" };
+                _fileds = new String[] { "STYPE", "SECURITYCODE", "SECURITYSHORTNAME", "STARTDATE", "ENDDATE", "REASONDES", "DATETYPE" };
                 _query.Add(DataAccess.GetData(WebDataSource.IND_FC_TPAR, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue, false, WebDataSource.IND_FC_TPAR.ToString()));
 
                 DataSet _DS = new DataSet();
@@ -438,18 +438,18 @@ namespace OwLib
         /// <param name="date">日期 默认为当天</param>
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <returns></returns>  
-        public static DataSet GetFundEnter(string date, string type)
+        public static DataSet GetFundEnter(String date, String type)
         {
-            if (string.IsNullOrEmpty(date))
+            if (String.IsNullOrEmpty(date))
                 date = DateTime.Now.ToShortDateString();
-            if (string.IsNullOrEmpty(type))
+            if (String.IsNullOrEmpty(type))
                 type = "0";
-            string STYPE = type == "0" ? "FDO" : "FDC";
+            String STYPE = type == "0" ? "FDO" : "FDC";
             List<Expression> filters = new List<Expression>();
             Expression exp = Expression.Eq("LISTDATE", Convert.ToDateTime(date));
             Expression exp1 = Expression.Eq("STYPE", STYPE);
             filters.Add(Expression.And(exp, exp1));
-            string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
+            String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
             DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDLIST, _fileds, filters, new List<Order>(), new List<Expression>(), 1, int.MaxValue);
             return _DS;
         }
@@ -460,13 +460,13 @@ namespace OwLib
         /// <param name="date">日期 默认为当天</param>
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <returns></returns>
-        public static DataSet GetFundShare(string date, string type)
+        public static DataSet GetFundShare(String date, String type)
         {
-            if (string.IsNullOrEmpty(date))
+            if (String.IsNullOrEmpty(date))
                 date = DateTime.Now.ToShortDateString();
-            if (string.IsNullOrEmpty(type))
+            if (String.IsNullOrEmpty(type))
                 type = "0";
-            string STYPE = type == "0" ? "FDO" : "FDC";
+            String STYPE = type == "0" ? "FDO" : "FDC";
             List<Order> Order = new List<Order>();
             Order s = new Order("DAT_MINDATE", false);
             Order.Add(s);
@@ -474,7 +474,7 @@ namespace OwLib
             filters.Add(Expression.Eq("STYPE", STYPE));
             filters.Add(Expression.Ge("DAT_MAXDATE", Convert.ToDateTime(date)));//addday
             filters.Add(Expression.Le("DAT_MINDATE", Convert.ToDateTime(date)));//addday
-            string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
+            String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
             DataSet _DS = DataAccess.Query(WebDataSource.IND_DIVIDENDFUND, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue);
             return _DS;
         }
@@ -485,11 +485,11 @@ namespace OwLib
         /// <param name="date">日期 默认为当天</param>
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <returns></returns>
-        public static DataSet GetFundIssue(string date, string type)
+        public static DataSet GetFundIssue(String date, String type)
         {
-            if (string.IsNullOrEmpty(date))
+            if (String.IsNullOrEmpty(date))
                 date = DateTime.Now.ToShortDateString();
-            if (string.IsNullOrEmpty(type))
+            if (String.IsNullOrEmpty(type))
                 type = "0";
             List<Expression> filters = new List<Expression>();
             Expression exp = Expression.Ge("ENDDATE", Convert.ToDateTime(date));//addday
@@ -501,7 +501,7 @@ namespace OwLib
             List<Order> Order = new List<Order>();
             Order s = new Order("STARTDATE", false);
             Order.Add(s);
-            string[] _fileds = new string[] { };
+            String[] _fileds = new String[] { };
             DataSet _DS = new DataSet();
             if (type == "0")
                 _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDDIS, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue);
@@ -517,11 +517,11 @@ namespace OwLib
         /// <param name="date">日期</param>
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <returns></returns>
-        public static DataSet GetOtherNotice(string date, string type)
+        public static DataSet GetOtherNotice(String date, String type)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 List<Expression> filters = new List<Expression>();
                 Expression exp = Expression.Ge("ENDDATE", Convert.ToDateTime(date));//addday
@@ -530,16 +530,16 @@ namespace OwLib
                 Expression exp3 = Expression.Eq("STARTDATE", Convert.ToDateTime(date));
                 filters.Add(Expression.Or(exp2, exp3));
 
-                if (string.IsNullOrEmpty(type))
+                if (String.IsNullOrEmpty(type))
                     type = "0";
-                string STYPE = type == "0" ? "FDO" : "FDC";
+                String STYPE = type == "0" ? "FDO" : "FDC";
 
                 Expression exp4 = Expression.Eq("STYPE", STYPE);
                 filters.Add(exp4);
                 List<Order> Order = new List<Order>();
                 Order s = new Order("STARTDATE", false);
                 Order.Add(s);
-                string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "STARTDATE", "ENDDATE", "REASONDES", "DATETYPE" };
+                String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "STARTDATE", "ENDDATE", "REASONDES", "DATETYPE" };
                 DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_TPAR, _fileds, filters, Order, new List<Expression>(), 1, int.MaxValue);
                 return _DS;
             }
@@ -557,13 +557,13 @@ namespace OwLib
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "CacheChangeByOneDay")]
-        public static DataSet GetFundSplit(string date, string type, string show)
+        public static DataSet GetFundSplit(String date, String type, String show)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
-                if (string.IsNullOrEmpty(type))
+                if (String.IsNullOrEmpty(type))
                     type = "0";
                 DataSet _DS = new DataSet();
                 //基金拆分
@@ -574,7 +574,7 @@ namespace OwLib
                     Expression exp1 = Expression.And(Expression.Eq("TYPECODE", STYPE), Expression.And(Expression.IsNotEmpty("ADDFORSPLIT"), Expression.And(Expression.IsNotNull("ADDFORSPLIT"), Expression.And(Expression.Eq("DECLAREDATE", Convert.ToDateTime(date + " 0:00:00")), Expression.Eq("STR_NB", "1")))));
                     Expression exp2 = Expression.And(Expression.Eq("TYPECODE", STYPE), Expression.And(Expression.IsNotEmpty("DEC_DIVIRATIO"), Expression.And(Expression.Eq("STR_NB", "0"), Expression.And(Expression.Ge("DECLAREDATE", Convert.ToDateTime(date)), Expression.Le("REPORTDATE", Convert.ToDateTime(date))))));
                     filters.Add(Expression.Or(exp1, exp2));
-                    string[] _fileds = new string[] { };
+                    String[] _fileds = new String[] { };
                     DataSet ds = DataAccess.Query(WebDataSource.IND_FC_FUNDRESO, _fileds, filters, new List<Order>(), new List<Expression>(), 1, int.MaxValue);
                     return ds;
                 }
@@ -583,12 +583,12 @@ namespace OwLib
                 {
                     List<Expression> filters = new List<Expression>();
                     // Expression exp = Expression.Ge("DAT_MINDATE", Convert.ToDateTime(date));
-                    string STYPE = type == "0" ? "FDO" : "FDC";
+                    String STYPE = type == "0" ? "FDO" : "FDC";
                     // Expression exp1 = Expression.Eq("STYPE", STYPE);
                     filters.Add(Expression.Ge("DAT_MAXDATE", Convert.ToDateTime(date)));//addday
                     filters.Add(Expression.Eq("STYPE", STYPE));
                     filters.Add(Expression.Le("DAT_MINDATE", Convert.ToDateTime(date)));//addday
-                    string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
+                    String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "PERBBTAX", "REGISTERDATE", "EXDIVIDATEOTC", "DIVIDATEOTC" };
                     _DS = DataAccess.Query(WebDataSource.IND_DIVIDENDFUND, _fileds, filters, new List<Order>(), new List<Expression>(), 1, int.MaxValue);
                     return _DS;
                 }
@@ -608,15 +608,15 @@ namespace OwLib
         /// <param name="type">0：开放式 1：封闭式 默认为0</param>
         /// <param name="show">show:0取发行，show:1取上市</param>
         /// <returns></returns>
-        public static DataSet GetIssueSale(string date, string type, string show)
+        public static DataSet GetIssueSale(String date, String type, String show)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
-                if (string.IsNullOrEmpty(type))
+                if (String.IsNullOrEmpty(type))
                     type = "0";
-                if (string.IsNullOrEmpty(show))
+                if (String.IsNullOrEmpty(show))
                     show = "0";
                 DataSet _DS = new DataSet();
                 //发行
@@ -631,7 +631,7 @@ namespace OwLib
                         filters.Add(Expression.Or(Expression.And(exp, exp1), Expression.Ge("STARTDATE", Convert.ToDateTime(date))));
                     else
                         filters.Add(Expression.And(exp, exp1));
-                    string[] _fileds = new string[] { };
+                    String[] _fileds = new String[] { };
                     if (type == "0")
                         _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDDIS, _fileds, filters, order, new List<Expression>(), 1, int.MaxValue);
                     else if (type == "1")
@@ -644,10 +644,10 @@ namespace OwLib
                 {
                     List<Expression> filters = new List<Expression>();
                     Expression exp = Expression.Eq("LISTDATE", Convert.ToDateTime(date));
-                    string STYPE = type == "0" ? "FDO" : "FDC";
+                    String STYPE = type == "0" ? "FDO" : "FDC";
                     Expression exp1 = Expression.Eq("STYPE", STYPE);
                     filters.Add(Expression.And(exp, exp1));
-                    string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
+                    String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_TEXCH", "LISTDATE", "LISTSHARE" };
                     _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDLIST, _fileds, filters, new List<Order>(), new List<Expression>(), 1, int.MaxValue);
                     return _DS;
                 }
@@ -665,11 +665,11 @@ namespace OwLib
         /// </summary>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public static DataSet GetFundManager(string date)
+        public static DataSet GetFundManager(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 DateTime beginDate = Convert.ToDateTime(date).AddDays(-2);
                 DateTime endDate = Convert.ToDateTime(date).AddDays(+5);
@@ -679,7 +679,7 @@ namespace OwLib
                 filters.Add(Expression.And(exp, exp1));
                 List<Order> order = new List<Order>();
                 order.Add(new Order("CHANGEDATE", false));
-                string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "CHANGEDATE", "NAME", "LEAVEREASON", "POST", "DATETYPE" };
+                String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "CHANGEDATE", "NAME", "LEAVEREASON", "POST", "DATETYPE" };
                 DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDMANAGER, _fileds, filters, order, new List<Expression>(), 1, int.MaxValue);
                 return _DS;
             }
@@ -694,11 +694,11 @@ namespace OwLib
         /// </summary>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public static DataSet GetFundChange(string date)
+        public static DataSet GetFundChange(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 DateTime beginDate = Convert.ToDateTime(date).AddDays(-2);
                 DateTime endDate = Convert.ToDateTime(date).AddDays(+5);
@@ -706,7 +706,7 @@ namespace OwLib
                 Expression exp = Expression.Ge("STARTDATE", Convert.ToDateTime(beginDate));//addday
                 Expression exp1 = Expression.Le("STARTDATE", Convert.ToDateTime(endDate));//addday
                 filters.Add(Expression.And(exp, exp1));
-                string[] _fileds = new string[] { "SNAME", "SECUCODE", "STR_ZXLX", "CORRESCODE", "CORRESNAME", "STARTDATE" };
+                String[] _fileds = new String[] { "SNAME", "SECUCODE", "STR_ZXLX", "CORRESCODE", "CORRESNAME", "STARTDATE" };
                 List<Order> order = new List<Order>();
                 order.Add(new Order("STARTDATE", false));
                 DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDTRANSFORM, _fileds, filters, order, new List<Expression>(), 1, int.MaxValue);
@@ -725,11 +725,11 @@ namespace OwLib
         /// </summary>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public static DataSet GetFundNameChange(string date)
+        public static DataSet GetFundNameChange(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 DateTime beginDate = Convert.ToDateTime(date).AddDays(-2);
                 DateTime endDate = Convert.ToDateTime(date).AddDays(+5);
@@ -737,7 +737,7 @@ namespace OwLib
                 Expression exp = Expression.Ge("STARTDATE", Convert.ToDateTime(beginDate));//addday
                 Expression exp1 = Expression.Le("STARTDATE", Convert.ToDateTime(endDate));//addday
                 filters.Add(Expression.And(exp, exp1));
-                string[] _fileds = new string[] { "SNAME", "SECUCODE", "STR_ZXLX", "CORRESCODE", "CORRESNAME", "STARTDATE" };
+                String[] _fileds = new String[] { "SNAME", "SECUCODE", "STR_ZXLX", "CORRESCODE", "CORRESNAME", "STARTDATE" };
                 List<Order> order = new List<Order>();
                 order.Add(new Order("STARTDATE", false));
                 DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_FUNDTRANSFORM, _fileds, filters, order, new List<Expression>(), 1, int.MaxValue);
@@ -756,11 +756,11 @@ namespace OwLib
         /// </summary>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public static DataSet GetFinanceShow(string date)
+        public static DataSet GetFinanceShow(String date)
         {
             try
             {
-                if (string.IsNullOrEmpty(date))
+                if (String.IsNullOrEmpty(date))
                     date = DateTime.Now.ToShortDateString();
                 DateTime beginDate = Convert.ToDateTime(date).AddDays(-10);
                 DateTime endDate = Convert.ToDateTime(date).AddDays(+10);
@@ -768,7 +768,7 @@ namespace OwLib
                 Expression exp = Expression.Ge("ENDDATE", Convert.ToDateTime(beginDate));//addday
                 Expression exp1 = Expression.Le("ENDDATE", Convert.ToDateTime(endDate));//addday
                 filters.Add(Expression.And(exp, exp1));
-                string[] _fileds = new string[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_REPORTTYPE", "ENDDATE" };
+                String[] _fileds = new String[] { "SECURITYCODE", "SECURITYSHORTNAME", "STR_REPORTTYPE", "ENDDATE" };
                 List<Order> order = new List<Order>();
                 order.Add(new Order("ENDDATE", false));
                 DataSet _DS = DataAccess.Query(WebDataSource.IND_FC_FINADISCLOSE, _fileds, filters, order, new List<Expression>(), 1, int.MaxValue);

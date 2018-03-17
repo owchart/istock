@@ -35,7 +35,7 @@ namespace OwLib
         /// <summary>
         /// 过滤条件名称集合
         /// </summary>
-		[XmlAttribute] public List<String> FilterLists = new List<string>();
+		[XmlAttribute] public List<String> FilterLists = new List<String>();
 
         /// <summary>
         /// 是否显示数值
@@ -53,13 +53,13 @@ namespace OwLib
 		/// Data source name
 		/// </summary>
 		[XmlElement]
-		public string DataSourceName { get; set; }
+		public String DataSourceName { get; set; }
 
 		/// <summary>
 		/// 获取或设置统计英文名
 		/// </summary>
 		[XmlElement]
-		public string StatisticsEngName { get; set; }
+		public String StatisticsEngName { get; set; }
 
 		/// <summary>
 		/// Propertis to show in chart.
@@ -76,7 +76,7 @@ namespace OwLib
         /// <summary>
         /// 类型
         /// </summary>
-		[XmlAttribute] public string Style;
+		[XmlAttribute] public String Style;
 
         /// <summary>
         /// 是否XY转换
@@ -109,7 +109,7 @@ namespace OwLib
 		public DataSourceAdaptor()
 		{
 			this.PropertiesToShow = new List<PropertiyName>(10);
-			this.DataSourceName = string.Empty;
+			this.DataSourceName = String.Empty;
 			this.Limits = new Limits();
 		}
 
@@ -197,7 +197,7 @@ namespace OwLib
             if(xml.Attributes !=null)
             {
                 if (xml.Attributes["FilterLists"] != null)
-                    this.FilterLists.AddRange(xml.Attributes["FilterLists"].Value.Split(new string[]{" "},StringSplitOptions.RemoveEmptyEntries));
+                    this.FilterLists.AddRange(xml.Attributes["FilterLists"].Value.Split(new String[]{" "},StringSplitOptions.RemoveEmptyEntries));
                 if (xml.Attributes["ShowLable"] != null)
                     this.ShowLable = xml.Attributes["ShowLable"].Value == "true";
                 if (xml.Attributes["ShowLegend"] != null)

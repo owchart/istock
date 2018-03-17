@@ -190,7 +190,7 @@ namespace OwLib
         /// <summary>
         /// 统计明细url
         /// </summary>
-        private string StatisticAnalyUrl = string.Format(@"http://mineapi.eastmoney.com/hq/publish/");
+        private String StatisticAnalyUrl = String.Format(@"http://mineapi.eastmoney.com/hq/publish/");
 
         private void ConnectSocketServer(bool isDataQuery)
         {
@@ -314,9 +314,9 @@ namespace OwLib
                                     switch (((RealTimeDataPacket)dataPacket).RequestType)
                                     {
                                         case FuncTypeRealTime.StatisticsAnalysis:
-                                            if (string.IsNullOrEmpty((dataPacket as ReqStatisticsAnalysisDataPacket).Url))
+                                            if (String.IsNullOrEmpty((dataPacket as ReqStatisticsAnalysisDataPacket).Url))
                                                 break;
-                                            string url = StatisticAnalyUrl + (dataPacket as ReqStatisticsAnalysisDataPacket).Url;
+                                            String url = StatisticAnalyUrl + (dataPacket as ReqStatisticsAnalysisDataPacket).Url;
                                             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                                             request.BeginGetResponse(new AsyncCallback(OnResponse), request);
                                             Debug.Print("SendPacket " + ((RealTimeDataPacket)dataPacket).RequestType);
@@ -567,12 +567,12 @@ namespace OwLib
             bool result = false;
             ResStatisticsAnalysisDataPacket packet = null;
 
-            string[] urlParams = response.ResponseUri.Segments;
+            String[] urlParams = response.ResponseUri.Segments;
             if (urlParams.Length < 2)
                 return;
-            string shortcode = urlParams[urlParams.Length - 1];
-            string markt = urlParams[urlParams.Length - 2];
-            string emcode = string.Format(@"{0}.{1}", shortcode.Substring(0, shortcode.Length - 4),
+            String shortcode = urlParams[urlParams.Length - 1];
+            String markt = urlParams[urlParams.Length - 2];
+            String emcode = String.Format(@"{0}.{1}", shortcode.Substring(0, shortcode.Length - 4),
                 markt.Substring(0, markt.Length - 1).ToUpper());
             if (!DetailData.EmCodeToUnicode.ContainsKey(emcode))
                 return;
@@ -662,31 +662,31 @@ namespace OwLib
         //杭州 115.236.99.43 1865
         //我们自己的服务器 115.236.102.248 1865
 
-        private static string IpServerRealTime = "202.104.236.15";
+        private static String IpServerRealTime = "202.104.236.15";
         private static int PortServerRealTime = 1865;
 
         //72--测试
         //44--相对稳定
         //正式202.104.236.245 1861
-        private static string IpServerHistory = "202.104.236.245";
+        private static String IpServerHistory = "202.104.236.245";
         private static int PortServerHistory = 1861;
 
         //202.104.236.68:80----临时
         //115.236.99.52:80----正式
-        private static string IpServerInfo = "115.236.99.52";
+        private static String IpServerInfo = "115.236.99.52";
         private static int PortServerInfo = 80;
 
         //外盘 弃用202.104.236.205 1860
         //调试122.224.82.152  7788
         //测试 202.104.236.242 1860
-        private static string IpServerOcean = "202.104.236.242";
+        private static String IpServerOcean = "202.104.236.242";
         private static int PortServerOcean = 1860;
 
         //机构版服务器
         //172.16.10.52：1860 科宇
         //115.236.103.78 1860
         //172.16.10.54 存超
-        private static string IpServerOrg = "115.236.103.78";
+        private static String IpServerOrg = "115.236.103.78";
         private static int PortServerOrg = 1870;
 
         private ReqHeartDataPacket _heartRealTime;

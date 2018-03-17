@@ -33,8 +33,8 @@ namespace OwLib
     public class DataQueryConnections
     {
         private DataQuery _dataQuery;
-        private string _id;
-        private Dictionary<string, int> _dicMsgId;
+        private String _id;
+        private Dictionary<String, int> _dicMsgId;
         private Queue<CMRecvDataEventArgs> _DataPacketQueue;
         private Thread _DataPacketPushSlave;
 
@@ -52,7 +52,7 @@ namespace OwLib
         public DataQueryConnections(DataQuery dataQuery)
         {
             _dataQuery = dataQuery;
-            _dicMsgId = new Dictionary<string, int>();
+            _dicMsgId = new Dictionary<String, int>();
             _DataPacketQueue = new Queue<CMRecvDataEventArgs>();
             _DataPacketPushSlave = new Thread(PushDataPacket);
             _DataPacketPushSlave.IsBackground = false;
@@ -129,12 +129,12 @@ namespace OwLib
                            if (dataPacket != null)
                            {
                                dataPacket.RequestId = requestId;
-                               if (_dicMsgId.ContainsKey((string)response.Tag))
+                               if (_dicMsgId.ContainsKey((String)response.Tag))
                                {
-                                   dataPacket.MsgId = _dicMsgId[(string)response.Tag];
-                                   LogUtilities.LogMessage("收到响应, id=" + (string)response.Tag + ", msgId=" + dataPacket.MsgId);
+                                   dataPacket.MsgId = _dicMsgId[(String)response.Tag];
+                                   LogUtilities.LogMessage("收到响应, id=" + (String)response.Tag + ", msgId=" + dataPacket.MsgId);
                                    lock (_dicMsgId)
-                                       _dicMsgId.Remove((string)response.Tag);
+                                       _dicMsgId.Remove((String)response.Tag);
                                }
                                dataPacket.Decoding(br);
                            }

@@ -54,7 +54,7 @@ namespace OwLib
             {
                 DataRow node = dt.Rows[i];
                 String id = node[0].ToString();
-                string text = node[1].ToString();
+                String text = node[1].ToString();
                 String parentID = node[2].ToString();
                 TreeNode tn2 = new TreeNode(id);
                 tn2.Name = id;
@@ -104,22 +104,22 @@ namespace OwLib
             System.GC.Collect();
         }
 
-        public string QuerySpecialCodeInfos(string id)
+        public String QuerySpecialCodeInfos(String id)
         {
             byte[] bytes = DataAccess.IDataQuery.NewQueryGlobalData("1009°ÚUID°ÚSpecialService°Ú°Ú°Ú5,-1," + id) as byte[];
-            string result = Encoding.UTF8.GetString(bytes);
+            String result = Encoding.UTF8.GetString(bytes);
             return result;
         }
 
-        public static string QuerySpecialXmlData(string pid, string version)
+        public static String QuerySpecialXmlData(String pid, String version)
         {
-            string path = DataCenter.GetAppPath() + @"\SpecialXmlData\";
+            String path = DataCenter.GetAppPath() + @"\SpecialXmlData\";
             Directory.CreateDirectory(path);
             path = path + pid + ".xml";
             try
             {
                 object obj2 = DataAccess.IDataQuery.NewQueryGlobalData("1006°ÚUID°ÚSpecialService°Ú°Ú°Ú2," + version + "," + pid);
-                string data = Encoding.UTF8.GetString(obj2 as byte[]);
+                String data = Encoding.UTF8.GetString(obj2 as byte[]);
                 if (!data.Trim().StartsWith("<"))
                 {
                     data = data.Trim().Remove(0, 1);
@@ -145,7 +145,7 @@ namespace OwLib
         }
         
 
-        private static void WriteXMlFile(string filename, string version, string data)
+        private static void WriteXMlFile(String filename, String version, String data)
         {
             using (FileStream stream = new FileStream(filename, FileMode.Create, FileAccess.Write))
             {
@@ -155,15 +155,15 @@ namespace OwLib
             }
         }
 
-        public static string QuerySpecialTreeData(string pid)
+        public static String QuerySpecialTreeData(String pid)
         {
-            string path = DataCenter.GetAppPath() + @"\SpecialXmlData\";
+            String path = DataCenter.GetAppPath() + @"\SpecialXmlData\";
             Directory.CreateDirectory(path);
             path = path + pid;
             try
             {
                 object obj2 = DataAccess.IDataQuery.NewQueryGlobalData("1005°ÚUID°ÚSpecialService°Ú°Ú°Ú1," + pid);
-                string data = Encoding.UTF8.GetString(obj2 as byte[]);
+                String data = Encoding.UTF8.GetString(obj2 as byte[]);
                 //WriteXMlFile(path, null, data);
                 return data;
             }
@@ -181,7 +181,7 @@ namespace OwLib
             }
         }
 
-        public static string ReadLocaXml(string path)
+        public static String ReadLocaXml(String path)
         {
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite))
             {
@@ -274,7 +274,7 @@ namespace OwLib
                  else if (tn.Tag == "2")
                  {
                      String[] codes = rtbCodes.Text.Split(new String[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                     Dictionary<String, String> dicCodes = new Dictionary<string, string>();
+                     Dictionary<String, String> dicCodes = new Dictionary<String, String>();
                      foreach (String code in codes)
                      {
                          dicCodes[code] = "";
@@ -284,21 +284,21 @@ namespace OwLib
              }
         }
 
-        private static List<BindingType> Deserialize(string data)
+        private static List<BindingType> Deserialize(String data)
         {
             List<BindingType> list = new List<BindingType>();
             char[] separator = new char[] { '}' };
-            string[] strArray = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            String[] strArray = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < strArray.Length; i++)
             {
                 char[] chArray2 = new char[] { '°Ú' };
-                string[] arr = strArray[i].Split(chArray2);
+                String[] arr = strArray[i].Split(chArray2);
                 BindingType item = new BindingType();
                 item.ID = arr[0];
                 item.Name = arr[1];
                 item.ParentID = arr[2];
                 item.Category = arr[3];
-                if (arr[4] != string.Empty)
+                if (arr[4] != String.Empty)
                 {
                     item.OrderNum = int.Parse(arr[4]);
                 }
@@ -312,28 +312,28 @@ namespace OwLib
             return list;
         }
 
-        public static ModSpecialtopic ArrToModSpecialtopic(string[] arr)
+        public static ModSpecialtopic ArrToModSpecialtopic(String[] arr)
         {
             ModSpecialtopic specialtopic = new ModSpecialtopic();
             specialtopic.ID = arr[0];
-            specialtopic.SpecialTopicCode = string.IsNullOrEmpty(arr[8]) ? arr[0] : arr[8];
+            specialtopic.SpecialTopicCode = String.IsNullOrEmpty(arr[8]) ? arr[0] : arr[8];
             specialtopic.SpecialTopicName = arr[1];
-            specialtopic.CateGoryCode = string.IsNullOrEmpty(arr[9]) ? arr[2] : arr[9];
-            if (arr[6] != string.Empty)
+            specialtopic.CateGoryCode = String.IsNullOrEmpty(arr[9]) ? arr[2] : arr[9];
+            if (arr[6] != String.Empty)
             {
                 specialtopic.IsImportant = int.Parse(arr[6]);
             }
-            if (arr[5] != string.Empty)
+            if (arr[5] != String.Empty)
             {
                 specialtopic.IsShowBlock = int.Parse(arr[5]);
             }
-            if (arr[4] != string.Empty)
+            if (arr[4] != String.Empty)
             {
                 specialtopic.SortCode = int.Parse(arr[4]);
             }
-            if (arr[7] != string.Empty)
+            if (arr[7] != String.Empty)
             {
-                specialtopic.Version = string.IsNullOrEmpty(arr[11]) ? int.Parse(arr[7]) : int.Parse(arr[11]);
+                specialtopic.Version = String.IsNullOrEmpty(arr[11]) ? int.Parse(arr[7]) : int.Parse(arr[11]);
             }
             specialtopic.HlepUrl = arr[10];
             return specialtopic;

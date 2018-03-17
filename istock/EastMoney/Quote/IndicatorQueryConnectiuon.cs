@@ -16,8 +16,8 @@ namespace OwLib
     public class IndicatorQueryConnectiuon
     {
         private DataQuery _dataQuery;
-        private string _id;
-        private Dictionary<string, int> _dicMsgId;
+        private String _id;
+        private Dictionary<String, int> _dicMsgId;
         private Queue<CMRecvDataEventArgs> _DataPacketQueue;
         private Thread _DataPacketPushSlave;
 
@@ -29,15 +29,15 @@ namespace OwLib
         ///</summary>
         public event EventHandler<CMRecvDataEventArgs> OnReceiveData;
 
-        public static DataTable SimpleTest(string emCode, List<string> MacroIds, IndicateRequestType type)
+        public static DataTable SimpleTest(String emCode, List<String> MacroIds, IndicateRequestType type)
         {
-          string Cmd = string.Format(IndicatorDataPacket.CustomIndicatorsReportCmd,
-                    emCode, string.Join(",", MacroIds.ToArray()), (int)type);
+          String Cmd = String.Format(IndicatorDataPacket.CustomIndicatorsReportCmd,
+                    emCode, String.Join(",", MacroIds.ToArray()), (int)type);
           DataQuery _dataQuery = new DataQuery();
           DataSet ds = _dataQuery.QueryMacroIndicate(Cmd) as DataSet;
           return ds.Tables[0];
         }
-        public static DataTable SimpleTest(string Cmd)
+        public static DataTable SimpleTest(String Cmd)
         {
             DataTable result = new DataTable();
             try
@@ -59,7 +59,7 @@ namespace OwLib
         public IndicatorQueryConnectiuon(DataQuery dataQuery)
         {
             _dataQuery = dataQuery;
-            _dicMsgId = new Dictionary<string, int>();
+            _dicMsgId = new Dictionary<String, int>();
             _DataPacketQueue = new Queue<CMRecvDataEventArgs>();
             _DataPacketPushSlave = new Thread(PushDataPacket);
             _DataPacketPushSlave.IsBackground = false;
@@ -77,7 +77,7 @@ namespace OwLib
         /// 发送请求包
         /// </summary>
         /// <param name="packet"></param>
-        public void DoSendPacket(string cmd, int msgId)
+        public void DoSendPacket(String cmd, int msgId)
         {
             IndicatorDataPacket sendPacket = new IndicatorDataPacket();
             sendPacket.Cmd = cmd;
@@ -104,7 +104,7 @@ namespace OwLib
                             using (DataTable dt = ds.Tables[0])
                             {
                                 IndicateRequestType requestId;
-                                string tableKeyCode;
+                                String tableKeyCode;
 
                                 if (TryGetRequestType(dt.TableName, out requestId, out tableKeyCode))
                                 {
@@ -125,13 +125,13 @@ namespace OwLib
                                     }
 
                                     dataPacket.RequestId = requestId;
-                                    if (_dicMsgId.ContainsKey((string)response.Tag))
+                                    if (_dicMsgId.ContainsKey((String)response.Tag))
                                     {
-                                        dataPacket.MsgId = _dicMsgId[(string)response.Tag];
+                                        dataPacket.MsgId = _dicMsgId[(String)response.Tag];
                                         LogUtilities.LogMessage("收到响应, id=" 
-                                            + (string)response.Tag + ", msgId=" + dataPacket.MsgId);
+                                            + (String)response.Tag + ", msgId=" + dataPacket.MsgId);
                                         lock (_dicMsgId)
-                                            _dicMsgId.Remove((string)response.Tag);
+                                            _dicMsgId.Remove((String)response.Tag);
                                     }
 
                                     dataPacket.Decoding(dt);
@@ -159,17 +159,17 @@ namespace OwLib
         /// <param name="requestType">报表请求类型</param>
         /// <param name="tableKeyCode">请求code</param>
         /// <returns></returns>
-        private bool TryGetRequestType(string tableName, out IndicateRequestType requestType,
-            out string tableKeyCode)
+        private bool TryGetRequestType(String tableName, out IndicateRequestType requestType,
+            out String tableKeyCode)
         {
             requestType = IndicateRequestType.LeftIndicatorsReport;
             tableKeyCode = tableName;
-            if (string.IsNullOrEmpty(tableName))
+            if (String.IsNullOrEmpty(tableName))
             {
                 //Log error;
                 return false;
             }
-            string[] arr = tableName.Split('_');
+            String[] arr = tableName.Split('_');
 
             if (arr == null || arr.Length == 0)
                 return false;

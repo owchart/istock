@@ -8,16 +8,16 @@ namespace OwLib
 {
     public class KlineStateIO
     {
-        static readonly string ConfigFile = PathUtilities.CfgPath + "KlineStateConfig.xml";
-        static readonly string CustomerConfigFile = PathUtilities.UserPath + @"Kline\" + "KlineStateConfig.xml";
+        static readonly String ConfigFile = PathUtilities.CfgPath + "KlineStateConfig.xml";
+        static readonly String CustomerConfigFile = PathUtilities.UserPath + @"Kline\" + "KlineStateConfig.xml";
 
         /// <summary>
         /// GetKlineStateCfgData
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, KlineState> GetData()
+        public static Dictionary<String, KlineState> GetData()
         {
-            Dictionary<string, KlineState> result =new Dictionary<string, KlineState>();
+            Dictionary<String, KlineState> result =new Dictionary<String, KlineState>();
             XmlDocument xmlDoc = new XmlDocument();
             bool flagReadData = false;
             if (File.Exists(CustomerConfigFile))
@@ -61,12 +61,12 @@ namespace OwLib
             return result;
         }
 
-        public static void WriteDataXML(Dictionary<string, KlineState> data)
+        public static void WriteDataXML(Dictionary<String, KlineState> data)
         {
             XmlDocument newDoc = new XmlDocument();
             XmlElement root = newDoc.CreateElement("KlineState");
             newDoc.AppendChild(root);
-            foreach (KeyValuePair<string, KlineState> temp in data)
+            foreach (KeyValuePair<String, KlineState> temp in data)
             {
                 XmlElement rootChild = newDoc.CreateElement("State");
                 rootChild.SetAttribute("Key", temp.Key);
@@ -81,16 +81,16 @@ namespace OwLib
 
     public class KlineState
     {
-        private string _key;
-        private string _objValue;
+        private String _key;
+        private String _objValue;
 
-        public string Key
+        public String Key
         {
             get { return _key; }
             set { this._key = value; }
         }
 
-        public string ObjValue
+        public String ObjValue
         {
             get { return _objValue; }
             set { this._objValue = value; }

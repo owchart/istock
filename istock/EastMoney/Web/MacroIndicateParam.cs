@@ -16,16 +16,16 @@ namespace OwLib
     public class MacroIndicateParam
     {
         
-        private string name;
+        private String name;
 
-        public string Name
+        public String Name
         {
             get { return name; }
             set { name = value; }
         }
-        private string columns;
+        private String columns;
 
-        public string Columns
+        public String Columns
         {
             get { return columns; }
             set { columns = value; }
@@ -53,11 +53,11 @@ namespace OwLib
         }
 
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("name=" + this.name);
-            if (!string.IsNullOrEmpty(this.columns))
+            if (!String.IsNullOrEmpty(this.columns))
             {
                 sb.Append("|columns=" + this.columns);
             }

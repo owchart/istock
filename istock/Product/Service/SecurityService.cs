@@ -239,7 +239,7 @@ namespace OwLib
         public static int GetActiveCodes(List<String> activeCodes, int maxCount)
         {
             LoadHistoryDatas();
-            Dictionary<String, double> dic = new Dictionary<string, double>();
+            Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
                 //·ÇÍ£ÅÆ
@@ -419,7 +419,7 @@ namespace OwLib
         public static int GetSecondNewCodes(List<String> secondNewCodes, int maxCount)
         {
             LoadHistoryDatas();
-            Dictionary<String, double> dic = new Dictionary<string, double>();
+            Dictionary<String, double> dic = new Dictionary<String, double>();
             foreach (SecurityLatestData latestData in m_latestDatas.Values)
             {
                 //·ÇÍ£ÅÆ

@@ -55,7 +55,7 @@ namespace OwLib
         /// <summary>
         /// 宏观多图专题图名集合
         /// </summary>
-        public static List<string> ChartTitles = new List<string>() { "CPI/PPI", "CPI同比增长", "M1/M2/贷款余额增速比较", "货币回笼/投放", "存贷差与贷存比变化", "固定资产投资增速(%)", "GDP同比增长(%)", "贸易顺逆差与外汇储备", "人民币汇率", "保险公司国债投资比例" };
+        public static List<String> ChartTitles = new List<String>() { "CPI/PPI", "CPI同比增长", "M1/M2/贷款余额增速比较", "货币回笼/投放", "存贷差与贷存比变化", "固定资产投资增速(%)", "GDP同比增长(%)", "贸易顺逆差与外汇储备", "人民币汇率", "保险公司国债投资比例" };
 
         /// <summary>
         /// 一次请求数据的大小
@@ -64,7 +64,7 @@ namespace OwLib
         /// <summary>
         /// 同名专题
         /// </summary>
-        public static Dictionary<string, string> SameSpecialCodes = new Dictionary<string, string>();
+        public static Dictionary<String, String> SameSpecialCodes = new Dictionary<String, String>();
         /// <summary>
         /// 请求数据编号
         /// </summary>
@@ -88,52 +88,52 @@ namespace OwLib
         /// <summary>
         /// 专题树键值对
         /// </summary>
-        public static Dictionary<string, EBlockCategory> SpecialBlockForSpecialTopicCodes = new Dictionary<string, EBlockCategory>();
+        public static Dictionary<String, EBlockCategory> SpecialBlockForSpecialTopicCodes = new Dictionary<String, EBlockCategory>();
 
         /// <summary>
         /// 相同专题映射
         /// </summary>
-        public static Dictionary<string, string> SameSpecials = new Dictionary<string, string>();
+        public static Dictionary<String, String> SameSpecials = new Dictionary<String, String>();
 
         /// <summary>
         /// 红星
         /// </summary>
-        public static readonly string RedStar = "红星";
+        public static readonly String RedStar = "红星";
 
         /// <summary>
         /// 蓝星
         /// </summary>
-        public static readonly string BuleStar = "蓝星";
+        public static readonly String BuleStar = "蓝星";
 
         /// <summary>
         /// 红星字符
         /// </summary>
-        public static readonly string Star = "★";
+        public static readonly String Star = "★";
 
         /// <summary>
         /// 空数据替换字符串
         /// </summary>
-        public static readonly string DbNullValue = "--";
+        public static readonly String DbNullValue = "--";
 
         /// <summary>
         /// 数据提取
         /// </summary>
-        public static readonly string RemoteData = "提取数据";
+        public static readonly String RemoteData = "提取数据";
 
         ///// <summary>
         ///// 停止提取
         ///// </summary>
-        //  public static readonly string StopRemoteData = "停止提取";
-        public static string ModName = null;
+        //  public static readonly String StopRemoteData = "停止提取";
+        public static String ModName = null;
         /// <summary>
         /// 柱状
         /// </summary>
-        public static readonly string Bar = "柱状";
+        public static readonly String Bar = "柱状";
         //专题控件类型容器,新加的类型都必须在容器存放
         /// <summary>
         /// 专题控件类型容器,新加的类型都必须在容器存放
         /// </summary>
-        public static Dictionary<string, Type> Types = new Dictionary<string, Type>();
+        public static Dictionary<String, Type> Types = new Dictionary<String, Type>();
 
         public static bool BlnManageComp = false;
         /// <summary>
@@ -150,14 +150,14 @@ namespace OwLib
         /// <summary>
         /// 专题收藏夹本地序列化文件存放路径
         /// </summary>
-        public static string FavoritesDir = null;
+        public static String FavoritesDir = null;
         /// <summary>
         /// 判断当前专题收藏夹文件信息是否有更新
         /// </summary>
         public static List<BindingType> FavFlags = new List<BindingType>();
         //public static bool macFlag = false;
         //  public static List<ComboxItem> ListReportComboxItems = new List<ComboxItem>();
-        public static List<string> QueryThreadIds = new List<string>();
+        public static List<String> QueryThreadIds = new List<String>();
         #endregion
 
         /// <summary>
@@ -193,11 +193,11 @@ namespace OwLib
         /// <summary>
         /// 板块分类code
         /// </summary>
-        public static string BlockCode;
+        public static String BlockCode;
         /// <summary>
         /// 板块分类code 明细
         /// </summary>
-        public static string BlockCodeDetails;
+        public static String BlockCodeDetails;
         /// <summary>
         /// 需要刷新Combox 数据
         /// </summary>
@@ -208,14 +208,14 @@ namespace OwLib
         public static bool BlnUpdateSpecialTree = true;
         //public static bool BlnBlockQuesting = false;
 
-        public static Dictionary<string, Image> ImageCaches;
+        public static Dictionary<String, Image> ImageCaches;
         /// <summary>
         /// 初始化时需要选中的专题
         /// </summary>
-        public static string TreeCode;
+        public static String TreeCode;
         /// <summary>
         /// 初始化时需要选中的代码
         /// </summary>
-        public static string SecCode;
+        public static String SecCode;
     }
 }

@@ -16,7 +16,7 @@ namespace OwLib
         /// <summary>
         /// 连接的服务器地址
         /// </summary>
-        private string _httpUrl;
+        private String _httpUrl;
 
         private IServerInfo _serverHelper;
 
@@ -50,7 +50,7 @@ namespace OwLib
         /// <summary>
         /// 模拟一个连接成功
         /// </summary>
-        public void Connect(string httpUrl)
+        public void Connect(String httpUrl)
         {
             _httpUrl = httpUrl;
             //_httpSite = new Uri(httpUrl);

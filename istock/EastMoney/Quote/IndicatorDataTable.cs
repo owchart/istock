@@ -14,39 +14,39 @@ namespace OwLib
         /// </summary>
         public IndicatorDataTable()
         {
-            AllLeftItems = new Dictionary<string, StockIndicatorLeftItem>();
-            AllRightItems = new Dictionary<string, StockIndicatorRightItem>();
-            DicLeftIndicatorOfStock = new Dictionary<int, HashSet<string>>();
-            DicRightIndicatorOfStock = new Dictionary<int, HashSet<string>>();
+            AllLeftItems = new Dictionary<String, StockIndicatorLeftItem>();
+            AllRightItems = new Dictionary<String, StockIndicatorRightItem>();
+            DicLeftIndicatorOfStock = new Dictionary<int, HashSet<String>>();
+            DicRightIndicatorOfStock = new Dictionary<int, HashSet<String>>();
         }
 
         /// <summary>
         ///  All left style macro-indicator items.
         /// (Key is macroid, value is left macro-indicator entity.)
         /// </summary>
-        public Dictionary<string, StockIndicatorLeftItem> AllLeftItems;
+        public Dictionary<String, StockIndicatorLeftItem> AllLeftItems;
         /// <summary>
         ///  All right style macro-indicator items.
         /// (Key is macroid, value is right macro-indicator entity.)
         /// </summary>
-        public Dictionary<string, StockIndicatorRightItem> AllRightItems;
+        public Dictionary<String, StockIndicatorRightItem> AllRightItems;
 
         /// <summary>
         /// Cache of the left-side macro-indicator Id list belong to the stock.
         /// ( Key is the stock id, value is macro-indicator Id list.)
         /// </summary>
-        public Dictionary<int, HashSet<string>> DicLeftIndicatorOfStock;
+        public Dictionary<int, HashSet<String>> DicLeftIndicatorOfStock;
         /// <summary>
         /// Cache of the right-side macro-indicator Id list belong to the stock.
         /// ( Key is the stock id, value is macro-indicator Id list.)
         /// </summary> 
-        public Dictionary<int, HashSet<string>> DicRightIndicatorOfStock;
+        public Dictionary<int, HashSet<String>> DicRightIndicatorOfStock;
 
         /// <summary>
         /// Cache of the macro-indicator value list.
         /// ( Key is the macro-indicator id, value is time-value pair.)
         /// </summary>
-        public Dictionary<string, SortedList<int, double>> _dicIndicatorValueReport;
+        public Dictionary<String, SortedList<int, double>> _dicIndicatorValueReport;
 
         /// <summary>
         /// Once client receive the response-packet,

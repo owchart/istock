@@ -14,20 +14,20 @@ namespace OwLib {
         /// 获取InfoPanel Chart的定义
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Dictionary<string, InfoPanelChart>> GetInfoPanelCharts() {
-            string filePath = PathUtilities.CfgPath + "InfoPanelCharts.xml";
+        public static Dictionary<String, Dictionary<String, InfoPanelChart>> GetInfoPanelCharts() {
+            String filePath = PathUtilities.CfgPath + "InfoPanelCharts.xml";
             return GetInfoPanelCharts(filePath);
         }
 
-        private static Dictionary<string, Dictionary<string, InfoPanelChart>> GetInfoPanelCharts(string filePath) {
+        private static Dictionary<String, Dictionary<String, InfoPanelChart>> GetInfoPanelCharts(String filePath) {
             if (File.Exists(filePath)) {
                 try {
                     XmlDocument doc = new XmlDocument();
                     doc.Load(filePath);
                     XmlNode root = doc.SelectSingleNode(@"InfoPanel/Charts");
-                    Dictionary<string, Dictionary<string, InfoPanelChart>> charts = new Dictionary<string, Dictionary<string, InfoPanelChart>>();
+                    Dictionary<String, Dictionary<String, InfoPanelChart>> charts = new Dictionary<String, Dictionary<String, InfoPanelChart>>();
                     foreach (XmlNode levelnode in root.ChildNodes) {
-                        Dictionary<string, InfoPanelChart> controls = new Dictionary<string, InfoPanelChart>();
+                        Dictionary<String, InfoPanelChart> controls = new Dictionary<String, InfoPanelChart>();
                         if (levelnode.NodeType == XmlNodeType.Comment)
                             continue;
                         foreach (XmlNode node in levelnode.ChildNodes) {
@@ -57,7 +57,7 @@ namespace OwLib {
                                                         : LineColor.Lite;
                                 }
                                 if (null != rownode.Attributes["Margin"]) {
-                                    string[] temp = rownode.Attributes["Margin"].Value.Split(',');
+                                    String[] temp = rownode.Attributes["Margin"].Value.Split(',');
                                     if (temp.Length > 0) {
                                         if (temp.Length == 1) {
                                             row.MarginTop = row.MarginBottom = Convert.ToInt32(temp[0]);
@@ -108,7 +108,7 @@ namespace OwLib {
                                             break;
                                     }
                                     if (null != columnode.Attributes["Margin"]) {
-                                        string[] temp = columnode.Attributes["Margin"].Value.Split(',');
+                                        String[] temp = columnode.Attributes["Margin"].Value.Split(',');
                                         if (temp.Length > 0) {
                                             if (temp.Length == 1) {
                                                 colum.MarginTop = colum.MarginBottom = Convert.ToInt32(temp[0]);
@@ -119,7 +119,7 @@ namespace OwLib {
                                         }
                                     }
                                     if (null != columnode.Attributes["Padding"]) {
-                                        string[] temp = columnode.Attributes["Padding"].Value.Split(',');
+                                        String[] temp = columnode.Attributes["Padding"].Value.Split(',');
                                         if (temp.Length > 0) {
                                             if (temp.Length == 1) {
                                                 colum.PaddingLeft = colum.PaddingRight = Convert.ToInt32(temp[0]);
@@ -130,7 +130,7 @@ namespace OwLib {
                                         }
                                     }
                                     if (null != columnode.Attributes["MarkLocation"]) {
-                                        string location = columnode.Attributes["MarkLocation"].Value;
+                                        String location = columnode.Attributes["MarkLocation"].Value;
                                         switch (location) {
                                             case "TopLeft":
                                                 colum.MarkLocation = MarkLocation.TopLeft;
@@ -174,12 +174,12 @@ namespace OwLib {
         /// </summary>
         /// <returns></returns>
         public static Dictionary<MarketType, InfoPanelLayout> GetInfoPanelLayout() {
-            string filePath = PathUtilities.CfgPath + "InfoPanelLayouts.xml";
+            String filePath = PathUtilities.CfgPath + "InfoPanelLayouts.xml";
             return GetInfoPanelLayout(filePath);
         }
 
 
-        private static Dictionary<MarketType, InfoPanelLayout> GetInfoPanelLayout(string filePath) {
+        private static Dictionary<MarketType, InfoPanelLayout> GetInfoPanelLayout(String filePath) {
             if (File.Exists(filePath)) {
                 try {
                     XmlDocument doc = new XmlDocument();
@@ -365,8 +365,8 @@ namespace OwLib {
         /// <returns></returns>
         public static IList<ShortLineType> GetUserShortLineTypes() {
             IList<ShortLineType> result = new List<ShortLineType>();
-            string filePathUser = PathUtilities.UserPath + "shortlines.xml";
-            string filePathNomal = PathUtilities.CfgPath + "shortlines.xml";
+            String filePathUser = PathUtilities.UserPath + "shortlines.xml";
+            String filePathNomal = PathUtilities.CfgPath + "shortlines.xml";
 
             XmlDocument doc = new XmlDocument();
             try {
@@ -407,7 +407,7 @@ namespace OwLib {
         public static void RestoreUserShortLineTypes(IList<ShortLineType> lines) {
             if (lines.Count == 0)
                 return;
-            string filePath = PathUtilities.UserPath + "shortlines.xml";
+            String filePath = PathUtilities.UserPath + "shortlines.xml";
             XmlDocument doc = new XmlDocument();
             XmlNode declare = doc.CreateXmlDeclaration("1.0", "utf-8", "");
 
@@ -422,7 +422,7 @@ namespace OwLib {
         }
 
         public static Dictionary<MarketType, List<TopBannerMenuItemPair>> GetTopBannerMenu() {
-            string filePath = PathUtilities.CfgPath + "TopBannerMenu.xml";
+            String filePath = PathUtilities.CfgPath + "TopBannerMenu.xml";
             if (File.Exists(filePath)) {
                 try {
                     Dictionary<MarketType, List<TopBannerMenuItemPair>> result =
@@ -444,20 +444,20 @@ namespace OwLib {
                                     if (count == 1)
                                     {
                                         TopBannerMenuItem item = new TopBannerMenuItem();
-                                        item.Caption = pairNode.FirstChild.Attributes["Caption"].Value ?? string.Empty;
-                                        item.Url = pairNode.FirstChild.Attributes["Url"].Value ?? string.Empty;
-                                        item.UrlTitle = pairNode.FirstChild.Attributes["UrlTitle"].Value ?? string.Empty;
+                                        item.Caption = pairNode.FirstChild.Attributes["Caption"].Value ?? String.Empty;
+                                        item.Url = pairNode.FirstChild.Attributes["Url"].Value ?? String.Empty;
+                                        item.UrlTitle = pairNode.FirstChild.Attributes["UrlTitle"].Value ?? String.Empty;
 
                                         pair.Item1 = item;
                                     } else {
                                         TopBannerMenuItem item1 = new TopBannerMenuItem();
-                                        item1.Caption = pairNode.FirstChild.Attributes["Caption"].Value ?? string.Empty;
-                                        item1.Url = pairNode.FirstChild.Attributes["Url"].Value ?? string.Empty;
-                                        item1.UrlTitle = pairNode.FirstChild.Attributes["UrlTitle"].Value ?? string.Empty;
+                                        item1.Caption = pairNode.FirstChild.Attributes["Caption"].Value ?? String.Empty;
+                                        item1.Url = pairNode.FirstChild.Attributes["Url"].Value ?? String.Empty;
+                                        item1.UrlTitle = pairNode.FirstChild.Attributes["UrlTitle"].Value ?? String.Empty;
                                         TopBannerMenuItem item2 = new TopBannerMenuItem();
-                                        item2.UrlTitle = pairNode.LastChild.Attributes["UrlTitle"].Value ?? string.Empty;
-                                        item2.Url = pairNode.LastChild.Attributes["Url"].Value ?? string.Empty;
-                                        item2.Caption = pairNode.LastChild.Attributes["Caption"].Value ?? string.Empty;
+                                        item2.UrlTitle = pairNode.LastChild.Attributes["UrlTitle"].Value ?? String.Empty;
+                                        item2.Url = pairNode.LastChild.Attributes["Url"].Value ?? String.Empty;
+                                        item2.Caption = pairNode.LastChild.Attributes["Caption"].Value ?? String.Empty;
                                         pair.Item1 = item1;
                                         pair.Item2 = item2;
                                     }

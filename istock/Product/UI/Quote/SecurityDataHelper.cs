@@ -110,42 +110,14 @@ namespace OwLib
             return indicator;
         }
 
-        public static void BindHistoryDatas(ChartAEx chart, CTable dataSource, List<CIndicator> indicators, int[] fields, List<SecurityData> historyDatas, bool showMinuteLine)
+        public static void BindHistoryDatas(ChartAEx chart, CTable dataSource, List<CIndicator> indicators, int[] fields, List<SecurityData> historyDatas)
         {
             dataSource.Clear();
             int sizeData = (int)historyDatas.Count;
             if (sizeData > 0)
             {
-                if (showMinuteLine)
-                {
-                    int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                    SecurityData securityData = historyDatas[0];
-                    double date = securityData.m_date;
-                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    double minTime = CStrA.M129(year, month, day, 9, 30, 0, 0);
-                    double maxTime = CStrA.M129(year, month, day, 15, 0, 0, 0);
-                    for (date = minTime; date <= maxTime; date = date + 60)
-                    {
-                        CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                        if ((hour * 60 + minute) < 690 || (hour * 60 + minute) >= 780)
-                        {
-                            dataSource.Set(date, fields[4], double.NaN);
-                            int index = dataSource.GetRowIndex(date);
-                            dataSource.Set2(index, fields[KeyFields.CLOSE_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.OPEN_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.HIGH_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.LOW_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.VOL_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.AMOUNT_INDEX], double.NaN);
-                            dataSource.Set2(index, fields[KeyFields.AVGPRICE_INDEX], double.NaN);
-                        }
-                    }
-                }
-                else
-                {
-                    dataSource.SetRowsCapacity(sizeData + 10);
-                    dataSource.SetRowsGrowStep(100);
-                }
+                dataSource.SetRowsCapacity(sizeData + 10);
+                dataSource.SetRowsGrowStep(100);
                 int columnsCount = dataSource.ColumnsCount;
                 for (int i = 0; i < sizeData; i++)
                 {

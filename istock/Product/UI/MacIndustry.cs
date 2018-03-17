@@ -122,7 +122,7 @@ namespace OwLib
                     m_fundCurve.Clear();
                     FundCurveData data = new FundCurveData();
                     XAxisPointData xdata = new XAxisPointData();
-                    Dictionary<String, YAxisCurveData> yDatas = new Dictionary<string, YAxisCurveData>();
+                    Dictionary<String, YAxisCurveData> yDatas = new Dictionary<String, YAxisCurveData>();
                     YAxisStyle ySyle = new YAxisStyle();
                     YAxisStyle ySyle1 = new YAxisStyle();
                     YAxisStyle ySyle2 = new YAxisStyle();
@@ -194,7 +194,7 @@ namespace OwLib
         public static DataTable GetMacIndustyData(String code, String macIndustyType)
         {
             MacroDataType type = (MacroDataType)Enum.Parse(typeof(MacroDataType), macIndustyType);
-            string[] ids = new string[] { code };
+            String[] ids = new String[] { code };
             DataSet ds = MongoRetriver.GetMutiIndicatorValuesFromService(ids, type);
             DataTable dt = ds.Tables[0];
             return dt;

@@ -112,9 +112,9 @@ namespace OwLib
                 klines[i].Volume = (uint)list[i].Volume;
                 klines[i].Time = list[i].Time;
             }
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
-            Dictionary<int, Dictionary<FieldIndex, string>> dict = DetailData.FieldIndexDataString;
+            Dictionary<int, Dictionary<FieldIndex, String>> dict = DetailData.FieldIndexDataString;
             //执行调用指标公式方法
             if (indicator.Formula.fid <= 0)
             {
@@ -170,7 +170,7 @@ namespace OwLib
            int dataCount, int index, int selectIndex,
            MarketType2 Market, KLineCycle KLineCycle)
         {
-            string nameTemp = output.fmOutput[index].name.Trim('\0');
+            String nameTemp = output.fmOutput[index].name.Trim('\0');
             List<float> outputList = new List<float>(0);
             double[] tempOutput = new double[1];
             for (int j = 0; j < dataCount; j++)
@@ -275,7 +275,7 @@ namespace OwLib
         private void GetFunctionFormulaOutput(EMIndicator indicator, FmFormulaOutput output, int dataCount, int index, int selectIndex)
         {
             QuoteDataStru quoteDataStru = new QuoteDataStru();
-            string nameTemp = output.fmOutput[index].name.Trim('\0');
+            String nameTemp = output.fmOutput[index].name.Trim('\0');
             quoteDataStru.QuoteName = nameTemp;
             try
             {

@@ -108,7 +108,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置显示文本值
         /// </summary>
-		public string Text { get; set; }
+		public String Text { get; set; }
 
         /// <summary>
         /// 获取或设置控件类型
@@ -123,25 +123,25 @@ namespace OwLib
 		/// <summary>
 		/// 绑定的数据列名
 		/// </summary>
-		public string BindParam { get; set; }
+		public String BindParam { get; set; }
 
 		/// <summary>
 		/// 绑定的数据列名(重命名)
 		/// </summary>
 		[XmlAttribute]
-		public string OtherBindParam { get; set; }
+		public String OtherBindParam { get; set; }
 
 		#region 项合并属性
 
 		/// <summary>
 		/// 绑定的数据列名
 		/// </summary>
-		public string Key { get; set; }
+		public String Key { get; set; }
 
 		/// <summary>
 		/// 绑定的数据列名
 		/// </summary>
-		public string BindValue { get; set; }
+		public String BindValue { get; set; }
 
 		private int _mergeItems = -1;
 
@@ -185,13 +185,13 @@ namespace OwLib
         /// <summary>
         /// 多报告期过滤框数据库中查询实际绑定的列值
         /// </summary>
-        public string  SCItemComboColName{ get; set; }
+        public String  SCItemComboColName{ get; set; }
 
         /// <summary>
         /// 多报告期过滤框报告期类型选择（四季度报，中报年报，年报）
         /// </summary>
 
-        public string  SCItemComType { get; set; }
+        public String  SCItemComType { get; set; }
 
         /// <summary>
         /// 实际绑定值是否是当前时间的上一个时间单位
@@ -216,7 +216,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置最新报告期类型
         /// </summary>
-        public string ReportType { get; set; }
+        public String ReportType { get; set; }
 
         /// <summary>
         /// 获取或设置最终时间值
@@ -242,7 +242,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置报表类型
         /// </summary>
-        public string  ReportTypeIndex { get; set; }
+        public String  ReportTypeIndex { get; set; }
 
         /// <summary>
         /// 获取或设置从源绑定数据设置
@@ -452,9 +452,9 @@ namespace OwLib
         /// 转换为字符串方法
         /// </summary>
         /// <returns>转换成的字符串</returns>
-		public override string ToString()
+		public override String ToString()
 		{
-			string result = string.Empty;
+			String result = String.Empty;
 			switch (ControlType)
 			{
 				case ContnrolModeType.ButtonControl:

@@ -34,7 +34,7 @@ namespace OwLib
         /// </summary>
         /// <param name="datasourcename">数据源名称</param>
         /// <returns>得到的数据集</returns>
-        private static DataSet QueryData(string datasourcename)
+        private static DataSet QueryData(String datasourcename)
         {
             List<FilterMode> list = new List<FilterMode>();
             FilterMode filterMode = new FilterMode();
@@ -42,7 +42,7 @@ namespace OwLib
             filterMode.Filter = FILTER.DENGYU;
             filterMode.Value = 1;
             list.Add(filterMode);
-            List<string> feilds = new List<string>() { "SPECIALTOPICCODE", "SPECIALTOPICNAME", "CATEGORYCODE", "SORTCODE", "IMPORTANT", "ISSHOWBLOCK" };
+            List<String> feilds = new List<String>() { "SPECIALTOPICCODE", "SPECIALTOPICNAME", "CATEGORYCODE", "SORTCODE", "IMPORTANT", "ISSHOWBLOCK" };
             DataSet result = DataHelper.QueryData(datasourcename, list, feilds.ToArray());
 
             return result;
@@ -52,7 +52,7 @@ namespace OwLib
         /// </summary>
         /// <param name="datasourcename">数据源名称</param>
         /// <returns>得到的数据集</returns>
-        private static DataSet QueryData(string datasourcename, string[] feilds)
+        private static DataSet QueryData(String datasourcename, String[] feilds)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace OwLib
                 filterMode.Filter = FILTER.DENGYU;
                 filterMode.Value = 1;
                 list.Add(filterMode);
-                Dictionary<string, bool> orders = new Dictionary<string, bool>();
+                Dictionary<String, bool> orders = new Dictionary<String, bool>();
                 orders["SORTCODE"] = false;
                 DataSet result = DataHelper.QueryData(datasourcename, list, feilds, null, orders);
 
@@ -80,7 +80,7 @@ namespace OwLib
         ///// </summary>
         ///// <param name="datasourcename">数据源名称</param>
         ///// <returns>数据表</returns>
-        //public static DataTable QueryByDatasoureName(string datasourcename)
+        //public static DataTable QueryByDatasoureName(String datasourcename)
         //{
         //    DataSet ds = QueryData(datasourcename);
         //    if (ds != null && ds.Tables.Count > 0)
@@ -101,14 +101,14 @@ namespace OwLib
               //  return QueryByDatasoureName("MOD_STC_ALL");
             if (CommonService.ISCLIENT == ClientType.Config)
             {
-                List<string> feilds = new List<string>() {"CATEGORYCODE", "CATEGORYNAME", "PCATEGORYCODE", "SORTCODE"};
+                List<String> feilds = new List<String>() {"CATEGORYCODE", "CATEGORYNAME", "PCATEGORYCODE", "SORTCODE"};
                 return QueryData("MOD_STC_ALL", feilds.ToArray()).Tables[0];
             }
             //}
             try
             {
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_STC_ALL";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_STC_ALL";
                 if (File.Exists(fileName))
                 {
                     return JSONHelper.DeserializeObject<DataSet>(File.ReadAllText(fileName)).Tables[0];
@@ -133,7 +133,7 @@ namespace OwLib
             if (CommonService.ISCLIENT == ClientType.Config)
                 try
                 {
-                    List<string> feilds = new List<string>()
+                    List<String> feilds = new List<String>()
                         {
                             "SPECIALTOPICCODE",
                             "SPECIALTOPICNAME",
@@ -162,7 +162,7 @@ namespace OwLib
             try
             {
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_SS";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_SS";
                 if (File.Exists(fileName))
                 {
                     return JSONHelper.DeserializeObject<DataSet>(File.ReadAllText(fileName)).Tables[0];
@@ -197,7 +197,7 @@ namespace OwLib
                     return DataHelper.QueryData("MOD_MAXREPORTDATE").Tables[0];
                 }
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_MAXREPORTDATE";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_MAXREPORTDATE";
                 if (File.Exists(fileName))
                 {
                     _modMaxreportdateDataTable =
@@ -231,7 +231,7 @@ namespace OwLib
                      return _modReporttypexlkDataTable;
                 }
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_REPORTTYPEXLK";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MOD_REPORTTYPEXLK";
                 if (File.Exists(fileName))
                 {
                     _modReporttypexlkDataTable =
@@ -257,7 +257,7 @@ namespace OwLib
             {
               // return SpecialCommon.DataHelper.QueryData("MAC_JJZBTB", null, null, null, null, true, "MAC_JJZBTB_TJ").Tables[0];
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MAC_JJZBTB_TJ";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MAC_JJZBTB_TJ";
                 if (File.Exists(fileName))
                 {
                     return JSONHelper.DeserializeObject<DataSet>(File.ReadAllText(fileName)).Tables[0];
@@ -285,7 +285,7 @@ namespace OwLib
             try
             {
                 //定义文件夹
-                string fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MAC_JJZBTB";
+                String fileName = DataCenter.GetAppPath() + "\\NecessaryData\\MAC_JJZBTB";
                 if (File.Exists(fileName))
                 {
                     return JSONHelper.DeserializeObject<DataSet>(File.ReadAllText(fileName)).Tables[0];
@@ -313,13 +313,13 @@ namespace OwLib
                //return DataHelper.QueryData("MOD_DATERE", null, null, null, null).Tables[0];
                 //if (CommonService.ISCLIENT == ClientType.Config)
                 //{
-                    //Dictionary<string, bool> order = new Dictionary<string, bool>();
+                    //Dictionary<String, bool> order = new Dictionary<String, bool>();
                     //order["SID"] = false;
                     return DataHelper.QueryData("MOD_DATERE", null, null, null, null).Tables[0];
                 //}
                 //IApp app = ServiceHelper.GetService<IApp>();
                 ////定义文件夹
-                //string fileName = app.SdataDir + "\\NecessaryData\\MOD_DATERE";
+                //String fileName = app.SdataDir + "\\NecessaryData\\MOD_DATERE";
                 //if (File.Exists(fileName))
                 //{
                 //    DataTable dt = JSONHelper.DeserializeObject<DataSet>(File.ReadAllText(fileName)).Tables[0];

@@ -30,9 +30,9 @@ namespace OwLib
         /// 具有和静态财务数据相同的表结构的临时数据表
         /// </summary>
         private DataTable _tbTmp;
-        private Dictionary<string, List<OneInfoMineOrgDataRec>> _dicNewsInfoByBlock;//按照小类存储新闻结构
-        private Dictionary<string, List<OneInfoMineOrgDataRec>> _dicNewsReportInfoByBlock;// 按照小类存储新闻类研报结构（returnType=1）
-        private Dictionary<string, List<ResearchReportItem>> _dicEmratingReportInfoByBlock;// 按照小类存储评估类研报结构（returnType=2）
+        private Dictionary<String, List<OneInfoMineOrgDataRec>> _dicNewsInfoByBlock;//按照小类存储新闻结构
+        private Dictionary<String, List<OneInfoMineOrgDataRec>> _dicNewsReportInfoByBlock;// 按照小类存储新闻类研报结构（returnType=1）
+        private Dictionary<String, List<ResearchReportItem>> _dicEmratingReportInfoByBlock;// 按照小类存储评估类研报结构（returnType=2）
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的新闻结构列表)
         /// </summary>
-        public Dictionary<string, List<OneInfoMineOrgDataRec>> DicNewsInfoByBlock
+        public Dictionary<String, List<OneInfoMineOrgDataRec>> DicNewsInfoByBlock
         {
             get { return _dicNewsInfoByBlock; }
             set { _dicNewsInfoByBlock = value; }
@@ -71,7 +71,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的新闻类研报列表)
         /// </summary>
-        public Dictionary<string, List<OneInfoMineOrgDataRec>> DicNewsReportInfoByBlock
+        public Dictionary<String, List<OneInfoMineOrgDataRec>> DicNewsReportInfoByBlock
         {
             get { return _dicNewsReportInfoByBlock; }
             set { _dicNewsReportInfoByBlock = value; }
@@ -79,7 +79,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的评估类研报结构列表)
         /// </summary>
-        public Dictionary<string, List<ResearchReportItem>> DicEmratingReportInfoByBlock
+        public Dictionary<String, List<ResearchReportItem>> DicEmratingReportInfoByBlock
         {
             get { return _dicEmratingReportInfoByBlock; }
             set { _dicEmratingReportInfoByBlock = value; }
@@ -110,9 +110,9 @@ namespace OwLib
         {
 
 
-            DicNewsInfoByBlock = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
-            DicNewsReportInfoByBlock = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
-            DicEmratingReportInfoByBlock = new Dictionary<string, List<ResearchReportItem>>();
+            DicNewsInfoByBlock = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
+            DicNewsReportInfoByBlock = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
+            DicEmratingReportInfoByBlock = new Dictionary<String, List<ResearchReportItem>>();
 
 
             if (isDependence)
@@ -736,7 +736,7 @@ namespace OwLib
             {
                 Dictionary<float, float> memYtmData;
 
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(code))
                     DetailData.FieldIndexDataString[code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -753,15 +753,15 @@ namespace OwLib
                         fieldSingle[ytmField] = memYtmData[price];
                     else
                     {
-                        string cmd = string.Empty;
+                        String cmd = String.Empty;
                         if (isConvertBond)
                             cmd =
-                                string.Format(
+                                String.Format(
                                     @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm",
                                     emcode, price);
                         else
                             cmd =
-                                string.Format(
+                                String.Format(
                                     @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm",
                                     emcode, price);
 
@@ -789,15 +789,15 @@ namespace OwLib
                 }
                 else
                 {
-                    string cmd = string.Empty;
+                    String cmd = String.Empty;
                     if (isConvertBond)
                         cmd =
-                            string.Format(
+                            String.Format(
                                 @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm", emcode,
                                 price);
                     else
                         cmd =
-                            string.Format(
+                            String.Format(
                                 @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm", emcode,
                                 price);
 
@@ -833,7 +833,7 @@ namespace OwLib
             Dictionary<FieldIndex, double> fieldDouble;
             Dictionary<FieldIndex, long> fieldInt64;
             Dictionary<FieldIndex, int> fieldInt32;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataSingle.TryGetValue(dataPacket.Code, out fieldSingle))
                 return;
@@ -892,7 +892,7 @@ namespace OwLib
             if (volume != 0)
                 fieldSingle[FieldIndex.AveragePrice] = Convert.ToSingle(amount / (volume * factor));
 
-            string tmpStatus = DataPacket.GetIFOpenCloseStatus(fieldInt64[FieldIndex.LastVolume],
+            String tmpStatus = DataPacket.GetIFOpenCloseStatus(fieldInt64[FieldIndex.LastVolume],
                 fieldInt64[FieldIndex.CurOI],
                 fieldInt32[FieldIndex.BSFlag]);
             fieldString[FieldIndex.OpenCloseStatus] = tmpStatus;
@@ -941,10 +941,10 @@ namespace OwLib
         {
             float upLimited = 0;
             float downLimited = 0;
-            string name = string.Empty;
+            String name = String.Empty;
             float preClose = 0;
 
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             Dictionary<FieldIndex, float> fieldSingle;
             if (!DetailData.FieldIndexDataSingle.TryGetValue(code, out fieldSingle))
                 return;
@@ -1397,10 +1397,10 @@ namespace OwLib
         {
             //             TextWriter textWriter = new StreamWriter("d:\\aaa.txt");
             //             int tmpIndex = 1;
-            //             foreach (KeyValuePair<string,Dictionary<byte,object>> entry in dataPacket.DicFieldValue)
+            //             foreach (KeyValuePair<String,Dictionary<byte,object>> entry in dataPacket.DicFieldValue)
             //             {
             //                 //临时，写到txt
-            //                 string tmpstr = tmpIndex.ToString() + "    " + entry.Key + "    " +
+            //                 String tmpstr = tmpIndex.ToString() + "    " + entry.Key + "    " +
             //                                 _allDetailDataRec[entry.Key][FieldIndex.Name];
             //                 textWriter.WriteLine(tmpstr);
             //                 tmpIndex++;
@@ -2377,10 +2377,10 @@ namespace OwLib
             }
         }
 
-        private void FillEmratingReportCacheData(Dictionary<string, List<ResearchReportItem>> dic)
+        private void FillEmratingReportCacheData(Dictionary<String, List<ResearchReportItem>> dic)
         {
             List<ResearchReportItem> recs;
-            foreach (KeyValuePair<string, List<ResearchReportItem>> pair in dic)
+            foreach (KeyValuePair<String, List<ResearchReportItem>> pair in dic)
             {
                 if (!this.DicEmratingReportInfoByBlock.TryGetValue(pair.Key, out recs))
                 {
@@ -2395,10 +2395,10 @@ namespace OwLib
         /// 返回包数据插入到缓存里面
         /// </summary>
         /// <param name="packetDic">返回包数据</param>
-        private void FillNewsReportCacheData(Dictionary<string, List<OneInfoMineOrgDataRec>> packetDic)
+        private void FillNewsReportCacheData(Dictionary<String, List<OneInfoMineOrgDataRec>> packetDic)
         {
             List<OneInfoMineOrgDataRec> cacheRecs;
-            foreach (KeyValuePair<string, List<OneInfoMineOrgDataRec>> packetItem in packetDic)
+            foreach (KeyValuePair<String, List<OneInfoMineOrgDataRec>> packetItem in packetDic)
             {
                 #region 没有该key对应的缓存
                 if (!DicNewsReportInfoByBlock.TryGetValue(packetItem.Key, out cacheRecs))
@@ -2475,10 +2475,10 @@ namespace OwLib
         /// 返回包数据填充缓存
         /// </summary>
         /// <param name="packetDic">返回包数据</param>
-        private void FillNewsCacheData(Dictionary<string, List<OneInfoMineOrgDataRec>> packetDic)
+        private void FillNewsCacheData(Dictionary<String, List<OneInfoMineOrgDataRec>> packetDic)
         {         
             List<OneInfoMineOrgDataRec> cacheRecs;
-            foreach (KeyValuePair<string, List<OneInfoMineOrgDataRec>> packetItem in packetDic)
+            foreach (KeyValuePair<String, List<OneInfoMineOrgDataRec>> packetItem in packetDic)
             {
                 #region 没有该key对应的缓存
                 if (!DicNewsInfoByBlock.TryGetValue(packetItem.Key, out cacheRecs))
@@ -5046,14 +5046,14 @@ namespace OwLib
         // 自选股成分发生变化
         // </summary>
         // <param name="blockId">发生成分变化的板块id</param>
-        private void OnCustomBlockElementUpdated(string blockId, List<string> lstUpdCodes, List<string> lstDelCodes)
+        private void OnCustomBlockElementUpdated(String blockId, List<String> lstUpdCodes, List<String> lstDelCodes)
         {
             if (blockId == "0.U")
             {
                 if (lstUpdCodes != null && lstUpdCodes.Count > 0)
                 {
                     Dictionary<FieldIndex, object> fieldObject;
-                    foreach (string code in lstUpdCodes)
+                    foreach (String code in lstUpdCodes)
                     {
                         if (!DetailData.FieldIndexDataObject.TryGetValue(Convert.ToInt32(code), out fieldObject))
                         {
@@ -5069,7 +5069,7 @@ namespace OwLib
                 if (lstDelCodes != null && lstDelCodes.Count > 0)
                 {
                     Dictionary<FieldIndex, object> fieldObject;
-                    foreach (string code in lstDelCodes)
+                    foreach (String code in lstDelCodes)
                     {
                         if (!DetailData.FieldIndexDataObject.TryGetValue(Convert.ToInt32(code), out fieldObject))
                         {
@@ -5091,7 +5091,7 @@ namespace OwLib
             MarketType mt = MarketType.NA;
             List<MarketType> mtList;
             List<int> removeCode = new List<int>(1);
-            foreach (KeyValuePair<int, Dictionary<FieldIndex, string>> oneStock in DetailData.FieldIndexDataString)
+            foreach (KeyValuePair<int, Dictionary<FieldIndex, String>> oneStock in DetailData.FieldIndexDataString)
             {
                 mt = Dc.GetMarketType(oneStock.Key);
                 if (SecurityAttribute.InitMarketType.TryGetValue(status, out mtList))

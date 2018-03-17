@@ -31,7 +31,7 @@ namespace OwLib
             bw.Write(0);
             bw.Write(-3);
             byte[] buffer = new byte[0x20];
-            string s = "guest\0";
+            String s = "guest\0";
             byte[] bytes = Encoding.Default.GetBytes(s);
             for (int i = 0; (i < bytes.Length) && (i < buffer.Length); i++)
             {
@@ -40,7 +40,7 @@ namespace OwLib
             bw.Write(buffer);
             bw.Write(0);
             byte[] buffer3 = new byte[0x20];
-            string str2 = "guest\0";
+            String str2 = "guest\0";
             byte[] buffer4 = Encoding.Default.GetBytes(str2);
             for (int j = 0; (j < buffer4.Length) && (j < buffer3.Length); j++)
             {
@@ -1367,10 +1367,10 @@ namespace OwLib
         /// <param name="code"></param>
         /// <param name="market"></param>
         /// <param name="shortCode"></param>
-        public static void ParseCode(string code, out ReqMarketType market, out string shortCode)
+        public static void ParseCode(String code, out ReqMarketType market, out String shortCode)
         {
             ReqMarketType type = ReqMarketType.MT_NA;
-            shortCode = string.Empty;
+            shortCode = String.Empty;
             if (shortCode.StartsWith("BK"))
             {
                 market = ReqMarketType.MT_Plate;
@@ -1378,7 +1378,7 @@ namespace OwLib
             }
             else
             {
-                string[] strArray = code.Split(new char[] { '.' });
+                String[] strArray = code.Split(new char[] { '.' });
                 shortCode = strArray[0];
                 if (strArray.Length >= 2)
                 {
@@ -1431,11 +1431,11 @@ namespace OwLib
                 switch (shortCode.Length)
                 {
                     case 3:
-                        shortCode = string.Concat(new object[] { shortCode, '\0', '\0', '\0', '\0' });
+                        shortCode = String.Concat(new object[] { shortCode, '\0', '\0', '\0', '\0' });
                         break;
 
                     case 4:
-                        shortCode = string.Concat(new object[] { shortCode, '\0', '\0', '\0' });
+                        shortCode = String.Concat(new object[] { shortCode, '\0', '\0', '\0' });
                         break;
 
                     case 5:
@@ -1456,9 +1456,9 @@ namespace OwLib
         /// <param name="market"></param>
         /// <param name="shortCode"></param>
         /// <returns></returns>
-        public static string GetEmCode(ReqMarketType market, string shortCode)
+        public static String GetEmCode(ReqMarketType market, String shortCode)
         {
-            string strMarket;
+            String strMarket;
 
             switch (market)
             {
@@ -1497,7 +1497,7 @@ namespace OwLib
             }
             if (strMarket == "BK")
                 return shortCode;
-            return string.Format("{0}.{1}", shortCode.ToUpper(), strMarket);
+            return String.Format("{0}.{1}", shortCode.ToUpper(), strMarket);
         }
 
         /// <summary>
@@ -1509,7 +1509,7 @@ namespace OwLib
         {
             double dTime = Convert.ToDouble(cTime + 28800);
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Unspecified).AddSeconds(dTime);
-            string strTime = dt.ToString("HHmmss");
+            String strTime = dt.ToString("HHmmss");
             return Convert.ToInt32(strTime);
         }
 
@@ -1534,9 +1534,9 @@ namespace OwLib
         /// <param name="openInterest"></param>
         /// <param name="flagBS"></param>
         /// <returns></returns>
-        public static string GetIFOpenCloseStatus(long volume, long openInterest, int flagBS)
+        public static String GetIFOpenCloseStatus(long volume, long openInterest, int flagBS)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             long OpenVolume = (volume + openInterest) / 2;
             long CloseVolume = (volume - openInterest) / 2;
             if (flagBS == 1)//卖
@@ -2260,7 +2260,7 @@ namespace OwLib
             {
                 short errorId = br.ReadInt16();
                 byte[] errorBytes = br.ReadBytes(len1 - 2);
-                string errorStr = Encoding.Default.GetString(errorBytes);
+                String errorStr = Encoding.Default.GetString(errorBytes);
                 LogUtilities.LogMessage("返回包失败,ErrorId=" + errorId + ",ErrorStr=" + errorStr);
             }
             return dataPacket;
@@ -2660,9 +2660,9 @@ namespace OwLib
     /// </summary>
     public class InfoOrgBaseDataPacket : DataPacket
     {
-        public static string NewsUrlHead = string.Format(@"http://app.jg.eastmoney.com/html_News/DetailOnly.html?infoCode=");
-        public static string NoticeUrlHead = string.Format(@"http://app.jg.eastmoney.com/html_Notice/Detail.html?isprice=1&infocode=");
-        public static string ReportUrlHead = string.Format(@"http://app.jg.eastmoney.com/html_Report/Detail.html?isprice=1&infocode=");
+        public static String NewsUrlHead = String.Format(@"http://app.jg.eastmoney.com/html_News/DetailOnly.html?infoCode=");
+        public static String NoticeUrlHead = String.Format(@"http://app.jg.eastmoney.com/html_Notice/Detail.html?isprice=1&infocode=");
+        public static String ReportUrlHead = String.Format(@"http://app.jg.eastmoney.com/html_Report/Detail.html?isprice=1&infocode=");
 
         /// <summary>
         /// 请求类型
@@ -2725,7 +2725,7 @@ namespace OwLib
         /// 位置0: 是股票代码(eg. 000960.SZ
         /// 位置1: 请求左侧(1)还是右侧报表(2)
         /// </summary>
-        public static readonly string DefaultIndicatorsReportCmd
+        public static readonly String DefaultIndicatorsReportCmd
             = "$-edbrpt\r\n$stockrise(name={0}|reporttype={1})\r\n";
 
         /// <summary>
@@ -2735,7 +2735,7 @@ namespace OwLib
         /// 位置1：宏观指标Id类表（多个时用","隔开）
         /// 位置2: 请求左侧(1)还是右侧报表(2)
         /// </summary>
-        public static readonly string CustomIndicatorsReportCmd
+        public static readonly String CustomIndicatorsReportCmd
             = "$-edbrpt\r\n$stockrise(name={0}|MACROIDS={1}|reporttype={2})\r\n";
 
 
@@ -2746,19 +2746,19 @@ namespace OwLib
         /// 位置1: startDate:开始时间
         /// 位置2: endDate:结束时间
         /// </summary>
-        public static readonly string IndicatorValuesReportCmd
+        public static readonly String IndicatorValuesReportCmd
             = "$-edb\r\n$indicate(name={0}|startDate={1}|enddate={2})\r\n";
 
         /// <summary>
         /// 命令请求的股票代码或者指标代码（"000960.SZ" 或者 "EMI00064805"）
         /// </summary>
-        public string TableKeyCode;
+        public String TableKeyCode;
 
 
         /// <summary>
         /// 宏观指标查询命令字符串
         /// </summary>
-        public string Cmd;
+        public String Cmd;
 
         ///// <summary>
         ///// 返回数据
@@ -2791,9 +2791,9 @@ namespace OwLib
         /// 组包
         /// </summary>
         /// <returns></returns>
-        public virtual string CreateCommand()
+        public virtual String CreateCommand()
         {
-            return string.Empty;
+            return String.Empty;
         }
 
 

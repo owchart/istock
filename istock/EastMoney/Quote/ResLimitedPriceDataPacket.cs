@@ -16,7 +16,7 @@ namespace OwLib
             {
                 srcCode[i] = buffer[i];
             }
-            string emcode = ConvertCode.ConvertIntToCode((uint) ConvertCode.ConvertCodeToInt(srcCode, market));
+            String emcode = ConvertCode.ConvertIntToCode((uint) ConvertCode.ConvertCodeToInt(srcCode, market));
             switch (market)
             {
                 case 8:

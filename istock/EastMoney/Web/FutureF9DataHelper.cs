@@ -32,7 +32,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetFuturesBaseInfo(string securityCode)
+        public static DataSet GetFuturesBaseInfo(String securityCode)
         {
             object result = new object();
             try
@@ -41,7 +41,7 @@ namespace OwLib
                 _query.Add(Expression.Eq("STR_FUTURECODE", securityCode));
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_HYJJ, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return dataSet;
             }
@@ -56,7 +56,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetFuturesBaseInfoByTransCode(string transCode)
+        public static DataSet GetFuturesBaseInfoByTransCode(String transCode)
         {
             object result = new object();
             try
@@ -65,7 +65,7 @@ namespace OwLib
                 _query.Add(Expression.Eq("STR_TRANSCODE", transCode));
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 ResultData resultData = DataAccess.QueryByStatistic(WebDataSource.FUTURE_HYJJ1, _field, _query, _sort, _selector, 1, int.MaxValue,
                     WebDataSource.FUTURE_HYJJ1.ToString());
                 return resultData.Data;
@@ -81,7 +81,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetContractBrief(string securityCode)
+        public static DataSet GetContractBrief(String securityCode)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace OwLib
                 List<Order> _sort = new List<Order>();
                 //_sort.Add(new Order("DAT_LDELVDATE", true));
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 ResultData resultData = DataAccess.QueryByStatistic(WebDataSource.FUTURE_HYJJ2, _field, _query, _sort, _selector, 1, int.MaxValue,
                     WebDataSource.FUTURE_HYJJ2.ToString());
                 return resultData.Data;
@@ -107,7 +107,7 @@ namespace OwLib
         /// </summary>
         /// <param name="transCode"></param>
         /// <returns></returns>
-        public static DataSet GetDiffPriceMatrix(string transCode, string date)
+        public static DataSet GetDiffPriceMatrix(String transCode, String date)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace OwLib
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("STR_FUTURECODE", true));
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_JCJZ, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return dataSet;
             }
@@ -136,7 +136,7 @@ namespace OwLib
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public static DataSet GetArbitrageAnalysis(string securityCodeA, string securityCodeB, string startDate, string endDate)
+        public static DataSet GetArbitrageAnalysis(String securityCodeA, String securityCodeB, String startDate, String endDate)
         {
             try
             {
@@ -148,7 +148,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_TRANSDATE", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_TLFX, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return dataSet;
             }
@@ -166,9 +166,9 @@ namespace OwLib
         /// <param name="transCode"></param>
         /// <param name="deliveryDate"></param>
         /// <returns></returns>
-        public static DataSet GetRelatedContract(string transCode, string deliveryDate)
+        public static DataSet GetRelatedContract(String transCode, String deliveryDate)
         {
-            List<String> result = new List<string>();
+            List<String> result = new List<String>();
             try
             {
                 List<Expression> _query = new List<Expression>();
@@ -178,7 +178,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_LDELVDATE", true));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_HYJJ, _field, _query, _sort, _selector, 1, int.MaxValue);
                 foreach (DataRow row in dataSet.Tables[0].Rows)
                 {
@@ -199,7 +199,7 @@ namespace OwLib
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public static DataSet GetInventoryReport(string securityCode, string startDate, string endDate)
+        public static DataSet GetInventoryReport(String securityCode, String startDate, String endDate)
         {
             try
             {
@@ -210,7 +210,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_TRANSDATE", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_KCBG, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return dataSet;
             }
@@ -233,7 +233,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("STR_MEMSNAME", true));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet dataSet = DataAccess.Query(WebDataSource.FUTURE_HYJG, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return dataSet;
             }
@@ -243,22 +243,22 @@ namespace OwLib
             }
             return null;
         }
-        public static DataSet GetPositionStructJson(string futureCode)
+        public static DataSet GetPositionStructJson(String futureCode)
         {
             List<Expression> _query = new List<Expression>();
             List<Expression> _selector = new List<Expression>();
             List<Order> _sort = new List<Order>();
             _sort.Add(new Order("STR_MEMSNAME", true));
-            string[] _field = new string[] { "STR_MEMSNAME", "STR_MEMENAME" };
+            String[] _field = new String[] { "STR_MEMSNAME", "STR_MEMENAME" };
             DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, _field, _query, _sort, _selector, 1, 1);
-            string party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
+            String party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
             return _DS;
 
         }
         /// <summary>
         /// 持仓结构
         /// </summary>
-        public static DataSet GetPositionStructModel(string futureCode, string date, string party)
+        public static DataSet GetPositionStructModel(String futureCode, String date, String party)
         {
             try
             {
@@ -266,10 +266,10 @@ namespace OwLib
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
-                if (!string.IsNullOrEmpty(futureCode))
+                String[] _field = new String[] { };
+                if (!String.IsNullOrEmpty(futureCode))
                     _query.Add(Expression.Eq("STR_TRANSCODE", futureCode));//-----
-                if (!string.IsNullOrEmpty(date))
+                if (!String.IsNullOrEmpty(date))
                 {
                     _query.Add(Expression.Eq("DAT_TRANSDATE", Convert.ToDateTime(date)));
                 }
@@ -277,7 +277,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Eq("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(party))
+                if (!String.IsNullOrEmpty(party))
                 {
                     _query.Add(Expression.Eq("STR_MEMSNAME", party));
                 }
@@ -292,22 +292,22 @@ namespace OwLib
                 //return Json("", JsonRequestBehavior.AllowGet);
             }
         }
-        public static DataSet GetOpenPositionJson(string futureCode)
+        public static DataSet GetOpenPositionJson(String futureCode)
         {
             List<Expression> _query = new List<Expression>();
             List<Expression> _selector = new List<Expression>();
             List<Order> _sort = new List<Order>();
             _sort.Add(new Order("STR_MEMSNAME", true));
-            string[] _field = new string[] { "STR_MEMSNAME", "STR_MEMENAME" };
+            String[] _field = new String[] { "STR_MEMSNAME", "STR_MEMENAME" };
             DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, _field, _query, _sort, _selector, 1, 1);
-            string party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
+            String party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
             return _DS;
 
         }
         /// <summary>
         /// 建仓过程
         /// </summary
-        public static DataSet GetOpenPositionModel(string futureCode, string datebegin, string dateEnd, string party)
+        public static DataSet GetOpenPositionModel(String futureCode, String datebegin, String dateEnd, String party)
         {
             try
             {
@@ -315,10 +315,10 @@ namespace OwLib
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
-                if (!string.IsNullOrEmpty(futureCode))
+                String[] _field = new String[] { };
+                if (!String.IsNullOrEmpty(futureCode))
                     _query.Add(Expression.Eq("STR_FUTURECODE", futureCode));
-                if (!string.IsNullOrEmpty(datebegin))
+                if (!String.IsNullOrEmpty(datebegin))
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(datebegin)));
                 }
@@ -326,7 +326,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(dateEnd))
+                if (!String.IsNullOrEmpty(dateEnd))
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(dateEnd)));
                 }
@@ -334,7 +334,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(party))
+                if (!String.IsNullOrEmpty(party))
                 {
                     _query.Add(Expression.Eq("STR_MEMSNAME", party));
                 }
@@ -360,7 +360,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("STR_MEMSNAME", true));
-                string[] _field = new string[] { "STR_MEMSNAME", "STR_MEMENAME" };
+                String[] _field = new String[] { "STR_MEMSNAME", "STR_MEMENAME" };
                 DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -371,32 +371,32 @@ namespace OwLib
                 //return Json("", JsonRequestBehavior.AllowGet);
             }
         }
-        public static DataSet GetDealPositionJson(string STR_FUTURECODE)
+        public static DataSet GetDealPositionJson(String STR_FUTURECODE)
         {
-            string date = GetLastDay();
+            String date = GetLastDay();
             return GetDealPositionModel(date, STR_FUTURECODE, "");
         }
         /// <summary>
         /// 成交持仓
         /// </summary>
-        public static DataSet GetDealPositionModel(string datetime, string futureCode, string num)
+        public static DataSet GetDealPositionModel(String datetime, String futureCode, String num)
         {
             try
             {
                 List<DataTransmission> dtList = new List<DataTransmission>();
                 DateTime date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-                if (!string.IsNullOrEmpty(datetime))
+                if (!String.IsNullOrEmpty(datetime))
                 {
                     date = Convert.ToDateTime(datetime);
                 }
 
                 //成交持仓比例图
-                string[] fileds_1 = new string[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_CJLZB", "DEC_QTCJLZB" };
+                String[] fileds_1 = new String[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_CJLZB", "DEC_QTCJLZB" };
                 List<Expression> filters_1 = new List<Expression>();
                 filters_1.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_1.Add(Expression.IsNotNull("DEC_CJLZB"));
                 filters_1.Add(Expression.IsNotEmpty("DEC_CJLZB"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_1.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 List<Order> orders_1 = new List<Order>();
                 orders_1.Add(new Order("DEC_CJLZB", false));
@@ -404,12 +404,12 @@ namespace OwLib
                 dtList.Add(dt1);
 
                 //多单持仓比例图
-                string[] fileds_2 = new string[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_DTLZB", "DEC_QTDTLZB" };
+                String[] fileds_2 = new String[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_DTLZB", "DEC_QTDTLZB" };
                 List<Expression> filters_2 = new List<Expression>();
                 filters_2.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_2.Add(Expression.IsNotNull("DEC_DTLZB"));
                 filters_2.Add(Expression.IsNotEmpty("DEC_DTLZB"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_2.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 List<Order> orders_2 = new List<Order>();
                 orders_2.Add(new Order("DEC_DTLZB", false));
@@ -417,12 +417,12 @@ namespace OwLib
                 dtList.Add(dt2);
 
                 //空单持仓比例图
-                string[] fileds_3 = new string[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_KTLZB", "DEC_QTKTLZB" };
+                String[] fileds_3 = new String[] { "DAT_TRANSDATE", "STR_FUTURECODE", "STR_MEMSNAME", "DEC_KTLZB", "DEC_QTKTLZB" };
                 List<Expression> filters_3 = new List<Expression>();
                 filters_3.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_3.Add(Expression.IsNotNull("DEC_KTLZB"));
                 filters_3.Add(Expression.IsNotEmpty("DEC_KTLZB"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_3.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 List<Order> orders_3 = new List<Order>();
                 orders_3.Add(new Order("DEC_KTLZB", false));
@@ -430,15 +430,15 @@ namespace OwLib
                 dtList.Add(dt3);
 
                 //九大表格----1
-                string[] fileds_4 = new string[] { "STR_MEMSNAME", "DEC_VLOUME", "DEC_VCHANGE", "DEC_CJLHJ", "DEC_CJLZJHJ", "DEC_QCJLHJ", "DEC_CJLHJZJ" };
+                String[] fileds_4 = new String[] { "STR_MEMSNAME", "DEC_VLOUME", "DEC_VCHANGE", "DEC_CJLHJ", "DEC_CJLZJHJ", "DEC_QCJLHJ", "DEC_CJLHJZJ" };
                 List<Expression> filters_4 = new List<Expression>();
                 filters_4.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_4.Add(Expression.IsNotNull("DEC_VLOUME"));
                 filters_4.Add(Expression.IsNotEmpty("DEC_VLOUME"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_4.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 int pageSize = 20;
-                if (!string.IsNullOrEmpty(num))
+                if (!String.IsNullOrEmpty(num))
                 {
                     int.TryParse(num, out pageSize);
                 }
@@ -450,16 +450,16 @@ namespace OwLib
                 dtList.Add(dt4);
 
                 //九大表格----2
-                string[] fileds_5 = new string[] { "STR_MEMSNAME", "DEC_LONGNUM", "DEC_LCHANGE", "DEC_DTLHJ", "DEC_QDTLHJ", "DEC_DTLHJZJ",
+                String[] fileds_5 = new String[] { "STR_MEMSNAME", "DEC_LONGNUM", "DEC_LCHANGE", "DEC_DTLHJ", "DEC_QDTLHJ", "DEC_DTLHJZJ",
                     "DEC_DTLZJHJ","DEC_ZCDTCDDHJ","DEC_ZCDTZDDHJ","DEC_JCDTCDDHJ","DEC_JCDTZDDHJ" };
                 List<Expression> filters_5 = new List<Expression>();
                 filters_5.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_5.Add(Expression.IsNotNull("DEC_LONGNUM"));
                 filters_5.Add(Expression.IsNotEmpty("DEC_LONGNUM"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_5.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 int pageSize5 = 20;
-                if (!string.IsNullOrEmpty(num))
+                if (!String.IsNullOrEmpty(num))
                 {
                     int.TryParse(num, out pageSize5);
                 }
@@ -471,16 +471,16 @@ namespace OwLib
                 dtList.Add(dt5);
 
                 //九大表格----3
-                string[] fileds_6 = new string[] { "STR_MEMSNAME", "DEC_SHORTNUM", "DEC_SCHANGE", "DEC_KTLHJ", "DEC_QKTLHJ", "DEC_KTLHJZJ",
+                String[] fileds_6 = new String[] { "STR_MEMSNAME", "DEC_SHORTNUM", "DEC_SCHANGE", "DEC_KTLHJ", "DEC_QKTLHJ", "DEC_KTLHJZJ",
                     "DEC_KTLZJHJ","DEC_ZCKTCKDHJ","DEC_ZCKTZKDHJ","DEC_JCKTCKDHJ","DEC_JCKTZKDHJ" };
                 List<Expression> filters_6 = new List<Expression>();
                 filters_6.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_6.Add(Expression.IsNotNull("DEC_SHORTNUM"));
                 filters_6.Add(Expression.IsNotEmpty("DEC_SHORTNUM"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_6.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 int pageSize6 = 20;
-                if (!string.IsNullOrEmpty(num))
+                if (!String.IsNullOrEmpty(num))
                 {
                     int.TryParse(num, out pageSize6);
                 }
@@ -492,15 +492,15 @@ namespace OwLib
                 dtList.Add(dt6);
 
                 //九大表格----4
-                string[] fileds_7 = new string[] { "STR_MEMSNAME", "DEC_NETLONG", "DEC_JDDZJ", "DEC_JDDHJ", "DEC_JDDZJHJ" };
+                String[] fileds_7 = new String[] { "STR_MEMSNAME", "DEC_NETLONG", "DEC_JDDZJ", "DEC_JDDHJ", "DEC_JDDZJHJ" };
                 List<Expression> filters_7 = new List<Expression>();
                 filters_7.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_7.Add(Expression.IsNotNull("DEC_NETLONG"));
                 filters_7.Add(Expression.IsNotEmpty("DEC_NETLONG"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_7.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 int pageSize7 = 20;
-                if (!string.IsNullOrEmpty(num))
+                if (!String.IsNullOrEmpty(num))
                 {
                     int.TryParse(num, out pageSize7);
                 }
@@ -512,15 +512,15 @@ namespace OwLib
                 dtList.Add(dt7);
 
                 //九大表格----5
-                string[] fileds_8 = new string[] { "STR_MEMSNAME", "DEC_NETSHORT", "DEC_JKDZJ", "DEC_JKDHJ", "DEC_JKDZJHJ" };
+                String[] fileds_8 = new String[] { "STR_MEMSNAME", "DEC_NETSHORT", "DEC_JKDZJ", "DEC_JKDHJ", "DEC_JKDZJHJ" };
                 List<Expression> filters_8 = new List<Expression>();
                 filters_8.Add(Expression.Eq("DAT_TRANSDATE", date));
                 filters_8.Add(Expression.IsNotNull("DEC_NETSHORT"));
                 filters_8.Add(Expression.IsNotEmpty("DEC_NETSHORT"));
-                if (!string.IsNullOrEmpty(futureCode))
+                if (!String.IsNullOrEmpty(futureCode))
                     filters_8.Add(Expression.Eq("STR_FUTURECODE", futureCode));
                 int pageSize8 = 20;
-                if (!string.IsNullOrEmpty(num))
+                if (!String.IsNullOrEmpty(num))
                 {
                     int.TryParse(num, out pageSize8);
                 }
@@ -541,31 +541,31 @@ namespace OwLib
                 //return Json("",JsonRequestBehavior.AllowGet);
             }
         }
-        public static DataSet GetPositionPriceJson(string futureCode)
+        public static DataSet GetPositionPriceJson(String futureCode)
         {
             List<Expression> _query = new List<Expression>();
             List<Expression> _selector = new List<Expression>();
             List<Order> _sort = new List<Order>();
             _sort.Add(new Order("STR_MEMSNAME", true));
             DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, null, _query, _sort, _selector, 1, 1);
-            string party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
+            String party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
             return _DS;
 
         }
         /// <summary>
         /// 持仓均价
         /// </summary>
-        public static DataSet GetPositionPriceModel(string futureCode, string datebegin, string dateEnd, string party)
+        public static DataSet GetPositionPriceModel(String futureCode, String datebegin, String dateEnd, String party)
         {
             try
             {
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { "DAT_TRANSDATE", "DEC_CLEAR", "DEC_DTCCJJ", "DEC_KTCCJJ", "DEC_LONGNUM", "DEC_SHORTNUM", "DEC_NETLONG", "DEC_NETSHORT" };
-                if (!string.IsNullOrEmpty(futureCode))
+                String[] _field = new String[] { "DAT_TRANSDATE", "DEC_CLEAR", "DEC_DTCCJJ", "DEC_KTCCJJ", "DEC_LONGNUM", "DEC_SHORTNUM", "DEC_NETLONG", "DEC_NETSHORT" };
+                if (!String.IsNullOrEmpty(futureCode))
                     _query.Add(Expression.Eq("STR_FUTURECODE", futureCode));
-                if (!string.IsNullOrEmpty(datebegin))
+                if (!String.IsNullOrEmpty(datebegin))
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(datebegin)));
                 }
@@ -573,7 +573,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(dateEnd))
+                if (!String.IsNullOrEmpty(dateEnd))
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(dateEnd)));
                 }
@@ -581,7 +581,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(party))
+                if (!String.IsNullOrEmpty(party))
                 {
                     _query.Add(Expression.Eq("STR_MEMSNAME", party));
                 }
@@ -597,31 +597,31 @@ namespace OwLib
             }
         }
 
-        public static DataSet GetProfitAnalysisJson(string futureCode)
+        public static DataSet GetProfitAnalysisJson(String futureCode)
         {
             List<Expression> _query = new List<Expression>();
             List<Expression> _selector = new List<Expression>();
             List<Order> _sort = new List<Order>();
             _sort.Add(new Order("STR_MEMSNAME", true));
             DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, null, _query, _sort, _selector, 1, 1);
-            string party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
+            String party = _DS.Tables[0].Rows[0]["STR_MEMSNAME"].ToString();
             return _DS;
 
         }
         /// <summary>
         /// 盈亏分析
         /// </summary>
-        public static DataSet GetProfitAnalysisModel(string futureCode, string datebegin, string dateEnd, string party)
+        public static DataSet GetProfitAnalysisModel(String futureCode, String datebegin, String dateEnd, String party)
         {
             try
             {
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
-                if (!string.IsNullOrEmpty(futureCode))
+                String[] _field = new String[] { };
+                if (!String.IsNullOrEmpty(futureCode))
                     _query.Add(Expression.Eq("STR_FUTURECODE", futureCode));
-                if (!string.IsNullOrEmpty(datebegin))
+                if (!String.IsNullOrEmpty(datebegin))
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(datebegin)));
                 }
@@ -629,7 +629,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(dateEnd))
+                if (!String.IsNullOrEmpty(dateEnd))
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(dateEnd)));
                 }
@@ -637,7 +637,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(party))
+                if (!String.IsNullOrEmpty(party))
                 {
                     _query.Add(Expression.Eq("STR_MEMSNAME", party));
                 }
@@ -656,7 +656,7 @@ namespace OwLib
         /// <summary>
         /// 会员简介
         /// </summary>
-        public static DataSet GetPartyInfoModel(string party)
+        public static DataSet GetPartyInfoModel(String party)
         {
             try
             {
@@ -664,8 +664,8 @@ namespace OwLib
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
-                if (!string.IsNullOrEmpty(party))
+                String[] _field = new String[] { };
+                if (!String.IsNullOrEmpty(party))
                     _query.Add(Expression.Eq("STR_MEMSNAME", HttpUtility.UrlDecode(party)));
                 _sort.Add(new Order("DAT_TRANSDATE", false));
                 DataSet _DS = DataAccess.Query(WebDataSource.FUTURE_HYJG, _field, _query, _sort, _selector, 1, 1);
@@ -680,17 +680,17 @@ namespace OwLib
         /// <summary>
         /// 净仓位
         /// </summary>
-        public static DataSet GetNetExposureModel(string futureCode, string datebegin, string dateEnd)
+        public static DataSet GetNetExposureModel(String futureCode, String datebegin, String dateEnd)
         {
             try
             {
                 List<Expression> _query = new List<Expression>();
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
-                if (!string.IsNullOrEmpty(futureCode))
+                String[] _field = new String[] { };
+                if (!String.IsNullOrEmpty(futureCode))
                     _query.Add(Expression.Eq("STR_FUTURECODE", futureCode));
-                if (!string.IsNullOrEmpty(datebegin))
+                if (!String.IsNullOrEmpty(datebegin))
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(datebegin)));
                 }
@@ -698,7 +698,7 @@ namespace OwLib
                 {
                     _query.Add(Expression.Ge("DAT_TRANSDATE", Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToShortDateString())));
                 }
-                if (!string.IsNullOrEmpty(dateEnd))
+                if (!String.IsNullOrEmpty(dateEnd))
                 {
                     _query.Add(Expression.Le("DAT_TRANSDATE", Convert.ToDateTime(dateEnd)));
                 }
@@ -727,10 +727,10 @@ namespace OwLib
             {
                 MacroIndicateParam param = new MacroIndicateParam();
                 param.Name = "RPT01374";
-                List<string> strList = DataAccess.QueryMacroParentReportDate(param);
+                List<String> strList = DataAccess.QueryMacroParentReportDate(param);
                 param.Name += "_" + strList[0];
                 DataSet dataSet = DataAccess.QueryMacroByParentReportDate(param);
-                string result = "<thead><tr><th>期限</th><th>" + strList[0] + "</th><th>" + strList[1] + "</th><th>涨跌(BP)</th><th>涨跌幅(%)</th><tr></thead>";
+                String result = "<thead><tr><th>期限</th><th>" + strList[0] + "</th><th>" + strList[1] + "</th><th>涨跌(BP)</th><th>涨跌幅(%)</th><tr></thead>";
                 return dataSet;
             }
             catch (Exception ex)
@@ -750,10 +750,10 @@ namespace OwLib
             {
                 MacroIndicateParam param = new MacroIndicateParam();
                 param.Name = "RPT01375";
-                List<string> strList = DataAccess.QueryMacroParentReportDate(param);
+                List<String> strList = DataAccess.QueryMacroParentReportDate(param);
                 param.Name += "_" + strList[0];
                 DataSet dataSet = DataAccess.QueryMacroByParentReportDate(param);
-                string result = "<thead><tr><th>回购代码</th><th>" + strList[0] + "</th><th>" + strList[1] + "</th><th>涨跌(BP)</th><th>涨跌幅(%)</th><tr></thead>";
+                String result = "<thead><tr><th>回购代码</th><th>" + strList[0] + "</th><th>" + strList[1] + "</th><th>涨跌(BP)</th><th>涨跌幅(%)</th><tr></thead>";
                 return dataSet;
             }
             catch (Exception ex)
@@ -767,15 +767,15 @@ namespace OwLib
         /// 国债首页 价差分析 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexFuturesPrice(string code)
+        public static DataSet GetIndexFuturesPrice(String code)
         {
-            string table = "";
+            String table = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_DQ_CLOSE";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", "1900-01-01");
                 sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -793,15 +793,15 @@ namespace OwLib
         /// 国债首页 价差分析 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexFuturesDiffer(string code)
+        public static DataSet GetIndexFuturesDiffer(String code)
         {
-            string table = "";
+            String table = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CLOSESPREAD";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 //sp.Dic.Add("StartDate", DateTime.Now.AddMonths(-3).ToShortDateString());
                 sp.Dic.Add("StartDate", "1900-01-01");
                 sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
@@ -819,15 +819,15 @@ namespace OwLib
         /// 国债首页 理论价差 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexTheoryDiffer(string type, string code)
+        public static DataSet GetIndexTheoryDiffer(String type, String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_THEOSPREAD";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", "1900-01-01");
                 //sp.Dic.Add("StartDate", DateTime.Now.AddDays(-10).ToShortDateString());//性能问题暂时展示10天
                 sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
@@ -845,19 +845,19 @@ namespace OwLib
         /// <summary>
         /// 理论价差历史数据
         /// </summary>
-        public static DataSet GetAllTheoryDiffer(string type, string StartDate, string EndDate, string code)
+        public static DataSet GetAllTheoryDiffer(String type, String StartDate, String EndDate, String code)
         {
-            string tbody = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String tbody = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_THEOSPREAD";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 sp.Dic.Add("BondType", type);
@@ -875,14 +875,14 @@ namespace OwLib
         /// 国债首页 可交割券总成交量 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexDeliveryCount(string code)
+        public static DataSet GetIndexDeliveryCount(String code)
         {
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_BONDVOL";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", "1900-01-01");
                 sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -900,15 +900,15 @@ namespace OwLib
         /// 国债首页 国债期货成交持仓图 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexDealPostion(string code)
+        public static DataSet GetIndexDealPostion(String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CCMX";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", "1900-01-01");
                 sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -926,15 +926,15 @@ namespace OwLib
         /// 国债首页 可交割券成交明细 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexDealDetail(string code)
+        public static DataSet GetIndexDealDetail(String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_ZXCJMX";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
                 return ds;
 
@@ -951,15 +951,15 @@ namespace OwLib
         /// 国债首页 历史理论CTD 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetHistoryCTD(string code)
+        public static DataSet GetHistoryCTD(String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "100000000015151";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("CloseDate", "N");
                 //sp.Dic.Add("top", "5");
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString("$-fun"));
@@ -978,15 +978,15 @@ namespace OwLib
         /// 国债首页 活跃CTD 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetActiveCTD(string code)
+        public static DataSet GetActiveCTD(String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_HYCTD";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
                 return ds;
 
@@ -1002,14 +1002,14 @@ namespace OwLib
         /// 国债首页 CTD券基差走势
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexCTDTrend(string code)
+        public static DataSet GetIndexCTDTrend(String code)
         {
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "100000000015148";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 //sp.Dic.Add("StartDate", "1900-01-01");
                 //sp.Dic.Add("EndDate", DateTime.Now.ToShortDateString());
                 sp.Dic.Add("TradeDate", "N");
@@ -1027,19 +1027,19 @@ namespace OwLib
         /// 货币投放回笼历史数据
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetMoneyBackDetail(string StartDate, string EndDate, string code)
+        public static DataSet GetMoneyBackDetail(String StartDate, String EndDate, String code)
         {
-            string tbody = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String tbody = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "100000000015155";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString("$-fun"));
@@ -1057,19 +1057,19 @@ namespace OwLib
         /// 合约价格历史数据 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAllFuturesPrice(string StartDate, string EndDate, string code)
+        public static DataSet GetAllFuturesPrice(String StartDate, String EndDate, String code)
         {
-            string table = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String table = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_DQ_CLOSE";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -1086,19 +1086,19 @@ namespace OwLib
         /// 国债首页 价差分析 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAllFuturesDiffer(string StartDate, string EndDate, string code)
+        public static DataSet GetAllFuturesDiffer(String StartDate, String EndDate, String code)
         {
-            string table = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String table = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CLOSESPREAD";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -1114,19 +1114,19 @@ namespace OwLib
         /// 国债首页 可交割券成交明细  全部 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAllDeliveryDetail(string StartDate, string EndDate, string code)
+        public static DataSet GetAllDeliveryDetail(String StartDate, String EndDate, String code)
         {
-            string tbody = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String tbody = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CJMX";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -1144,19 +1144,19 @@ namespace OwLib
         /// 国债首页 国债期货成交持仓图 
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetAllDealPostion(string StartDate, string EndDate, string code)
+        public static DataSet GetAllDealPostion(String StartDate, String EndDate, String code)
         {
-            string tbody = "";
-            if (string.IsNullOrEmpty(StartDate))
+            String tbody = "";
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddMonths(-3).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CCMX";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -1179,7 +1179,7 @@ namespace OwLib
             {
                 MacroIndicateParam param = new MacroIndicateParam();
                 param.Name = "BRPT01817";
-                List<string> strList = DataAccess.QueryMacroParentReportDate(param);
+                List<String> strList = DataAccess.QueryMacroParentReportDate(param);
                 param.Name += "_" + strList[0];
                 DataSet dataSet = DataAccess.QueryMacroByParentReportDate(param);
                 return dataSet;
@@ -1217,15 +1217,15 @@ namespace OwLib
         /// 国债首页 头信息
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetIndexHead(string code)
+        public static DataSet GetIndexHead(String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_INFO";
                 sp.Secucode = code + ".CFE"; ;
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
                 return ds;
 
@@ -1241,15 +1241,15 @@ namespace OwLib
         /// 可交割券分析
         /// </summary>
         /// <returns></returns>
-        public static DataSet GetDeliveryAnalysis(string MarketType, string BondType, string code)
+        public static DataSet GetDeliveryAnalysis(String MarketType, String BondType, String code)
         {
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_CTDINFO";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("SecMarket", MarketType);
                 sp.Dic.Add("BondType", BondType);
                 DataSet ds = (DataSet)DataAccess.QueryIndicate(sp.ToString());
@@ -1263,20 +1263,20 @@ namespace OwLib
             return null; 
         }
 
-        public static DataSet GetMarketTrend(string code, string bondCode, string StartDate, string EndDate)
+        public static DataSet GetMarketTrend(String code, String bondCode, String StartDate, String EndDate)
         {
-            if (string.IsNullOrEmpty(StartDate))
+            if (String.IsNullOrEmpty(StartDate))
                 StartDate = DateTime.Now.AddYears(-1).ToShortDateString();
-            if (string.IsNullOrEmpty(EndDate))
+            if (String.IsNullOrEmpty(EndDate))
                 EndDate = DateTime.Now.ToShortDateString();
            
-            string tbody = "";
+            String tbody = "";
             try
             {
                 StockIndicateParam sp = new StockIndicateParam();
                 sp.Name = "TREAFUTU_F9_HQSJ";
                 sp.Secucode = code + ".CFE";
-                sp.Dic = new Dictionary<string, string>();
+                sp.Dic = new Dictionary<String, String>();
                 sp.Dic.Add("BondCode", bondCode);
                 sp.Dic.Add("StartDate", StartDate);
                 sp.Dic.Add("EndDate", EndDate);

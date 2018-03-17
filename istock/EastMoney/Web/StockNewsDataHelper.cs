@@ -23,36 +23,36 @@ namespace OwLib
             this._pagesize = String.Empty;
             this._h = String.Empty;
             this._id = String.Empty;
-            this._column = new string[0];
+            this._column = new String[0];
             this.otherparams = String.Empty;
         }
-        public SocketModel(string h)
+        public SocketModel(String h)
         {
             this._h = h;
             this._id = String.Empty;
-            this._column = new string[0];
+            this._column = new String[0];
             this._cid = String.Empty;
             this._rid = String.Empty;
             this._pageno = String.Empty;
             this._pagesize = String.Empty;
             this.otherparams = String.Empty;
         }
-        public SocketModel(string h, string id, string pageno, string pagesize)
+        public SocketModel(String h, String id, String pageno, String pagesize)
         {
             this._h = h;
             this._id = id;
-            this._column = new string[0];
+            this._column = new String[0];
             this._cid = String.Empty;
             this._rid = String.Empty;
             this._pageno = pageno;
             this._pagesize = pagesize;
             this.otherparams = String.Empty;
         }
-        public SocketModel(string h, string id, string otherparams, string pageno, string pagesize)
+        public SocketModel(String h, String id, String otherparams, String pageno, String pagesize)
         {
             this._h = h;
             this._id = id;
-            this._column = new string[0];
+            this._column = new String[0];
             this._cid = String.Empty;
             this._rid = String.Empty;
             if (String.IsNullOrEmpty(pageno))
@@ -73,25 +73,25 @@ namespace OwLib
             }
             this.otherparams = otherparams;
         }
-        public SocketModel(string h, string cid)
+        public SocketModel(String h, String cid)
         {
             this._h = h;
             this._id = String.Empty;
-            this._column = new string[0];
+            this._column = new String[0];
             this._cid = cid;
             this._rid = String.Empty;
             this._pageno = String.Empty;
             this._pagesize = String.Empty;
             this.otherparams = String.Empty;
         }
-        public SocketModel(string cid, string request, string h, string id, string otherparams,
-                           string pageno, string pagesize, string sort, string order)
+        public SocketModel(String cid, String request, String h, String id, String otherparams,
+                           String pageno, String pagesize, String sort, String order)
         {
             this._cid = String.Empty;
             this._rid = String.Empty;
             this._h = h;
             this._id = id;
-            this._column = new string[0];
+            this._column = new String[0];
             this.sort = String.Empty;
             this.order = String.Empty;
             if (!String.IsNullOrEmpty(cid))
@@ -131,9 +131,9 @@ namespace OwLib
         /// <summary>
         /// 用户信息
         /// </summary>
-        private string _cid;
+        private String _cid;
 
-        public string cid
+        public String cid
         {
             get { return _cid; }
             set { _cid = value; }
@@ -141,9 +141,9 @@ namespace OwLib
         /// <summary>
         /// 缓存标识
         /// </summary>
-        private string _rid;
+        private String _rid;
 
-        public string rid
+        public String rid
         {
             get { return _rid; }
             set { _rid = value; }
@@ -151,9 +151,9 @@ namespace OwLib
         /// <summary>
         /// 第几页
         /// </summary>
-        private string _pageno;
+        private String _pageno;
 
-        public string pageno
+        public String pageno
         {
             get { return _pageno; }
             set { _pageno = value; }
@@ -161,9 +161,9 @@ namespace OwLib
         /// <summary>
         /// 页面记录数
         /// </summary>
-        private string _pagesize;
+        private String _pagesize;
 
-        public string pagesize
+        public String pagesize
         {
             get { return _pagesize; }
             set { _pagesize = value; }
@@ -171,9 +171,9 @@ namespace OwLib
         /// <summary>
         /// 头标识-资讯类型
         /// </summary>
-        private string _h;
+        private String _h;
 
-        public string h
+        public String h
         {
             get { return _h; }
             set { _h = value; }
@@ -181,9 +181,9 @@ namespace OwLib
         /// <summary>
         /// 节点标识
         /// </summary>
-        private string _id;
+        private String _id;
 
-        public string id
+        public String id
         {
             get { return _id; }
             set { _id = value; }
@@ -191,16 +191,16 @@ namespace OwLib
         /// <summary>
         /// 证券名称
         /// </summary>
-        private string[] _column;
+        private String[] _column;
 
-        public string[] column
+        public String[] column
         {
             get { return _column; }
             set { _column = value; }
         }
-        private string _otherparams;
+        private String _otherparams;
 
-        public string otherparams
+        public String otherparams
         {
             get { return _otherparams; }
             set { _otherparams = value; }
@@ -208,9 +208,9 @@ namespace OwLib
         /// <summary>
         /// 请求类型
         /// </summary>
-        public string request = "simpleSearch";//默认简单查询。subscribeSearch：查询订阅内容
-        public string sort = String.Empty;
-        public string order = String.Empty;
+        public String request = "simpleSearch";//默认简单查询。subscribeSearch：查询订阅内容
+        public String sort = String.Empty;
+        public String order = String.Empty;
     }
 
     public class NewsDetailModel
@@ -218,11 +218,11 @@ namespace OwLib
         /// <summary>
         /// CODE
         /// </summary>
-        public string Code { get; set; }
+        public String Code { get; set; }
         /// <summary>
         /// 详情
         /// </summary>
-        public string Text { get; set; }
+        public String Text { get; set; }
         /// <summary>
         /// 点击量
         /// </summary>
@@ -230,12 +230,12 @@ namespace OwLib
         /// <summary>
         /// 收藏
         /// </summary>
-        public string IfStore { get; set; }
+        public String IfStore { get; set; }
     }
 
     public class SktByIdsModel
     {
-        public SktByIdsModel(string h, string[] ids)
+        public SktByIdsModel(String h, String[] ids)
         {
             this.h = h;
             this.ids = ids;
@@ -244,18 +244,18 @@ namespace OwLib
         /// <summary>
         /// 请求
         /// </summary>
-        public string request = "getInfoById";
-        public string cid { get; set; }
+        public String request = "getInfoById";
+        public String cid { get; set; }
         /// <summary>
         /// 大类别：H1:新闻,H2:公告,H3:研报,H4:法律法规
         /// </summary>
-        public string h { get; set; }
+        public String h { get; set; }
         /// <summary>
         /// 查询的资讯Ids
         /// </summary>
-        public string[] ids { get; set; }
+        public String[] ids { get; set; }
 
-        public string columnType = "detailColumn";
+        public String columnType = "detailColumn";
 
     }
 
@@ -264,17 +264,17 @@ namespace OwLib
     /// </summary>
     public class SktSrhModel<T>
     {
-        public SktSrhModel(string h, T query)
+        public SktSrhModel(String h, T query)
         {
             this.comm = new Comm(h);
             this.query = query;
         }
-        public SktSrhModel(string h, string pageno, string pagesize, T query)
+        public SktSrhModel(String h, String pageno, String pagesize, T query)
         {
             this.comm = new Comm(h, pageno, pagesize);
             this.query = query;
         }
-        public SktSrhModel(string h, string pageno, string pagesize, string sort, string order, T query)
+        public SktSrhModel(String h, String pageno, String pagesize, String sort, String order, T query)
         {
             this.comm = new Comm(h, pageno, pagesize, sort, order);
             this.query = query;
@@ -284,7 +284,7 @@ namespace OwLib
         /// </summary>
         public class Comm
         {
-            public Comm(string h)
+            public Comm(String h)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -293,7 +293,7 @@ namespace OwLib
                 this.pageno = "1";
                 this.pagesize = "50";
             }
-            public Comm(string h, string pageno, string pagesize)
+            public Comm(String h, String pageno, String pagesize)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -302,7 +302,7 @@ namespace OwLib
                 this.pageno = pageno;
                 this.pagesize = pagesize;
             }
-            public Comm(string h, string pageno, string pagesize, string sort, string order)
+            public Comm(String h, String pageno, String pagesize, String sort, String order)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -311,27 +311,27 @@ namespace OwLib
                 this.pageno = pageno;
                 this.pagesize = pagesize;
             }
-            public string cid { get; set; }
+            public String cid { get; set; }
             /// <summary>
             /// 大类别：H1:新闻,H2:公告,H3:研报,H4:法律法规
             /// </summary>
-            public string h { get; set; }
+            public String h { get; set; }
             /// <summary>
             /// 排序字段
             /// </summary>
-            public string sort { get; set; }
+            public String sort { get; set; }
             /// <summary>
             /// 排序方式：desc,asc
             /// </summary>
-            public string order { get; set; }
+            public String order { get; set; }
             /// <summary>
             /// 分页页码
             /// </summary>
-            public string pageno { get; set; }
+            public String pageno { get; set; }
             /// <summary>
             /// 分页大小
             /// </summary>
-            public string pagesize { get; set; }
+            public String pagesize { get; set; }
         }
         public Comm comm { get; set; }
         /// <summary>
@@ -341,7 +341,7 @@ namespace OwLib
         /// <summary>
         /// 请求类型
         /// </summary>
-        public string request = "advancedSearch";
+        public String request = "advancedSearch";
     }
 
 
@@ -351,17 +351,17 @@ namespace OwLib
     /// <typeparam name="T">泛型</typeparam>
     public class SktSrhModelByMultiQuery<T>
     {
-        public SktSrhModelByMultiQuery(string h, List<T> query)
+        public SktSrhModelByMultiQuery(String h, List<T> query)
         {
             this.comm = new Comm(h);
             this.query = query;
         }
-        public SktSrhModelByMultiQuery(string h, string pageno, string pagesize, List<T> query)
+        public SktSrhModelByMultiQuery(String h, String pageno, String pagesize, List<T> query)
         {
             this.comm = new Comm(h, pageno, pagesize);
             this.query = query;
         }
-        public SktSrhModelByMultiQuery(string h, string pageno, string pagesize, string sort, string order, List<T> query)
+        public SktSrhModelByMultiQuery(String h, String pageno, String pagesize, String sort, String order, List<T> query)
         {
             this.comm = new Comm(h, pageno, pagesize, sort, order);
             this.query = query;
@@ -371,7 +371,7 @@ namespace OwLib
         /// </summary>
         public class Comm
         {
-            public Comm(string h)
+            public Comm(String h)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -380,7 +380,7 @@ namespace OwLib
                 this.pageno = "1";
                 this.pagesize = "50";
             }
-            public Comm(string h, string pageno, string pagesize)
+            public Comm(String h, String pageno, String pagesize)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -389,7 +389,7 @@ namespace OwLib
                 this.pageno = pageno;
                 this.pagesize = pagesize;
             }
-            public Comm(string h, string pageno, string pagesize, string sort, string order)
+            public Comm(String h, String pageno, String pagesize, String sort, String order)
             {
                 this.cid = String.Empty;
                 this.h = h;
@@ -398,27 +398,27 @@ namespace OwLib
                 this.pageno = pageno;
                 this.pagesize = pagesize;
             }
-            public string cid { get; set; }
+            public String cid { get; set; }
             /// <summary>
             /// 大类别：H1:新闻,H2:公告,H3:研报,H4:法律法规
             /// </summary>
-            public string h { get; set; }
+            public String h { get; set; }
             /// <summary>
             /// 排序字段
             /// </summary>
-            public string sort { get; set; }
+            public String sort { get; set; }
             /// <summary>
             /// 排序方式：desc,asc
             /// </summary>
-            public string order { get; set; }
+            public String order { get; set; }
             /// <summary>
             /// 分页页码
             /// </summary>
-            public string pageno { get; set; }
+            public String pageno { get; set; }
             /// <summary>
             /// 分页大小
             /// </summary>
-            public string pagesize { get; set; }
+            public String pagesize { get; set; }
             /// <summary>
             /// boolean型，可以为空，默认为false（true：query为数组，包含多个条件，false：query为单个对象）
             /// </summary>
@@ -432,7 +432,7 @@ namespace OwLib
         /// <summary>
         /// 请求类型
         /// </summary>
-        public string request = "advancedSearch";
+        public String request = "advancedSearch";
 
     }
 
@@ -444,13 +444,13 @@ namespace OwLib
     {
         public NewsSktSrhQryModel()
         {
-            this.types = new string[0];
-            this.securitycodes = new string[0];
-            this.industrys = new string[0];
+            this.types = new String[0];
+            this.securitycodes = new String[0];
+            this.industrys = new String[0];
             this.terms = String.Empty;
             this.columnType = String.Empty;
         }
-        public NewsSktSrhQryModel(string[] types, string[] securitycodes, string[] industrys, string terms, string columnType)
+        public NewsSktSrhQryModel(String[] types, String[] securitycodes, String[] industrys, String terms, String columnType)
         {
             this.types = types;
             this.securitycodes = securitycodes;
@@ -466,11 +466,11 @@ namespace OwLib
             }
         }
 
-        public string[] types { get; set; }
-        public string[] securitycodes { get; set; }
-        public string[] industrys { get; set; }
-        public string terms { get; set; }
-        public string columnType { get; set; }
+        public String[] types { get; set; }
+        public String[] securitycodes { get; set; }
+        public String[] industrys { get; set; }
+        public String terms { get; set; }
+        public String columnType { get; set; }
     }
 
     /// <summary>
@@ -480,19 +480,19 @@ namespace OwLib
     {
         public ReportSktSrhQryModel()
         {
-            this.types = new string[0];
-            this.orgs = new string[0];
-            this.authors = new string[0];
-            this.securitycodes = new string[0];
-            this.industrys = new string[0];
-            this.concepts = new string[0];
-            this.ratings = new string[0];
-            this.ratingchanges = new string[0];
+            this.types = new String[0];
+            this.orgs = new String[0];
+            this.authors = new String[0];
+            this.securitycodes = new String[0];
+            this.industrys = new String[0];
+            this.concepts = new String[0];
+            this.ratings = new String[0];
+            this.ratingchanges = new String[0];
             this.terms = String.Empty;
             this.columnType = String.Empty;
         }
-        public ReportSktSrhQryModel(string[] types, string[] orgs, string[] authors, string[] securitycodes, string[] industrys, string[] concepts,
-                                    string[] ratings, string[] ratingchanges, string terms, string columnType)
+        public ReportSktSrhQryModel(String[] types, String[] orgs, String[] authors, String[] securitycodes, String[] industrys, String[] concepts,
+                                    String[] ratings, String[] ratingchanges, String terms, String columnType)
         {
             this.types = types;
             this.orgs = orgs;
@@ -512,29 +512,29 @@ namespace OwLib
                 this.columnType = columnType;
             }
         }
-        public ReportSktSrhQryModel(string terms, string columnType)
+        public ReportSktSrhQryModel(String terms, String columnType)
         {
-            this.types = new string[0];
-            this.orgs = new string[0];
-            this.authors = new string[0];
-            this.securitycodes = new string[0];
-            this.industrys = new string[0];
-            this.concepts = new string[0];
-            this.ratings = new string[0];
-            this.ratingchanges = new string[0];
+            this.types = new String[0];
+            this.orgs = new String[0];
+            this.authors = new String[0];
+            this.securitycodes = new String[0];
+            this.industrys = new String[0];
+            this.concepts = new String[0];
+            this.ratings = new String[0];
+            this.ratingchanges = new String[0];
             this.terms = terms;
             this.columnType = columnType;
         }
-        public string[] types { get; set; }
-        public string[] orgs { get; set; }
-        public string[] authors { get; set; }
-        public string[] securitycodes { get; set; }
-        public string[] industrys { get; set; }
-        public string[] concepts { get; set; }
-        public string[] ratings { get; set; }
-        public string[] ratingchanges { get; set; }
-        public string terms { get; set; }
-        public string columnType { get; set; }
+        public String[] types { get; set; }
+        public String[] orgs { get; set; }
+        public String[] authors { get; set; }
+        public String[] securitycodes { get; set; }
+        public String[] industrys { get; set; }
+        public String[] concepts { get; set; }
+        public String[] ratings { get; set; }
+        public String[] ratingchanges { get; set; }
+        public String terms { get; set; }
+        public String columnType { get; set; }
     }
     /// <summary>
     /// 公告的queryModel
@@ -543,12 +543,12 @@ namespace OwLib
     {
         public NoticeSktSrhQryModel()
         {
-            this.types = new string[0];
-            this.securitycodes = new string[0];
+            this.types = new String[0];
+            this.securitycodes = new String[0];
             this.terms = String.Empty;
             this.columnType = String.Empty;
         }
-        public NoticeSktSrhQryModel(string[] types, string[] securitycodes, string terms, string columnType)
+        public NoticeSktSrhQryModel(String[] types, String[] securitycodes, String terms, String columnType)
         {
             this.types = types;
             this.securitycodes = securitycodes;
@@ -563,10 +563,10 @@ namespace OwLib
             }
         }
 
-        public string[] types { get; set; }
-        public string[] securitycodes { get; set; }
-        public string terms { get; set; }
-        public string columnType { get; set; }
+        public String[] types { get; set; }
+        public String[] securitycodes { get; set; }
+        public String terms { get; set; }
+        public String columnType { get; set; }
     }
     /// <summary>
     /// 法律法规的queryModel
@@ -575,11 +575,11 @@ namespace OwLib
     {
         public LawsSktSrhQryModel()
         {
-            this.types = new string[0];
+            this.types = new String[0];
             this.terms = String.Empty;
             this.columnType = String.Empty;
         }
-        public LawsSktSrhQryModel(string[] types, string terms, string columnType)
+        public LawsSktSrhQryModel(String[] types, String terms, String columnType)
         {
             this.types = types;
             this.terms = terms;
@@ -593,9 +593,9 @@ namespace OwLib
             }
         }
 
-        public string[] types { get; set; }
-        public string terms { get; set; }
-        public string columnType { get; set; }
+        public String[] types { get; set; }
+        public String terms { get; set; }
+        public String columnType { get; set; }
     }
 
     public class NewsTypeRoot
@@ -799,7 +799,7 @@ namespace OwLib
         /// <summary>
         /// 新通道-左侧菜单
         /// </summary>
-        public static object GetLeftTree(string cid)
+        public static object GetLeftTree(String cid)
         {
             try
             {
@@ -818,7 +818,7 @@ namespace OwLib
         /// <summary>
         /// 新通道-根据id获取新闻列表
         /// </summary>
-        public static object GetNewsById(string id, string pageIndex, string limit, string order, string sort)
+        public static object GetNewsById(String id, String pageIndex, String limit, String order, String sort)
         {
             try
             {
@@ -836,13 +836,13 @@ namespace OwLib
         /// <summary>
         /// 新通道-根据id获取我的新闻
         /// </summary>
-        public static object GetNewsBySubId(string id, string cid, string pageIndex, string limit, string order, string sort)
+        public static object GetNewsBySubId(String id, String cid, String pageIndex, String limit, String order, String sort)
         {
             try
             {
                 SocketModel obj = new SocketModel("H1", id, pageIndex, limit);
                 obj.request = "subscribeSearch";
-                if (!string.IsNullOrEmpty(cid))
+                if (!String.IsNullOrEmpty(cid))
                     obj.cid = cid;
                 object objRs = DataAccess.QueryIndex(JsonConvert.SerializeObject(obj));
                 return objRs;
@@ -856,17 +856,17 @@ namespace OwLib
         /// <summary>
         /// 新通道-简单搜索
         /// </summary>
-        public static object GetNewsByParam(string id, string securityCodes, string term, string pageIndex, string limit, string order, string sort)
+        public static object GetNewsByParam(String id, String securityCodes, String term, String pageIndex, String limit, String order, String sort)
         {
-            string errorquery = string.Empty;
+            String errorquery = String.Empty;
             try
             {
                 SktSrhModel<NewsSktSrhQryModel> queryModel = new SktSrhModel<NewsSktSrhQryModel>("H1", new NewsSktSrhQryModel());
                 queryModel.comm.pageno = pageIndex;
                 queryModel.comm.pagesize = limit;
-                if (!string.IsNullOrEmpty(id))
-                    queryModel.query.types = new string[1] { id };
-                if (!string.IsNullOrEmpty(securityCodes))
+                if (!String.IsNullOrEmpty(id))
+                    queryModel.query.types = new String[1] { id };
+                if (!String.IsNullOrEmpty(securityCodes))
                     queryModel.query.securitycodes = securityCodes.Split(',');
                 queryModel.query.terms = HttpUtility.UrlDecode(term);//LQ 以前是"("+term+")"
                 errorquery = JsonConvert.SerializeObject(queryModel);
@@ -885,9 +885,9 @@ namespace OwLib
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        private string[] GetParams(string param)
+        private String[] GetParams(String param)
         {
-            string[] result = new string[0];
+            String[] result = new String[0];
             if (!String.IsNullOrEmpty(param))
             {
                 result = param.Split(',');
@@ -905,9 +905,9 @@ namespace OwLib
         /// <param name="order"></param>
         /// <param name="sort"></param>
         /// <returns></returns>
-        public object GetNewsBySearch(string types, string securitycodes, string industrys,
-                                string date, string title,
-                                string text, string columnType, string pageIndex, string limit)
+        public object GetNewsBySearch(String types, String securitycodes, String industrys,
+                                String date, String title,
+                                String text, String columnType, String pageIndex, String limit)
         {
 
 
@@ -918,8 +918,8 @@ namespace OwLib
                 try
                 {
                     date = date.Replace("99:99:99", "23:59:59");
-                    string startdate = string.Empty;
-                    string enddate = string.Empty;
+                    String startdate = String.Empty;
+                    String enddate = String.Empty;
                     startdate = Convert.ToDateTime(date.Substring(0, date.IndexOf(" TO ")).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T00:00:00Z";
                     enddate = Convert.ToDateTime(date.Substring(date.IndexOf(" TO ") + 4).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T23:59:59Z";
                     date = startdate + " TO " + enddate;
@@ -975,7 +975,7 @@ namespace OwLib
         /// </summary>
         /// <param name="infocodes"></param>
         /// <returns></returns>
-        public static string GetDetailList(string infocodes)
+        public static String GetDetailList(String infocodes)
         {
             String result = String.Empty;
             SktByIdsModel queryModel = new SktByIdsModel("H1", infocodes.Split(','));
@@ -995,9 +995,9 @@ namespace OwLib
         /// <summary>
         /// 获取实时资讯详细信息
         /// </summary>
-        public static string GetRealTimeInfoByCode(string infoCode)
+        public static String GetRealTimeInfoByCode(String infoCode)
         {
-            string content = "";
+            String content = "";
             try
             {
                 String url = "http://mainbody.jg.eastmoney.com/nrsweb/service.action?token=&serviceType=C&dataType=json&h=H1";

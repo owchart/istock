@@ -432,11 +432,11 @@ namespace OwLib
 
         #region 股票动态
         /// <summary>
-        /// 股票代码string
+        /// 股票代码String
         /// </summary>
-        Code = 8000,//string
+        Code = 8000,//String
         /// <summary>
-        /// 股票名称string
+        /// 股票名称String
         /// </summary>
         Name = 8001,
         /// <summary>
@@ -674,7 +674,7 @@ namespace OwLib
         /// </summary>
         SumVolumeDay5 = 8085,
         /// <summary>
-        /// 领涨股string
+        /// 领涨股String
         /// </summary>
         Leader = 8086,
         /// <summary>
@@ -3717,7 +3717,7 @@ namespace OwLib
         //CurOI,
         //#endregion
 
-        //#region string(1200--8999)
+        //#region String(1200--8999)
         ////String 1200
         ///// <summary>
         ///// 股票代码
@@ -3985,7 +3985,7 @@ namespace OwLib
         //IsDefaultCustomStock,
 
         ///// <summary>
-        ///// 股票标记string内容
+        ///// 股票标记String内容
         ///// </summary>
         //StockTagText,
         ///// <summary>
@@ -4966,7 +4966,7 @@ namespace OwLib
         ///// </summary>
         //FT_LONG,
         ///// <summary>
-        ///// 16字节的string
+        ///// 16字节的String
         ///// </summary>
         ////FT_CODEORG,
         ///// <summary>
@@ -4978,10 +4978,10 @@ namespace OwLib
         ///// </summary>
         //FT_TOPCODE,//龙头股
         ///// <summary>
-        ///// 18个字节的string
+        ///// 18个字节的String
         ///// </summary>
         ////FT_STRING18,
-        //FT_STRINGORG,//先byte，后string
+        //FT_STRINGORG,//先byte，后String
     }
 
 
@@ -5711,10 +5711,10 @@ namespace OwLib
     /// </summary>
     public class DetailData
     {
-        //public static Dictionary<string, Dictionary<FieldIndex, object>> AllDetailData =
-        //    new Dictionary<string, Dictionary<FieldIndex, object>>();
+        //public static Dictionary<String, Dictionary<FieldIndex, object>> AllDetailData =
+        //    new Dictionary<String, Dictionary<FieldIndex, object>>();
 
-        //public static Dictionary<int, string> UnicodeToCode = new Dictionary<int, string>();
+        //public static Dictionary<int, String> UnicodeToCode = new Dictionary<int, String>();
         public static Dictionary<uint, IntPtr> CodeIntPtrsAllOrder = new Dictionary<uint, IntPtr>(1);
         public static Dictionary<uint, IntPtr> CodeIntPtrsNOrder = new Dictionary<uint, IntPtr>(1);
         public static Dictionary<uint, IntPtr> CodeIntPtrsTrendFF = new Dictionary<uint, IntPtr>(1);
@@ -5722,7 +5722,7 @@ namespace OwLib
         /// <summary>
         /// emcode和内码的对应关系
         /// </summary>
-        public static Dictionary<string, int> EmCodeToUnicode = new Dictionary<string, int>(14000);
+        public static Dictionary<String, int> EmCodeToUnicode = new Dictionary<String, int>(14000);
 
         /// <summary>
         /// 内存中所有的报价数据
@@ -5753,9 +5753,9 @@ namespace OwLib
         public static Dictionary<int, Dictionary<FieldIndex, double>> FieldIndexDataDouble = new Dictionary<int, Dictionary<FieldIndex, double>>(1);
         
         /// <summary>
-        /// string型flield集合
+        /// String型flield集合
         /// </summary>
-        public static Dictionary<int, Dictionary<FieldIndex, string>> FieldIndexDataString = new Dictionary<int, Dictionary<FieldIndex, string>>(1);
+        public static Dictionary<int, Dictionary<FieldIndex, String>> FieldIndexDataString = new Dictionary<int, Dictionary<FieldIndex, String>>(1);
         
         /// <summary>
         /// object型flield集合
@@ -5775,7 +5775,7 @@ namespace OwLib
         /// <param name="paramString"></param>
         /// <param name="paramObject"></param>
         public static void SetFieldData(int code, FieldIndex field, Fieldtype index, int paramInt, float paramSingle, long paramInt64,
-            double paramDouble, string paramString, object paramObject)
+            double paramDouble, String paramString, object paramObject)
         {
             switch ((byte)index)
             {
@@ -5948,10 +5948,10 @@ namespace OwLib
                     }
                     break;
                 case 4:
-                    Dictionary<FieldIndex, string> fieldString;
+                    Dictionary<FieldIndex, String> fieldString;
                     if (!FieldIndexDataString.TryGetValue(code, out fieldString))
                     {
-                        fieldString = new Dictionary<FieldIndex, string>(1);
+                        fieldString = new Dictionary<FieldIndex, String>(1);
                         FieldIndexDataString[code] = fieldString;
                     }
                     fieldString[field] = paramString;
@@ -6014,7 +6014,7 @@ namespace OwLib
         /// <param name="emCode"></param>
         /// <param name="typeCode"></param>
         /// <param name="name"></param>
-        public static void SetStockBasicField(int code, string emCode, string typeCode, string name)
+        public static void SetStockBasicField(int code, String emCode, String typeCode, String name)
         {
             SetStockBasicField(code, emCode, Convert.ToInt32(typeCode), name);
         }
@@ -6026,9 +6026,9 @@ namespace OwLib
         /// <param name="emCode"></param>
         /// <param name="typeCode"></param>
         /// <param name="name"></param>
-        public static void SetStockBasicField(int code, string emCode, int typeCode, string name)
+        public static void SetStockBasicField(int code, String emCode, int typeCode, String name)
         {
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             Dictionary<FieldIndex, int> fieldInt32;
             if (!FieldIndexDataInt32.TryGetValue(code, out fieldInt32))
             {
@@ -6037,7 +6037,7 @@ namespace OwLib
             }
             if (!FieldIndexDataString.TryGetValue(code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 FieldIndexDataString[code] = fieldString;
             }
             if (!fieldString.ContainsKey(FieldIndex.EMCode))
@@ -6057,9 +6057,9 @@ namespace OwLib
         /// <param name="emCode"></param>
         /// <param name="market"></param>
         /// <param name="name"></param>
-        public static void SetStockBasicField(int code, string emCode, MarketType market, string name)
+        public static void SetStockBasicField(int code, String emCode, MarketType market, String name)
         {
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             Dictionary<FieldIndex, int> fieldInt32;
             if (!FieldIndexDataInt32.TryGetValue(code, out fieldInt32))
             {
@@ -6068,7 +6068,7 @@ namespace OwLib
             }
             if (!FieldIndexDataString.TryGetValue(code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 FieldIndexDataString[code] = fieldString;
             }
             if (!fieldString.ContainsKey(FieldIndex.EMCode))
@@ -6094,7 +6094,7 @@ namespace OwLib
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        public static void ConvertTagToString(StockTag tag,out string tagShowString, out SolidBrush brush)
+        public static void ConvertTagToString(StockTag tag,out String tagShowString, out SolidBrush brush)
         {
             switch (tag)
             {
@@ -6129,7 +6129,7 @@ namespace OwLib
                     tagShowString = "T";
                     break;
                 default:
-                    tagShowString = string.Empty;
+                    tagShowString = String.Empty;
                     break;
             }
             brush = QuoteDrawService.BrushColorDown;

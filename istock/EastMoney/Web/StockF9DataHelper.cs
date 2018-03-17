@@ -16,7 +16,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetCompanyIntroductionInfo(string securityCode)
+        public static DataSet GetCompanyIntroductionInfo(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -26,7 +26,7 @@ namespace OwLib
                 _query.Add(Expression.Eq("SECURITYCODE", securityCode));
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
 
 
                 _DS = DataAccess.Query(WebDataSource.F9_INSTINFO, _field, _query, _sort, _selector, 1, 20);
@@ -44,7 +44,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetCompanyNameHistoryList(string securityCode)
+        public static DataSet GetCompanyNameHistoryList(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -55,7 +55,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("CHANGEDATE", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
 
                 _DS = DataAccess.Query(WebDataSource.SF9_NAMECHGB, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
@@ -75,8 +75,8 @@ namespace OwLib
         /// <param name="seperate">是否分隔</param>
         /// <param name="order">排序(desc or asc)</param>
         /// <returns></returns>
-        public static DataSet GetStockStructureList(string securityCode, string order,
-            string yearList, string reportTypeList, string dateSearchType)
+        public static DataSet GetStockStructureList(String securityCode, String order,
+            String yearList, String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
 
@@ -91,7 +91,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_CHANGEDATE", order == "asc"));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
 
                 _DS = DataAccess.Query(WebDataSource.SF9_CAPITALSTRUCT, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
@@ -108,7 +108,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetTop10HolderList(string securityCode, int type, string order, string yearList, string reportTypeList, string dateSearchType)
+        public static DataSet GetTop10HolderList(String securityCode, int type, String order, String yearList, String reportTypeList, String dateSearchType)
         {
             StringBuilder holderList = new StringBuilder();
             WebDataSource source = new WebDataSource();
@@ -136,7 +136,7 @@ namespace OwLib
                         break;
                 }
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 DataSet _DS = DataAccess.Query(source, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -153,8 +153,8 @@ namespace OwLib
         /// <param name="securityCode"></param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "CacheChangeBySixHours")]
-        public static DataSet GetInstitutionInvestorList(string securityCode, string order, string sort, string timeorder, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet GetInstitutionInvestorList(String securityCode, String order, String sort, String timeorder, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
             try
@@ -169,7 +169,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("REPORTDATE", timeorder == "asc"));
                 _sorts.Add(new Order(sort, order == "asc"));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_INSTINVESTOR, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 //_DS = CommonController.FilterDataByDateRange(_DS, "REPORTDATE", yearList, reportTypeList, CommDao.SafeToInt(dateSearchType), timeorder == "asc");
                 return _DS;
@@ -186,8 +186,8 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetStockHolderNumberList(string securityCode, string order, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet GetStockHolderNumberList(String securityCode, String order, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
             try
@@ -200,7 +200,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 bool ascending = order == "asc";
                 _sorts.Add(new Order("ENDDATE", ascending));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 //ResultData _DS = DataAccess.QueryByStatistic(WebDataSource.F9_TNOSII_DETIAL, _field, _query, _sorts, _selector, 1, int.MaxValue, WebDataSource.F9_TNOSII_DETIAL.ToString());
                 _DS = DataAccess.Query(WebDataSource.SF9_TNOSII, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 //_DS.Data = CommonController.FilterDataByDateRange(_DS.Data, "ENDDATE", yearList, reportTypeList, CommDao.SafeToInt(dateSearchType), ascending);
@@ -218,7 +218,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GetStockUnlimitedTimeList(string securityCode)
+        public static DataSet GetStockUnlimitedTimeList(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -228,7 +228,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("KLTSJ", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_XSJJDATE, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -244,7 +244,7 @@ namespace OwLib
         /// </summary>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "CacheChangeBySixHours")]
-        public static DataSet GetManagerInfo(string securityCode, int type)
+        public static DataSet GetManagerInfo(String securityCode, int type)
         {
             WebDataSource source = new WebDataSource();
             DataSet _DS = new DataSet();
@@ -279,7 +279,7 @@ namespace OwLib
                         break;
                 }
 
-                string[] _fileds = new string[] { };
+                String[] _fileds = new String[] { };
                 DateTime dt1 = DateTime.Now;
                 _DS = DataAccess.Query(source, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
                 LogHelper.WriteDebugLog("getManagerInfo获取数据时间:" + (DateTime.Now - dt1));
@@ -298,8 +298,8 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet ManagementRemuneration(string securityCode, string order, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet ManagementRemuneration(String securityCode, String order, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
 
@@ -315,7 +315,7 @@ namespace OwLib
                 _sort.Add(new Order("ENDDATE", ascending));
                 _sort.Add(new Order("ANUALWAGE", false));
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_MOAC, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -332,8 +332,8 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet ManagementStockChange(string securityCode, string order, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet ManagementStockChange(String securityCode, String order, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
 
@@ -347,8 +347,8 @@ namespace OwLib
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("CHANGEDATE", order == "asc"));
 
-                //string[] _field = new string[] { "CHANGEDATE", "SHAREHOLDER", "CHANNUM", "AFCHANGENUM", "AVPRICE", "CHANGECAUSE", "PNAME", "DUTY", "STR_RELATIONMAN", "STR_SFDXJY"};
-                string[] _field = new string[] { };
+                //String[] _field = new String[] { "CHANGEDATE", "SHAREHOLDER", "CHANNUM", "AFCHANGENUM", "AVPRICE", "CHANGECAUSE", "PNAME", "DUTY", "STR_RELATIONMAN", "STR_SFDXJY"};
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_MOC, _field, _query, _sort, _selector, 1, int.MaxValue);
                 //_DS = CommonController.FilterDataByDateRange(_DS, "CHANGEDATE", yearList, reportTypeList, CommDao.SafeToInt(dateSearchType));
                 return _DS;
@@ -360,7 +360,7 @@ namespace OwLib
             return null;
         }
 
-        private const string STR_EMPTY = "-";
+        private const String STR_EMPTY = "-";
 
         /// <summary>
         ///  解析当前股票对应的证券类型 
@@ -368,9 +368,9 @@ namespace OwLib
         /// <param name=CommDao.SafeToString("dataSet")></param>
         /// <returns></returns>
         /// <summary>
-        internal static string GetStockIndustryType(DataSet dataSet, string code)
+        internal static String GetStockIndustryType(DataSet dataSet, String code)
         {
-            string industry = null;
+            String industry = null;
             if (dataSet.Tables[0].Rows.Count > 0)
             {
                 DataRow _row = dataSet.Tables[0].Rows[0];
@@ -386,18 +386,18 @@ namespace OwLib
         /// <param name="industry">获取行业类型的代码(1为申万一级，2为申万二级(默认)，3为申万三级)</param>
         /// <param name="option">显示的条数(1为前20条(默认)，2为全部)</param>
         /// <returns></returns>
-        public static DataSet GetStockMarketExpressList(string securityCode, int industry, int option)
+        public static DataSet GetStockMarketExpressList(String securityCode, int industry, int option)
         {
             DataSet _DS = new DataSet();
-            string code = "";
-            string industryType;
+            String code = "";
+            String industryType;
             try
             {
                 List<Expression> _query = new List<Expression>();
                 _query.Add(Expression.Eq("SECURITYCODE", securityCode));
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sorts = new List<Order>();
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 //请求数据获取股票代码的行业类型(申万一级，申万二级，申万三级)
                 _DS = DataAccess.Query(WebDataSource.IND_DAILYPRICE, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 switch (industry)
@@ -440,7 +440,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet SecurityIntroduction(string securityCode)
+        public static DataSet SecurityIntroduction(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -451,7 +451,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_GGRI", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_SECURITY, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
 
@@ -469,7 +469,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet SpecialProcessDelistedOpen(string securityCode)
+        public static DataSet SpecialProcessDelistedOpen(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -481,7 +481,7 @@ namespace OwLib
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("DAT_GGRI", false));
 
-                string[] _field = new string[] { "SECURITYCODE", "DAT_GGRI", "STR_SSFS", "STR_SSYY" };
+                String[] _field = new String[] { "SECURITYCODE", "DAT_GGRI", "STR_SSFS", "STR_SSYY" };
                 _DS = DataAccess.Query(WebDataSource.SF9_SECURITY, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
 
@@ -498,7 +498,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet GetIndustryInfo(string securityCode, int industryType)
+        public static DataSet GetIndustryInfo(String securityCode, int industryType)
         {
             DataSet _DS = new DataSet();
 
@@ -517,7 +517,7 @@ namespace OwLib
                 List<Expression> _selector = new List<Expression>();
                 List<Order> _sort = new List<Order>();
                 _sort.Add(new Order("STR_HY", false));
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_INDUSTRY, _field, _query, _sort, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -534,7 +534,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet GetSecurityIndex(string securityCode)
+        public static DataSet GetSecurityIndex(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -546,7 +546,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("OPDATE", false));
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_THEINDEX, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -562,7 +562,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode">证券代码</param>
         /// <returns></returns>
-        public static DataSet GetConceptBoardList(string securityCode)
+        public static DataSet GetConceptBoardList(String securityCode)
         {
             DataSet _DS = new DataSet();
 
@@ -574,7 +574,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("DAT_JRRQ", false));
 
-                string[] _field = new string[] { };
+                String[] _field = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_TCOP, _field, _query, _sorts, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -592,7 +592,7 @@ namespace OwLib
         /// <param name="rotate">旋转(1为旋转，0为不旋转)</param>
         /// <param name="order">排序(值为"desc"or"asc")</param>
         /// <returns></returns>
-        public static DataSet GetStageMarketDataList(string securityCode, string order)
+        public static DataSet GetStageMarketDataList(String securityCode, String order)
         {
             DataSet _DS = new DataSet();
             try
@@ -604,7 +604,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 //_sorts.Add(new Order("DAT_TDAY", order == "asc"));
 
-                string[] _fields = new string[] { };
+                String[] _fields = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_INTVLQUOTESTAT, _fields, _query, _sorts, _selector, 1, int.MaxValue);
                 return _DS;
             }
@@ -623,13 +623,13 @@ namespace OwLib
         /// <param name="order">排序(值为"desc"or"asc")</param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "CacheChangeBySixHours")]
-        public static DataSet GetRiskAndIncomeAnalysisList(string securityCode, int rotate, string order, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet GetRiskAndIncomeAnalysisList(String securityCode, int rotate, String order, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet DS = new DataSet();
             try
             {
-                Dictionary<string, string> paramDic = CommonController.GetDateRangeDic(yearList, reportTypeList, CommDao.SafeToInt(dateSearchType));
+                Dictionary<String, String> paramDic = CommonController.GetDateRangeDic(yearList, reportTypeList, CommDao.SafeToInt(dateSearchType));
                 StockIndicateParam param = new StockIndicateParam();
                 param.Name = "EM_AB_RISK";
                 param.Secucode = securityCode;
@@ -652,8 +652,8 @@ namespace OwLib
         /// <param name="securityCode">股票代码</param>
         /// <param name="order">排序(值为"desc"or"asc")</param>
         /// <returns></returns>
-        public static DataSet GetBargainOfficeList(string securityCode, string order, string yearList,
-            string reportTypeList, string dateSearchType)
+        public static DataSet GetBargainOfficeList(String securityCode, String order, String yearList,
+            String reportTypeList, String dateSearchType)
         {
             DataSet _DS = new DataSet();
 
@@ -669,7 +669,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("TDATE", order == "asc"));
 
-                string[] _fields = new string[] { };
+                String[] _fields = new String[] { };
                 _DS = DataAccess.Query(WebDataSource.SF9_JIAOYIYIDONG, _fields, _query, _sorts, _selector, 1, Int16.MaxValue);
                 //_DS = CommonController.FilterDataByDateRange(_DS, "TDATE", yearList, reportTypeList, CommDao.SafeToInt(dateSearchType));
                 return _DS;
@@ -694,7 +694,7 @@ namespace OwLib
         /// <param name="order">排序(值为"desc"or"asc")</param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "CacheChangeBySixHours")]
-        public static DataSet GetFundFlowListForChart(string securityCode)
+        public static DataSet GetFundFlowListForChart(String securityCode)
         {
             object result = new object();
             //主力资金
@@ -737,8 +737,8 @@ namespace OwLib
         /// <param name="securityCode">股票代码</param>
         /// <param name="order">排序(值为"desc"or"asc")</param>
         /// <returns></returns>
-        public static DataSet GetSecurityFinancingList(string securityCode, string yearList,
-            string reportTypeList, string dateSearchType, string cycleType)
+        public static DataSet GetSecurityFinancingList(String securityCode, String yearList,
+            String reportTypeList, String dateSearchType, String cycleType)
         {
             List<object> securityList = new List<object>();
             int count = 1;
@@ -755,7 +755,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("TDATE", false));
 
-                string[] _fields = new string[] { };
+                String[] _fields = new String[] { };
                 ResultData _RS = DataAccess.QueryByStatistic(WebDataSource.SF9_MARGINTRADING1, _fields, _query, _sorts, _selector, 1, Int16.MaxValue, WebDataSource.SF9_MARGINTRADING1.ToString());
                 return _RS.Data;
             }
@@ -771,7 +771,7 @@ namespace OwLib
         /// 运营能力
         /// </summary>
         /// <returns></returns>
-        public static DataSet OperationAbility(string securityCode)
+        public static DataSet OperationAbility(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -782,7 +782,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("REPORTDATE", false));
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                     "REPORTDATE","DEC_BENYINGYEZHOUQI","DEC_BENCUNZHOUTIAN","DEC_BENZHANGZHOU","DEC_BENCUNZHOULV","DEC_BENZHANGLV","DEC_LDZCZZL","DEC_BENGUZILV","DEC_BENZONGZILV"
                 };
                 _DS = DataAccess.Query(WebDataSource.IND_OCI, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
@@ -801,7 +801,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet ProfitAbility(string securityCode)
+        public static DataSet ProfitAbility(String securityCode)
         {
             List<DataTransmission> data = new List<DataTransmission>();
             DataSet _DS = new DataSet();
@@ -828,11 +828,11 @@ namespace OwLib
                 _sorts_IND_SPA.Add(new Order("REPORTDATE", false));
                 _sorts_IND_QOE.Add(new Order("REPORTDATE", false));
                 _sorts_IND_TPOA.Add(new Order("REPORTDATE", false));
-                string[] _field_IND_POTY = new string[] { "REPORTDATE", "DEC_JINGSHOU", "DEC_ZONGBAO", "DEC_ROA", "DEC_KC_JB", "DEC_MGJZCBPS", "NETOPERATECASHFLOWPS", "DEC_QMGBTB", "DEC_MGYYZSR", "DEC_MGYYSR", "DEC_MGXSQLR", "DEC_MGZBGJ", "DEC_MGYYGJ", "DEC_MGWFPLR", "DEC_MGYYLC", "DEC_MGXJLLJE" };
-                string[] _field_IND_PAROE = new string[] { "REPORTDATE", "ROEFULLYDILUTED", "ROEWEIGHTED", "DEC_JZCSYLROEP", "DEC_JZCSYL_KC_TB", "DEC_JZCSYL_KC_JQ", "DEC_JZCSYL_KCFJCXSY", "DEC_ROLC" };
-                string[] _field_IND_SPA = new string[] { "REPORTDATE", "DEC_XSJLR", "DEC_XSMLL", "DEC_XSCBL", "DEC_XSQJFYL", "DEC_JLR_YYZSR", "DEC_YYLR_YYZSR", "DEC_XSQLR_YYZSR", "DEC_YYZCB_YYZSR", "DEC_YYFY_YYZSR", "DEC_GLFY_YYZSR", "DEC_CWFY_YYZSR", "DEC_ZCJZSS_YYZSR", "DEC_MGWFPLR" };
-                string[] _field_IND_QOE = new string[] { "REPORTDATE", "DEC_JYHDJSY_LRZE", "DEC_JZBDJSY_LRZE", "DEC_YYWSZJE_LRZE", "DEC_SDSL_LRZE", "DEC_KFMGSJLR_GSMGSJLR" };
-                string[] _field_IND_TPOA = new string[] { "REPORTDATE", "DEC_ZZCBCL", "DEC_ZZCJLL" };
+                String[] _field_IND_POTY = new String[] { "REPORTDATE", "DEC_JINGSHOU", "DEC_ZONGBAO", "DEC_ROA", "DEC_KC_JB", "DEC_MGJZCBPS", "NETOPERATECASHFLOWPS", "DEC_QMGBTB", "DEC_MGYYZSR", "DEC_MGYYSR", "DEC_MGXSQLR", "DEC_MGZBGJ", "DEC_MGYYGJ", "DEC_MGWFPLR", "DEC_MGYYLC", "DEC_MGXJLLJE" };
+                String[] _field_IND_PAROE = new String[] { "REPORTDATE", "ROEFULLYDILUTED", "ROEWEIGHTED", "DEC_JZCSYLROEP", "DEC_JZCSYL_KC_TB", "DEC_JZCSYL_KC_JQ", "DEC_JZCSYL_KCFJCXSY", "DEC_ROLC" };
+                String[] _field_IND_SPA = new String[] { "REPORTDATE", "DEC_XSJLR", "DEC_XSMLL", "DEC_XSCBL", "DEC_XSQJFYL", "DEC_JLR_YYZSR", "DEC_YYLR_YYZSR", "DEC_XSQLR_YYZSR", "DEC_YYZCB_YYZSR", "DEC_YYFY_YYZSR", "DEC_GLFY_YYZSR", "DEC_CWFY_YYZSR", "DEC_ZCJZSS_YYZSR", "DEC_MGWFPLR" };
+                String[] _field_IND_QOE = new String[] { "REPORTDATE", "DEC_JYHDJSY_LRZE", "DEC_JZBDJSY_LRZE", "DEC_YYWSZJE_LRZE", "DEC_SDSL_LRZE", "DEC_KFMGSJLR_GSMGSJLR" };
+                String[] _field_IND_TPOA = new String[] { "REPORTDATE", "DEC_ZZCBCL", "DEC_ZZCJLL" };
                 data.Add(DataAccess.GetData(WebDataSource.IND_POTY, _field_IND_POTY, _query_IND_POTY, _sorts_IND_POTY, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_PAROE, _field_IND_PAROE, _query_IND_PAROE, _sorts_IND_PAROE, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_SPA, _field_IND_SPA, _query_IND_SPA, _sorts_IND_SPA, _selector, 1, 8, false, ""));
@@ -938,7 +938,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet CapitalStructure(string securityCode)
+        public static DataSet CapitalStructure(String securityCode)
         {
             List<DataTransmission> data = new List<DataTransmission>();
             DataSet _DS = new DataSet();
@@ -961,10 +961,10 @@ namespace OwLib
                 _sorts_IND_DPA.Add(new Order("REPORTDATE", false));
                 _sorts_IND_DPAADD.Add(new Order("REPORTDATE", false));
                 _sorts_IND_BUSINESSS.Add(new Order("REPORTDATE", false));
-                string[] _field_IND_CAPITALS = new string[] { "REPORTDATE", "DEC_ZCFZL", "DEC_QYCS", "DEC_LDZC_ZCHJ", "DEC_FLDZC_ZCHJ", "DEC_YXZC_ZZC", "DEC_GSMGSQY_QBTRZB", "DEC_DXZW_QBTRZB", "DEC_LDFZ_FZHJ", "DEC_FLDFZ_FZHJ" };
-                string[] _field_IND_DPA = new string[] { "REPORTDATE", "DEC_LDBL", "DEC_SDBL", "DEC_BSSDBL", "DEC_CQBL", "DEC_GSMGSGDQY_FZHJ", "DEC_GSMGSGDQY_DXZW", "DEC_YXZC_FZHJ", "DEC_YXZC_DXZW", "DEC_YXZC_JZW" };
-                string[] _field_IND_DPAADD = new string[] { "REPORTDATE", "DEC_XISHUI_FUZHAI", "DEC_YIHUOLIXI", "DEC_EBITDA_DXZW" };
-                string[] _field_IND_BUSINESSS = new string[] { "REPORTDATE", "DEC_JYHDCSDXJLLJE_FZHJ", "DEC_JYHDCSDXJLLJE_DXZW", "DEC_JYHDCSDXJLLJE_LDFZ", "DEC_JYHDCSDXJLLJE_JZW" };
+                String[] _field_IND_CAPITALS = new String[] { "REPORTDATE", "DEC_ZCFZL", "DEC_QYCS", "DEC_LDZC_ZCHJ", "DEC_FLDZC_ZCHJ", "DEC_YXZC_ZZC", "DEC_GSMGSQY_QBTRZB", "DEC_DXZW_QBTRZB", "DEC_LDFZ_FZHJ", "DEC_FLDFZ_FZHJ" };
+                String[] _field_IND_DPA = new String[] { "REPORTDATE", "DEC_LDBL", "DEC_SDBL", "DEC_BSSDBL", "DEC_CQBL", "DEC_GSMGSGDQY_FZHJ", "DEC_GSMGSGDQY_DXZW", "DEC_YXZC_FZHJ", "DEC_YXZC_DXZW", "DEC_YXZC_JZW" };
+                String[] _field_IND_DPAADD = new String[] { "REPORTDATE", "DEC_XISHUI_FUZHAI", "DEC_YIHUOLIXI", "DEC_EBITDA_DXZW" };
+                String[] _field_IND_BUSINESSS = new String[] { "REPORTDATE", "DEC_JYHDCSDXJLLJE_FZHJ", "DEC_JYHDCSDXJLLJE_DXZW", "DEC_JYHDCSDXJLLJE_LDFZ", "DEC_JYHDCSDXJLLJE_JZW" };
                 data.Add(DataAccess.GetData(WebDataSource.IND_CAPITALS, _field_IND_CAPITALS, _query_IND_CAPITALS, _sorts_IND_CAPITALS, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_DPA, _field_IND_DPA, _query_IND_DPA, _sorts_IND_DPA, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_DPAADD, _field_IND_DPAADD, _query_IND_DPAADD, _sorts_IND_DPAADD, _selector, 1, 8, false, ""));
@@ -1042,7 +1042,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet SingleFinanceIndex(string securityCode)
+        public static DataSet SingleFinanceIndex(String securityCode)
         {
             List<DataTransmission> data = new List<DataTransmission>();
             DataSet _DS = new DataSet();
@@ -1065,10 +1065,10 @@ namespace OwLib
                 _sorts_IND_ASQPFI.Add(new Order("REPORTDATE", false));
                 _sorts_IND_QFIR.Add(new Order("REPORTDATE", false));
                 _sorts_IND_ASQYOYGOFI.Add(new Order("REPORTDATE", false));
-                string[] _field_IND_QUARTERLYI = new string[] { "REPORTDATE", "DEC_DJDMGSY", "DEC_DJDKFJLR", "DEC_DJDJZCSYLREO", "DEC_DJDKFJZCSYL", "DEC_DJDKFJLR_GSMGSJLR", "DEC_DJDSSSP_YYSR", "DEC_DJDJYHDJE_YYSR", "DEC_DJDJYHDJE_JYHDJSY" };
-                string[] _field_IND_ASQPFI = new string[] { "REPORTDATE", "DEC_DJDJYHDJSY", "DEC_DJDJZBDJSY", "DEC_ZCCJLVROA", "DEC_DJDXSJLR", "DEC_DJDXSMLL", "DEC_DJDYYZCB_YYZSR", "DEC_DJDYYLR_YYZSR", "DEC_JLR_YYZSR", "DEC_YYFY_YYZSR", "DEC_GLFY_YYZSR", "DEC_DJDCWFY_YYZSR", "DEC_DJDJYHDJSY_LRZE", "DEC_DJDJZBDJSY_LRZE" };
-                string[] _field_IND_QFIR = new string[] { "REPORTDATE", "DEC_YYZSRHBZZ", "DEC_YYSRHBZZ", "DEC_YYLRHBZZ", "DEC_JLRHBZZ", "DEC_GSMGSJLRHBZZ" };
-                string[] _field_IND_ASQYOYGOFI = new string[] { "REPORTDATE", "DEC_DJDYYZSRTBZZ", "DEC_DJDYYSRTBZZ", "DEC_DJDYYLRTBZZ", "DEC_DJDJLRTBZZ", "DEC_DJDGSMGSJLRTBZZ" };
+                String[] _field_IND_QUARTERLYI = new String[] { "REPORTDATE", "DEC_DJDMGSY", "DEC_DJDKFJLR", "DEC_DJDJZCSYLREO", "DEC_DJDKFJZCSYL", "DEC_DJDKFJLR_GSMGSJLR", "DEC_DJDSSSP_YYSR", "DEC_DJDJYHDJE_YYSR", "DEC_DJDJYHDJE_JYHDJSY" };
+                String[] _field_IND_ASQPFI = new String[] { "REPORTDATE", "DEC_DJDJYHDJSY", "DEC_DJDJZBDJSY", "DEC_ZCCJLVROA", "DEC_DJDXSJLR", "DEC_DJDXSMLL", "DEC_DJDYYZCB_YYZSR", "DEC_DJDYYLR_YYZSR", "DEC_JLR_YYZSR", "DEC_YYFY_YYZSR", "DEC_GLFY_YYZSR", "DEC_DJDCWFY_YYZSR", "DEC_DJDJYHDJSY_LRZE", "DEC_DJDJZBDJSY_LRZE" };
+                String[] _field_IND_QFIR = new String[] { "REPORTDATE", "DEC_YYZSRHBZZ", "DEC_YYSRHBZZ", "DEC_YYLRHBZZ", "DEC_JLRHBZZ", "DEC_GSMGSJLRHBZZ" };
+                String[] _field_IND_ASQYOYGOFI = new String[] { "REPORTDATE", "DEC_DJDYYZSRTBZZ", "DEC_DJDYYSRTBZZ", "DEC_DJDYYLRTBZZ", "DEC_DJDJLRTBZZ", "DEC_DJDGSMGSJLRTBZZ" };
                 data.Add(DataAccess.GetData(WebDataSource.IND_QUARTERLYI, _field_IND_QUARTERLYI, _query_IND_QUARTERLYI, _sorts_IND_QUARTERLYI, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_ASQPFI, _field_IND_ASQPFI, _query_IND_ASQPFI, _sorts_IND_ASQPFI, _selector, 1, 8, false, ""));
                 data.Add(DataAccess.GetData(WebDataSource.IND_QFIR, _field_IND_QFIR, _query_IND_QFIR, _sorts_IND_QFIR, _selector, 1, 8, false, ""));
@@ -1088,7 +1088,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet TransferDebt(string securityCode)
+        public static DataSet TransferDebt(String securityCode)
         {
             List<DataTransmission> data = new List<DataTransmission>();
             DataSet _DS = new DataSet();
@@ -1101,7 +1101,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("REPORTDATE", false));
 
-                string[] _field = new string[] { "STR_FAJD", "DEC_FXGM", "DEC_FXSL", "BONDPERIOD", "NEWRATE", "COUPONTYPE", "RATEDES", "PAYPERYEAR", "PAYTYPE", "FRSTVALUEDATE", "MRTYDATE", "LISTDATE", "DELISTDATE", "DAT_HUISHOURI", "DAT_SHENQQISR", "ENDATE" 
+                String[] _field = new String[] { "STR_FAJD", "DEC_FXGM", "DEC_FXSL", "BONDPERIOD", "NEWRATE", "COUPONTYPE", "RATEDES", "PAYPERYEAR", "PAYTYPE", "FRSTVALUEDATE", "MRTYDATE", "LISTDATE", "DELISTDATE", "DAT_HUISHOURI", "DAT_SHENQQISR", "ENDATE" 
                 ,"DEC_HSJGMZBI","SWAPPRICE","ISSUEDATE","AVALIPUB","DEC_XYGZGDPSBL","DEC_XYGZGDPSAP","DAT_YUANPEISRI","APLACVALHOID","DAT_GQDJR","DAT_YUANJIAOKUANRI","SIR_CSZGJSM","SPCHGSTD","STR_ZHQSM","STR_QJYTJHSSM","REVISECLAUSE","STR_ZHUCXS","STR_TUIJIANREN","ISSUEMETHOD","ISSUEFEE","PARVALUE","DAT_FXJGGGRI","STR_FENXIAOSHANG","BUYVALIPUB","DEC_YXSGHS","LUCKRATE"
                 ,"DEC_LC","INBUYNUMPUB","DAT_YAGGR","DAT_GDDHGGR","PUBLISHDATE","DAT_SSGGR"};
                 data.Add(DataAccess.GetData(WebDataSource.SP9_FAXINGKEZHUANZHAI, _field, _query, _sorts, _selector, 1, 8, false, ""));
@@ -1119,7 +1119,7 @@ namespace OwLib
         /// 财务费用明细
         /// </summary>
         /// <returns></returns>
-        public static DataSet FinanceDetails(string securityCode)
+        public static DataSet FinanceDetails(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -1130,7 +1130,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("REPORTDATE", false));
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                     "REPORTDATE","COMBINETYPE","DEC_LXZC","DEC_LXSR","DEC_HDSY","DEC_SXF","DEC_QT","DEC_HEJI"
                 };
                 _DS = DataAccess.Query(WebDataSource.IND_FINANCECOSTS, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
@@ -1149,7 +1149,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet GuaranteeCash(string securityCode)
+        public static DataSet GuaranteeCash(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -1160,7 +1160,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("STR_BAOGAOQI", false));
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                     "STR_BAOGAOQI","AAMTGUARANTEE","DEC_DBJEHJ","DEC_GLDBJEHJ","AAMTSUBSIDIARY","AMTILLEGAL","AAMTTONA","DEC_HEJI"
                 };
                 _DS = DataAccess.Query(WebDataSource.IND_GUARANTEEDATA, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
@@ -1179,7 +1179,7 @@ namespace OwLib
         /// </summary>
         /// <param name="securityCode"></param>
         /// <returns></returns>
-        public static DataSet StockDetails(string securityCode)
+        public static DataSet StockDetails(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -1190,7 +1190,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("REPORTDATE", false));
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                     "REPORTDATE","ACTUALITEM","BOOKAMTEND","FPREND"
                 };
                 _DS = DataAccess.Query(WebDataSource.IF9_INSTOCKDETAIL, _fileds, _querys, _sorts, _selectors, 1, int.MaxValue);
@@ -1208,7 +1208,7 @@ namespace OwLib
         /// 以下分别是 交易异动成交营业部
         /// </summary>
         /// <returns></returns>
-        public static DataSet BargainExchange(string securityCode)
+        public static DataSet BargainExchange(String securityCode)
         {
             DataSet _DS = new DataSet();
             try
@@ -1219,7 +1219,7 @@ namespace OwLib
                 List<Order> _sorts = new List<Order>();
                 _sorts.Add(new Order("TDATE", false));
 
-                string[] _fileds = new string[] {
+                String[] _fileds = new String[] {
                     "CTYPE","CSDATE","CEDATE","STADATE",
                     "SALESNAME","BMONEY","SMONEY","TVAL","DEC_YYBMRZB",
                     "DEC_YYBMCZB","DEC_YYBJYZB","CHGRADIO","TDATE"

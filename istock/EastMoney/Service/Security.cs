@@ -71,7 +71,7 @@ namespace OwLib
         /// 对象转换成String
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("{0}◎{1}◎{2}◎{3}◎{4}◎{5}◎{6}◎{7}", code, name, pingyin, state, innercode, type, marketcode, timestamp);
@@ -118,7 +118,7 @@ namespace OwLib
         /// 对象转换成String
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("{0}◎{1}◎{2}◎{3}", bkcode, code, innercode, timestamp);
@@ -145,7 +145,7 @@ namespace OwLib
         /// 对象转换成String
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("{0}◎{1}◎{2}◎{3}◎{4}◎{5}◎{6}◎{7}◎{8}", innerCode, code, name, parentcode, typcode, typname, tmpl, order, timestamp);

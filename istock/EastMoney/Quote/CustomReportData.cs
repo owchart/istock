@@ -13,7 +13,7 @@ namespace OwLib
     {
         public delegate void SendDataReceive(Dictionary<int, List<FieldIndex>> ChangedFields);
 
-        public delegate void SendDataReceiveEmCode(Dictionary<string, List<FieldIndex>> ChangedFields);
+        public delegate void SendDataReceiveEmCode(Dictionary<String, List<FieldIndex>> ChangedFields);
 
         public delegate void SearchFinishHandle(int id);
 
@@ -39,7 +39,7 @@ namespace OwLib
         /// </summary>
         private List<int> _codes;
 
-        private Dictionary<string, int> EmcodeToUnicode;
+        private Dictionary<String, int> EmcodeToUnicode;
 
         private Stopwatch _stopwatch;
 
@@ -86,14 +86,14 @@ namespace OwLib
         public CustomReportData()
         {
             _codes = new List<int>(0);
-            EmcodeToUnicode = new Dictionary<string, int>(1);
+            EmcodeToUnicode = new Dictionary<String, int>(1);
         }
         /// <summary>
         /// 设置股票代码
         /// </summary>
         /// <param name="id">标识</param>
         /// <param name="emcodes"></param>
-        public void SetEmCode(int id, string emcodes)
+        public void SetEmCode(int id, String emcodes)
         {
         }
 
@@ -106,8 +106,8 @@ namespace OwLib
 
                 if (ReceiveCustomReportDataEmCode != null)
                 {
-                    Dictionary<string, List<FieldIndex>> ChangedFields =
-                        new Dictionary<string, List<FieldIndex>>(
+                    Dictionary<String, List<FieldIndex>> ChangedFields =
+                        new Dictionary<String, List<FieldIndex>>(
                             ((ResCustomReportOrgDataPacket)e.DataPacket).ChangedFields.Count);
                     foreach (
                         KeyValuePair<int, List<FieldIndex>> onePair in
@@ -132,7 +132,7 @@ namespace OwLib
             return FieldInfoHelper.GetObjectValue(code, field);
         }
 
-        public object GetFieldData(string emcode, FieldIndex field)
+        public object GetFieldData(String emcode, FieldIndex field)
         {
             int unicode;
             if (EmcodeToUnicode.TryGetValue(emcode, out unicode))

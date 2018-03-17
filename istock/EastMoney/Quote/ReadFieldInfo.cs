@@ -62,10 +62,10 @@ namespace OwLib
         /// <param name="market">市场类型</param>
         /// <param name="fieldName">界面字段名称</param>
         /// <returns></returns>
-        public static FieldInfo GetFieldInfoByName(MarketType market, string fieldName)
+        public static FieldInfo GetFieldInfoByName(MarketType market, String fieldName)
         {
             FieldInfo result;
-            Dictionary<string, FieldInfo> dic;
+            Dictionary<String, FieldInfo> dic;
             if (FieldInfoCfgFileIO.DicMarketFieldInfo.TryGetValue(market, out dic)
                 && dic.TryGetValue(fieldName, out result))
             {
@@ -88,10 +88,10 @@ namespace OwLib
         /// <param name="specialFieldIndexValue">颜色配置比较的对象（FieldIndex）</param>
         /// <param name="dic">该FieldIndex对应的字典</param>
         /// <returns></returns>
-        public static string GetFieldFormattedValue<T>(int code, FieldIndex fieldIndex,
+        public static String GetFieldFormattedValue<T>(int code, FieldIndex fieldIndex,
             Format format, float specialFieldIndexValue, Dictionary<int, Dictionary<FieldIndex, T>> dic)
         {
-            string result = string.Empty;
+            String result = String.Empty;
 
             T tempResult = GetFieldValue(code, fieldIndex, dic);
             result = FormatField(tempResult, format, specialFieldIndexValue);
@@ -107,11 +107,11 @@ namespace OwLib
         /// <param name="format">格式化的格式</param>
         /// <param name="zRuleComparedIndexValue">ZRule中比较的FieldIndex</param>
         /// <returns>进行格式化后的字符串</returns>
-        private static string FormatField<T>(T originalValue, Format format, float zRuleComparedIndexValue)
+        private static String FormatField<T>(T originalValue, Format format, float zRuleComparedIndexValue)
         {
             if (originalValue == null)
-                return string.Empty;
-            string result = originalValue.ToString();
+                return String.Empty;
+            String result = originalValue.ToString();
 
             // Run Z Rule.
             if (format.ZeroRule != null
@@ -821,10 +821,10 @@ namespace OwLib
         /// <param name="name">界面配置实用的字段别名</param>
         /// <param name="formattedValue">返回的格式化字符串</param>
         /// <param name="brush">返回的颜色画刷</param>
-        public static void GetFieldInfo(int code, string name,
-            out string formattedValue, out SolidBrush brush)
+        public static void GetFieldInfo(int code, String name,
+            out String formattedValue, out SolidBrush brush)
         {
-            formattedValue = string.Empty;
+            formattedValue = String.Empty;
             brush = QuoteDrawService.BrushColorCode;
             FieldInfo fieldInfo = GetFieldInfoByName(code, name);
             if (fieldInfo == null)
@@ -840,9 +840,9 @@ namespace OwLib
         /// </summary>
         /// <param name="code">证券代码</param>
         /// <param name="name">界面配置实用的字段别名</param>   
-        public static string GetFieldValue(int code, string name)
+        public static String GetFieldValue(int code, String name)
         {
-            string formattedValue = string.Empty;
+            String formattedValue = String.Empty;
             FieldInfo fieldInfo = GetFieldInfoByName(code, name);
             formattedValue = GetFieldValueByFieldInfo(code, fieldInfo.FieldIndex, fieldInfo.Format);
 
@@ -858,11 +858,11 @@ namespace OwLib
         /// <param name="exportValue">返回导出的值</param>
         /// <param name="type">返回导出的值的类型</param>
         /// <returns>是否成功</returns>
-        public static bool TryGetFieldExportValue(int code, string name,
+        public static bool TryGetFieldExportValue(int code, String name,
             out object exportValue, out Type type)
         {
             bool success = false;
-            string formattedExportValue = string.Empty;
+            String formattedExportValue = String.Empty;
             FieldInfo fieldInfo = GetFieldInfoByName(code, name);
             formattedExportValue = GetFieldValueByFieldInfo(code, fieldInfo.FieldIndex, fieldInfo.ExportFormat);
             type = fieldInfo.ExportType;
@@ -914,7 +914,7 @@ namespace OwLib
         /// <param name="code"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        private static FieldInfo GetFieldInfoByName(int code, string fieldName)
+        private static FieldInfo GetFieldInfoByName(int code, String fieldName)
         {
             MarketType market = FieldInfoHelper.GetMarketByCode(code);
             return FieldInfoHelper.GetFieldInfoByName(market, fieldName);
@@ -927,12 +927,12 @@ namespace OwLib
         /// <param name="fieldIndex">FieldIndex</param>
         /// <param name="format">格式</param>
         /// <returns>格式化后的字符串</returns>
-        private static string GetFieldValueByFieldInfo(int code, FieldIndex fieldIndex, Format format)
+        private static String GetFieldValueByFieldInfo(int code, FieldIndex fieldIndex, Format format)
         {
-            string result = string.Empty;
+            String result = String.Empty;
 
             if (format == null)
-                return string.Empty;
+                return String.Empty;
 
             float fieldIndexValue = 0.0f;
             if (format.ZeroRule != null
@@ -993,7 +993,7 @@ namespace OwLib
             }
             if ((int)field >= 1200 && (int)field <= 8999)
             {
-                string data = _dc.GetFieldDataString(code, field);
+                String data = _dc.GetFieldDataString(code, field);
                 return GetFieldBrushByFieldInfo(code, fieldInfo, data);
             }
             else
@@ -1088,7 +1088,7 @@ namespace OwLib
                 }
                 else if (fieldInfo.ColorSetting[0].Equals("#"))
                 {
-                    string aimName = fieldInfo.ColorSetting[1];
+                    String aimName = fieldInfo.ColorSetting[1];
                     FieldInfo aimField = GetFieldInfoByName(code, aimName);
                     return GetFieldBrushByFieldInfo(code, aimField);
                 }
@@ -1177,7 +1177,7 @@ namespace OwLib
                 }
                 else if (fieldInfo.ColorSetting[0].Equals("#"))
                 {
-                    string aimName = fieldInfo.ColorSetting[1];
+                    String aimName = fieldInfo.ColorSetting[1];
                     FieldInfo aimField = GetFieldInfoByName(code, aimName);
                     return GetFieldBrushByFieldInfo(code, aimField);
                 }
@@ -1266,7 +1266,7 @@ namespace OwLib
                 }
                 else if (fieldInfo.ColorSetting[0].Equals("#"))
                 {
-                    string aimName = fieldInfo.ColorSetting[1];
+                    String aimName = fieldInfo.ColorSetting[1];
                     FieldInfo aimField = GetFieldInfoByName(code, aimName);
                     return GetFieldBrushByFieldInfo(code, aimField);
                 }
@@ -1355,7 +1355,7 @@ namespace OwLib
                 }
                 else if (fieldInfo.ColorSetting[0].Equals("#"))
                 {
-                    string aimName = fieldInfo.ColorSetting[1];
+                    String aimName = fieldInfo.ColorSetting[1];
                     FieldInfo aimField = GetFieldInfoByName(code, aimName);
                     return GetFieldBrushByFieldInfo(code, aimField);
                 }
@@ -1363,7 +1363,7 @@ namespace OwLib
             return QuoteDrawService.BrushColorCode;
         }
 
-        private static SolidBrush GetFieldBrushByFieldInfo(int code, FieldInfo fieldInfo, string data)
+        private static SolidBrush GetFieldBrushByFieldInfo(int code, FieldInfo fieldInfo, String data)
         {
             if (fieldInfo.ColorSetting.Count == 1)
             {
@@ -1448,7 +1448,7 @@ namespace OwLib
                 }
                 else if (fieldInfo.ColorSetting[0].Equals("#"))
                 {
-                    string aimName = fieldInfo.ColorSetting[1];
+                    String aimName = fieldInfo.ColorSetting[1];
                     FieldInfo aimField = GetFieldInfoByName(code, aimName);
                     return GetFieldBrushByFieldInfo(code, aimField);
                 }

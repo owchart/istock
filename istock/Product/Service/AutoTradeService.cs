@@ -199,7 +199,7 @@ namespace OwLib
         private static extern int FindWindow(String lpClassName, String lpWindowName);
 
         [DllImport("User32.dll", EntryPoint = "FindWindowEx")]
-        private static extern int FindWindowEx(int hwndParent, int hwndChildAfter, string lpszClass, string lpszWindow);
+        private static extern int FindWindowEx(int hwndParent, int hwndChildAfter, String lpszClass, String lpszWindow);
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -224,7 +224,7 @@ namespace OwLib
            IntPtr windowHandle,
            uint Msg,
            IntPtr wParam,
-           string lParam,
+           String lParam,
            SendMessageTimeoutFlags flags,
            uint timeout,
            out IntPtr result
@@ -597,7 +597,7 @@ namespace OwLib
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        public static int SendKey(string cmd)
+        public static int SendKey(String cmd)
         {
             int intKey = Convert.ToInt32(cmd);
             SendKeys.SendWait(((char)intKey).ToString());
@@ -683,7 +683,7 @@ namespace OwLib
 
                         PostMessage(buyButtonInfo.m_hWnd, WM_KEYDOWN, (int)Keys.B, 0);
                         Thread.Sleep(200);
-                        List<String> titles = new List<string>();
+                        List<String> titles = new List<String>();
                         titles.Add("是否确定以上买入委托？");
                         String tipTitle = CheckPopupWindow(titles, "是(&Y)", keys);
                         titles.Clear();
@@ -759,7 +759,7 @@ namespace OwLib
 
                         PostMessage(cancelBuyButtonInfo.m_hWnd, WM_KEYDOWN, (int)Keys.X, 0);
                         Thread.Sleep(200);
-                        List<String> titles = new List<string>();
+                        List<String> titles = new List<String>();
                         titles.Add("笔买入委托吗？");
                         String tipTitle = CheckPopupWindow(titles, "是(&Y)", keys);
                         titles.Clear();
@@ -835,7 +835,7 @@ namespace OwLib
 
                         PostMessage(cancelSellButtonInfo.m_hWnd, WM_KEYDOWN, (int)Keys.C, 0);
                         Thread.Sleep(200);
-                        List<String> titles = new List<string>();
+                        List<String> titles = new List<String>();
                         titles.Add("笔卖出委托吗？");
                         String tipTitle = CheckPopupWindow(titles, "是(&Y)", keys);
                         titles.Clear();
@@ -1406,7 +1406,7 @@ namespace OwLib
 
                         PostMessage(sellButtonInfo.m_hWnd, WM_KEYDOWN, (int)Keys.S, 0);
                         Thread.Sleep(200);
-                        List<String> titles = new List<string>();
+                        List<String> titles = new List<String>();
                         titles.Add("是否确定以上卖出委托？");
                         String tipTitle = CheckPopupWindow(titles, "是(&Y)", keys);
                         titles.Clear();

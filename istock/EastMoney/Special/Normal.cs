@@ -12,7 +12,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string Trim(object obj)
+        public static String Trim(object obj)
         {
             return ParseString(obj).Trim();
         }
@@ -23,7 +23,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string CheckPoint(object obj)
+        public static String CheckPoint(object obj)
         {
             return ParseString(obj).Replace("'", "''");
         }
@@ -33,7 +33,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string ListStr(object obj)
+        public static String ListStr(object obj)
         {
             return ParseString(obj).Replace("<", "&lt;")
                 .Replace(">", "&gt;").Replace("\"", "&quot;");
@@ -44,7 +44,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string ListStrs(object obj)
+        public static String ListStrs(object obj)
         {
             char ch1 = (char)13; // 换行
             char ch2 = (char)32; // 空格
@@ -59,7 +59,7 @@ namespace OwLib
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string ListStrsRev(object obj)
+        public static String ListStrsRev(object obj)
         {
             return ParseString(obj).Replace("&lt;", "<")
                 .Replace("&gt;", ">");
@@ -69,7 +69,7 @@ namespace OwLib
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        public static string formatSqlDate(DateTime d)
+        public static String formatSqlDate(DateTime d)
         {
             DateTime d1 = ParseDateTime("1900-01-02");
             if (d < d1)
@@ -83,7 +83,7 @@ namespace OwLib
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        public static string formatSqlDateTime(DateTime d)
+        public static String formatSqlDateTime(DateTime d)
         {
             DateTime d1 = ParseDateTime("1900-01-02");
             if (d < d1)

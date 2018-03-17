@@ -9,8 +9,8 @@ namespace OwLib
     /// </summary>
     public class RankDataTable : DataTableBase
     {
-        private Dictionary<string, RankOrgDataRec> _rankOrgData;
-        private Dictionary<string, NetInflowRankType> _netInflowRankData;
+        private Dictionary<String, RankOrgDataRec> _rankOrgData;
+        private Dictionary<String, NetInflowRankType> _netInflowRankData;
         private Dictionary<ReqSecurityType, RankDataRec> _rankData;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace OwLib
         /// <summary>
         /// 机构版综合排名
         /// </summary>
-        public Dictionary<string, RankOrgDataRec> RankOrgData
+        public Dictionary<String, RankOrgDataRec> RankOrgData
         {
             get { return _rankOrgData; }
             private set { _rankOrgData = value; }
@@ -34,7 +34,7 @@ namespace OwLib
         /// <summary>
         /// 净流入排名
         /// </summary>
-        public Dictionary<string, NetInflowRankType> NetInflowRankData
+        public Dictionary<String, NetInflowRankType> NetInflowRankData
         {
             get { return _netInflowRankData; }
             private set { _netInflowRankData = value; }
@@ -47,8 +47,8 @@ namespace OwLib
         public RankDataTable()
         {
             RankData = new Dictionary<ReqSecurityType, RankDataRec>(0); 
-            RankOrgData = new Dictionary<string, RankOrgDataRec>(0);
-            NetInflowRankData = new Dictionary<string, NetInflowRankType>(0);
+            RankOrgData = new Dictionary<String, RankOrgDataRec>(0);
+            NetInflowRankData = new Dictionary<String, NetInflowRankType>(0);
         }
         /// <summary>
         /// SetData

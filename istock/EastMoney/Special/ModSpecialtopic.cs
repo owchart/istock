@@ -5,19 +5,19 @@ namespace OwLib
     [Serializable]
     public class ModSpecialtopic : IComparable, ICloneable
     {
-        private string _cateGoryCode;
-        private string _cateGoryName;
+        private String _cateGoryCode;
+        private String _cateGoryName;
         private int _cateGorySortCode;
-        private string _configFileName;
-        private string _descRiption;
-        private string _engName;
-        private string _HelpUrl;
-        private string _ID;
+        private String _configFileName;
+        private String _descRiption;
+        private String _engName;
+        private String _HelpUrl;
+        private String _ID;
         private int _isImportant;
         private int _isShowBlock;
         private int _sortCode;
-        private string _specialTopicCode;
-        private string _specialTopicName;
+        private String _specialTopicCode;
+        private String _specialTopicName;
         private double _updateID;
         private double _updatePerson;
         public int Version;
@@ -58,7 +58,7 @@ namespace OwLib
             return 1;
         }
 
-        public string CateGoryCode
+        public String CateGoryCode
         {
             get
             {
@@ -70,7 +70,7 @@ namespace OwLib
             }
         }
 
-        public string CateGoryName
+        public String CateGoryName
         {
             get
             {
@@ -94,7 +94,7 @@ namespace OwLib
             }
         }
 
-        public string ConfigFileName
+        public String ConfigFileName
         {
             get
             {
@@ -106,7 +106,7 @@ namespace OwLib
             }
         }
 
-        public string DescRiption
+        public String DescRiption
         {
             get
             {
@@ -118,7 +118,7 @@ namespace OwLib
             }
         }
 
-        public string EngName
+        public String EngName
         {
             get
             {
@@ -130,7 +130,7 @@ namespace OwLib
             }
         }
 
-        public string HlepUrl
+        public String HlepUrl
         {
             get
             {
@@ -142,7 +142,7 @@ namespace OwLib
             }
         }
 
-        public string ID
+        public String ID
         {
             get
             {
@@ -190,7 +190,7 @@ namespace OwLib
             }
         }
 
-        public string SpecialTopicCode
+        public String SpecialTopicCode
         {
             get
             {
@@ -202,7 +202,7 @@ namespace OwLib
             }
         }
 
-        public string SpecialTopicName
+        public String SpecialTopicName
         {
             get
             {

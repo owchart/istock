@@ -371,6 +371,41 @@ namespace OwLib
             return indicator;
         }
 
+        /// <summary>
+        /// °ó¶¨Ç÷ÊÆÏß
+        /// </summary>
+        /// <param name="dataInfo"></param>
+        /// <param name="historyDatas"></param>
+        public void BindTrendLines(HistoryDataInfo dataInfo, List<SecurityData> historyDatas)
+        {
+            if (m_showMinuteLine)
+            {
+                CTable dataSource = m_chart.DataSource;
+                int[] fields = new int[7];
+                fields[0] = KeyFields.CLOSE_INDEX;
+                fields[1] = KeyFields.HIGH_INDEX;
+                fields[2] = KeyFields.LOW_INDEX;
+                fields[3] = KeyFields.OPEN_INDEX;
+                fields[4] = KeyFields.VOL_INDEX;
+                fields[5] = KeyFields.AMOUNT_INDEX;
+                fields[6] = KeyFields.AVGPRICE_INDEX;
+                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas);
+                int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
+                double date = dataSource.GetXValue(0);
+                CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 0, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 30, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 0, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 30, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 13, 30, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 0, 0, 0));
+                m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 30, 0, 0));
+                RefreshData();
+                m_chart.Update();
+                m_chart.Invalidate();
+            }
+        }
+
         public void BindHistoryData(HistoryDataInfo dataInfo, List<SecurityData> historyDatas)
         {
             int size = historyDatas.Count;
@@ -387,51 +422,27 @@ namespace OwLib
                && dataInfo.m_code == m_latestDiv.SecurityCode
                && dataInfo.m_subscription == m_subscription)
             {
-                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas, m_showMinuteLine);
-                //if (m_cycle == 0)
-                //{
-                //    int lastIndex = dataSource.GetRowIndex(historyDatas[size - 1].m_date);
-                //    SecurityDataHelper.InsertLatestData(m_chart, dataSource, m_indicators, fields, m_preClosePrice, lastIndex);
-                //}
+                SecurityDataHelper.BindHistoryDatas(m_chart, dataSource, m_indicators, fields, historyDatas);
                 m_hScaleSteps.Clear();
-                if (m_showMinuteLine)
+                int rowsSize = dataSource.RowsCount;
+                for (int i = 0; i < rowsSize; i++)
                 {
-                    int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;
-                    double date = dataSource.GetXValue(0);
-                    CStrA.M130(date, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 0, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 10, 30, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 0, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 11, 30, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 13, 30, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 0, 0, 0));
-                    m_hScaleSteps.Add(CStrA.M129(year, month, day, 14, 30, 0, 0));
-                }
-                else
-                {
-                    int rowsSize = dataSource.RowsCount;
-                    for (int i = 0; i < rowsSize; i++)
+                    double volume = dataSource.Get2(i, KeyFields.VOL_INDEX);
+                    if (!double.IsNaN(volume))
                     {
-                        double volume = dataSource.Get2(i, KeyFields.VOL_INDEX);
-                        if (!double.IsNaN(volume))
-                        {
-                            m_index = i;
-                        }
-                        if (!m_showMinuteLine)
-                        {
-                            double close = dataSource.Get2(i, KeyFields.CLOSE_INDEX);
-                            double open = dataSource.Get2(i, KeyFields.OPEN_INDEX);
-                            if (close >= open)
-                            {
-                                dataSource.Set2(i, m_bar.StyleField, 1);
-                                dataSource.Set2(i, m_bar.ColorField, CDraw.PCOLORS_UPCOLOR);
-                            }
-                            else
-                            {
-                                dataSource.Set2(i, m_bar.StyleField, 0);
-                                dataSource.Set2(i, m_bar.ColorField, CDraw.PCOLORS_DOWNCOLOR2);
-                            }
-                        }
+                        m_index = i;
+                    }
+                    double close = dataSource.Get2(i, KeyFields.CLOSE_INDEX);
+                    double open = dataSource.Get2(i, KeyFields.OPEN_INDEX);
+                    if (close >= open)
+                    {
+                        dataSource.Set2(i, m_bar.StyleField, 1);
+                        dataSource.Set2(i, m_bar.ColorField, CDraw.PCOLORS_UPCOLOR);
+                    }
+                    else
+                    {
+                        dataSource.Set2(i, m_bar.StyleField, 0);
+                        dataSource.Set2(i, m_bar.ColorField, CDraw.PCOLORS_DOWNCOLOR2);
                     }
                 }
                 RefreshData();
@@ -1186,10 +1197,7 @@ namespace OwLib
 
         public void RefreshKLineData(List<SecurityLatestData> datas)
         {
-            if (m_cycle != SecurityDataHelper.CYCLE_DAY)
-            {
-                return;
-            }
+            return;
             int dataSize = datas.Count;
             if (dataSize == 0)
             {
@@ -1476,6 +1484,7 @@ namespace OwLib
             m_latestDiv.Type = security.m_type;
             CFTService.QuitLV2(m_latestDiv.SecurityCode);
             CFTService.QuitTrendLine(m_latestDiv.SecurityCode);
+            CFTService.QuitHistoryDatas(m_latestDiv.SecurityCode);
             m_latestDiv.SecurityCode = security.m_code;
             m_latestDiv.SecurityName = security.m_name;
             HistoryDataInfo dataInfo = new HistoryDataInfo();

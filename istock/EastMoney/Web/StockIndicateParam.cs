@@ -12,41 +12,41 @@ namespace OwLib
     /// </summary>
     public class StockIndicateParam
     {
-        private string _name;
+        private String _name;
 
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        private string _secucode;
+        private String _secucode;
 
-        public string Secucode
+        public String Secucode
         {
             get { return _secucode; }
             set { _secucode = value; }
         }
 
-        private Dictionary<string, string> _dic;
+        private Dictionary<String, String> _dic;
         /// <summary>
         /// 指标函数 参数
         /// $StartDate=2013-01-01,EndDate=2013-09-10\r\n
         /// 其中StartDate=2013-01-01,EndDate=2013-09-10为参数
         /// </summary>
-        public Dictionary<string, string> Dic
+        public Dictionary<String, String> Dic
         {
             get { return _dic; }
             set { _dic = value; }
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("$-rpt");
             sb.Append("\r\n");
             sb.Append("$name=" + this._name);
             sb.Append("\r\n");
-            if (!string.IsNullOrEmpty(this._secucode))
+            if (!String.IsNullOrEmpty(this._secucode))
             {
                 sb.Append("$secucode=" + this._secucode);
             }
@@ -72,7 +72,7 @@ namespace OwLib
             return sb.ToString();
         }
 
-        public string ToString(string type)
+        public String ToString(String type)
         {
             StringBuilder sb = new StringBuilder();
             switch (type)
@@ -82,7 +82,7 @@ namespace OwLib
                     sb.Append("\r\n");
                     sb.Append("$name=" + this._name);
                     sb.Append("\r\n");
-                    if (!string.IsNullOrEmpty(this._secucode))
+                    if (!String.IsNullOrEmpty(this._secucode))
                     {
                         sb.Append("$secuCode=" + this._secucode);
                     }
@@ -111,7 +111,7 @@ namespace OwLib
                     sb.Append("\r\n");
                     sb.Append("$name=" + this._name);
                     sb.Append("\r\n");
-                    if (!string.IsNullOrEmpty(this._secucode))
+                    if (!String.IsNullOrEmpty(this._secucode))
                     {
                         sb.Append("$secuCode=" + this._secucode);
                     }

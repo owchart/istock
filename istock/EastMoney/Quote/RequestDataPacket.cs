@@ -64,7 +64,7 @@ namespace OwLib
     {
         private int _code;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
 
         public ReqStockDetailDataPacket()
         {
@@ -123,7 +123,7 @@ namespace OwLib
 
         private int _code;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _unicode;
         public List<int> Codes;
 
@@ -166,7 +166,7 @@ namespace OwLib
         public static int ConvertCodeOrgToCft(int code)
         {
             ReqMarketType type;
-            string str;
+            String str;
             DataPacket.ParseCode(DetailData.FieldIndexDataString[code][ FieldIndex.EMCode], out type, out str);
             byte market = (byte)type;
             return ConvertCode.ConvertCodeToInt(Encoding.ASCII.GetBytes(str), market);
@@ -327,7 +327,7 @@ namespace OwLib
 
         private int SetCode(int code)
         {
-            string shortCode = string.Empty;
+            String shortCode = String.Empty;
             ReqMarketType market = ReqMarketType.MT_NA;
             DataPacket.ParseCode(DllImportHelper.GetFieldDataString(code, FieldIndex.EMCode), out market, out shortCode);
             byte num = (byte)market;
@@ -514,10 +514,10 @@ namespace OwLib
 
         private int SetCode(int code)
         {
-            string shortCode = string.Empty;
+            String shortCode = String.Empty;
             ReqMarketType tmp = ReqMarketType.MT_NA;
             byte market;
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(code))
                 DetailData.FieldIndexDataString[code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -590,7 +590,7 @@ namespace OwLib
                 _code = value;
 
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = _code;
+                String emcode = _code;
 
                 if (emcode.StartsWith("I"))
                 {
@@ -625,7 +625,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private String _code;
         private int _unicode;
 
@@ -650,7 +650,7 @@ namespace OwLib
         private int _code;
         private int _lastRequestPoint;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _time;
         private int ContainerId;
         private int CtrlId;
@@ -686,7 +686,7 @@ namespace OwLib
             }
             if (this.ContainerId == 0)
             {
-                //LogUtilities.LogMessagePublishInfo(string.Concat(new object[] { "trend containerId = 0!, ispush=", this.IsPush, ", code=", this._shortCode.TrimEnd(new char[1]) }));
+                //LogUtilities.LogMessagePublishInfo(String.Concat(new object[] { "trend containerId = 0!, ispush=", this.IsPush, ", code=", this._shortCode.TrimEnd(new char[1]) }));
             }
             else
             {
@@ -773,7 +773,7 @@ namespace OwLib
             {
                 _code = value;
 
-                string shortcode = string.Empty;
+                String shortcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.Code, out shortcode);
 
@@ -787,7 +787,7 @@ namespace OwLib
                         _shortCode = "040122";
                     else if (shortcode == "IF00C4")
                         _shortCode = "040123";
-                    else if (!string.IsNullOrEmpty(shortcode))
+                    else if (!String.IsNullOrEmpty(shortcode))
                         _shortCode = "0411" + shortcode.Substring(shortcode.Length - 2, 2) + '\0';
                 }
                 else if (shortcode.StartsWith("T"))
@@ -823,7 +823,7 @@ namespace OwLib
 
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -854,8 +854,8 @@ namespace OwLib
     {
 
         private byte _market;
-        private string _shortCode;
-        private string _code;
+        private String _shortCode;
+        private String _code;
 
         /// <summary>
         /// 上一次请求的下标
@@ -865,7 +865,7 @@ namespace OwLib
         /// <summary>
         /// 股票代码
         /// </summary>
-        public string Code
+        public String Code
         {
             get { return _code; }
             set
@@ -930,7 +930,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _lastRequestPoint;
 
@@ -944,7 +944,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1016,7 +1016,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _lastRequestPoint;
 
@@ -1030,7 +1030,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1089,7 +1089,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
                 ParseCode(emcode, out tmp, out _shortCode);
@@ -1098,7 +1098,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -1155,8 +1155,8 @@ namespace OwLib
             foreach (int code in codes)
             {
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string shortCode = string.Empty;
-                string emcode = string.Empty;
+                String shortCode = String.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(code))
                     DetailData.FieldIndexDataString[code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1202,7 +1202,7 @@ namespace OwLib
     public class ReqHisKLineDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -1214,7 +1214,7 @@ namespace OwLib
             set
             {
                 _code = value;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1380,7 +1380,7 @@ namespace OwLib
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ReqBlockSimpleQuoteDataPacket(string blockId)
+        public ReqBlockSimpleQuoteDataPacket(String blockId)
         {
             RequestType = FuncTypeRealTime.BlockSimpleQuote;
             IsPush = true;
@@ -1392,12 +1392,12 @@ namespace OwLib
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ReqBlockSimpleQuoteDataPacket(List<string> blockIdList)
+        public ReqBlockSimpleQuoteDataPacket(List<String> blockIdList)
         {
             RequestType = FuncTypeRealTime.BlockSimpleQuote;
             IsPush = true;
             _unicodeList = new List<int>(blockIdList.Count);
-            foreach (string blockid in blockIdList)
+            foreach (String blockid in blockIdList)
             {
                 int unicode = ConvertCode.ConvertCodeToInt(Encoding.ASCII.GetBytes(blockid),
                                                        Convert.ToByte(ReqMarketType.MT_Plate));
@@ -1445,7 +1445,7 @@ namespace OwLib
 
                 if (_isBlock)
                 {
-                    foreach (string id in _idInput)
+                    foreach (String id in _idInput)
                     {
                         int unicodeId = ConvertCode.ConvertCodeToInt(Encoding.ASCII.GetBytes(id), (byte)ReqMarketType.MT_Plate);
                         _unicodeList.Add(unicodeId);
@@ -1453,7 +1453,7 @@ namespace OwLib
                 }
                 else
                 {
-                    foreach (string id in _idInput)
+                    foreach (String id in _idInput)
                         _unicodeList.Add(Convert.ToInt32(id));
                 }
             }
@@ -1487,11 +1487,11 @@ namespace OwLib
         private List<byte> _fieldIndexList;
 
         private List<int> _unicodeList;
-        private List<string> _idInput;
+        private List<String> _idInput;
         /// <summary>
         /// 
         /// </summary>
-        public List<string> IdInput
+        public List<String> IdInput
         {
             get { return _idInput; }
             set { _idInput = value; }
@@ -1499,7 +1499,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqSectorQuoteReportDataPacket(List<string> id)
+        public ReqSectorQuoteReportDataPacket(List<String> id)
         {
             RequestType = FuncTypeRealTime.SectorQuoteReport;
             IsResponseData = true;
@@ -1512,14 +1512,14 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqSectorQuoteReportDataPacket(string id)
+        public ReqSectorQuoteReportDataPacket(String id)
         {
             RequestType = FuncTypeRealTime.SectorQuoteReport;
             IsResponseData = true;
             IsPush = true;
             _bNumFieldIndex = false;
             _unicodeList = new List<int>(1);
-            _idInput = new List<string>(1);
+            _idInput = new List<String>(1);
             _idInput.Add(id);
             _isBlock = false;
         }
@@ -1588,7 +1588,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBlockIndexReportDataPacket(string blockId)
+        public ReqBlockIndexReportDataPacket(String blockId)
         {
             RequestType = FuncTypeRealTime.BlockIndexReport;
             IsResponseData = true;
@@ -1603,7 +1603,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBlockIndexReportDataPacket(List<string> blockId)
+        public ReqBlockIndexReportDataPacket(List<String> blockId)
         {
             RequestType = FuncTypeRealTime.BlockIndexReport;
             IsResponseData = true;
@@ -1644,7 +1644,7 @@ namespace OwLib
     public class ReqDealRequestDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -1657,11 +1657,11 @@ namespace OwLib
             {
                 _code = value;
 
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
-                string shortcode = string.Empty;
+                String shortcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.Code, out shortcode);
 
@@ -1682,7 +1682,7 @@ namespace OwLib
                         _shortCode = "040122\0";
                     else if (shortcode == "IF00C4")
                         _shortCode = "040123\0";
-                    else if (!string.IsNullOrEmpty(shortcode))
+                    else if (!String.IsNullOrEmpty(shortcode))
                         _shortCode = "0411" + shortcode.Substring(shortcode.Length - 2, 2) + '\0';
                     _market = (byte)ReqMarketType.MT_IndexFutures;
                 }
@@ -1697,7 +1697,7 @@ namespace OwLib
                         _shortCode = "050122\0";
                     else if (shortcode == "TF00C4")
                         _shortCode = "050123\0";
-                    else if (!string.IsNullOrEmpty(shortcode))
+                    else if (!String.IsNullOrEmpty(shortcode))
                         _shortCode = "0511" + shortcode.Substring(shortcode.Length - 2, 2) + '\0';
                     _market = (byte)ReqMarketType.MT_IndexFutures;
                 }
@@ -1750,7 +1750,7 @@ namespace OwLib
     public class ReqDealSubscribeDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -1762,11 +1762,11 @@ namespace OwLib
             set
             {
                 _code = value;
-                string shortcode = string.Empty;
+                String shortcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.Code, out shortcode);
 
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1788,7 +1788,7 @@ namespace OwLib
                         _shortCode = "040122\0";
                     else if (shortcode == "IF00C4")
                         _shortCode = "040123\0";
-                    else if (!string.IsNullOrEmpty(shortcode))
+                    else if (!String.IsNullOrEmpty(shortcode))
                         _shortCode = "0411" + shortcode.Substring(shortcode.Length - 2, 2) + '\0';
                     _market = (byte)ReqMarketType.MT_IndexFutures;
                 }
@@ -1803,7 +1803,7 @@ namespace OwLib
                         _shortCode = "050122\0";
                     else if (shortcode == "TF00C4")
                         _shortCode = "050123\0";
-                    else if (!string.IsNullOrEmpty(shortcode))
+                    else if (!String.IsNullOrEmpty(shortcode))
                         _shortCode = "0511" + shortcode.Substring(shortcode.Length - 2, 2) + '\0';
                     _market = (byte)ReqMarketType.MT_IndexFutures;
                 }
@@ -1881,7 +1881,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1893,7 +1893,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _unicode;
         /// <summary>
@@ -1931,7 +1931,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
                 ParseCode(emcode, out tmp, out _shortCode);
@@ -1942,7 +1942,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _unicode;
         /// <summary>
@@ -2011,7 +2011,7 @@ namespace OwLib
     public class ReqF10DataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -2024,7 +2024,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2078,7 +2078,7 @@ namespace OwLib
         private int _stockID;
         private int _code;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         /// <summary>
         /// 股票内码
         /// </summary>
@@ -2092,7 +2092,7 @@ namespace OwLib
         private int SetCode(int code)
         {
             ReqMarketType tmp = ReqMarketType.MT_NA;
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(_code))
                 DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2143,7 +2143,7 @@ namespace OwLib
     {
         private int _code;
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
 
         /// <summary>
         /// 市场代码
@@ -2152,7 +2152,7 @@ namespace OwLib
         /// <summary>
         /// 股票代码(7个Byte)
         /// </summary>
-        public string ShortCode { get { return _shortCode; } set { _shortCode = value; } }
+        public String ShortCode { get { return _shortCode; } set { _shortCode = value; } }
         /// <summary>
         /// 请求数据类型数据模式
         /// </summary>
@@ -2185,11 +2185,11 @@ namespace OwLib
             {
                 _code = value;
 
-                string shortcode = string.Empty;
+                String shortcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.Code, out shortcode);
 
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2300,7 +2300,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2337,7 +2337,7 @@ namespace OwLib
         public ReqTickFlag Flag;
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _unicode;
         /// <summary>
@@ -2385,7 +2385,7 @@ namespace OwLib
     public class ReqOrderQueueDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _unicode;
 
@@ -2399,7 +2399,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2535,7 +2535,7 @@ namespace OwLib
     public class ReqStatisticsAnalysisDataPacket : RealTimeDataPacket
     {
         private int _code;
-        public string Url;
+        public String Url;
         public int Code
         {
             set
@@ -2543,13 +2543,13 @@ namespace OwLib
                 _code = value;
                 try
                 {
-                    string emcode = string.Empty;
+                    String emcode = String.Empty;
                     if (DetailData.FieldIndexDataString.ContainsKey(_code))
                         DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
 
-                    string[] codeArray = emcode.Split('.');
-                    Url = string.Format(@"{0}/{1}.dat", codeArray[1].ToLower(), codeArray[0]);
+                    String[] codeArray = emcode.Split('.');
+                    Url = String.Format(@"{0}/{1}.dat", codeArray[1].ToLower(), codeArray[0]);
 
                 }
                 catch (Exception e)
@@ -2572,7 +2572,7 @@ namespace OwLib
     public class ReqTrendCaptialFlowDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -2585,7 +2585,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2741,7 +2741,7 @@ namespace OwLib
     public class ReqNewsReportDataPacket : InfoDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -2754,7 +2754,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -2865,7 +2865,7 @@ namespace OwLib
                 }
                 bw.Write(stockCount);
 
-                string _shortCode;
+                String _shortCode;
                 byte _market;
 
                 foreach (CustomStockNewsParam customStockNewsParam in StockParams)
@@ -2922,7 +2922,7 @@ namespace OwLib
     public class ReqOrgRateDataPacket : InfoDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
 
         /// <summary>
@@ -2935,7 +2935,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -3206,7 +3206,7 @@ namespace OwLib
             base.Coding(bw);
             bw.Write((long)_code);
             //if (DetailData.AllStockDetailData.ContainsKey(_code))
-            //    bw.Write(ConvertCodeOrg.ConvertCodeToLong((string)DetailData.AllStockDetailData[_code][FieldIndex.EMCode]));
+            //    bw.Write(ConvertCodeOrg.ConvertCodeToLong((String)DetailData.AllStockDetailData[_code][FieldIndex.EMCode]));
             KLineCycleOrg cycleOrg = (KLineCycleOrg)Enum.Parse(typeof(KLineCycleOrg), Cycle.ToString());
             bw.Write((short)cycleOrg);
             //DataRange = ReqKLineDataRange.All;
@@ -3259,7 +3259,7 @@ namespace OwLib
         public byte FieldFlag;
 
         //private List<long> _unicodeList;
-        private List<string> _idInput;
+        private List<String> _idInput;
         /// <summary>
         /// 栏位个数
         /// </summary>
@@ -3280,7 +3280,7 @@ namespace OwLib
             }
         }
 
-        // public ReqBlockReportDataPacket(List<string> id)
+        // public ReqBlockReportDataPacket(List<String> id)
         //{
         //    RequestType = FuncTypeOrg.BlockReport;
         //    IsResponseData = true;
@@ -3290,7 +3290,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBlockReportDataPacket(string id)
+        public ReqBlockReportDataPacket(String id)
         {
             if (id == "001004")
             {
@@ -3300,7 +3300,7 @@ namespace OwLib
             RequestType = FuncTypeOrg.BlockReport;
             IsResponseData = true;
             IsPush = true;
-            _idInput = new List<string>(1);
+            _idInput = new List<String>(1);
             _idInput.Add("91" + id);
         }
         /// <summary>
@@ -3351,7 +3351,7 @@ namespace OwLib
         /// </summary>
         public short[] FieldIndexList ={ 7001, 17002, 17003, 17004, 17005 };
 
-        public string[] _idInput ={ "911" };
+        public String[] _idInput ={ "911" };
 
         /// <summary>
         /// 构造该请求包体
@@ -3392,7 +3392,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBlockIndexReportOrgDataPacket(string id)
+        public ReqBlockIndexReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.BlockIndexReport;
@@ -3404,7 +3404,7 @@ namespace OwLib
     /// </summary>
     public class ReqGlobalIndexReportOrgDataPacket : ReqBlockReportDataPacket
     {
-        public ReqGlobalIndexReportOrgDataPacket(string id)
+        public ReqGlobalIndexReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.GlobalIndexReport;
@@ -3416,7 +3416,7 @@ namespace OwLib
     /// </summary>
     public class ReqEmIndexReportOrgDataPacket : ReqBlockReportDataPacket
     {
-        public ReqEmIndexReportOrgDataPacket(string id)
+        public ReqEmIndexReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.EmIndexReport;
@@ -3446,7 +3446,7 @@ namespace OwLib
             if (DetailData.FieldIndexDataInt32.ContainsKey(Code))
                 DetailData.FieldIndexDataInt32[Code].TryGetValue(FieldIndex.Market, out objMarket);
 
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(Code))
                 DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -3575,7 +3575,7 @@ namespace OwLib
         //    bw.Write((short)CustomCodeList.Count);
 
         //    int mtObj = -1;
-        //    string emcode = string.Empty;
+        //    String emcode = String.Empty;
         //    for (int i = 0; i < CustomCodeList.Count; i++)
         //    {
         //        if (DetailData.FieldIndexDataInt32.ContainsKey(CustomCodeList[i]))
@@ -3642,7 +3642,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBlockStockReportOrgDataPacket(string id)
+        public ReqBlockStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.BlockStockReport;
@@ -3657,7 +3657,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqHKStockReportOrgDataPacket(string id)
+        public ReqHKStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.HKStockReport;
@@ -3672,7 +3672,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqFundStockReportOrgDataPacket(string id)
+        public ReqFundStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.FundStockReport;
@@ -3687,7 +3687,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqBondStockReportOrgDataPacket(string id)
+        public ReqBondStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.BondStockReport;
@@ -3702,7 +3702,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReqFuturesStockReportOrgDataPacket(string id)
+        public ReqFuturesStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.FuturesStockReport;
@@ -3718,7 +3718,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqIndexFuturesReportOrgDataPacket(string id)
+        public ReqIndexFuturesReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.IndexFuturesReport;
@@ -3734,7 +3734,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqRateReportOrgDataPacket(string id)
+        public ReqRateReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.RateReport;
@@ -3750,7 +3750,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqFinanceReportOrgDataPacket(string id)
+        public ReqFinanceReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.FinanceReport;
@@ -3766,7 +3766,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqCapitalFlowReportOrgDataPacket(string id)
+        public ReqCapitalFlowReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.CapitalFlowReport;
@@ -3782,7 +3782,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqDDEReportOrgDataPacket(string id)
+        public ReqDDEReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.DDEReport;
@@ -3798,7 +3798,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqNetInFlowReportOrgDataPacket(string id)
+        public ReqNetInFlowReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.NetInFlowReport;
@@ -3814,7 +3814,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqFinanceStockReportOrgDataPacket(string id)
+        public ReqFinanceStockReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.FinanceStockReport;
@@ -3830,7 +3830,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqProfitForecastReportOrgDataPacket(string id)
+        public ReqProfitForecastReportOrgDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.ProfitForecastReport;
@@ -3846,7 +3846,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqForexReportDataPacket(string id)
+        public ReqForexReportDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.ForexReport;
@@ -3862,7 +3862,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqUSStockReportDataPacket(string id)
+        public ReqUSStockReportDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.USStockReport;
@@ -3880,7 +3880,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqOSFuturesReportDataPacket(string id)
+        public ReqOSFuturesReportDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.OSFuturesReport;
@@ -3896,7 +3896,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqOSFuturesReportNewDataPacket(string id)
+        public ReqOSFuturesReportNewDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.OSFuturesReportNew;
@@ -3912,7 +3912,7 @@ namespace OwLib
         /// 构造
         /// </summary>
         /// <param name="id"></param>
-        public ReqOSFuturesLMEReportDataPacket(string id)
+        public ReqOSFuturesLMEReportDataPacket(String id)
             : base(id)
         {
             RequestType = FuncTypeOrg.OsFuturesLMEReport;
@@ -4162,7 +4162,7 @@ namespace OwLib
             base.Coding(bw);
             Dictionary<FieldIndex, object> memData = null;
             long sid = 0;
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(Code))
                 DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -4193,7 +4193,7 @@ namespace OwLib
             Dictionary<FieldIndex, object> memData = null;
             long sid = 0;
 
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(Code))
                 DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
             if (emcode != null)
@@ -4517,7 +4517,7 @@ namespace OwLib
         {
             base.Coding(bw);
 
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(Code))
                 DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
             bw.Write(ConvertCodeOrg.ConvertCodeToLong(emcode));
@@ -4553,7 +4553,7 @@ namespace OwLib
     /// </summary>
     public class ReqRankOrgDataPacket : OrgDataPacket
     {
-        private string _blockId;
+        private String _blockId;
 
         /// <summary>
         /// 排名种类(默认0,表示全部)，涨跌，量比，金额等，支持或操作
@@ -4571,7 +4571,7 @@ namespace OwLib
                                           9509
                                       };
 
-        public ReqRankOrgDataPacket(string id)
+        public ReqRankOrgDataPacket(String id)
         {
             RequestType = FuncTypeOrg.Rank;
             IsPush = true;
@@ -4600,7 +4600,7 @@ namespace OwLib
     /// </summary>
     public class ReqNetInflowRankDataPacket : OrgDataPacket
     {
-        private string _blockId;
+        private String _blockId;
 
         /// <summary>
         /// 字段标记，1实时，2静态，3混合
@@ -4614,7 +4614,7 @@ namespace OwLib
 
         private bool IsResponseData = false;
 
-        public ReqNetInflowRankDataPacket(string id)
+        public ReqNetInflowRankDataPacket(String id)
         {
             RequestType = FuncTypeOrg.NetInFlowRank;
             IsPush = true;
@@ -4868,12 +4868,12 @@ namespace OwLib
         public override void Coding(BinaryWriter bw)
         {
             base.Coding(bw);
-            string emcode = string.Empty;
-            Dictionary<FieldIndex, string> fieldString;
+            String emcode = String.Empty;
+            Dictionary<FieldIndex, String> fieldString;
             if (DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
                 if (!fieldString.TryGetValue(FieldIndex.EMCode, out emcode))
-                    emcode = string.Empty;
+                    emcode = String.Empty;
             }
             bw.Write(ConvertCodeOrg.ConvertCodeToLong(emcode));
         }
@@ -4970,7 +4970,7 @@ namespace OwLib
     public class ReqOceanRecordDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode = string.Empty;
+        private String _shortCode = String.Empty;
         private int _code;
 
         /// <summary>
@@ -4983,7 +4983,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(Code))
                     DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
                 ParseCode(emcode, out tmp, out _shortCode);
@@ -5038,7 +5038,7 @@ namespace OwLib
         }
 
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private int _code;
         private int _lastRequestPoint;
 
@@ -5052,7 +5052,7 @@ namespace OwLib
             {
                 _code = value;
                 ReqMarketType tmp = ReqMarketType.MT_NA;
-                string emcode = string.Empty;
+                String emcode = String.Empty;
                 if (DetailData.FieldIndexDataString.ContainsKey(_code))
                     DetailData.FieldIndexDataString[_code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -5515,7 +5515,7 @@ namespace OwLib
         /// <summary>
         /// 小类，比如F001，S001001(typeLevel2)
         /// </summary>
-        public string InnerType;
+        public String InnerType;
 
         /// <summary>
         /// 研究报告类型（新闻/评级）
@@ -5530,7 +5530,7 @@ namespace OwLib
         /// <param name="orgType">资讯内容: 新闻：1；研报：3</param>
         /// <param name="innerType">小类，比如F001，S001001(typeLevel2)</param>
         /// <param name="reportType">返回格式 （暂时只对研报有效） 1：个股的返回类型 2：全景图的返回类型 </param>
-        public ReqInfoOrgByIdsDataPacket(InfoMineOrg orgType, string innerType, ReportType reportType)
+        public ReqInfoOrgByIdsDataPacket(InfoMineOrg orgType, String innerType, ReportType reportType)
         {
             RequestId = FuncTypeInfoOrg.InfoMineOrgByIds;
             MaxCount = 200;
@@ -5586,14 +5586,14 @@ namespace OwLib
         /// <summary>
         /// 请求宏观指标ID列表(当有自定义指标存在时需要发送单侧的所有ID)
         /// </summary>
-        public List<string> MacroIds;
+        public List<String> MacroIds;
 
         /// <summary>
         /// 
         /// </summary>
         public ReqIndicatorsReportDataPacket()
         {
-            MacroIds = new List<string>(1);
+            MacroIds = new List<String>(1);
         }
        
         /// <summary>
@@ -5607,12 +5607,12 @@ namespace OwLib
             // Get RequestId.
             this.RequestId = requestType;
 
-            Dictionary<FieldIndex, string> innerDict;
+            Dictionary<FieldIndex, String> innerDict;
             if (DetailData.FieldIndexDataString.TryGetValue(code, out innerDict)
                 && innerDict.TryGetValue(FieldIndex.EMCode, out   this.TableKeyCode))
             {
                 // Get the customs macroIds from local file.
-                HashSet<string> macroIds;
+                HashSet<String> macroIds;
                 if (StockCustIndicatorFileIO.TryGetCustIndicatorIds(code, requestType, out macroIds))
                 {
                     //MacroIds = macroIds.ToList();
@@ -5623,17 +5623,17 @@ namespace OwLib
         /// <summary>
         /// 生产请求内容
         /// </summary>
-        public override string CreateCommand()
+        public override String CreateCommand()
         {
             if (this.MacroIds.Count == 0)
             {
-                Cmd = string.Format(IndicatorDataPacket.DefaultIndicatorsReportCmd,
+                Cmd = String.Format(IndicatorDataPacket.DefaultIndicatorsReportCmd,
                     this.TableKeyCode, (int)this.RequestId);
             }
             else
             {
-                Cmd = string.Format(IndicatorDataPacket.CustomIndicatorsReportCmd,
-                    this.TableKeyCode, string.Join(",", MacroIds.ToArray()), (int)this.RequestId);
+                Cmd = String.Format(IndicatorDataPacket.CustomIndicatorsReportCmd,
+                    this.TableKeyCode, String.Join(",", MacroIds.ToArray()), (int)this.RequestId);
             }
 
             return Cmd;
@@ -5647,13 +5647,13 @@ namespace OwLib
     public class ReqIndicatorValuesDataPacket : IndicatorDataPacket
     {
         /// <summary>
-        /// DateForamt string: "yyyy-MM-dd" 
+        /// DateForamt String: "yyyy-MM-dd" 
         /// </summary>
-        private const string DateFormateStr = "yyyy-MM-dd";
+        private const String DateFormateStr = "yyyy-MM-dd";
         /// <summary>
         /// 
         /// </summary>
-        public string MacroId;
+        public String MacroId;
         /// <summary>
         /// 
         /// </summary>
@@ -5673,7 +5673,7 @@ namespace OwLib
         /// 
         /// </summary>
         /// <param name="macroId">宏观指标Id</param>
-        public ReqIndicatorValuesDataPacket(string macroId)
+        public ReqIndicatorValuesDataPacket(String macroId)
             : this()
         {
             this.MacroId = macroId;
@@ -5684,7 +5684,7 @@ namespace OwLib
         /// <param name="macroId">宏观指标Id</param>
         /// <param name="startDate">开始日期</param>
         /// <param name="endDate">结束日期</param>
-        public ReqIndicatorValuesDataPacket(string macroId, DateTime startDate, DateTime endDate)
+        public ReqIndicatorValuesDataPacket(String macroId, DateTime startDate, DateTime endDate)
             : this(macroId)
         {
             this.StartDate = startDate;
@@ -5693,9 +5693,9 @@ namespace OwLib
         /// <summary>
         /// 生产请求内容
         /// </summary>
-        public override string CreateCommand()
+        public override String CreateCommand()
         {
-            this.Cmd = string.Format(IndicatorDataPacket.IndicatorValuesReportCmd,
+            this.Cmd = String.Format(IndicatorDataPacket.IndicatorValuesReportCmd,
                 this.MacroId, StartDate.ToString(DateFormateStr), this.EndDate.ToString(DateFormateStr));
 
             return Cmd;

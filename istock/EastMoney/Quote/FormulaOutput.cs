@@ -61,7 +61,7 @@ namespace OwLib
     {
         public double[] Price;
         
-        public string Text;
+        public String Text;
 
     }
 

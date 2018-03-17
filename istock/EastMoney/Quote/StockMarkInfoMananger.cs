@@ -11,7 +11,7 @@ namespace OwLib
     {
         private int _Code;
         private StockTag _StockTag;
-        private string _MarkInfo;
+        private String _MarkInfo;
 
         /// <summary>
         /// 股票内码
@@ -32,7 +32,7 @@ namespace OwLib
         /// <summary>
         /// 标记文本
         /// </summary>
-        public string MarkInfo
+        public String MarkInfo
         {
             get { return _MarkInfo; }
             set { _MarkInfo = value; }
@@ -58,10 +58,10 @@ namespace OwLib
     /// </summary>
     public class StockMarkInfoMananger : PersistableObject
     {
-        private static readonly string _StockMarkInfoFile = PathUtilities.UserPath + "StockMarkInfo.xml";
+        private static readonly String _StockMarkInfoFile = PathUtilities.UserPath + "StockMarkInfo.xml";
         private static StockMarkInfoMananger _Instance;
         private Dictionary<int, StockMarkInfo> _StockMarkInfo;
-        private static readonly string _CurrentVersion = "v1.0";
+        private static readonly String _CurrentVersion = "v1.0";
 
         public Dictionary<int, StockMarkInfo> StockMarkInfo
         {
@@ -91,7 +91,7 @@ namespace OwLib
         /// <summary>
         /// 设置股票标记
         /// </summary>
-        public void SetStockTag(int code, StockTag tag, string text)
+        public void SetStockTag(int code, StockTag tag, String text)
         {
             StockMarkInfo sInfo;
             _StockMarkInfo.TryGetValue(code, out sInfo);
@@ -103,7 +103,7 @@ namespace OwLib
             if (sInfo.StockTag == StockTag.Text)
                 sInfo.MarkInfo = text;
             else
-                sInfo.MarkInfo = string.Empty;
+                sInfo.MarkInfo = String.Empty;
 
             _StockMarkInfo[code] = sInfo;
 
@@ -139,7 +139,7 @@ namespace OwLib
         {
             _StockMarkInfo.Clear();
 
-            string versionInfo = memento.GetString("Version");
+            String versionInfo = memento.GetString("Version");
 
             if (_CurrentVersion.Equals(versionInfo, StringComparison.OrdinalIgnoreCase))
             {

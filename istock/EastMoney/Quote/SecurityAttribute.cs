@@ -872,21 +872,21 @@ namespace OwLib
             if (!EqualZero(price))
             {
                 Dictionary<float, float> dictionary;
-                string fieldDataString = DetailData.FieldIndexDataString[code][FieldIndex.EMCode];
+                String fieldDataString = DetailData.FieldIndexDataString[code][FieldIndex.EMCode];
                 if (DetailData.AllBondYtmDataRec.TryGetValue(code, out dictionary))
                 {
                     if (dictionary.ContainsKey(price))
                     {
                         return dictionary[price];
                     }
-                    string cmd = string.Empty;
+                    String cmd = String.Empty;
                     if (isConvertBond)
                     {
-                        cmd = string.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm", fieldDataString, price);
+                        cmd = String.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm", fieldDataString, price);
                     }
                     else
                     {
-                        cmd = string.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm", fieldDataString, price);
+                        cmd = String.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm", fieldDataString, price);
                     }
                     try
                     {
@@ -913,14 +913,14 @@ namespace OwLib
                 }
                 else
                 {
-                    string str3 = string.Empty;
+                    String str3 = String.Empty;
                     if (isConvertBond)
                     {
-                        str3 = string.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm", fieldDataString, price);
+                        str3 = String.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm", fieldDataString, price);
                     }
                     else
                     {
-                        str3 = string.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm", fieldDataString, price);
+                        str3 = String.Format("rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm", fieldDataString, price);
                     }
                     try
                     {
@@ -1460,16 +1460,16 @@ namespace OwLib
         /// <summary>
         /// Code和MarketType对应关系
         /// </summary>
-        // public static Dictionary<string,MarketType>  CodeMarket = new Dictionary<string, MarketType>();
+        // public static Dictionary<String,MarketType>  CodeMarket = new Dictionary<String, MarketType>();
 
         /// <summary>
         /// 期货ShortCode和EMCode对应关系
         /// </summary>
-        public static Dictionary<string, string> FuturesCode = new Dictionary<string, string>(400);
+        public static Dictionary<String, String> FuturesCode = new Dictionary<String, String>(400);
 
-        public static Dictionary<string, string> DicGlobalIndexCftToOrg = new Dictionary<string, string>(22);
+        public static Dictionary<String, String> DicGlobalIndexCftToOrg = new Dictionary<String, String>(22);
 
-        public static Dictionary<string, string> DicGlobalIndexOrgToCft = new Dictionary<string, string>(22);
+        public static Dictionary<String, String> DicGlobalIndexOrgToCft = new Dictionary<String, String>(22);
 
         public static List<MarketType> CFTMarketTypes = new List<MarketType>();
 
@@ -1594,7 +1594,7 @@ namespace OwLib
         }
 
 
-        public static MarketType TypeCodeToMarketType(int typeCode, string emCode)
+        public static MarketType TypeCodeToMarketType(int typeCode, String emCode)
         {
             MarketType result = MarketType.NA;
 
@@ -1882,10 +1882,10 @@ namespace OwLib
         /// <param name="typeCode"></param>
         /// <param name="emCode"></param>
         /// <returns></returns>
-        public static MarketType TypeCodeToMarketType(string typeCode, string emCode)
+        public static MarketType TypeCodeToMarketType(String typeCode, String emCode)
         {
             int typeCodeInt = 0;
-            if (!string.IsNullOrEmpty(typeCode))
+            if (!String.IsNullOrEmpty(typeCode))
                 typeCodeInt = Convert.ToInt32(typeCode);
             return TypeCodeToMarketType(typeCodeInt,emCode);
         }
@@ -1895,9 +1895,9 @@ namespace OwLib
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string GetBlockId(int code)
+        public static String GetBlockId(int code)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             MarketType mt = MarketType.NA;
             int mtInt = 0;
             if (DetailData.FieldIndexDataInt32.ContainsKey(code))
@@ -2110,7 +2110,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public SecurityAttribute(string code)
+        public SecurityAttribute(String code)
         {
             //Market_Code = GetMarketCodeByCode(code);
             //Security_Type = GetInstrumentTypeByCode(code);
@@ -2121,14 +2121,14 @@ namespace OwLib
         ///// </summary>
         ///// <param name="code"></param>
         ///// <returns></returns>
-        //public static MarketType GetMarketCodeByCode(string code)
+        //public static MarketType GetMarketCodeByCode(String code)
         //{
         //    MarketType marketCode = MarketType.NA;
         //    if (code == null)
         //        return marketCode;
         //    if (code.EndsWith(".SH"))
         //    {
-        //        string strShortCode = code.Substring(0, 6);
+        //        String strShortCode = code.Substring(0, 6);
         //        if (char.IsNumber(strShortCode, 0))
         //        {
         //            int nShortCode = Convert.ToInt32(strShortCode);
@@ -2192,7 +2192,7 @@ namespace OwLib
         ///// </summary>
         ///// <param name="code"></param>
         ///// <returns></returns>
-        //public static SecurityType GetInstrumentTypeByCode(string code)
+        //public static SecurityType GetInstrumentTypeByCode(String code)
         //{
         //    SecurityType instrumentType;
         //    if (code.EndsWith(".SZ"))
@@ -2322,11 +2322,11 @@ namespace OwLib
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string GetPriceAccuracy(int code)
+        public static String GetPriceAccuracy(int code)
         {
             if (code == 0)
                 return "F2";
-            string result = "F2";
+            String result = "F2";
             MarketType mt = MarketType.NA;
             int mtInt = 0;
             if (DetailData.FieldIndexDataInt32.ContainsKey(code))
@@ -2405,7 +2405,7 @@ namespace OwLib
         /// </summary>
         /// <param name="sectorID">需要验证的板块ID</param>
         /// <returns>验证结果, true:板块, false:市场</returns>
-        public static bool CheckMarketOrSector(string sectorID)
+        public static bool CheckMarketOrSector(String sectorID)
         {
             return sectorID.StartsWith("BK");
 

@@ -13,31 +13,31 @@ namespace OwLib
         //private static Regex intRegex = new Regex(@"^[-+]?\d{0,10}$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
         /// <summary>
         /// 类型转换1
-        /// 先处理null,再转换为string
+        /// 先处理null,再转换为String
         /// </summary>
         /// <param name="obj">要处理的数据</param>
         /// <returns>返回处理后的数据</returns>
-        public static string ParseString(object obj)
+        public static String ParseString(object obj)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             if (obj != null)
                 result = obj.ToString();
             return result;
         }
 
         /// <summary>
-        /// 根据保留小数的位置将double型转化为string型
+        /// 根据保留小数的位置将double型转化为String型
         /// </summary>
         /// <param name="value">数值</param>
         /// <param name="digit">保留位数</param>
         /// <param name="round">是否四舍五入</param>
         /// <returns></returns>
-        public static string GetValueByDigit(double value, int digit, bool round)
+        public static String GetValueByDigit(double value, int digit, bool round)
         {
             if (!round)
             {
                 StringBuilder sbFormat = new StringBuilder();
-                string strValue = value.ToString();
+                String strValue = value.ToString();
                 if (strValue.IndexOf(".") != -1)
                 {
                     sbFormat.Append(strValue.Substring(0, strValue.IndexOf(".")));
@@ -94,9 +94,9 @@ namespace OwLib
         /// <param name="obj">对象</param>
         /// <param name="str0">字符串</param>
         /// <returns>生成的字符串</returns>
-        public static string ParseString(object obj, string str0)
+        public static String ParseString(object obj, String str0)
         {
-            string result = "";
+            String result = "";
             if (obj == null)
                 result = str0;
             else
@@ -127,8 +127,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                         result = byte.Parse(tempStr);
                 }
             }
@@ -162,8 +162,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                         result = Int16.Parse(tempStr);
                 }
             }
@@ -198,8 +198,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                         result = Int32.Parse(tempStr);
                 }
             }
@@ -233,8 +233,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                         result = Int64.Parse(tempStr);
                 }
             }
@@ -266,8 +266,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                     {
                         result = Single.Parse(tempStr);
                     }
@@ -301,8 +301,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                     {
                         result = double.Parse(tempStr);
                     }
@@ -324,7 +324,7 @@ namespace OwLib
             //result = DateTime.Parse(ParseString(obj));
 
             DateTime result;
-            string timeStr = ParseString(obj);
+            String timeStr = ParseString(obj);
             if (!DateTime.TryParse(timeStr, out result))
                 result = new DateTime(1900, 1, 1);
             return result;
@@ -390,8 +390,8 @@ namespace OwLib
             {
                 if (!(obj == null))
                 {
-                    string tempStr = obj.ToString();
-                    if (!string.IsNullOrEmpty(tempStr))
+                    String tempStr = obj.ToString();
+                    if (!String.IsNullOrEmpty(tempStr))
                     {
                         result = Decimal.Parse(tempStr);
                     }

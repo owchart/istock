@@ -15,10 +15,10 @@ namespace OwLib
         private const int ALLBIGALPHA = 2;
         private const int NUMANDBIG = 3;
 
-        public static string ConvertFuturesOrgCodeToCftShortCode(int code)
+        public static String ConvertFuturesOrgCodeToCftShortCode(int code)
         {
-            string fieldDataString = DetailData.FieldIndexDataString[code][FieldIndex.Code];
-            string str2 = string.Empty;
+            String fieldDataString = DetailData.FieldIndexDataString[code][FieldIndex.Code];
+            String str2 = String.Empty;
             if (fieldDataString.StartsWith("IF"))
             {
                 if (fieldDataString == "IF00C1")
@@ -37,7 +37,7 @@ namespace OwLib
                 {
                     return "040123\0";
                 }
-                if (!string.IsNullOrEmpty(fieldDataString))
+                if (!String.IsNullOrEmpty(fieldDataString))
                 {
                     str2 = "0411" + fieldDataString.Substring(fieldDataString.Length - 2, 2) + '\0';
                 }
@@ -169,17 +169,17 @@ namespace OwLib
         public static int CovertFuturesOrgCodeToCftStockId(int code)
         {
             int num = 0;
-            string str = ConvertFuturesOrgCodeToCftShortCode(code);
-            if (!string.IsNullOrEmpty(str))
+            String str = ConvertFuturesOrgCodeToCftShortCode(code);
+            if (!String.IsNullOrEmpty(str))
             {
                 num = ConvertCodeToInt(Encoding.ASCII.GetBytes(str), 8);
             }
             return num;
         }
 
-        public static string ConvertFuturesCftEmCodeToOrgEmCode(string emcode)
+        public static String ConvertFuturesCftEmCodeToOrgEmCode(String emcode)
         {
-            string str = emcode;
+            String str = emcode;
             if (str.StartsWith("04"))
             {
                 if (str == "040120.CFE")
@@ -198,8 +198,8 @@ namespace OwLib
                 {
                     return "IF00C4.CFE";
                 }
-                string str2 = str.Substring(str.Length - 6, 2);
-                string str3 = string.Empty;
+                String str2 = str.Substring(str.Length - 6, 2);
+                String str3 = String.Empty;
                 if (DateTime.Now.Month <= Convert.ToInt32(str2))
                 {
                     str3 = "IF" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -226,8 +226,8 @@ namespace OwLib
                     case "050123.CFE":
                         return "TF00C4.CFE";
                 }
-                string str4 = str.Substring(str.Length - 6, 2);
-                string str5 = string.Empty;
+                String str4 = str.Substring(str.Length - 6, 2);
+                String str5 = String.Empty;
                 if (DateTime.Now.Month <= Convert.ToInt32(str4))
                 {
                     str5 = "TF" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -254,8 +254,8 @@ namespace OwLib
                     case "060123.CFE":
                         return "IC00C4.CFE";
                 }
-                string str6 = str.Substring(str.Length - 6, 2);
-                string str7 = string.Empty;
+                String str6 = str.Substring(str.Length - 6, 2);
+                String str7 = String.Empty;
                 if (DateTime.Now.Month <= Convert.ToInt32(str6))
                 {
                     str7 = "IC" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -282,8 +282,8 @@ namespace OwLib
                     case "070123.CFE":
                         return "IH00C4.CFE";
                 }
-                string str8 = str.Substring(str.Length - 6, 2);
-                string str9 = string.Empty;
+                String str8 = str.Substring(str.Length - 6, 2);
+                String str9 = String.Empty;
                 if (DateTime.Now.Month <= Convert.ToInt32(str8))
                 {
                     str9 = "IH" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -310,8 +310,8 @@ namespace OwLib
                     case "100123.CFE":
                         return "TT00C4.CFE";
                 }
-                string str10 = str.Substring(str.Length - 6, 2);
-                string str11 = string.Empty;
+                String str10 = str.Substring(str.Length - 6, 2);
+                String str11 = String.Empty;
                 if (DateTime.Now.Month <= Convert.ToInt32(str10))
                 {
                     str11 = "TT" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -340,8 +340,8 @@ namespace OwLib
                 case "110123.CFE":
                     return "T00C4.CFE";
             }
-            string str12 = str.Substring(str.Length - 6, 2);
-            string str13 = string.Empty;
+            String str12 = str.Substring(str.Length - 6, 2);
+            String str13 = String.Empty;
             if (DateTime.Now.Month <= Convert.ToInt32(str12))
             {
                 str13 = "T" + Convert.ToString((int)(DateTime.Now.Year % 100));
@@ -539,7 +539,7 @@ namespace OwLib
         /// </summary>
         /// <param name="stockId"></param>
         /// <returns></returns>
-        public static string ConvertIntToCode(uint stockId)
+        public static String ConvertIntToCode(uint stockId)
         {
             byte[] shortCode = new byte[7];
             byte market = 0;
@@ -669,7 +669,7 @@ namespace OwLib
                     break;
             }
 
-            string code = Encoding.ASCII.GetString(shortCode);
+            String code = Encoding.ASCII.GetString(shortCode);
             code = code.TrimEnd('\0');
             return DataPacket.GetEmCode((ReqMarketType)market, code);
         }
@@ -682,7 +682,7 @@ namespace OwLib
         public static long CommonConvertUnicodeToLong(int unicode)
         {
             long num = 0L;
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             MarketType marketType = DllImportHelper.GetMarketType(unicode);
             emcode = DllImportHelper.GetFieldDataString(unicode, FieldIndex.EMCode);
             if (marketType < MarketType.NA)
@@ -744,11 +744,11 @@ namespace OwLib
         public static int CommonConvertLongToUnicode(long sid)
         {
             int num = 0;
-            string str = string.Empty;
+            String str = String.Empty;
             if (sid > 0x2540be400L)
             {
                 str = ConvertLongToCode(sid);
-                if (!string.IsNullOrEmpty(str) && DetailData.EmCodeToUnicode.ContainsKey(str))
+                if (!String.IsNullOrEmpty(str) && DetailData.EmCodeToUnicode.ContainsKey(str))
                 {
                     num = DetailData.EmCodeToUnicode[str];
                 }
@@ -765,7 +765,7 @@ namespace OwLib
         public static long ConvertCodeToLong(String code)
         {
             ReqMarketType reqMt;
-            string shortCode;
+            String shortCode;
             DataPacket.ParseCode(code, out reqMt, out shortCode);
 
 
@@ -868,7 +868,7 @@ namespace OwLib
         public static String ConvertLongToCode(long securityId)
         {
             if (securityId == 0)
-                return string.Empty;
+                return String.Empty;
             if(securityId > 10000000000)
             {
                 String[] marketCode = new String[2];
@@ -890,7 +890,7 @@ namespace OwLib
                 {
                     for (int i = 2; i < sidStr.Length; i += 2)
                     {
-                        string sus = sidStr.Substring(i, 2);
+                        String sus = sidStr.Substring(i, 2);
 
                         Int32 tmp = Int32.Parse(sus);
                         if (tmp >= 0 && tmp <= 9)
@@ -939,7 +939,7 @@ namespace OwLib
             }
             else
             {
-                string code = string.Empty;
+                String code = String.Empty;
                 try
                 {
                     if (DetailData.FieldIndexDataString.ContainsKey(Convert.ToInt32(securityId)))

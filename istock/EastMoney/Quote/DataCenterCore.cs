@@ -81,35 +81,35 @@ namespace OwLib
         /// <summary>
         /// 当前选中的板块id,默认全部AB股
         /// </summary>
-        public string CurrentBlockId = "001005";
+        public String CurrentBlockId = "001005";
 
 
-        private string _defaultBlockId =
-            string.Format(
+        private String _defaultBlockId =
+            String.Format(
                 @"001005,001006,001012,001013,001014,001015,001016,905008,905017,905010,905005,905007,903011,903009,902002,902003,902004,902008,904003,611002,611003,611004,611001,611005,621001,621002,507015,507004,507001,507022,507013,801001,801002,801003,806001,806002,807001,807002,807003,807004,701002,702011,703010,704001,717001,401001,401014,301001,302001,303001,304001,305001,305003,305002");
 
 
         /// <summary>
         /// 东财指数Unicode和PUBLISHCODE键值对
         /// </summary>
-        private Dictionary<int, string> _dicEMIndexCodePublishCode;
+        private Dictionary<int, String> _dicEMIndexCodePublishCode;
 
         /// <summary>
         /// PUBLISHCODE和对应指数EMCode的键值对
         /// </summary>
-        private Dictionary<string, string> _dicPublishCodeIndexCode;
+        private Dictionary<String, String> _dicPublishCodeIndexCode;
 
         /// <summary>
         /// 键盘精灵文件
         /// </summary>
-        private List<string> CodeNameFilePath;
+        private List<String> CodeNameFilePath;
 
 
 
         /// <summary>
         /// 用户板块，Key:BlockId, Value:BlockName
         /// </summary>
-        public List<KeyValuePair<string, string>> UserBlock
+        public List<KeyValuePair<String, String>> UserBlock
         {
             get
             {
@@ -139,7 +139,7 @@ namespace OwLib
         private DataCenterCore(bool isIndependence)
         {
             #region 初始化集合
-            CodeNameFilePath = new List<string>(31);
+            CodeNameFilePath = new List<String>(31);
             CodeNameFilePath.Add("1");
             CodeNameFilePath.Add("2");
             CodeNameFilePath.Add("3");
@@ -231,7 +231,7 @@ namespace OwLib
                     #region 请求静态数据
 
 
-                    _blockIdStocksCash = new Dictionary<string, List<string>>();
+                    _blockIdStocksCash = new Dictionary<String, List<String>>();
 
                     try
                     {
@@ -881,7 +881,7 @@ namespace OwLib
             GetBlockStockListOrg("0.U", DefaultUserBlockCallBack);
         }
 
-        void DefaultUserBlockCallBack(string block, List<int> blockStocks)
+        void DefaultUserBlockCallBack(String block, List<int> blockStocks)
         {
             if (block == "0.U")
             {
@@ -927,14 +927,14 @@ namespace OwLib
             //GetBlockStockListOrg("001001", BlockCallBack);
             //GetBlockStockListOrg("905008033", BlockCallBack);
             //GetBlockStockListOrg("905005", BlockCallBack);
-            List<string> blocks = new List<string>(3);
+            List<String> blocks = new List<String>(3);
             blocks.Add("001001");//沪深重点指数
             blocks.Add("905008033");//沪深重点指数
             blocks.Add("905005");//全球指数
             GetBlockStockListOrg(blocks, BlockCallBack);
         }
 
-        private void BlockCallBack(string blockid, List<int> stocks)
+        private void BlockCallBack(String blockid, List<int> stocks)
         {
             LogUtilities.LogMessage("【******行情初始化******】完成获取板块成分");
             ReadReadStockPublishDataTable();
@@ -951,12 +951,12 @@ namespace OwLib
                 DetailData.SetStockBasicField(item.Innercode, item.Code, item.Type, item.Name);
                 DetailData.EmCodeToUnicode[item.Code] = item.Innercode;
             }
-            string pathRoot = PathUtilities.SDataPath + @"KeySprite\";
-            foreach (string file in CodeNameFilePath)
+            String pathRoot = PathUtilities.SDataPath + @"KeySprite\";
+            foreach (String file in CodeNameFilePath)
             {
                 if (file == "11" || file == "12")//商品期货
                 {
-                    string path = pathRoot + file;
+                    String path = pathRoot + file;
                     if (File.Exists(path))
                     {
                         using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -964,20 +964,20 @@ namespace OwLib
                             using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
                             {
                                 sr.BaseStream.Seek(0, SeekOrigin.Begin);
-                                string data = sr.ReadToEnd();
-                                string[] allStocks = data.Split('}');
-                                foreach (string oneStock in allStocks)
+                                String data = sr.ReadToEnd();
+                                String[] allStocks = data.Split('}');
+                                foreach (String oneStock in allStocks)
                                 {
-                                    string[] stock = oneStock.Split('$');
+                                    String[] stock = oneStock.Split('$');
                                     if (!DetailData.EmCodeToUnicode.ContainsKey(stock[0]))
                                     {
-                                        string strUnicode = stock[stock.Length - 1];
+                                        String strUnicode = stock[stock.Length - 1];
                                         int unicode = 0;
-                                        if (!string.IsNullOrEmpty(strUnicode))
+                                        if (!String.IsNullOrEmpty(strUnicode))
                                             unicode = Convert.ToInt32(strUnicode);
                                         DetailData.EmCodeToUnicode.Add(stock[0], unicode);
                                     }
-                                    string shortcode = stock[0].Split('.')[0];
+                                    String shortcode = stock[0].Split('.')[0];
                                     if (!SecurityAttribute.FuturesCode.ContainsKey(shortcode))
                                         SecurityAttribute.FuturesCode.Add(shortcode, stock[0]);
                                 }
@@ -988,7 +988,7 @@ namespace OwLib
                 }
                 else
                 {
-                    string path = pathRoot + file;
+                    String path = pathRoot + file;
                     if (File.Exists(path))
                     {
                         using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -996,16 +996,16 @@ namespace OwLib
                             using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
                             {
                                 sr.BaseStream.Seek(0, SeekOrigin.Begin);
-                                string data = sr.ReadToEnd();
-                                string[] allStocks = data.Split('}');
-                                foreach (string oneStock in allStocks)
+                                String data = sr.ReadToEnd();
+                                String[] allStocks = data.Split('}');
+                                foreach (String oneStock in allStocks)
                                 {
-                                    string[] stock = oneStock.Split('$');
+                                    String[] stock = oneStock.Split('$');
                                     if (!DetailData.EmCodeToUnicode.ContainsKey(stock[0]))
                                     {
-                                        string strUnicode = stock[stock.Length - 1];
+                                        String strUnicode = stock[stock.Length - 1];
                                         int unicode = 0;
-                                        if (!string.IsNullOrEmpty(strUnicode))
+                                        if (!String.IsNullOrEmpty(strUnicode))
                                             unicode = Convert.ToInt32(strUnicode);
                                         DetailData.EmCodeToUnicode.Add(stock[0], unicode);
                                     }
@@ -1024,15 +1024,15 @@ namespace OwLib
             try
             {
                 if (_dicEMIndexCodePublishCode == null)
-                    _dicEMIndexCodePublishCode = new Dictionary<int, string>(1);
-                Dictionary<string, string> industry = new Dictionary<string, string>();
-                Dictionary<string, string> area = new Dictionary<string, string>();
-                Dictionary<string, string> concept = new Dictionary<string, string>();
+                    _dicEMIndexCodePublishCode = new Dictionary<int, String>(1);
+                Dictionary<String, String> industry = new Dictionary<String, String>();
+                Dictionary<String, String> area = new Dictionary<String, String>();
+                Dictionary<String, String> concept = new Dictionary<String, String>();
                 List<int> conceptItems = new List<int>();
                 List<int> areaItems = new List<int>();
                 List<int> industryItems = new List<int>();
 
-                string fileName = PathUtilities.SDataPath + "NecessaryData\\" + "SPE_STOCKPUBLISH";
+                String fileName = PathUtilities.SDataPath + "NecessaryData\\" + "SPE_STOCKPUBLISH";
                 if (File.Exists(fileName))
                 {
                     using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -1041,22 +1041,22 @@ namespace OwLib
                         {
                             sr.BaseStream.Seek(0, SeekOrigin.Begin);
                             sr.ReadLine();
-                            string oneLine = string.Empty;
-                            string[] oneStock = null;
+                            String oneLine = String.Empty;
+                            String[] oneStock = null;
                             bool hasConcept = true;
 
                             while (sr.Peek() > -1)
                             {
                                 hasConcept = true;
                                 oneLine = sr.ReadLine();
-                                if (!string.IsNullOrEmpty(oneLine))
+                                if (!String.IsNullOrEmpty(oneLine))
                                 {
                                     oneStock = oneLine.Split('$');
                                     if (oneStock.Length == 14)
                                     {
-                                        if (string.IsNullOrEmpty(oneStock[5]))
+                                        if (String.IsNullOrEmpty(oneStock[5]))
                                             continue;
-                                        if (string.IsNullOrEmpty(oneStock[10]) || string.IsNullOrEmpty(oneStock[13]))
+                                        if (String.IsNullOrEmpty(oneStock[10]) || String.IsNullOrEmpty(oneStock[13]))
                                         {
                                             hasConcept = false;
                                         }
@@ -1073,7 +1073,7 @@ namespace OwLib
                                         area[oneStock[2]] = oneStock[3];
                                         if (!areaItems.Contains(Convert.ToInt32(oneStock[5])))
                                             areaItems.Add(Convert.ToInt32(oneStock[5]));
-                                        if (!string.IsNullOrEmpty(oneStock[11]) && !string.IsNullOrEmpty(oneStock[13]))
+                                        if (!String.IsNullOrEmpty(oneStock[11]) && !String.IsNullOrEmpty(oneStock[13]))
                                         {
                                             concept[oneStock[10]] = oneStock[11];
                                             if (!conceptItems.Contains(Convert.ToInt32(oneStock[13])))
@@ -1088,7 +1088,7 @@ namespace OwLib
 
                                         if (hasConcept)
                                         {
-                                            if (!string.IsNullOrEmpty(oneStock[11]))
+                                            if (!String.IsNullOrEmpty(oneStock[11]))
                                             {
                                                 DetailData.SetStockBasicField(Convert.ToInt32(oneStock[13]),
                                                     oneStock[12],
@@ -1140,7 +1140,7 @@ namespace OwLib
                                         }
                                     }
                                 }
-                                oneLine = string.Empty;
+                                oneLine = String.Empty;
                                 oneLine = null;
                                 oneStock = null;
                             }
@@ -1161,7 +1161,7 @@ namespace OwLib
         {
             try
             {
-                string fileName = PathUtilities.SDataPath + "NecessaryData\\" + "IND_MAININDEX";
+                String fileName = PathUtilities.SDataPath + "NecessaryData\\" + "IND_MAININDEX";
                 if (File.Exists(fileName))
                 {
                     using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -1170,8 +1170,8 @@ namespace OwLib
                         {
                             sr.BaseStream.Seek(0, SeekOrigin.Begin);
                             sr.ReadLine();
-                            string oneLine = string.Empty;
-                            string[] oneStock = null;
+                            String oneLine = String.Empty;
+                            String[] oneStock = null;
                             if (_mainIndexCodeList == null)
                                 _mainIndexCodeList = new List<int>(20);
                             else
@@ -1180,7 +1180,7 @@ namespace OwLib
                             while (sr.Peek() > -1)
                             {
                                 oneLine = sr.ReadLine();
-                                if (!string.IsNullOrEmpty(oneLine))
+                                if (!String.IsNullOrEmpty(oneLine))
                                 {
                                     oneStock = oneLine.Split('$');
                                     if (oneStock.Length == 5)
@@ -1207,7 +1207,7 @@ namespace OwLib
         {
             try
             {
-                string fileName = PathUtilities.SDataPath + "NecessaryData\\" + "IND_BKZSDYGX";
+                String fileName = PathUtilities.SDataPath + "NecessaryData\\" + "IND_BKZSDYGX";
                 if (File.Exists(fileName))
                 {
                     using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -1216,20 +1216,20 @@ namespace OwLib
                         {
                             sr.BaseStream.Seek(0, SeekOrigin.Begin);
                             sr.ReadLine();
-                            string oneLine = string.Empty;
-                            string[] oneStock = null;
+                            String oneLine = String.Empty;
+                            String[] oneStock = null;
                             if (_dicEMIndexCodePublishCode == null)
-                                _dicEMIndexCodePublishCode = new Dictionary<int, string>(1);
+                                _dicEMIndexCodePublishCode = new Dictionary<int, String>(1);
 
                             while (sr.Peek() > -1)
                             {
                                 oneLine = sr.ReadLine();
-                                if (!string.IsNullOrEmpty(oneLine))
+                                if (!String.IsNullOrEmpty(oneLine))
                                 {
                                     oneStock = oneLine.Split('$');
                                     if (oneStock.Length == 5)
                                     {
-                                        if (!string.IsNullOrEmpty(Convert.ToString(oneStock[0])))
+                                        if (!String.IsNullOrEmpty(Convert.ToString(oneStock[0])))
                                         {
                                             DetailData.SetStockBasicField(Convert.ToInt32(oneStock[3]),
                                                 Convert.ToString(oneStock[1]), Convert.ToInt32(oneStock[4]),
@@ -1306,17 +1306,17 @@ namespace OwLib
         /// <summary>
         /// 板块成分缓存
         /// </summary>
-        private Dictionary<string, List<string>> _blockIdStocksCash;
+        private Dictionary<String, List<String>> _blockIdStocksCash;
 
         /// <summary>
         /// 数据结构表
         /// </summary>
-        private Dictionary<string, DataTableBase> _dataTableCollecion;
+        private Dictionary<String, DataTableBase> _dataTableCollecion;
 
         /// <summary>
         /// 右边信息栏所有的Charts
         /// </summary>
-        public Dictionary<string, Dictionary<string, InfoPanelChart>> InfoPanelCharts
+        public Dictionary<String, Dictionary<String, InfoPanelChart>> InfoPanelCharts
         {
             get { return _infoPanelCharts; }
             private set { _infoPanelCharts = value; }
@@ -1358,17 +1358,17 @@ namespace OwLib
             private set { _formulaFunctions = value; }
         }
 
-        private IDictionary<string, FormulaFunctions.Function> _functionDictionary;
+        private IDictionary<String, FormulaFunctions.Function> _functionDictionary;
         /// <summary>
         /// 公式指标系统中内置函数的字典
         /// </summary>
-        public IDictionary<string, FormulaFunctions.Function> FormulaFunctionsDictionary
+        public IDictionary<String, FormulaFunctions.Function> FormulaFunctionsDictionary
         {
             get
             {
                 if (null == _functionDictionary)
                 {
-                    _functionDictionary = new Dictionary<string, FormulaFunctions.Function>();
+                    _functionDictionary = new Dictionary<String, FormulaFunctions.Function>();
                     if (null != FormulaFunctions)
                     {
                         foreach (FormulaFunctions.Category category in FormulaFunctions.FunctionCategories)
@@ -2429,7 +2429,7 @@ namespace OwLib
         /// </summary>
         private void InitDataTable(bool isDepedence)
         {
-            _dataTableCollecion = new Dictionary<string, DataTableBase>();
+            _dataTableCollecion = new Dictionary<String, DataTableBase>();
 
             DetailDataTable detailDataTable;
             if (isDepedence)
@@ -2537,7 +2537,7 @@ namespace OwLib
         {
             if (_dataTableCollecion != null)
             {
-                foreach (KeyValuePair<string, DataTableBase> table in _dataTableCollecion)
+                foreach (KeyValuePair<String, DataTableBase> table in _dataTableCollecion)
                 {
                     table.Value.ClearData(status);
                 }
@@ -2985,7 +2985,7 @@ namespace OwLib
         /// <param name="blockId"></param>
         /// <param name="codeList"></param>
         /// <param name="index"></param>
-        public void GetCurrentCodeIndex(int code, string blockId, out List<int> codeList, out int index)
+        public void GetCurrentCodeIndex(int code, String blockId, out List<int> codeList, out int index)
         {
             codeList = new List<int>();
             index = 0;
@@ -3156,7 +3156,7 @@ namespace OwLib
             if ((int)field >= 1000 && (int)field <= 1199)
                 return typeof(long);
             if ((int)field >= 1200 && (int)field <= 8999)
-                return typeof(string);
+                return typeof(String);
             return typeof(object);
         }
 
@@ -3222,19 +3222,19 @@ namespace OwLib
 
 
         /// <summary>
-        /// 获取string值的字段
+        /// 获取String值的字段
         /// </summary>
         /// <param name="code"></param>
         /// <param name="fieldIndex"></param>
         /// <returns></returns>
-        public string GetFieldDataString(int code, FieldIndex fieldIndex)
+        public String GetFieldDataString(int code, FieldIndex fieldIndex)
         {
-            string result = string.Empty;
-            Dictionary<FieldIndex, string> fieldString;
+            String result = String.Empty;
+            Dictionary<FieldIndex, String> fieldString;
             if (DetailData.FieldIndexDataString.TryGetValue(code, out fieldString))
             {
                 if (!fieldString.TryGetValue(fieldIndex, out result))
-                    result = string.Empty;
+                    result = String.Empty;
             }
             return result;
         }
@@ -3276,9 +3276,9 @@ namespace OwLib
         private DateTime dt1;
         private DateTime dt2;
         private static int _blockFlag = 1;
-        public delegate void RecBlockElementHandle(string block, List<int> blockStocks);
-        Dictionary<string, RecBlockElementHandle> _dicCallBack = new Dictionary<string, RecBlockElementHandle>();
-        private Dictionary<string, Dictionary<string, InfoPanelChart>> _infoPanelCharts;
+        public delegate void RecBlockElementHandle(String block, List<int> blockStocks);
+        Dictionary<String, RecBlockElementHandle> _dicCallBack = new Dictionary<String, RecBlockElementHandle>();
+        private Dictionary<String, Dictionary<String, InfoPanelChart>> _infoPanelCharts;
         private Dictionary<MarketType, InfoPanelLayout> _infoPanelLayout;
         private Dictionary<MarketType, List<TopBannerMenuItemPair>> _topBannerMenu;
         private FormulaDict _formulaDict;
@@ -3331,14 +3331,14 @@ namespace OwLib
         private Image _gubaResearch;
         private int _serverDate;
         private int _serverTime;
-        private List<KeyValuePair<string, string>> _userBlock;
+        private List<KeyValuePair<String, String>> _userBlock;
 
         /// <summary>
         /// 获取多个板块的成分内码（机构版）
         /// </summary>
         /// <param name="blockIds"></param>
         /// <param name="FunCallBack"></param>
-        public void GetBlockStockListOrg(List<string> blockIds, RecBlockElementHandle FunCallBack)
+        public void GetBlockStockListOrg(List<String> blockIds, RecBlockElementHandle FunCallBack)
         {
         }
 
@@ -3347,12 +3347,12 @@ namespace OwLib
         /// </summary>
         /// <param name="blockId"></param>
         /// <param name="FunCallBack"></param>
-        public void GetBlockStockListOrg(string blockId, RecBlockElementHandle FunCallBack)
+        public void GetBlockStockListOrg(String blockId, RecBlockElementHandle FunCallBack)
         {
 
         }
 
-        private void BlockElementsCallBack(string blockCode, object dtElemets)
+        private void BlockElementsCallBack(String blockCode, object dtElemets)
         {
             //dt2 = DateTime.Now;
             //TimeSpan ts = dt2 - dt1;
@@ -3363,8 +3363,8 @@ namespace OwLib
                 QuotoBlockElemenetResultData data = dtElemets as QuotoBlockElemenetResultData;
                 if (data != null)
                 {
-                    Dictionary<string, List<BlockElementInfo>> elements = data.DicBlockElementsMarshal as Dictionary<string, List<BlockElementInfo>>;
-                    string[] oneStock;
+                    Dictionary<String, List<BlockElementInfo>> elements = data.DicBlockElementsMarshal as Dictionary<String, List<BlockElementInfo>>;
+                    String[] oneStock;
                     int unicode = 0;
                     if (elements.Count == 0)
                     {
@@ -3377,7 +3377,7 @@ namespace OwLib
                         if (handle != null)
                             handle(blockCode, new List<int>(0));
                     }
-                    foreach (KeyValuePair<string, List<BlockElementInfo>> oneBlock in elements)
+                    foreach (KeyValuePair<String, List<BlockElementInfo>> oneBlock in elements)
                     {
                         List<int> oneBlockResult = new List<int>(oneBlock.Value.Count);
                         foreach (BlockElementInfo oneStockInfo in oneBlock.Value)
@@ -3424,11 +3424,11 @@ namespace OwLib
         /// </summary>
         /// <param name="blockIds"></param>
         /// <returns></returns>
-        //public Dictionary<string, List<string>> GetBlockStockListOrg(List<string> blockIds)
+        //public Dictionary<String, List<String>> GetBlockStockListOrg(List<String> blockIds)
         //{
         //    DateTime dt = DateTime.Now;
-        //    //Dictionary<string, List<string>> result = _blockService.GetBlockElementCdsByPublishCodes(new List<string>() { "007100", "007099" });
-        //    Dictionary<string, List<string>> result = _blockService.GetBlockElementCdsByPublishCodes(blockIds);
+        //    //Dictionary<String, List<String>> result = _blockService.GetBlockElementCdsByPublishCodes(new List<String>() { "007100", "007099" });
+        //    Dictionary<String, List<String>> result = _blockService.GetBlockElementCdsByPublishCodes(blockIds);
         //    TimeSpan ts = DateTime.Now - dt;
         //    Debug.Print("获取多个板块成分 = " + ts.TotalMilliseconds);
         //    return result;
@@ -3451,11 +3451,11 @@ namespace OwLib
         /// </summary>
         /// <param name="blockIds"></param>
         /// <returns></returns>
-        //public Dictionary<string, List<string>> GetBlockStockListOrg(List<string> blockIds)
+        //public Dictionary<String, List<String>> GetBlockStockListOrg(List<String> blockIds)
         //{
         //    DateTime dt = DateTime.Now;
-        //    //Dictionary<string, List<string>> result = _blockService.GetBlockElementCdsByPublishCodes(new List<string>() { "007100", "007099" });
-        //    Dictionary<string, List<string>> result = _blockService.GetBlockElementCdsByPublishCodes(blockIds);
+        //    //Dictionary<String, List<String>> result = _blockService.GetBlockElementCdsByPublishCodes(new List<String>() { "007100", "007099" });
+        //    Dictionary<String, List<String>> result = _blockService.GetBlockElementCdsByPublishCodes(blockIds);
         //    TimeSpan ts = DateTime.Now - dt;
         //    Debug.Print("获取多个板块成分 = " + ts.TotalMilliseconds);
         //    return result;
@@ -3492,13 +3492,13 @@ namespace OwLib
         /// <param name="field">排序的字段索引</param>
         /// <param name="sortMode">排序方式，默认按代码排</param>
         /// <returns></returns>
-        //public List<int> GetQuoteCodeList(string sectorID, FieldIndex field, SortMode sortMode = SortMode.Mode_Code)
+        //public List<int> GetQuoteCodeList(String sectorID, FieldIndex field, SortMode sortMode = SortMode.Mode_Code)
         //{
-        //    List<string> result;
+        //    List<String> result;
         //    Stopwatch watch = new Stopwatch();
         //    watch.Start();
-        //    //List<string> codes = GetSecurityCodeList(sectorID);
-        //    List<string> codes = GetBlockStockListOrg(sectorID);
+        //    //List<String> codes = GetSecurityCodeList(sectorID);
+        //    List<String> codes = GetBlockStockListOrg(sectorID);
 
         //    if (sortMode == SortMode.Mode_Code)
         //        result = codes;
@@ -3511,7 +3511,7 @@ namespace OwLib
         //        result = null;
 
         //    watch.Stop();
-        //    Debug.Print(string.Format("GetQuoteCodeList :{0}", watch.ElapsedMilliseconds));
+        //    Debug.Print(String.Format("GetQuoteCodeList :{0}", watch.ElapsedMilliseconds));
 
         //    return result;
         //}
@@ -3535,13 +3535,13 @@ namespace OwLib
         /// <param name="field">排序的字段索引</param>
         /// <param name="sortMode">排序方式，默认按代码排</param>
         /// <returns></returns>
-        //public List<int> GetQuoteCodeList(string sectorID, FieldIndex field, SortMode sortMode = SortMode.Mode_Code)
+        //public List<int> GetQuoteCodeList(String sectorID, FieldIndex field, SortMode sortMode = SortMode.Mode_Code)
         //{
-        //    List<string> result;
+        //    List<String> result;
         //    Stopwatch watch = new Stopwatch();
         //    watch.Start();
-        //    //List<string> codes = GetSecurityCodeList(sectorID);
-        //    List<string> codes = GetBlockStockListOrg(sectorID);
+        //    //List<String> codes = GetSecurityCodeList(sectorID);
+        //    List<String> codes = GetBlockStockListOrg(sectorID);
 
         //    if (sortMode == SortMode.Mode_Code)
         //        result = codes;
@@ -3554,7 +3554,7 @@ namespace OwLib
         //        result = null;
 
         //    watch.Stop();
-        //    Debug.Print(string.Format("GetQuoteCodeList :{0}", watch.ElapsedMilliseconds));
+        //    Debug.Print(String.Format("GetQuoteCodeList :{0}", watch.ElapsedMilliseconds));
 
         //    return result;
         //}
@@ -3806,7 +3806,7 @@ namespace OwLib
         /// <param name="id">板块id</param>
         /// <param name="isTop">是否前10</param>
         /// <returns></returns>
-        public List<int> GetNetInflowData(string id, bool isTop)
+        public List<int> GetNetInflowData(String id, bool isTop)
         {
             NetInflowRankType data;
             if (((RankDataTable)_dataTableCollecion["rank"]).NetInflowRankData.TryGetValue(id, out data))
@@ -3842,7 +3842,7 @@ namespace OwLib
         /// <param name="blockId"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public List<int> GetRankOrgData(string blockId, RankType type)
+        public List<int> GetRankOrgData(String blockId, RankType type)
         {
             RankOrgDataRec memData;
             List<int> result = new List<int>();
@@ -3859,7 +3859,7 @@ namespace OwLib
         /// </summary>
         /// <param name="blockId"></param>
         /// <returns></returns>
-        public RankOrgDataRec GetRankOrgData(string blockId)
+        public RankOrgDataRec GetRankOrgData(String blockId)
         {
             RankOrgDataRec result;
             ((RankDataTable)_dataTableCollecion["rank"]).RankOrgData.TryGetValue(blockId, out result);
@@ -3979,7 +3979,7 @@ namespace OwLib
         /// </summary>
         /// <param name="typeLevel2">小类，比如F009，S001001</param>
         /// <returns></returns>
-        public List<OneInfoMineOrgDataRec> GetBondDashboardNews(string typeLevel2)
+        public List<OneInfoMineOrgDataRec> GetBondDashboardNews(String typeLevel2)
         {
             List<OneInfoMineOrgDataRec> result = new List<OneInfoMineOrgDataRec>();
             if (((DetailDataTable)_dataTableCollecion["detail"]).DicNewsInfoByBlock.TryGetValue(typeLevel2, out result))
@@ -3995,7 +3995,7 @@ namespace OwLib
         /// </summary>
         /// <param name="typeLevel2">小类，比如F009，S001001</param>
         /// <returns></returns>
-        public List<OneInfoMineOrgDataRec> GetBondDashboardNewsReport(string typeLevel2)
+        public List<OneInfoMineOrgDataRec> GetBondDashboardNewsReport(String typeLevel2)
         {
             List<OneInfoMineOrgDataRec> result = new List<OneInfoMineOrgDataRec>();
             if (((DetailDataTable)_dataTableCollecion["detail"]).DicNewsReportInfoByBlock.TryGetValue(typeLevel2, out result))
@@ -4084,9 +4084,9 @@ namespace OwLib
         /// 获取东财指数的Code和PublishCode
         /// </summary>
         /// <returns></returns>
-        public string GetEmIndexPublishCode(int code)
+        public String GetEmIndexPublishCode(int code)
         {
-            string result = string.Empty;
+            String result = String.Empty;
             _dicEMIndexCodePublishCode.TryGetValue(code, out result);
             return result;
         }
@@ -4146,9 +4146,9 @@ namespace OwLib
         /// </summary>
         /// <param name="publishCode"></param>
         /// <returns></returns>
-        public static BlockTreeCategory GetBlockCategory(string publishCode)
+        public static BlockTreeCategory GetBlockCategory(String publishCode)
         {
-            if (string.IsNullOrEmpty(publishCode))
+            if (String.IsNullOrEmpty(publishCode))
                 return BlockTreeCategory.SHSZ;
 
             BlockTreeCategory result = BlockTreeCategory.SHSZ;
@@ -4157,12 +4157,12 @@ namespace OwLib
             try
             {
                 DataView dv = new DataView(_blockTreeDataTable);
-                string filter = string.Format("PUBLISHCODE = '{0}'", publishCode);
+                String filter = String.Format("PUBLISHCODE = '{0}'", publishCode);
                 dv.RowFilter = filter;
                 if (dv.Count > 0)
                 {
-                    string tmpl = dv[0]["TMPL"].ToString();
-                    if (!string.IsNullOrEmpty(tmpl))
+                    String tmpl = dv[0]["TMPL"].ToString();
+                    if (!String.IsNullOrEmpty(tmpl))
                     {
                         int tmplInt = Convert.ToInt32(tmpl);
                         result = (BlockTreeCategory)tmplInt;
@@ -4181,19 +4181,19 @@ namespace OwLib
         /// </summary>
         /// <param name="publishCode"></param>
         /// <returns></returns>
-        public string GetBlockPublishName(string publishCode)
+        public String GetBlockPublishName(String publishCode)
         {
-            if (string.IsNullOrEmpty(publishCode))
-                return string.Empty;
+            if (String.IsNullOrEmpty(publishCode))
+                return String.Empty;
 
-            string result = string.Empty;
+            String result = String.Empty;
             DataView dv = new DataView(_blockTreeDataTable);
-            string filter = string.Format("PUBLISHCODE = '{0}'", publishCode);
+            String filter = String.Format("PUBLISHCODE = '{0}'", publishCode);
             dv.RowFilter = filter;
             if (dv.Count > 0)
             {
-                string tmpl = dv[0]["PUBLISHNAME"].ToString();
-                if (!string.IsNullOrEmpty(tmpl))
+                String tmpl = dv[0]["PUBLISHNAME"].ToString();
+                if (!String.IsNullOrEmpty(tmpl))
                 {
                     result = tmpl;
                 }
@@ -4206,9 +4206,9 @@ namespace OwLib
         /// </summary>
         /// <param name="publishCode"></param>
         /// <returns></returns>
-        public static string SectorType(string publishCode)
+        public static String SectorType(String publishCode)
         {
-            string result;
+            String result;
 
             BlockTreeCategory category = GetBlockCategory(publishCode);
             switch (category)
@@ -4271,9 +4271,9 @@ namespace OwLib
         /// </summary>
         /// <param name="publishCode">板块code</param>
         /// <returns></returns>
-        public static string GetQuoteReqortsHTableConfig(string publishCode)
+        public static String GetQuoteReqortsHTableConfig(String publishCode)
         {
-            string result = "QuoteReport_1R";
+            String result = "QuoteReport_1R";
 
             BlockTreeCategory category = GetBlockCategory(publishCode);
 
@@ -4321,9 +4321,9 @@ namespace OwLib
         /// </summary>
         /// <param name="publishCode">板块ID</param>
         /// <returns>SectorBar类别</returns>
-        public static string SectorBarType(string publishCode)
+        public static String SectorBarType(String publishCode)
         {
-            string result;
+            String result;
 
             BlockTreeCategory category = GetBlockCategory(publishCode);
             switch (category)
@@ -4383,7 +4383,7 @@ namespace OwLib
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public MarketType GetMarketByPublishCode(string id)
+        public MarketType GetMarketByPublishCode(String id)
         {
             MarketType result = MarketType.SHALev1;
             BlockTreeCategory category = GetBlockCategory(id);
@@ -4403,7 +4403,7 @@ namespace OwLib
             return result;
         }
 
-        public int SaveString(string strValue)
+        public int SaveString(String strValue)
         {
             return 0;
         }
@@ -4596,7 +4596,7 @@ namespace OwLib
         ///// </summary>
         ///// <param name="code"></param>
         ///// <param name="tag"></param>
-        //public void SetStockTag(int code, string text)
+        //public void SetStockTag(int code, String text)
         //{
         //    if (DetailData.AllStockDetailData.ContainsKey(code))
         //    {
@@ -4610,7 +4610,7 @@ namespace OwLib
         /// </summary>
         /// <param name="code"></param>
         /// <param name="tag"></param>
-        public void SetStockTag(int code, StockTag tag, string text)
+        public void SetStockTag(int code, StockTag tag, String text)
         {
             Dictionary<FieldIndex, object> fieldObject;
             Dictionary<FieldIndex, int> fieldInt32;
@@ -4628,7 +4628,7 @@ namespace OwLib
             if (tag == StockTag.Text)
                 fieldObject[FieldIndex.StockTagText] = text;
             else
-                fieldObject[FieldIndex.StockTagText] = string.Empty;
+                fieldObject[FieldIndex.StockTagText] = String.Empty;
             StockMarkInfoMananger.GetInstance().SetStockTag(code, tag, text);
         }
 
@@ -4947,13 +4947,13 @@ namespace OwLib
         /// Value:BlockName
         /// </summary>
         /// <returns></returns>
-        private List<KeyValuePair<string, string>> GetUserBlocks()
+        private List<KeyValuePair<String, String>> GetUserBlocks()
         {
-            List<KeyValuePair<string, string>> result = null;
+            List<KeyValuePair<String, String>> result = null;
 
             if (result == null)
             {
-                result = new List<KeyValuePair<string, string>>(0);
+                result = new List<KeyValuePair<String, String>>(0);
             }
 
             return result;
@@ -4962,7 +4962,7 @@ namespace OwLib
         /// <summary>
         /// 添加自选股
         /// </summary>
-        public bool AddUserSecurity(string blockId, int unicode)
+        public bool AddUserSecurity(String blockId, int unicode)
         {
             
 
@@ -4972,7 +4972,7 @@ namespace OwLib
         /// <summary>
         /// 删除自选股
         /// </summary>
-        public void DeleteUserSecurity(string blockid, int unicode)
+        public void DeleteUserSecurity(String blockid, int unicode)
         {
 
         }
@@ -4993,7 +4993,7 @@ namespace OwLib
         /// <param name="code"></param>
         /// <param name="blockid"></param>
         /// <returns></returns>
-        public bool IsUserSecurity(int unicode, string blockid)
+        public bool IsUserSecurity(int unicode, String blockid)
         {
 
             return false;
@@ -5004,9 +5004,9 @@ namespace OwLib
         /// </summary>
         /// <param name="blockID">板块ID</param>
         /// <returns></returns>
-        public static bool IsCustomerHoldStockBlock(string blockID)
+        public static bool IsCustomerHoldStockBlock(String blockID)
         {
-            if (string.IsNullOrEmpty(blockID))
+            if (String.IsNullOrEmpty(blockID))
                 return false;
             return blockID.ToLower().Equals("0.u");
         }
@@ -5016,9 +5016,9 @@ namespace OwLib
         /// </summary>
         /// <param name="blockID">板块ID</param>
         /// <returns>true: 自选股板块；false: 系统板块</returns>
-        public static bool IsCustomerBlock(string blockID)
+        public static bool IsCustomerBlock(String blockID)
         {
-            if (string.IsNullOrEmpty(blockID))
+            if (String.IsNullOrEmpty(blockID))
                 return false;
             return blockID.ToLower().EndsWith(".u");
         }
@@ -5030,19 +5030,19 @@ namespace OwLib
         /// </summary>
         /// <param name="blockID">需要检查的自选股板块ID</param>
         /// <returns>核实后的自选股板块ID</returns>
-        public string CheckCustomerBlockID(string blockID)
+        public String CheckCustomerBlockID(String blockID)
         {
-            string result = string.Empty;
+            String result = String.Empty;
 
-            List<KeyValuePair<string, string>> blocks = GetUserBlocks();
+            List<KeyValuePair<String, String>> blocks = GetUserBlocks();
 
             if (blocks != null && blocks.Count > 0)
             {
                 int locationIndex = -1;
                 for (int index = 0; index < blocks.Count; index++)
                 {
-                    KeyValuePair<string, string> blockElements = blocks[index];
-                    if (string.Equals(blockElements.Key, blockID))
+                    KeyValuePair<String, String> blockElements = blocks[index];
+                    if (String.Equals(blockElements.Key, blockID))
                     {
                         locationIndex = index;
                         break;
@@ -5072,12 +5072,12 @@ namespace OwLib
         public  List<StockIndicatorLeftItem> GetIndicatorLeftReport(int code)
         {
             List<StockIndicatorLeftItem> result = new List<StockIndicatorLeftItem>();
-            HashSet<string> macroIds;
+            HashSet<String> macroIds;
             IndicatorDataTable dataTable = (IndicatorDataTable)_dataTableCollecion["indicator"];
             if (dataTable.DicLeftIndicatorOfStock.TryGetValue(code, out macroIds))
             {
                 StockIndicatorLeftItem item;
-                foreach (string macroId in macroIds) 
+                foreach (String macroId in macroIds) 
                 {
                     if (dataTable.AllLeftItems.TryGetValue(macroId, out item))
                     {
@@ -5098,12 +5098,12 @@ namespace OwLib
         public  List<StockIndicatorRightItem> GetIndicatorRightReport(int code)
         {
             List<StockIndicatorRightItem> result = new List<StockIndicatorRightItem>();
-            HashSet<string> macroIds;
+            HashSet<String> macroIds;
             IndicatorDataTable dataTable = (IndicatorDataTable)_dataTableCollecion["indicator"];
             if (dataTable.DicRightIndicatorOfStock.TryGetValue(code, out macroIds))
             {
                 StockIndicatorRightItem item;
-                foreach (string macroId in macroIds)
+                foreach (String macroId in macroIds)
                 {
                     if (dataTable.AllRightItems.TryGetValue(macroId, out item))
                     {

@@ -359,7 +359,7 @@ namespace OwLib
                 historyDataInfo.m_code = EMSecurityService.GetKwItemByInnerCode(rec.Code).Code;
                 historyDataInfo.m_subscription = 1;
                 historyDataInfo.m_cycle = 0;
-                m_klineDiv.BindHistoryData(historyDataInfo, securityDatas);
+                m_klineDiv.BindTrendLines(historyDataInfo, securityDatas);
                 CFTService.QueryLV2(historyDataInfo.m_code);
                 Console.WriteLine("1");
             }
@@ -1201,7 +1201,7 @@ namespace OwLib
         /// 获取绘制文字
         /// </summary>
         /// <returns>绘制文字</returns>
-        public override string GetPaintText()
+        public override String GetPaintText()
         {
             String text = CStr.GetValueByDigit(m_value, m_digit);
             if (m_isPercent)

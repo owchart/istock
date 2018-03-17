@@ -14,7 +14,7 @@ namespace OwLib {
         /// </summary>
         public static FormulaDict GetFormulaDict() {
             FormulaDict dict = new FormulaDict();
-            string filePath = PathUtilities.CfgPath + "formuladict.xml";
+            String filePath = PathUtilities.CfgPath + "formuladict.xml";
             if (File.Exists(filePath)) {
                 try {
                     XmlDocument doc = new XmlDocument();
@@ -58,7 +58,7 @@ namespace OwLib {
         /// </summary>
         public static FormulaFunctions GetFormulaSystemFunctions() {
             FormulaFunctions functions = new FormulaFunctions();
-            string filePath = PathUtilities.CfgPath + "formulafunctions.xml";
+            String filePath = PathUtilities.CfgPath + "formulafunctions.xml";
             if (File.Exists(filePath)) {
                 try {
                     XmlDocument doc = new XmlDocument();

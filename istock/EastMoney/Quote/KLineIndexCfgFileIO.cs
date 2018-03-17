@@ -10,15 +10,15 @@ namespace OwLib
     /// </summary>
     public static class KLineIndexCfgFileIO
     {
-        private static readonly string _filePath = PathUtilities.CfgPath + "KLineIndexConfig.xml";
+        private static readonly String _filePath = PathUtilities.CfgPath + "KLineIndexConfig.xml";
         /// <summary>
         /// GetAllKLineCfgData
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, List<KLineIndexData>> GetAllKLineCfgData()
+        public static Dictionary<String, List<KLineIndexData>> GetAllKLineCfgData()
         {
-            Dictionary<string, List<KLineIndexData>> result =
-                new Dictionary<string, List<KLineIndexData>>();
+            Dictionary<String, List<KLineIndexData>> result =
+                new Dictionary<String, List<KLineIndexData>>();
             XmlDocument doc = new XmlDocument(); 
             doc.Load(_filePath);
 
@@ -30,8 +30,8 @@ namespace OwLib
             {
                 if (node.Name == "#comment")
                     continue;
-                string id = node.Attributes["id"].Value;
-                string name = node.Attributes["caption"].Value;
+                String id = node.Attributes["id"].Value;
+                String name = node.Attributes["caption"].Value;
 
                 list = new List<KLineIndexData>();
 
@@ -59,7 +59,7 @@ namespace OwLib
     /// </summary>
     public struct KLineIndexData
     {
-        private string _name;
+        private String _name;
         private int _default;
         private int _step;
         private int _min;
@@ -68,7 +68,7 @@ namespace OwLib
         /// <summary>
         /// Name
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }

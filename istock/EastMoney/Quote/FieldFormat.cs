@@ -24,9 +24,9 @@ namespace OwLib
         /// <param name="fieldName"></param>
         /// <param name="output"></param>
         /// <param name="brush"></param>
-        public static void GetFieldOutput(int code, string fieldName, out string output, out SolidBrush brush)
+        public static void GetFieldOutput(int code, String fieldName, out String output, out SolidBrush brush)
         {
-            output = string.Empty;
+            output = String.Empty;
             brush = QuoteDrawService.BrushColorCode;
 
             try
@@ -77,15 +77,15 @@ namespace OwLib
         /// <param name="code"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        public static string GetFieldExport(int code, string fieldName)
+        public static String GetFieldExport(int code, String fieldName)
         {
-            return string.Empty;
+            return String.Empty;
         }
 
-        private static EmQDataIO.FieldInfo GetFieldInfo(int code, string fieldName)
+        private static EmQDataIO.FieldInfo GetFieldInfo(int code, String fieldName)
         {
             FieldInfo fieldInfo = null;
-            Dictionary<string, FieldInfo> fieldInfoArray;
+            Dictionary<String, FieldInfo> fieldInfoArray;
             MarketType mt = _dc.GetMarketType(code);
 
             if (FieldInfoCfgFileIO.DicMarketFieldInfo.TryGetValue(mt, out fieldInfoArray))
@@ -102,15 +102,15 @@ namespace OwLib
 
         #region 设置Format字符串
 
-        private static string SetFieldFormat(int data, FieldInfo fieldInfo, int code)  
+        private static String SetFieldFormat(int data, FieldInfo fieldInfo, int code)  
         {
-            string prefix = string.Empty;
-            string postfix = string.Empty;
-            string body = string.Empty;
-            string round = string.Empty;
+            String prefix = String.Empty;
+            String postfix = String.Empty;
+            String body = String.Empty;
+            String round = String.Empty;
             bool isShowBody = false;
 
-            foreach (List<string> oneFormat in fieldInfo.FormatSetting)
+            foreach (List<String> oneFormat in fieldInfo.FormatSetting)
             {
                 try
                 {
@@ -240,7 +240,7 @@ namespace OwLib
                                 }
                                 else
                                 {
-                                    body = string.Empty;
+                                    body = String.Empty;
                                     isShowBody = true;
                                 }
                             }
@@ -259,15 +259,15 @@ namespace OwLib
             return prefix + body + postfix;
         }
 
-        private static string SetFieldFormat(float data, FieldInfo fieldInfo, int code)
+        private static String SetFieldFormat(float data, FieldInfo fieldInfo, int code)
         {
-            string prefix = string.Empty;
-            string postfix = string.Empty;
-            string body = string.Empty;
-            string round = string.Empty;
+            String prefix = String.Empty;
+            String postfix = String.Empty;
+            String body = String.Empty;
+            String round = String.Empty;
             bool isShowBody = false;
 
-            foreach (List<string> oneFormat in fieldInfo.FormatSetting)
+            foreach (List<String> oneFormat in fieldInfo.FormatSetting)
             {
                 try
                 {
@@ -397,7 +397,7 @@ namespace OwLib
                                 }
                                 else
                                 {
-                                    body = string.Empty;
+                                    body = String.Empty;
                                     isShowBody = true;
                                 }
                             }
@@ -416,15 +416,15 @@ namespace OwLib
             return prefix + body + postfix;
         }
 
-        private static string SetFieldFormat(long data, FieldInfo fieldInfo, int code)
+        private static String SetFieldFormat(long data, FieldInfo fieldInfo, int code)
         {
-            string prefix = string.Empty;
-            string postfix = string.Empty;
-            string body = string.Empty;
-            string round = string.Empty;
+            String prefix = String.Empty;
+            String postfix = String.Empty;
+            String body = String.Empty;
+            String round = String.Empty;
             bool isShowBody = false;
 
-            foreach (List<string> oneFormat in fieldInfo.FormatSetting)
+            foreach (List<String> oneFormat in fieldInfo.FormatSetting)
             {
                 try
                 {
@@ -554,7 +554,7 @@ namespace OwLib
                                 }
                                 else
                                 {
-                                    body = string.Empty;
+                                    body = String.Empty;
                                     isShowBody = true;
                                 }
                             }
@@ -573,15 +573,15 @@ namespace OwLib
             return prefix + body + postfix;
         }
 
-        private static string SetFieldFormat(double data, FieldInfo fieldInfo, int code)
+        private static String SetFieldFormat(double data, FieldInfo fieldInfo, int code)
         {
-            string prefix = string.Empty;
-            string postfix = string.Empty;
-            string body = string.Empty;
-            string round = string.Empty;
+            String prefix = String.Empty;
+            String postfix = String.Empty;
+            String body = String.Empty;
+            String round = String.Empty;
             bool isShowBody = false;
 
-            foreach (List<string> oneFormat in fieldInfo.FormatSetting)
+            foreach (List<String> oneFormat in fieldInfo.FormatSetting)
             {
                 try
                 {
@@ -711,7 +711,7 @@ namespace OwLib
                                 }
                                 else
                                 {
-                                    body = string.Empty;
+                                    body = String.Empty;
                                     isShowBody = true;
                                 }
                             }
@@ -730,13 +730,13 @@ namespace OwLib
             return prefix + body + postfix;
         }
 
-        private static string SetFieldFormat(string data, FieldInfo fieldInfo, int code)
+        private static String SetFieldFormat(String data, FieldInfo fieldInfo, int code)
         {
-            string prefix = string.Empty;
-            string postfix = string.Empty;
-            string body = string.Empty;
+            String prefix = String.Empty;
+            String postfix = String.Empty;
+            String body = String.Empty;
 
-            foreach (List<string> oneFormat in fieldInfo.FormatSetting)
+            foreach (List<String> oneFormat in fieldInfo.FormatSetting)
             {
                 try
                 {
@@ -793,7 +793,7 @@ namespace OwLib
                                 }
                                 else
                                 {
-                                    body = string.Empty;
+                                    body = String.Empty;
                                 }
                             }
                             break;

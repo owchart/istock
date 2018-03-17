@@ -14,7 +14,7 @@ namespace OwLib
         /// <summary>
         /// 设置路径
         /// </summary>
-        public static void SetDataPath(string configPath, string dataPath, string userPath, string skinsPath)
+        public static void SetDataPath(String configPath, String dataPath, String userPath, String skinsPath)
         {
             DataPath = dataPath;
             CfgPath = configPath;
@@ -70,22 +70,22 @@ namespace OwLib
         }
 
 
-        private static string _rootPath = "";
- //      private static string _rootPath = Directory.GetParent(Process.GetCurrentProcess().MainModule.FileName).FullName.Replace("bin", "");
+        private static String _rootPath = "";
+ //      private static String _rootPath = Directory.GetParent(Process.GetCurrentProcess().MainModule.FileName).FullName.Replace("bin", "");
         /// <summary>
         /// 根路径
         /// </summary>
-        public static string RootPath
+        public static String RootPath
         {
             get { return _rootPath; }
             set { _rootPath = value; }
         }
 
-        private static string _dataPath;
+        private static String _dataPath;
         /// <summary>
         /// 数据路径
         /// </summary>
-        public static string DataPath
+        public static String DataPath
         {
             get
             {
@@ -100,7 +100,7 @@ namespace OwLib
         /// <summary>
         /// sData
         /// </summary>
-        public static string SDataPath
+        public static String SDataPath
         {
             get
             {
@@ -113,7 +113,7 @@ namespace OwLib
             
         }
 
-        public static string MDataPath
+        public static String MDataPath
         {
             get
             {
@@ -121,15 +121,15 @@ namespace OwLib
             }
         }
 
-        private static string _skinsPath;
+        private static String _skinsPath;
         /// <summary>
         /// 皮肤路径
         /// </summary>
-        public static string SkinsPath
+        public static String SkinsPath
         {
             get
             {
-                if (string.IsNullOrEmpty(_skinsPath))
+                if (String.IsNullOrEmpty(_skinsPath))
                     return Path.Combine(_rootPath, @"skins\default\quote\");
                 else
                     return Path.Combine(_skinsPath, @"quote\");
@@ -140,15 +140,15 @@ namespace OwLib
             }
         }
 
-        private static string _cfgPath;
+        private static String _cfgPath;
         /// <summary>
         /// 配置路径
         /// </summary>
-        public static string CfgPath
+        public static String CfgPath
         {
             get
             {
-                if (string.IsNullOrEmpty(_cfgPath))
+                if (String.IsNullOrEmpty(_cfgPath))
                     return Path.Combine(_rootPath, @"Config\QuoteTest\");
                 else
                     return Path.Combine(_cfgPath, @"Quote\");
@@ -159,26 +159,26 @@ namespace OwLib
             }
         }
 
-        private static string _userPath;
+        private static String _userPath;
         /// <summary>
         /// 用户路径
         /// </summary>
-        public static string UserPath
+        public static String UserPath
         {
             get
             {
-                string userPath = "" + @"Quote\";
+                String userPath = "" + @"Quote\";
                 if (!Directory.Exists(userPath))
                     Directory.CreateDirectory(userPath);
                 return userPath;
                 //测试用户
-                string path = @"D:\work\FinalTerminal\src\run\" + @"config\users\test001\";
+                String path = @"D:\work\FinalTerminal\src\run\" + @"config\users\test001\";
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 return path;
 
-                if (string.IsNullOrEmpty(_userPath))
+                if (String.IsNullOrEmpty(_userPath))
                 {
-                    string tmp = Path.Combine(_rootPath, @"users\");
+                    String tmp = Path.Combine(_rootPath, @"users\");
                     tmp = Path.Combine(tmp, SystemConfig.UserInfo.UserName + @"\");
                     return tmp;
                 }
@@ -193,7 +193,7 @@ namespace OwLib
         /// <summary>
         /// 日志路径
         /// </summary>
-        public static string LogPath
+        public static String LogPath
         {
             get
             {
@@ -204,14 +204,14 @@ namespace OwLib
         /// <summary>
         /// 板块树路径
         /// </summary>
-        public static string BlockTreePath
+        public static String BlockTreePath
         {
             get { return Path.Combine(_dataPath, @"NecessaryData\BLK_BLOCKTREE"); }
         }
         /// <summary>
         /// 旧新闻路径
         /// </summary>
-        public static string OldNewsPath
+        public static String OldNewsPath
         {
             get
             {
@@ -221,7 +221,7 @@ namespace OwLib
         /// <summary>
         /// 旧报告路径
         /// </summary>
-        public static string OldReportPath
+        public static String OldReportPath
         {
             get
             {
@@ -232,7 +232,7 @@ namespace OwLib
         /// <summary>
         /// 资源文件
         /// </summary>
-        public  static string ImagePath
+        public  static String ImagePath
         {
             get
             {
@@ -242,7 +242,7 @@ namespace OwLib
         /// <summary>
         /// 新闻路径
         /// </summary>
-        public static string NewsPath
+        public static String NewsPath
         {
             get
             {
@@ -253,7 +253,7 @@ namespace OwLib
         /// <summary>
         /// F10路径
         /// </summary>
-        public static string F10Path
+        public static String F10Path
         {
             get
             {
@@ -263,7 +263,7 @@ namespace OwLib
         /// <summary>
         /// 报告路径
         /// </summary>
-        public static string ReportPath
+        public static String ReportPath
         {
             get
             {
@@ -273,63 +273,63 @@ namespace OwLib
         /// <summary>
         /// Bmp文件路径
         /// </summary>
-        public static string BmpPath
+        public static String BmpPath
         {
             get { return Path.Combine(_rootPath, @"Bmp"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataWgtPath
+        public static String DataWgtPath
         {
             get { return Path.Combine(DataPath, @"Weight\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataMntPath
+        public static String DataMntPath
         {
             get { return Path.Combine(DataPath, @"Mnt\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataDayPath
+        public static String DataDayPath
         {
             get { return Path.Combine(DataPath, @"Day\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataDBFPath
+        public static String DataDBFPath
         {
             get { return DataPath + @"DBF\"; }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataMinPath
+        public static String DataMinPath
         {
             get { return Path.Combine(DataPath, @"Min\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataTickPath
+        public static String DataTickPath
         {
             get { return Path.Combine(DataPath, @"Tick\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataDealPath
+        public static String DataDealPath
         {
             get { return Path.Combine(DataPath, @"Deal\"); }
         }
         /// <summary>
         /// 
         /// </summary>
-        public static string DataNowPath
+        public static String DataNowPath
         {
             get { return Path.Combine(DataPath, @"Now\"); }
         }
@@ -341,7 +341,7 @@ namespace OwLib
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns>文件名</returns>
-        public static string GetFileNameWithoutDot(string filePath)
+        public static String GetFileNameWithoutDot(String filePath)
         {
             int startIndex = filePath.LastIndexOf(@"\");
             int endIndex = filePath.LastIndexOf(@".");
@@ -355,13 +355,13 @@ namespace OwLib
         /// 从完整的路径中获得文件名称
         /// </summary>
         /// <returns>文件名</returns>
-        public static string GetFileName(string filePath)
+        public static String GetFileName(String filePath)
         {
             int startIndex = filePath.LastIndexOf(@"\");
             return startIndex == -1 ? filePath : filePath.Substring(startIndex + 1, filePath.Length - (startIndex + 1));
         }
 
-        public static string GetFilePath(string filePath)
+        public static String GetFilePath(String filePath)
         {
             int length = filePath.LastIndexOf(@"\");
             if( length == -1)

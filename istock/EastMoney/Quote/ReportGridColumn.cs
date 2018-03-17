@@ -58,21 +58,21 @@ namespace OwLib
         private StringAlignment _VAlign = StringAlignment.Far;
         private Brush _FontColor = QuoteDrawService.BrushColorNormal;
 
-        private string _name;
+        private String _name;
         /// <summary>
         /// 列名
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { this._name = value; }
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
         /// 列头显示的中文名字
         /// </summary>
-        public string Caption
+        public String Caption
         {
             get { return _caption; }
             set { this._caption = value; }
@@ -280,11 +280,11 @@ namespace OwLib
             set { this._dataType = value; }
         }
 
-        private string _format;
+        private String _format;
         /// <summary>
         /// 当前列绑定字段的格式化类别
         /// </summary>
-        public string Format
+        public String Format
         {
             get { return _format; }
             set { this._format = value; }
@@ -300,21 +300,21 @@ namespace OwLib
             set { this._showTip = value; }
         }
 
-        private string _tipId;
+        private String _tipId;
         /// <summary>
         /// TipID
         /// </summary>
-        public string TipID
+        public String TipID
         {
             get { return _tipId; }
             set { this._tipId = value; }
         }
 
-        private string _helpButtonId;
+        private String _helpButtonId;
         /// <summary>
         /// 帮助按钮ID
         /// </summary>
-        public string HelpButtonID
+        public String HelpButtonID
         {
             get { return _helpButtonId; }
             set { this._helpButtonId = value; }
@@ -333,7 +333,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public override string ToString()
+        public override String ToString()
         {
             return this.Caption;
         }
@@ -468,7 +468,7 @@ namespace OwLib
         /// <summary>
         /// 数据内容
         /// </summary>
-        public string DataContent;
+        public String DataContent;
         /// <summary>
         /// 前景
         /// </summary>

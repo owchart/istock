@@ -27,7 +27,7 @@ namespace OwLib
         /// </summary>
         /// <param name="sourcename">数据源名</param>
         /// <returns>查询到的数据集</returns>
-		public static DataSet QueryData(string sourcename)
+		public static DataSet QueryData(String sourcename)
 		{
 			return QueryData(sourcename, null);
 		}
@@ -50,7 +50,7 @@ namespace OwLib
         /// <param name="modes">过滤条件集合</param>
         /// <param name="fields">数据列名</param>
         /// <returns>查询的数据集结果</returns>
-		public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields)
+		public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields)
 		{
 			return QueryData(sourcename, modes, fields, null);
 		}
@@ -63,8 +63,8 @@ namespace OwLib
         /// <param name="fields">数据列名</param>
         /// <param name="map">键值对</param>
         /// <returns>查询的数据集结果</returns>
-		public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields,
-		                                Dictionary<GROUPTYPE, string> map)
+		public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields,
+		                                Dictionary<GROUPTYPE, String> map)
 		{
 			return QueryData(sourcename, modes, fields, map, null);
 		}
@@ -78,8 +78,8 @@ namespace OwLib
         /// <param name="map">键值对</param>
         /// <param name="_orders">排序键值对</param>
         /// <returns>查询的数据集结果</returns>
-		public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields,
-		                                Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders)
+		public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields,
+		                                Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders)
 		{
 			return QueryData(sourcename, modes, fields, map, _orders, false);
 		}
@@ -94,8 +94,8 @@ namespace OwLib
         /// <param name="_orders">排序键值对</param>
         /// <param name="_needToGroup">是否要组合列</param>
         /// <returns>查询的数据集结果</returns>
-		public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields,
-		                                Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders, bool _needToGroup)
+		public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields,
+		                                Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders, bool _needToGroup)
 		{
 			return QueryData(sourcename, modes, fields, map, _orders, _needToGroup, null);
 		}
@@ -111,9 +111,9 @@ namespace OwLib
         /// <param name="_needToGroup">是否要组合列</param>
         /// <param name="statisticsEngName">统计英文名</param>
         /// <returns>查询的数据结果</returns>
-		public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields,
-		                                Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders, bool _needToGroup,
-		                                string statisticsEngName)
+		public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields,
+		                                Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders, bool _needToGroup,
+		                                String statisticsEngName)
 		{
 		//	int result;
 			return QueryData(sourcename, modes, fields, map, _orders, _needToGroup, statisticsEngName, null);
@@ -137,15 +137,15 @@ namespace OwLib
         /// <param name="handler">数据处理委托</param>
         /// <param name="form">父容器控件</param>
         /// <returns>查询到的数据集</returns>
-        public static DataSet QueryData(String sourcename, List<FilterMode> modes, string[] fields,
-                                        Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders, bool _needToGroup,
-                                        string statisticsEngName, DelegateMgr.QueryHandle handler
-            //,Dictionary<string,string[]> blockfilters
+        public static DataSet QueryData(String sourcename, List<FilterMode> modes, String[] fields,
+                                        Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders, bool _needToGroup,
+                                        String statisticsEngName, DelegateMgr.QueryHandle handler
+            //,Dictionary<String,String[]> blockfilters
             )
         {
 
-            string log = null;
-            if (string.IsNullOrEmpty(sourcename))
+            String log = null;
+            if (String.IsNullOrEmpty(sourcename))
             {
                 //	res = 0;
                 return null;
@@ -160,7 +160,7 @@ namespace OwLib
             }
             log = "\n" + log + "\n请求参数描述:\n" + PrintFilterLog(modes) + "\nQueryData请求数据描述结束-------------->\n\n\n";
             if (_orders!=null)
-            foreach (KeyValuePair<string, bool> keyValuePair in _orders)
+            foreach (KeyValuePair<String, bool> keyValuePair in _orders)
             {
                 log = log + "r\n" + "排序字段: " + keyValuePair.Key + keyValuePair.Value;
             }
@@ -190,7 +190,7 @@ namespace OwLib
                     {
                         continue;
                     }
-                    string[] values = mode.Value as string[];
+                    String[] values = mode.Value as String[];
                     if (values != null && values.Length >= 2)
                     {
 
@@ -262,7 +262,7 @@ namespace OwLib
                     try
                     {
                         dt.DataSource = sourcename;
-                        if (string.IsNullOrEmpty(statisticsEngName))
+                        if (String.IsNullOrEmpty(statisticsEngName))
                             dt.StatisticsEngName = sourcename;
                         else
                         {
@@ -341,15 +341,15 @@ namespace OwLib
         /// <param name="pageCount">页数</param>
         /// <param name="queryHandle">分页数据查询委托</param>
         /// <returns>查询到的数据集</returns>
-		public static DataSet QueryPageData(String sourcename, List<FilterMode> modes, string[] fields,
-																Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders, bool _needToGroup,
-																string statisticsEngName, DelegateMgr.SendBackHandle handler, int startindex,int pageCount, DelegateMgr.QueryHandle queryHandle
-			//,Dictionary<string,string[]> blockfilters
+		public static DataSet QueryPageData(String sourcename, List<FilterMode> modes, String[] fields,
+																Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders, bool _needToGroup,
+																String statisticsEngName, DelegateMgr.SendBackHandle handler, int startindex,int pageCount, DelegateMgr.QueryHandle queryHandle
+			//,Dictionary<String,String[]> blockfilters
 	)
 		{
 
-			string log = null;
-			if (string.IsNullOrEmpty(sourcename))
+			String log = null;
+			if (String.IsNullOrEmpty(sourcename))
 			{
 				//res = 0;
 				return null;
@@ -365,7 +365,7 @@ namespace OwLib
             if (_orders != null)
             {
                 log = log + "排序信息:";
-                foreach (KeyValuePair<string, bool> keyValuePair in _orders)
+                foreach (KeyValuePair<String, bool> keyValuePair in _orders)
                 {
                     log = log + "\r\n    " + keyValuePair.Key;
                     if (keyValuePair.Value)
@@ -405,7 +405,7 @@ namespace OwLib
 					{
 						continue;
 					}
-					string[] values = mode.Value as string[];
+					String[] values = mode.Value as String[];
 					if (values != null)
 					{
 
@@ -495,7 +495,7 @@ namespace OwLib
 					try
 					{
 						dt.DataSource = sourcename;
-						if (string.IsNullOrEmpty(statisticsEngName))
+						if (String.IsNullOrEmpty(statisticsEngName))
 							dt.StatisticsEngName = sourcename;
 						else
 						{
@@ -508,7 +508,7 @@ namespace OwLib
 							
 						} else if (queryHandle!=null)
 						{
-                            string threadid = "";
+                            String threadid = "";
 						    dq.QueryStatics(dt,out threadid,queryHandle);
                             CommonService.Log("开始执行QueryHandler ID:" + threadid);
                             CommonContant.QueryThreadIds.Add(threadid);
@@ -542,7 +542,7 @@ namespace OwLib
 						{
 						
                             //result = dq.Query(requests);
-						  //  string threadid;
+						  //  String threadid;
 						    result = dq.Query(requests);
 
 						}
@@ -551,10 +551,10 @@ namespace OwLib
 							if (startindex == 0)
 							//dq.Query(requests, handler);
 							{
-                                string threadid = "";
+                                String threadid = "";
 								dq.QueryForPagging(dt,out threadid,handler);
                                 CommonContant.QueryThreadIds.Add(threadid);
-                                CommonService.Log(string.Format("发起数据请求: {0}", threadid));
+                                CommonService.Log(String.Format("发起数据请求: {0}", threadid));
 							
 							}
 
@@ -578,7 +578,7 @@ namespace OwLib
 					}
 					finally
 					{
-						CommonService.Log(string.Format("执行到位置{0}", 17));
+						CommonService.Log(String.Format("执行到位置{0}", 17));
 					}
 				//}
 			}
@@ -594,16 +594,16 @@ namespace OwLib
         /// </summary>
         /// <param name="cmd">查询命令</param>
         /// <returns>结果集</returns>
-        public static DataSet QueryIndicate(string cmd)
+        public static DataSet QueryIndicate(String cmd)
         {
             CommonService.ClearMemory();
             return DataAccess.IDataQuery.QueryIndicate(cmd) as DataSet;
         }
 
-        public static void CancelQuery(string threadid)
+        public static void CancelQuery(String threadid)
         {
              new DataQuery().CancelRequest(threadid);
-            CommonService.Log(string.Format("取消数据请求ID: {0}", threadid));
+            CommonService.Log(String.Format("取消数据请求ID: {0}", threadid));
                    
             
         }
@@ -612,13 +612,13 @@ namespace OwLib
         /// </summary>
         /// <param name="ordermaps">排序键值对</param>
         /// <returns>获取到的排序集合</returns>
-		private static List<Order> GetOrders(Dictionary<string, bool> ordermaps)
+		private static List<Order> GetOrders(Dictionary<String, bool> ordermaps)
 		{
 
 			if (ordermaps != null && ordermaps.Count > 0)
 			{
 				List<Order> orders = new List<Order>();
-				foreach (string key in ordermaps.Keys)
+				foreach (String key in ordermaps.Keys)
 				{
 					bool value = ordermaps[key];
 					if (!value)
@@ -644,7 +644,7 @@ namespace OwLib
         /// <param name="filter">过滤</param>
         /// <param name="value">值</param>
         /// <returns>对象的解释文本</returns>
-		private static Expression GetExpression(string obj, FILTER filter, object value)
+		private static Expression GetExpression(String obj, FILTER filter, object value)
 		{
 			Expression e = null;
 			switch (filter)
@@ -674,18 +674,18 @@ namespace OwLib
 
 					break;
 				case FILTER.BAOHANS:
-					e = Expression.Like(obj, "%" + (string) value + "%");
+					e = Expression.Like(obj, "%" + (String) value + "%");
 					break;
 				case FILTER.IN:
-					if (value is string[])
+					if (value is String[])
 					{
-						var res = value as string[];
+						var res = value as String[];
 						if (res.Length > 0)
 							e = Expression.In(obj, (object[]) value);
 					}
 					else
 					{
-						var res1 = value.ToString().Split(new string[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+						var res1 = value.ToString().Split(new String[] {";"}, StringSplitOptions.RemoveEmptyEntries);
 						if (res1.Length > 0)
 							e = Expression.In(obj, res1);
 					}
@@ -702,18 +702,18 @@ namespace OwLib
         /// </summary>
         /// <param name="filterModes">过滤值集合</param>
         /// <returns>log文本字符串</returns>
-		private static string PrintFilterLog(List<FilterMode> filterModes)
+		private static String PrintFilterLog(List<FilterMode> filterModes)
 		{
 			if (filterModes == null)
 				return "";
-			string log = "";
+			String log = "";
 			foreach (var filterMode in filterModes)
 			{
-				string value = null;
-				if (filterMode.Value is string[])
+				String value = null;
+				if (filterMode.Value is String[])
 				{
-					var res = filterMode.Value as string[];
-					foreach (string s in res)
+					var res = filterMode.Value as String[];
+					foreach (String s in res)
 					{
 						value = value + s + ";";
 					}
@@ -743,14 +743,14 @@ namespace OwLib
         /// <param name="_orders">排序键值对</param>
         /// <param name="_needToGroup">是否要列重组</param>
         /// <param name="statisticsEngName">统计英文名</param>
-		public static void SetFilterLog(String sourcename, List<FilterMode> modes, string[] fields,
-		                                Dictionary<GROUPTYPE, string> map, Dictionary<string, bool> _orders, bool _needToGroup,
-		                                string statisticsEngName)
+		public static void SetFilterLog(String sourcename, List<FilterMode> modes, String[] fields,
+		                                Dictionary<GROUPTYPE, String> map, Dictionary<String, bool> _orders, bool _needToGroup,
+		                                String statisticsEngName)
 		{
             if (FilterTable ==null)
                 return;
-			string id = "";
-			string speicalname = "";
+			String id = "";
+			String speicalname = "";
 			if (modes != null)
 			{
 				foreach (var filter in modes)
@@ -777,7 +777,7 @@ namespace OwLib
 						dr["PROPERTY_CN"] = "";
 						dr["ISSTATIC"] = _needToGroup;
 						dr["ISBIGDATA"] = false;
-						dr["SPECIALTOPICNAME"] = string.Format("{0}&{1}", id, speicalname);
+						dr["SPECIALTOPICNAME"] = String.Format("{0}&{1}", id, speicalname);
 						FilterTable.Rows.Add(dr);
 					}
 					//if (
@@ -796,14 +796,14 @@ namespace OwLib
 					//  dr["PROPERTY_CN"] = "";
 					//  dr["ISSTATIC"] = _needToGroup;
 					//  dr["ISBIGDATA"] = false;
-					//  dr["SPECIALTOPICNAME"] = string.Format("{0}&{1}", id, speicalname);
+					//  dr["SPECIALTOPICNAME"] = String.Format("{0}&{1}", id, speicalname);
 					//  FilterTable.Rows.Add(dr);
 					//}
 				}
 			}
 			if (_orders !=null&&_orders .Count>0)
 			{
-				foreach (KeyValuePair<string, bool> keyValuePair in _orders)
+				foreach (KeyValuePair<String, bool> keyValuePair in _orders)
 				{
 					bool findres = false;
                     if (FilterTable==null)
@@ -829,7 +829,7 @@ namespace OwLib
 						dr["PROPERTY_CN"] = "";
 						dr["ISSTATIC"] = _needToGroup;
 						dr["ISBIGDATA"] = false;
-						dr["SPECIALTOPICNAME"] = string.Format("{0}&{1}", id, speicalname);
+						dr["SPECIALTOPICNAME"] = String.Format("{0}&{1}", id, speicalname);
 						FilterTable.Rows.Add(dr);
 					}
 					//if (DataTableExtentions.DataTableToArray(FilterTable)
@@ -849,7 +849,7 @@ namespace OwLib
 					//  dr["ISSTATIC"] = _needToGroup;
 					//  dr["ISBIGDATA"] = false;
 						
-					//  dr["SPECIALTOPICNAME"] = string.Format("{0}&{1}", id, speicalname);
+					//  dr["SPECIALTOPICNAME"] = String.Format("{0}&{1}", id, speicalname);
 					//  FilterTable.Rows.Add(dr);
 					//}
 				}
@@ -891,9 +891,9 @@ namespace OwLib
         /// <param name="blockCodes"></param>
         /// <param name="elements"></param>
         /// <returns></returns>
-        public static List<string> FormatListStringFormString(string blockCodes, string elements)
+        public static List<String> FormatListStringFormString(String blockCodes, String elements)
         {
-            List<string> lstElements = new List<string>();
+            List<String> lstElements = new List<String>();
 
             if (elements.Length == 0)
                 return lstElements;
@@ -902,30 +902,30 @@ namespace OwLib
             char[] separater2 = "}".ToCharArray(); // "}"
             char[] separater4 = "|".ToCharArray(); // "|"
 
-            string[] strBlocks = null;
+            String[] strBlocks = null;
 
             if (elements == "")
                 return lstElements;
 
-            List<string> lstCode = new List<string>();
+            List<String> lstCode = new List<String>();
 
             // 板块
             strBlocks = elements.Split(separater4, StringSplitOptions.RemoveEmptyEntries);
 
-            IDictionary<string, string> EmCodeCompanyMapping = new Dictionary<string, string>();
-            //string key = String.Format("{0}{1}", 
+            IDictionary<String, String> EmCodeCompanyMapping = new Dictionary<String, String>();
+            //String key = String.Format("{0}{1}", 
             if (blockCodes.Contains("511"))
                 EmCodeCompanyMapping = GetEmCodeCompanyMapping();
 
             if (strBlocks == null)
                 return lstElements;
 
-            string blockCd = "";
-            string[] strElements = null;
-            string[] columns = null;
+            String blockCd = "";
+            String[] strElements = null;
+            String[] columns = null;
             StringBuilder sb = null;
-            string companyCode = "";
-            foreach (string block in strBlocks)
+            String companyCode = "";
+            foreach (String block in strBlocks)
             {
                 strElements = block.Split(separater2, StringSplitOptions.RemoveEmptyEntries);
                 if (elements == null || elements.Length == 0)
@@ -1015,25 +1015,25 @@ namespace OwLib
         /// 获取基金公司和基金Code的Mapping
         /// </summary>
         /// <returns></returns>
-        public static IDictionary<string, string> GetEmCodeCompanyMapping()
+        public static IDictionary<String, String> GetEmCodeCompanyMapping()
         {
-            IDictionary<string, string> EmCodeCompanyMapping = new Dictionary<string, string>();
+            IDictionary<String, String> EmCodeCompanyMapping = new Dictionary<String, String>();
 
             // 对应关系文件
-            string filePath = Path.Combine(DataCenter.GetAppPath(), @"NecessaryData/FundCompcode");
+            String filePath = Path.Combine(DataCenter.GetAppPath(), @"NecessaryData/FundCompcode");
             char[] separater1 = "$".ToCharArray(); // "$"
             char[] separater2 = "}".ToCharArray(); // "}"
 
             if (File.Exists(filePath))
             {
-                string content = File.ReadAllText(filePath);
-                string[] strRecords = content.Split(separater2, StringSplitOptions.RemoveEmptyEntries);
+                String content = File.ReadAllText(filePath);
+                String[] strRecords = content.Split(separater2, StringSplitOptions.RemoveEmptyEntries);
 
                 if (strRecords == null || strRecords.Length == 0)
                     return EmCodeCompanyMapping;
 
-                string[] strColumns = null;
-                foreach (string record in strRecords)
+                String[] strColumns = null;
+                foreach (String record in strRecords)
                 {
                     strColumns = record.Split(separater1, StringSplitOptions.RemoveEmptyEntries);
 

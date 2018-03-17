@@ -78,10 +78,10 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -304,13 +304,13 @@ namespace OwLib
                 byte num3 = br.ReadByte();
                 int fieldValue = DataPacket.CTimeToDateTimeInt(br.ReadInt32());
                 byte[] bytes = br.ReadBytes(7);
-                string str = Encoding.ASCII.GetString(bytes).TrimEnd(new char[1]);
-                if (string.IsNullOrEmpty(str))
+                String str = Encoding.ASCII.GetString(bytes).TrimEnd(new char[1]);
+                if (String.IsNullOrEmpty(str))
                 {
                     this.Code = 0;
                     return false;
                 }
-                string emCode = DataPacket.GetEmCode((ReqMarketType)num3, str);
+                String emCode = DataPacket.GetEmCode((ReqMarketType)num3, str);
                 if ((emCode == null) || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 {
                     return false;
@@ -637,7 +637,7 @@ namespace OwLib
                         using (BinaryReader reader = new BinaryReader(stream))
                         {
                             reader.ReadInt32();
-                            string key = ConvertCode.ConvertIntToCode(stockId);
+                            String key = ConvertCode.ConvertIntToCode(stockId);
                             if (!DetailData.EmCodeToUnicode.ContainsKey(key))
                             {
                                 return false;
@@ -759,12 +759,12 @@ namespace OwLib
                                 byte num6 = reader.ReadByte();
                                 int fieldValue = DataPacket.CTimeToDateTimeInt(reader.ReadInt32());
                                 byte[] bytes = reader.ReadBytes(7);
-                                string str = Encoding.ASCII.GetString(bytes).TrimEnd(new char[1]);
-                                if (string.IsNullOrEmpty(str))
+                                String str = Encoding.ASCII.GetString(bytes).TrimEnd(new char[1]);
+                                if (String.IsNullOrEmpty(str))
                                 {
                                     return false;
                                 }
-                                string emCode = DataPacket.GetEmCode((ReqMarketType)num6, str);
+                                String emCode = DataPacket.GetEmCode((ReqMarketType)num6, str);
                                 if ((emCode == null) || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                                 {
                                     return false;
@@ -1030,7 +1030,7 @@ namespace OwLib
                         using (BinaryReader brUncompress = new BinaryReader(ms))
                         {
                             int stockid = brUncompress.ReadInt32();
-                            string emCode = ConvertCode.ConvertIntToCode(stockId);
+                            String emCode = ConvertCode.ConvertIntToCode(stockId);
                             if (!DetailData.EmCodeToUnicode.ContainsKey(emCode))
                                 return false;
                             oneStock.Code = DetailData.EmCodeToUnicode[emCode];
@@ -1098,7 +1098,7 @@ namespace OwLib
         /// </summary>
         protected override bool DecodingBody(BinaryReader br)
         {
-            string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+            String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
             if (emCode.StartsWith("04"))
             {
                 if (emCode == "040120.CFE")
@@ -1111,8 +1111,8 @@ namespace OwLib
                     emCode = "IF00C4.CFE";
                 else
                 {
-                    string month = emCode.Substring(emCode.Length - 6, 2);
-                    string headStr = string.Empty;
+                    String month = emCode.Substring(emCode.Length - 6, 2);
+                    String headStr = String.Empty;
                     if (DateTime.Now.Month <= Convert.ToInt32(month))
                         headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                     else
@@ -1134,8 +1134,8 @@ namespace OwLib
                     emCode = "TF00C4.CFE";
                 else
                 {
-                    string month = emCode.Substring(emCode.Length - 6, 2);
-                    string headStr = string.Empty;
+                    String month = emCode.Substring(emCode.Length - 6, 2);
+                    String headStr = String.Empty;
                     if (DateTime.Now.Month <= Convert.ToInt32(month))
                         headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                     else
@@ -1253,7 +1253,7 @@ namespace OwLib
             {
                 int date = br.ReadInt32();
                 int time = br.ReadInt32();
-                string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+                String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
 
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
@@ -1392,7 +1392,7 @@ namespace OwLib
                 List<CompressHelper.SRawNewRtMin> datas = null;
                 int date = 0;
                 CompressHelper.GetTrendData(ptr, zipData, count, out stockId, out datas, out date);
-                string emcode = ConvertCode.ConvertIntToCode((uint)stockId);
+                String emcode = ConvertCode.ConvertIntToCode((uint)stockId);
                 if (emcode.EndsWith("CFE"))
                 {
                     emcode = ConvertCode.ConvertFuturesCftEmCodeToOrgEmCode(emcode);
@@ -1531,7 +1531,7 @@ namespace OwLib
         /// </summary>
         protected override bool DecodingBody(BinaryReader br)
         {
-            string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+            String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
             if (emCode.StartsWith("04"))
             {
                 if (emCode == "040120.CFE")
@@ -1544,8 +1544,8 @@ namespace OwLib
                     emCode = "IF00C4.CFE";
                 else
                 {
-                    string month = emCode.Substring(emCode.Length - 6, 2);
-                    string headStr = string.Empty;
+                    String month = emCode.Substring(emCode.Length - 6, 2);
+                    String headStr = String.Empty;
                     if (DateTime.Now.Month <= Convert.ToInt32(month))
                         headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                     else
@@ -1567,8 +1567,8 @@ namespace OwLib
                     emCode = "TF00C4.CFE";
                 else
                 {
-                    string month = emCode.Substring(emCode.Length - 6, 2);
-                    string headStr = string.Empty;
+                    String month = emCode.Substring(emCode.Length - 6, 2);
+                    String headStr = String.Empty;
                     if (DateTime.Now.Month <= Convert.ToInt32(month))
                         headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                     else
@@ -1689,9 +1689,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             int uniCode = DetailData.EmCodeToUnicode[emCode];
@@ -1774,9 +1774,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -1848,9 +1848,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -2039,7 +2039,7 @@ namespace OwLib
                             break;
                         case ReqFieldIndexType.FT_CODE:
                             byte[] codeBytes = br.ReadBytes(7);
-                            //                         string code = Encoding.ASCII.GetString(codeBytes);
+                            //                         String code = Encoding.ASCII.GetString(codeBytes);
                             //                         code = code.TrimEnd('\0');
                             //                         result.Add(field,codeBytes);
                             break;
@@ -2154,7 +2154,7 @@ namespace OwLib
                     if (fieldIndexItem.FieldClient != FieldIndex.Na)
                         fieldClient.Add(fieldIndexItem.FieldClient);
                 }
-                string emCode = ConvertCode.ConvertIntToCode(stockId);
+                String emCode = ConvertCode.ConvertIntToCode(stockId);
                 if (emCode != null && DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 {
                     int unicode = DetailData.EmCodeToUnicode[emCode];
@@ -2297,7 +2297,7 @@ namespace OwLib
                             break;
                         case ReqFieldIndexType.FT_CODE:
                             byte[] codeBytes = br.ReadBytes(7);
-                            //                         string code = Encoding.ASCII.GetString(codeBytes);
+                            //                         String code = Encoding.ASCII.GetString(codeBytes);
                             //                         code = code.TrimEnd('\0');
                             //                         result.Add(field,codeBytes);
                             break;
@@ -2397,7 +2397,7 @@ namespace OwLib
                     if (fieldIndexItem.FieldClient != FieldIndex.Na)
                         fieldClient.Add(fieldIndexItem.FieldClient);
                 }
-                string emCode = ConvertCode.ConvertIntToCode(stockId);
+                String emCode = ConvertCode.ConvertIntToCode(stockId);
                 if (emCode != null && DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 {
                     int unicode =
@@ -2540,10 +2540,10 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
 
             if (emCode.EndsWith("CFE"))
             {
@@ -2559,8 +2559,8 @@ namespace OwLib
                         emCode = "IF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -2582,8 +2582,8 @@ namespace OwLib
                         emCode = "TF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -2680,14 +2680,14 @@ namespace OwLib
                         }
                         else
                         {
-                            string cmd = string.Empty;
+                            String cmd = String.Empty;
                             if (IsNonConvertBond)
-                                cmd = string.Format(
+                                cmd = String.Format(
                                @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm",
                                emCode, oneDeal.Price);
                             else
                             {
-                                cmd = string.Format(
+                                cmd = String.Format(
                                @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm",
                                emCode, oneDeal.Price);
                             }
@@ -2703,14 +2703,14 @@ namespace OwLib
                     }
                     else
                     {
-                        string cmd = string.Empty;
+                        String cmd = String.Empty;
                         if (IsNonConvertBond)
-                            cmd = string.Format(
+                            cmd = String.Format(
                            @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=1 columns=netPrice,ytm",
                            emCode, oneDeal.Price);
                         else
                         {
-                            cmd = string.Format(
+                            cmd = String.Format(
                            @"rpt name=InstantCalc emCodes={0} prices={1} isNetPrice=0 columns=netPrice,ytm",
                            emCode, oneDeal.Price);
                         }
@@ -2775,10 +2775,10 @@ namespace OwLib
             int time = br.ReadInt32();
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
 
             if (emCode.EndsWith("CFE"))
             {
@@ -2794,8 +2794,8 @@ namespace OwLib
                         emCode = "IF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -2817,8 +2817,8 @@ namespace OwLib
                         emCode = "TF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -2984,12 +2984,12 @@ namespace OwLib
             uint uicode = br.ReadUInt32();
 
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
             byte market = br.ReadByte();
             CapitalFlowData = new CapitalFlowDataRec();
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
 
@@ -3072,7 +3072,7 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             uint stockId = br.ReadUInt32();
-            string emCode = ConvertCode.ConvertIntToCode(stockId);
+            String emCode = ConvertCode.ConvertIntToCode(stockId);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
 
@@ -3138,13 +3138,13 @@ namespace OwLib
                 {
                     RankElement element = new RankElement();
                     byte[] codeBytes = br.ReadBytes(7);
-                    string emCode = Encoding.ASCII.GetString(codeBytes);
+                    String emCode = Encoding.ASCII.GetString(codeBytes);
                     emCode = emCode.TrimEnd('\0');
                     if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                         return false;
                     element.Code = DetailData.EmCodeToUnicode[emCode];
                     byte[] nameBytes = br.ReadBytes(9);
-                    string name = Encoding.Default.GetString(nameBytes);
+                    String name = Encoding.Default.GetString(nameBytes);
                     name = name.TrimEnd('\0');
                     element.Name = name;
                     element.PreClose = br.ReadSingle();
@@ -3195,9 +3195,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             F10Data.Code = DetailData.EmCodeToUnicode[emCode];
@@ -3288,7 +3288,7 @@ namespace OwLib
     public class ResCapitalFlowDayDataPacket : RealTimeDataPacket
     {
         private byte _market;
-        private string _shortCode;
+        private String _shortCode;
         private KLineCycle _dataType;
         private int _dayDataNum;
         private int _code;
@@ -3321,11 +3321,11 @@ namespace OwLib
         /// <param name="market">市场代码</param>
         /// <param name="code">股票内码</param>
         /// <returns>true for convert successfully, otherwise false</returns>
-        public bool TryConvertShortCode2Code(string shortCode, byte market, out  int code)
+        public bool TryConvertShortCode2Code(String shortCode, byte market, out  int code)
         {
             code = 0;
             shortCode = shortCode.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, shortCode);
+            String emCode = GetEmCode((ReqMarketType)market, shortCode);
             if (emCode == null)
                 return false;
             if (emCode.EndsWith("CFE"))
@@ -3342,8 +3342,8 @@ namespace OwLib
                         emCode = "IF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr = string.Empty;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr = String.Empty;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -3365,8 +3365,8 @@ namespace OwLib
                         emCode = "TF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr = string.Empty;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr = String.Empty;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -3475,7 +3475,7 @@ namespace OwLib
             int id = br.ReadInt32();
             byte status = br.ReadByte(); //0中间，1开始，2末尾，3未知
             uint stockId = br.ReadUInt32();
-            string emCode = ConvertCode.ConvertIntToCode(stockId);
+            String emCode = ConvertCode.ConvertIntToCode(stockId);
 
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
@@ -3530,7 +3530,7 @@ namespace OwLib
             int id = br.ReadInt32();
             byte status = br.ReadByte(); //0中间，1开始，2末尾，3未知
             uint stockId = br.ReadUInt32();
-            string emCode = ConvertCode.ConvertIntToCode(stockId);
+            String emCode = ConvertCode.ConvertIntToCode(stockId);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             OrderDetailData.Code = DetailData.EmCodeToUnicode[emCode];
@@ -3596,7 +3596,7 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             uint stockId = br.ReadUInt32();
-            string emCode = ConvertCode.ConvertIntToCode(stockId);
+            String emCode = ConvertCode.ConvertIntToCode(stockId);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -3704,7 +3704,7 @@ namespace OwLib
                 }
                 item.Time = br.ReadInt32();
                 item.SeriesId = br.ReadInt32();
-                string key = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+                String key = ConvertCode.ConvertIntToCode(br.ReadUInt32());
                 if ((key == null) || !DetailData.EmCodeToUnicode.ContainsKey(key))
                 {
                     return false;
@@ -3767,9 +3767,9 @@ namespace OwLib
             {
                 ContributionDataRec data = new ContributionDataRec();
                 byte[] codeBytes = br.ReadBytes(7);
-                string code = Encoding.ASCII.GetString(codeBytes);
+                String code = Encoding.ASCII.GetString(codeBytes);
                 code = code.TrimEnd('\0');
-                string emCode = GetEmCode(Mt, code);
+                String emCode = GetEmCode(Mt, code);
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 data.Code = DetailData.EmCodeToUnicode[emCode];
@@ -3781,9 +3781,9 @@ namespace OwLib
             {
                 ContributionDataRec data = new ContributionDataRec();
                 byte[] codeBytes = br.ReadBytes(7);
-                string code = Encoding.ASCII.GetString(codeBytes);
+                String code = Encoding.ASCII.GetString(codeBytes);
                 code = code.TrimEnd('\0');
-                string emCode = GetEmCode(Mt, code);
+                String emCode = GetEmCode(Mt, code);
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 data.Code = DetailData.EmCodeToUnicode[emCode];
@@ -3842,9 +3842,9 @@ namespace OwLib
             {
                 ContributionDataRec data = new ContributionDataRec();
                 byte[] codeBytes = br.ReadBytes(7);
-                string code = Encoding.ASCII.GetString(codeBytes);
+                String code = Encoding.ASCII.GetString(codeBytes);
                 code = code.TrimEnd('\0');
-                string emCode = GetEmCode(ReqMarketType.MT_Plate, code);
+                String emCode = GetEmCode(ReqMarketType.MT_Plate, code);
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 data.Code = DetailData.EmCodeToUnicode[emCode];
@@ -3913,10 +3913,10 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -3975,9 +3975,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             TrendData = new OneDayTrendDataRec(DetailData.EmCodeToUnicode[emCode]);
@@ -4032,9 +4032,9 @@ namespace OwLib
         {
             byte market = br.ReadByte();
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null)
                 return false;
             if (emCode.EndsWith("CFE"))
@@ -4051,8 +4051,8 @@ namespace OwLib
                         emCode = "IF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr = string.Empty;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr = String.Empty;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "IF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -4074,8 +4074,8 @@ namespace OwLib
                         emCode = "TF00C4.CFE";
                     else
                     {
-                        string month = emCode.Substring(emCode.Length - 6, 2);
-                        string headStr = string.Empty;
+                        String month = emCode.Substring(emCode.Length - 6, 2);
+                        String headStr = String.Empty;
                         if (DateTime.Now.Month <= Convert.ToInt32(month))
                             headStr = "TF" + Convert.ToString(DateTime.Now.Year % 100);
                         else
@@ -4187,7 +4187,7 @@ namespace OwLib
                 OneNews24HDataRec oneNews24HData = new OneNews24HDataRec();
                 oneNews24HData.NewsID = br.ReadInt32();
                 byte[] bytesTitle = br.ReadBytes(60);
-                string strTitle = Encoding.Default.GetString(bytesTitle);
+                String strTitle = Encoding.Default.GetString(bytesTitle);
                 int tmpIndex = strTitle.IndexOf('\0');
                 strTitle = strTitle.Substring(0, tmpIndex);
                 oneNews24HData.Title = strTitle;
@@ -4197,7 +4197,7 @@ namespace OwLib
                 oneNews24HData.PublishTime = br.ReadInt32();
                 oneNews24HData.IsValid = br.ReadBoolean();
                 oneNews24HData.HasShown = false;
-                oneNews24HData.Url = string.Format(
+                oneNews24HData.Url = String.Format(
                     "http://mineapi.eastmoney.com/WebFiles/0/MainPageNews/{0}/{1}.shtml", oneNews24HData.NewsID / 5000,
                     oneNews24HData.NewsID);
                 if (oneNews24HData.IsValid)
@@ -4224,11 +4224,11 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
             byte market = br.ReadByte();
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
 
@@ -4251,7 +4251,7 @@ namespace OwLib
                 long tmp = oneInfo.TextId / 5000;
 
                 byte[] title = br.ReadBytes(61);
-                string titleStr = Encoding.Default.GetString(title);
+                String titleStr = Encoding.Default.GetString(title);
                 int index = titleStr.IndexOf('\0');
                 if (index >= 0)
                     titleStr = titleStr.Substring(0, index);
@@ -4261,20 +4261,20 @@ namespace OwLib
                 oneInfo.PublishTime = br.ReadInt32();
                 oneInfo.InfoType = (InfoMine)br.ReadUInt16(); //类型
 
-                string url = string.Empty;
+                String url = String.Empty;
                 switch (oneInfo.InfoType)
                 {
                     case InfoMine.News:
                     case InfoMine.IndexNews:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/News/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/News/{0}/{1}.shtml", tmp,
                                             oneInfo.TextId);
                         break;
                     case InfoMine.Report:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", tmp,
                                             oneInfo.TextId);
                         break;
                     case InfoMine.Notice:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Bulletin/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Bulletin/{0}/{1}.shtml", tmp,
                                             oneInfo.TextId);
                         break;
                 }
@@ -4321,7 +4321,7 @@ namespace OwLib
                 oneInfoMine.TextId = br.ReadInt64();
                 long tmp = oneInfoMine.TextId / 5000;
                 byte[] title = br.ReadBytes(61);
-                string titleStr = Encoding.Default.GetString(title);
+                String titleStr = Encoding.Default.GetString(title);
 
                 int index = titleStr.IndexOf('\0');
                 if (index >= 0)
@@ -4330,7 +4330,7 @@ namespace OwLib
                 oneInfoMine.PublishDate = br.ReadInt32();
                 oneInfoMine.PublishTime = br.ReadInt32();
 
-                string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+                String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
 
                 oneInfoMine.InfoType = (InfoMine)br.ReadUInt16(); //类型
                 int dateBegin = br.ReadInt32();
@@ -4341,20 +4341,20 @@ namespace OwLib
                 int dateUpdate = br.ReadInt32();
                 int timeUpdate = br.ReadInt32();
 
-                string url = string.Empty;
+                String url = String.Empty;
                 switch (oneInfoMine.InfoType)
                 {
                     case InfoMine.News:
                     case InfoMine.IndexNews:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/News/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/News/{0}/{1}.shtml", tmp,
                                             oneInfoMine.TextId);
                         break;
                     case InfoMine.Report:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", tmp,
                                             oneInfoMine.TextId);
                         break;
                     case InfoMine.Notice:
-                        url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Bulletin/{0}/{1}.shtml", tmp,
+                        url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Bulletin/{0}/{1}.shtml", tmp,
                                             oneInfoMine.TextId);
                         break;
                 }
@@ -4402,7 +4402,7 @@ namespace OwLib
             //        int date = br.ReadInt32();
             //        int time = br.ReadInt32();
             //        uint stockid = br.ReadUInt32();
-            //        string emCode = ConvertCode.ConvertIntToCode(stockid);
+            //        String emCode = ConvertCode.ConvertIntToCode(stockid);
             //        oneStockFinance.ZGB = br.ReadDouble();
             //        oneStockFinance.AvgNetS= br.ReadDouble();
             //        oneStockFinance.MGSY= br.ReadDouble();
@@ -4478,31 +4478,31 @@ namespace OwLib
             {
                 OneOrgRateItem item = new OneOrgRateItem();
                 item.Id = br.ReadInt64();
-                item.Url = string.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", item.Id / 5000,
+                item.Url = String.Format(@"http://mineapi.eastmoney.com/WebFiles/0/Report/{0}/{1}.shtml", item.Id / 5000,
                                          item.Id);
 
                 item.WrittenDate = br.ReadInt32();
 
                 uint stockid = br.ReadUInt32();
-                string emCode = ConvertCode.ConvertIntToCode(stockid);
+                String emCode = ConvertCode.ConvertIntToCode(stockid);
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 byte[] rankBytes = br.ReadBytes(9);
-                string rankStr = Encoding.Default.GetString(rankBytes);
+                String rankStr = Encoding.Default.GetString(rankBytes);
                 int rankIndex = rankStr.IndexOf('\0');
                 if (rankIndex > 0)
                     rankStr = rankStr.Substring(0, rankIndex);
                 item.Rate = rankStr;
 
                 byte[] orgNameBytes = br.ReadBytes(13);
-                string orgNameStr = Encoding.Default.GetString(orgNameBytes);
+                String orgNameStr = Encoding.Default.GetString(orgNameBytes);
                 int orgNameIndex = orgNameStr.IndexOf('\0');
                 if (orgNameIndex > 0)
                     orgNameStr = orgNameStr.Substring(0, orgNameIndex);
                 item.OrgName = orgNameStr;
 
                 byte[] titleBytes = br.ReadBytes(61);
-                string titleStr = Encoding.Default.GetString(titleBytes);
+                String titleStr = Encoding.Default.GetString(titleBytes);
                 int titleIndex = titleStr.IndexOf('\0');
                 if (titleIndex > 0)
                     titleStr = titleStr.Substring(0, titleIndex);
@@ -4580,7 +4580,7 @@ namespace OwLib
                 item.Forecast5 = br.ReadInt16();
                 item.RealValue5 = br.ReadByte();
 
-                string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+                String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 item.Code = DetailData.EmCodeToUnicode[emCode];
@@ -4638,7 +4638,7 @@ namespace OwLib
                 bool isValid = br.ReadBoolean();
                 DivideRightDataRec item = new DivideRightDataRec();
                 item.PunishDate = br.ReadInt32();
-                string emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
+                String emCode = ConvertCode.ConvertIntToCode(br.ReadUInt32());
                 if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                     return false;
                 int type = br.ReadInt32();
@@ -4688,13 +4688,13 @@ namespace OwLib
 
                 long codeId = br.ReadInt64();
                 int unicode = 0;
-                string code = string.Empty;
+                String code = String.Empty;
                 if (codeId > 10000000000)
                     code = ConvertCodeOrg.ConvertLongToCode(codeId); //等会用ConvertCodeOrd替换
                 else
                     unicode = Convert.ToInt32(codeId);
 
-                if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                     unicode = DetailData.EmCodeToUnicode[code];
 
                 Dictionary<FieldIndex, int> fieldInt32;
@@ -4885,15 +4885,15 @@ namespace OwLib
                                 }
                             case ReqFieldIndexType.FT_TOPCODE:
                                 {
-                                    string str2 = ConvertCodeOrg.ConvertLongToCode(br.ReadInt64());
-                                    DllImportHelper.SetFieldData<string>(code, item.FieldClient, str2);
+                                    String str2 = ConvertCodeOrg.ConvertLongToCode(br.ReadInt64());
+                                    DllImportHelper.SetFieldData<String>(code, item.FieldClient, str2);
                                     break;
                                 }
                             case ReqFieldIndexType.FT_STRINGORG:
                                 {
                                     byte count = br.ReadByte();
-                                    string str = Encoding.Default.GetString(br.ReadBytes(count)).Trim();
-                                    DllImportHelper.SetFieldData<string>(code, item.FieldClient, str);
+                                    String str = Encoding.Default.GetString(br.ReadBytes(count)).Trim();
+                                    DllImportHelper.SetFieldData<String>(code, item.FieldClient, str);
                                     break;
                                 }
                             case ReqFieldIndexType.FT_INTTOLONG:
@@ -5045,14 +5045,14 @@ namespace OwLib
 
             return result;
         }
-        private string GetFormatDate(int date)
+        private String GetFormatDate(int date)
         {
-            string result = string.Empty;
+            String result = String.Empty;
 
             int day = (int)(date % 100);
             int month = (int)((date - day) % 10000) / 100;
             int year = (date - day - month * 100) / 10000;
-            result = string.Format("{0}-{1}-{2}", year.ToString("D4"), month.ToString("D2"), day.ToString("D2"));
+            result = String.Format("{0}-{1}-{2}", year.ToString("D4"), month.ToString("D2"), day.ToString("D2"));
 
             return result;
         }
@@ -5310,14 +5310,14 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emCode = string.Empty;
+            String emCode = String.Empty;
             int unicode = 0;
 
             if (sid > 10000000000)
                 emCode = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
             else
                 unicode = Convert.ToInt32(sid);
-            if ((!string.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
+            if ((!String.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 unicode = DetailData.EmCodeToUnicode[emCode];
 
             if (emCode == null || unicode == 0)
@@ -5367,14 +5367,14 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emCode = string.Empty;
+            String emCode = String.Empty;
             int unicode = 0;
 
             if (sid > 10000000000)
                 emCode = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
             else
                 unicode = Convert.ToInt32(sid);
-            if ((!string.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
+            if ((!String.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 unicode = DetailData.EmCodeToUnicode[emCode];
 
             if (emCode == null || unicode == 0)
@@ -5478,14 +5478,14 @@ namespace OwLib
         protected override bool DecodingBody(System.IO.BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emCode = string.Empty;
+            String emCode = String.Empty;
             int unicode = 0;
 
             if (sid > 10000000000)
                 emCode = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
             else
                 unicode = Convert.ToInt32(sid);
-            if ((!string.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
+            if ((!String.IsNullOrEmpty(emCode)) && DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 unicode = DetailData.EmCodeToUnicode[emCode];
 
 
@@ -5701,13 +5701,13 @@ namespace OwLib
             {
                 long sid = br.ReadInt64();
                 int unicode = 0;
-                string code = string.Empty;
+                String code = String.Empty;
                 if (sid > 10000000000)
                     code = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
                 else
                     unicode = Convert.ToInt32(sid);
 
-                if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                     unicode = DetailData.EmCodeToUnicode[code];
 
                 Dictionary<FieldIndex, int> fieldInt32;
@@ -5775,13 +5775,13 @@ namespace OwLib
             {
                 long sid = br.ReadInt64();
                 int unicode = 0;
-                string code = string.Empty;
+                String code = String.Empty;
                 if (sid > 10000000000)
                     code = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
                 else
                     unicode = Convert.ToInt32(sid);
 
-                if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                     unicode = DetailData.EmCodeToUnicode[code];
 
                 int divideNum = br.ReadInt32();
@@ -5883,7 +5883,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -5899,7 +5899,7 @@ namespace OwLib
 
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -5964,7 +5964,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -5980,7 +5980,7 @@ namespace OwLib
 
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -6092,7 +6092,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -6108,7 +6108,7 @@ namespace OwLib
 
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
             fieldInt32[FieldIndex.FundLatestDate] = br.ReadInt32();
@@ -6187,7 +6187,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -6203,7 +6203,7 @@ namespace OwLib
 
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
             fieldInt32[FieldIndex.FundLatestDate] = br.ReadInt32();
@@ -6607,7 +6607,7 @@ namespace OwLib
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, object> fieldObject;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             if (!DetailData.FieldIndexDataObject.TryGetValue(Code, out fieldObject))
             {
                 fieldObject = new Dictionary<FieldIndex, object>(1);
@@ -6620,9 +6620,9 @@ namespace OwLib
             {
                 int bgqDate = br.ReadInt32();
                 byte countName = br.ReadByte();
-                string strName = Encoding.Default.GetString(br.ReadBytes(countName));
+                String strName = Encoding.Default.GetString(br.ReadBytes(countName));
                 byte countCode = br.ReadByte();
-                string strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
+                String strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
                 float fundHoldShare = br.ReadSingle();
                 float fundHoldValue = br.ReadSingle();
                 float fundStockValueRange = br.ReadSingle();
@@ -6644,7 +6644,7 @@ namespace OwLib
 
                 if (!DetailData.FieldIndexDataString.TryGetValue(unicode, out fieldString))
                 {
-                    fieldString = new Dictionary<FieldIndex, string>(1);
+                    fieldString = new Dictionary<FieldIndex, String>(1);
                     DetailData.FieldIndexDataString[unicode] = fieldString;
                 }
                 if (!fieldString.ContainsKey(FieldIndex.EMCode))
@@ -6691,7 +6691,7 @@ namespace OwLib
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, object> fieldObject;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             if (!DetailData.FieldIndexDataObject.TryGetValue(Code, out fieldObject))
             {
                 fieldObject = new Dictionary<FieldIndex, object>(1);
@@ -6703,13 +6703,13 @@ namespace OwLib
             for (int i = 0; i < num; i++)
             {
                 byte countName = br.ReadByte();
-                string strName = Encoding.Default.GetString(br.ReadBytes(countName));
+                String strName = Encoding.Default.GetString(br.ReadBytes(countName));
                 int bgqDate = br.ReadInt32();
                 float fundHoldValue = br.ReadSingle();
                 float fundStockValueRange = br.ReadSingle();
                 float fundScpz = br.ReadSingle();
                 byte countCode = br.ReadByte();
-                string strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
+                String strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
                 int unicode = (int)br.ReadInt64();
                 short typeShort = br.ReadInt16();
 
@@ -6729,7 +6729,7 @@ namespace OwLib
 
                 if (!DetailData.FieldIndexDataString.TryGetValue(unicode, out fieldString))
                 {
-                    fieldString = new Dictionary<FieldIndex, string>(1);
+                    fieldString = new Dictionary<FieldIndex, String>(1);
                     DetailData.FieldIndexDataString[unicode] = fieldString;
                 }
 
@@ -6777,7 +6777,7 @@ namespace OwLib
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, object> fieldObject;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             if (!DetailData.FieldIndexDataObject.TryGetValue(Code, out fieldObject))
             {
                 fieldObject = new Dictionary<FieldIndex, object>(1);
@@ -6788,20 +6788,20 @@ namespace OwLib
             for (int i = 0; i < num; i++)
             {
                 byte countName = br.ReadByte();
-                string strName = Encoding.Default.GetString(br.ReadBytes(countName));
+                String strName = Encoding.Default.GetString(br.ReadBytes(countName));
                 byte countCode = br.ReadByte();
-                string strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
+                String strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
                 int bgqDate = br.ReadInt32();
                 float FundHoldValue = br.ReadSingle();
                 float FundNetValueRange = br.ReadSingle();
                 float BondTomrtyyear = br.ReadSingle();
                 float FundBondRange = br.ReadSingle();
                 byte countBondStrZtpj = br.ReadByte();
-                string strBondStrZtpj = Encoding.Default.GetString(br.ReadBytes(countBondStrZtpj));
+                String strBondStrZtpj = Encoding.Default.GetString(br.ReadBytes(countBondStrZtpj));
                 byte countBondType = br.ReadByte();
-                string strBondType = Encoding.Default.GetString(br.ReadBytes(countBondType));
+                String strBondType = Encoding.Default.GetString(br.ReadBytes(countBondType));
                 byte countBondMarket = br.ReadByte();
-                string strBondMarket = Encoding.Default.GetString(br.ReadBytes(countBondMarket));
+                String strBondMarket = Encoding.Default.GetString(br.ReadBytes(countBondMarket));
                 int unicode = (int)br.ReadInt64();
                 short typeShort = br.ReadInt16();
                 if (unicode == 0)
@@ -6820,7 +6820,7 @@ namespace OwLib
 
                 if (!DetailData.FieldIndexDataString.TryGetValue(unicode, out fieldString))
                 {
-                    fieldString = new Dictionary<FieldIndex, string>(1);
+                    fieldString = new Dictionary<FieldIndex, String>(1);
                     DetailData.FieldIndexDataString[unicode] = fieldString;
                 }
 
@@ -6949,7 +6949,7 @@ namespace OwLib
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, object> fieldObject;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
             if (!DetailData.FieldIndexDataObject.TryGetValue(Code, out fieldObject))
             {
                 fieldObject = new Dictionary<FieldIndex, object>(1);
@@ -6960,20 +6960,20 @@ namespace OwLib
             for (int i = 0; i < num; i++)
             {
                 byte countCode = br.ReadByte();
-                string strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
+                String strCode = Encoding.Default.GetString(br.ReadBytes(countCode));
                 byte countName = br.ReadByte();
-                string strName = Encoding.Default.GetString(br.ReadBytes(countName));
+                String strName = Encoding.Default.GetString(br.ReadBytes(countName));
                 byte tmp = br.ReadByte();
-                string strtmp = Encoding.Default.GetString(br.ReadBytes(tmp));
+                String strtmp = Encoding.Default.GetString(br.ReadBytes(tmp));
                 int bgqDate = br.ReadInt32();
                 float fundHoldShare = br.ReadSingle();
                 float fundHoldValue = br.ReadSingle();
                 float pctnv = br.ReadSingle();
                 float aayield = br.ReadSingle();
                 byte countParaname = br.ReadByte();
-                string strParaname = Encoding.Default.GetString(br.ReadBytes(countParaname));
+                String strParaname = Encoding.Default.GetString(br.ReadBytes(countParaname));
                 byte countManager = br.ReadByte();
-                string manager = Encoding.Default.GetString(br.ReadBytes(countManager));
+                String manager = Encoding.Default.GetString(br.ReadBytes(countManager));
                 int endDate = br.ReadInt32();
                 int unicode = (int)br.ReadInt64();
                 short typeShort = br.ReadInt16();
@@ -6993,7 +6993,7 @@ namespace OwLib
 
                 if (!DetailData.FieldIndexDataString.TryGetValue(unicode, out fieldString))
                 {
-                    fieldString = new Dictionary<FieldIndex, string>(1);
+                    fieldString = new Dictionary<FieldIndex, String>(1);
                     DetailData.FieldIndexDataString[unicode] = fieldString;
                 }
 
@@ -7540,7 +7540,7 @@ namespace OwLib
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, long> fieldInt64;
             Dictionary<FieldIndex, double> fieldDouble;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -7564,7 +7564,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -7590,7 +7590,7 @@ namespace OwLib
             float bp = br.ReadSingle();
             fieldSingle[FieldIndex.BondNowYTM] = ytm;
             fieldSingle[FieldIndex.BondDiffRangeYTM] = bp;
-            fieldString[FieldIndex.YTMAndBP] = string.Format(
+            fieldString[FieldIndex.YTMAndBP] = String.Format(
                 "{0}({1}BP)", ytm == 0 ? "─" : ytm.ToString("F2"), ytm == 0 ? "─" : (bp).ToString("F2"));
             fieldSingle[FieldIndex.BondDuration] = br.ReadSingle();
             fieldSingle[FieldIndex.BondConvexity] = br.ReadSingle();
@@ -7651,7 +7651,7 @@ namespace OwLib
                 byte sfdbSize = br.ReadByte();
                 fieldString[FieldIndex.BondIsVouch] = Encoding.Default.GetString(br.ReadBytes(sfdbSize));
                 byte instsNameSize = br.ReadByte();
-                string instName = Encoding.Default.GetString(br.ReadBytes(instsNameSize));
+                String instName = Encoding.Default.GetString(br.ReadBytes(instsNameSize));
                 fieldString[FieldIndex.BondInstname] = instName;
                 byte ztpjSize = br.ReadByte();
                 fieldString[FieldIndex.BondStrZtpj] = Encoding.Default.GetString(br.ReadBytes(ztpjSize));
@@ -7678,22 +7678,22 @@ namespace OwLib
                 fieldInt32[FieldIndex.BondSNDate] = br.ReadInt32();
 
                 byte instTypeSize = br.ReadByte();
-                string instType = Encoding.Default.GetString(br.ReadBytes(instTypeSize));
-                if (string.IsNullOrEmpty(instType))
+                String instType = Encoding.Default.GetString(br.ReadBytes(instTypeSize));
+                if (String.IsNullOrEmpty(instType))
                 {
                     instType = "─";
                 }
                 fieldString[FieldIndex.BondInstType] = instType;
 
                 byte instIndustrySize = br.ReadByte();
-                string instIndustry = Encoding.Default.GetString(br.ReadBytes(instIndustrySize));
-                if (string.IsNullOrEmpty(instIndustry))
+                String instIndustry = Encoding.Default.GetString(br.ReadBytes(instIndustrySize));
+                if (String.IsNullOrEmpty(instIndustry))
                 {
                     instIndustry = "─";
                 }
                 fieldString[FieldIndex.BondInstIndustry] = instIndustry;
 
-                fieldString[FieldIndex.BondInstDetail] = string.Format("{0}({1},{2})", instName, instType, instIndustry);
+                fieldString[FieldIndex.BondInstDetail] = String.Format("{0}({1},{2})", instName, instType, instIndustry);
             }
             return true;
         }
@@ -7709,14 +7709,14 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emcode = ConvertCodeOrg.ConvertLongToCode(sid);
+            String emcode = ConvertCodeOrg.ConvertLongToCode(sid);
             if (!DetailData.EmCodeToUnicode.TryGetValue(emcode, out Code))
                 return false;
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, long> fieldInt64;
             Dictionary<FieldIndex, double> fieldDouble;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -7740,7 +7740,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -7789,7 +7789,7 @@ namespace OwLib
             {
                 float bp = (nowYtm - preYtm) * 100;
                 fieldSingle[FieldIndex.BondDiffRangeYTM] = bp;
-                fieldString[FieldIndex.YTMAndBP] = string.Format("{0}({1}BP)", nowYtm == 0 ? "─" : nowYtm.ToString("F2"),
+                fieldString[FieldIndex.YTMAndBP] = String.Format("{0}({1}BP)", nowYtm == 0 ? "─" : nowYtm.ToString("F2"),
                     nowYtm == 0 ? "─" : (bp).ToString("F2"));
             }
 
@@ -7807,13 +7807,13 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emcode = ConvertCodeOrg.ConvertLongToCode(sid);
+            String emcode = ConvertCodeOrg.ConvertLongToCode(sid);
             if (!DetailData.EmCodeToUnicode.TryGetValue(emcode, out Code))
                 return false;
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
             Dictionary<FieldIndex, double> fieldDouble;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -7833,7 +7833,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -7877,19 +7877,19 @@ namespace OwLib
                 fieldInt32[FieldIndex.BondCSDate] = br.ReadInt32();
 
                 byte instsNameSize = br.ReadByte();
-                string Instname = Encoding.Default.GetString(br.ReadBytes(instsNameSize));
-                if (string.IsNullOrEmpty(Instname))
+                String Instname = Encoding.Default.GetString(br.ReadBytes(instsNameSize));
+                if (String.IsNullOrEmpty(Instname))
                     Instname = "─";
                 fieldString[FieldIndex.BondInstname] = Instname;
 
                 byte typeSize = br.ReadByte();
-                string instType = Encoding.Default.GetString(br.ReadBytes(typeSize));
-                if (string.IsNullOrEmpty(instType))
+                String instType = Encoding.Default.GetString(br.ReadBytes(typeSize));
+                if (String.IsNullOrEmpty(instType))
                     instType = "─";
 
                 byte industrySize = br.ReadByte();
-                string instIndustry = Encoding.Default.GetString(br.ReadBytes(industrySize));
-                if (string.IsNullOrEmpty(instIndustry))
+                String instIndustry = Encoding.Default.GetString(br.ReadBytes(industrySize));
+                if (String.IsNullOrEmpty(instIndustry))
                     instIndustry = "─";
 
                 fieldString[FieldIndex.BondInstDetail] = Instname + '(' + instType + ',' + instIndustry + ')';
@@ -7905,7 +7905,7 @@ namespace OwLib
             {
                 float bp = (nowYtm - preYtm) * 100;
                 fieldSingle[FieldIndex.BondDiffRangeYTM] = bp;
-                fieldString[FieldIndex.YTMAndBP] = string.Format("{0}({1}BP)", nowYtm == 0 ? "─" : nowYtm.ToString("F2"),
+                fieldString[FieldIndex.YTMAndBP] = String.Format("{0}({1}BP)", nowYtm == 0 ? "─" : nowYtm.ToString("F2"),
                     nowYtm == 0 ? "─" : (bp).ToString("F2"));
             }
 
@@ -7934,7 +7934,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -7949,7 +7949,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
             bool isPush = br.ReadBoolean();
@@ -8040,7 +8040,7 @@ namespace OwLib
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, long> fieldInt64;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -8060,7 +8060,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
 
@@ -8153,7 +8153,7 @@ namespace OwLib
             Code = (int)br.ReadInt64();
             Dictionary<FieldIndex, int> fieldInt32;
             Dictionary<FieldIndex, float> fieldSingle;
-            Dictionary<FieldIndex, string> fieldString;
+            Dictionary<FieldIndex, String> fieldString;
 
             if (!DetailData.FieldIndexDataInt32.TryGetValue(Code, out fieldInt32))
             {
@@ -8168,7 +8168,7 @@ namespace OwLib
             }
             if (!DetailData.FieldIndexDataString.TryGetValue(Code, out fieldString))
             {
-                fieldString = new Dictionary<FieldIndex, string>(1);
+                fieldString = new Dictionary<FieldIndex, String>(1);
                 DetailData.FieldIndexDataString[Code] = fieldString;
             }
             bool ispush = br.ReadBoolean();
@@ -8274,13 +8274,13 @@ namespace OwLib
             long sid = br.ReadInt64();
 
             Code = 0;
-            string strCode = string.Empty;
+            String strCode = String.Empty;
             if (sid > 10000000000)
                 strCode = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
             else
                 Code = Convert.ToInt32(sid);
 
-            if ((!string.IsNullOrEmpty(strCode)) && DetailData.EmCodeToUnicode.ContainsKey(strCode))
+            if ((!String.IsNullOrEmpty(strCode)) && DetailData.EmCodeToUnicode.ContainsKey(strCode))
             {
                 Code = DetailData.EmCodeToUnicode[strCode];
             }
@@ -8399,9 +8399,9 @@ namespace OwLib
             get { return _data; }
             private set { _data = value; }
         }
-        private string _blockId;
+        private String _blockId;
 
-        public string BlockId
+        public String BlockId
         {
             get { return _blockId; }
             private set { _blockId = value; }
@@ -8415,7 +8415,7 @@ namespace OwLib
             int id = br.ReadInt32();
             byte status = br.ReadByte();
             long blockIdLong = br.ReadInt64();
-            string blockid = Convert.ToString(blockIdLong);
+            String blockid = Convert.ToString(blockIdLong);
             if (blockid.StartsWith("91"))
                 BlockId = blockid.Substring(2, blockid.Length - 2);
             else
@@ -8424,7 +8424,7 @@ namespace OwLib
 
             RankType type;
             int unicode = 0;
-            string code = string.Empty;
+            String code = String.Empty;
             Dictionary<FieldIndex, object> memData;
 
             for (int i = 0; i < num; i++)
@@ -8437,7 +8437,7 @@ namespace OwLib
                 else
                     unicode = Convert.ToInt32(tmpUnicode);
 
-                if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                     unicode = DetailData.EmCodeToUnicode[code];
 
                 Dictionary<FieldIndex, float> fieldSingle;
@@ -8505,9 +8505,9 @@ namespace OwLib
     /// </summary>
     public class ResNetInflowRankDataPacket : OrgDataPacket
     {
-        private string _blockId;
+        private String _blockId;
 
-        public string BlockId
+        public String BlockId
         {
             get { return _blockId; }
             private set { _blockId = value; }
@@ -8547,12 +8547,12 @@ namespace OwLib
                 long biaoshi = br.ReadInt64();
                 long codeId = br.ReadInt64();
                 int unicode = 0;
-                string code = string.Empty;
+                String code = String.Empty;
                 if (codeId > 10000000000)
                     code = ConvertCodeOrg.ConvertLongToCode(codeId); //等会用ConvertCodeOrd替换
                 else
                     unicode = Convert.ToInt32(codeId);
-                if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                     unicode = DetailData.EmCodeToUnicode[code];
 
                 Dictionary<FieldIndex, int> fieldInt32;
@@ -8609,13 +8609,13 @@ namespace OwLib
         {
 
             long tmpUnicode = br.ReadInt64();
-            string codeStr = string.Empty;
+            String codeStr = String.Empty;
             if (tmpUnicode > 10000000000)
                 codeStr = ConvertCodeOrg.ConvertLongToCode(tmpUnicode); //等会用ConvertCodeOrd替换
             else
                 Code = Convert.ToInt32(tmpUnicode);
 
-            if ((!string.IsNullOrEmpty(codeStr)) && DetailData.EmCodeToUnicode.ContainsKey(codeStr))
+            if ((!String.IsNullOrEmpty(codeStr)) && DetailData.EmCodeToUnicode.ContainsKey(codeStr))
                 Code = DetailData.EmCodeToUnicode[codeStr];
 
             Dictionary<FieldIndex, float> fieldSingle;
@@ -8890,7 +8890,7 @@ namespace OwLib
         protected override bool DecodingBody(BinaryReader br)
         {
             long sid = br.ReadInt64();
-            string emcode = ConvertCodeOrg.ConvertLongToCode(sid);
+            String emcode = ConvertCodeOrg.ConvertLongToCode(sid);
             if (!DetailData.EmCodeToUnicode.TryGetValue(emcode, out Code))
                 return false;
             ProfitForecastDataByOneCode.Code = Code;
@@ -8927,17 +8927,17 @@ namespace OwLib
             long sid;
             byte newnameLen = 0;
             byte newPYLen = 0;
-            string emCode = string.Empty;//新旧emcode一样
+            String emCode = String.Empty;//新旧emcode一样
 
-            string newName = string.Empty;
-            string newPY = string.Empty;
+            String newName = String.Empty;
+            String newPY = String.Empty;
 
-            string oldName = string.Empty;
-            string oldPY = string.Empty;
+            String oldName = String.Empty;
+            String oldPY = String.Empty;
 
             int unicode = 0;
-            string code = string.Empty;
-            Dictionary<FieldIndex, string> fieldString;
+            String code = String.Empty;
+            Dictionary<FieldIndex, String> fieldString;
 
 
             if (num > 0)
@@ -8962,7 +8962,7 @@ namespace OwLib
                         code = ConvertCodeOrg.ConvertLongToCode(sid); //等会用ConvertCodeOrd替换
                     else
                         unicode = Convert.ToInt32(sid);
-                    if ((!string.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
+                    if ((!String.IsNullOrEmpty(code)) && DetailData.EmCodeToUnicode.ContainsKey(code))
                         unicode = DetailData.EmCodeToUnicode[code];
 
                     if (DetailData.FieldIndexDataString.TryGetValue(unicode, out fieldString)
@@ -8986,7 +8986,7 @@ namespace OwLib
 
             }
             else
-                UpdateBlockInfo(string.Empty, string.Empty);
+                UpdateBlockInfo(String.Empty, String.Empty);
 
             return true;
         }
@@ -8998,7 +8998,7 @@ namespace OwLib
         /// </summary>
         /// <param name="BlockServiceInfo"></param>
         /// <param name="SecuAsstInfo"></param>
-        private void UpdateBlockInfo(string blockServiceInfo, string secuAsstInfo)
+        private void UpdateBlockInfo(String blockServiceInfo, String secuAsstInfo)
         {
         }
 
@@ -9104,10 +9104,10 @@ namespace OwLib
             int time = CTimeToDateTimeInt(cTime);
 
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
             Code = DetailData.EmCodeToUnicode[emCode];
@@ -9214,7 +9214,7 @@ namespace OwLib
     /// </summary>
     public class ResOceanTrendDataPacket : RealTimeDataPacket
     {
-        //public string Code { get; private set; }
+        //public String Code { get; private set; }
         //public Dictionary<FieldIndex, object> PacketDetailData { get; private set; }
         /// <summary>
         /// 外盘走势数据
@@ -9264,10 +9264,10 @@ namespace OwLib
             //int time = CTimeToDateTimeInt(cTime);
 
             byte[] codeBytes = br.ReadBytes(7);
-            string code = Encoding.ASCII.GetString(codeBytes);
+            String code = Encoding.ASCII.GetString(codeBytes);
             code = code.TrimEnd('\0');
 
-            string emCode = GetEmCode((ReqMarketType)market, code);
+            String emCode = GetEmCode((ReqMarketType)market, code);
             if (emCode == null || !DetailData.EmCodeToUnicode.ContainsKey(emCode))
                 return false;
 
@@ -9380,13 +9380,13 @@ namespace OwLib
                     oneInfoMineData.Code = currentCode;
                     short lenInfoCode = br.ReadInt16();
                     if (lenInfoCode == 0)
-                        oneInfoMineData.InfoCode = string.Empty;
+                        oneInfoMineData.InfoCode = String.Empty;
                     else
                         oneInfoMineData.InfoCode = Encoding.UTF8.GetString(br.ReadBytes(lenInfoCode));
 
                     short lenTitle = br.ReadInt16();
                     if (lenTitle == 0)
-                        oneInfoMineData.Title = string.Empty;
+                        oneInfoMineData.Title = String.Empty;
                     else
                         oneInfoMineData.Title = Encoding.UTF8.GetString(br.ReadBytes(lenTitle));
 
@@ -9396,9 +9396,9 @@ namespace OwLib
                     if (oneInfoMineData.InfoType == InfoMineOrg.News || oneInfoMineData.InfoType == InfoMineOrg.Report)
                     {
                         short lenMediaName = br.ReadInt16();
-                        string mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
+                        String mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
                         if (mediaNameStr == null)
-                            oneInfoMineData.MediaName = string.Empty;
+                            oneInfoMineData.MediaName = String.Empty;
                         else
                             oneInfoMineData.MediaName = mediaNameStr;
                     }
@@ -9692,13 +9692,13 @@ namespace OwLib
                     oneInfoMineData.Code = currentCode;
                     short lenInfoCode = br.ReadInt16();
                     if (lenInfoCode == 0)
-                        oneInfoMineData.InfoCode = string.Empty;
+                        oneInfoMineData.InfoCode = String.Empty;
                     else
                         oneInfoMineData.InfoCode = Encoding.UTF8.GetString(br.ReadBytes(lenInfoCode));
 
                     short lenTitle = br.ReadInt16();
                     if (lenTitle == 0)
-                        oneInfoMineData.Title = string.Empty;
+                        oneInfoMineData.Title = String.Empty;
                     else
                         oneInfoMineData.Title = Encoding.UTF8.GetString(br.ReadBytes(lenTitle));
 
@@ -9708,9 +9708,9 @@ namespace OwLib
                     if (oneInfoMineData.InfoType == InfoMineOrg.News || oneInfoMineData.InfoType == InfoMineOrg.Report)
                     {
                         short lenMediaName = br.ReadInt16();
-                        string mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
+                        String mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
                         if (mediaNameStr == null)
-                            oneInfoMineData.MediaName = string.Empty;
+                            oneInfoMineData.MediaName = String.Empty;
                         else
                             oneInfoMineData.MediaName = mediaNameStr;
                     }
@@ -9786,16 +9786,16 @@ namespace OwLib
         /// <summary>
         /// 小类，比如F009，S001001
         /// </summary>
-        public string TypeLevel2;
+        public String TypeLevel2;
         /// <summary>
         ///返回格式 （暂时只对研报有效）
         ///1：个股的返回类型
         ///2：全景图的返回类型
         /// </summary>
         public ReportType ReturnType;
-        private Dictionary<string, List<OneInfoMineOrgDataRec>> _dicNewsInfoByBlock;//按照小类存储新闻结构
-        private Dictionary<string, List<OneInfoMineOrgDataRec>> _dicNewsReportInfoByBlock;// 按照小类存储新闻类研报结构（returnType=1）
-        private Dictionary<string, List<ResearchReportItem>> _dicEmratingReportInfoByBlock;// 按照小类存储评估类研报结构（returnType=2）
+        private Dictionary<String, List<OneInfoMineOrgDataRec>> _dicNewsInfoByBlock;//按照小类存储新闻结构
+        private Dictionary<String, List<OneInfoMineOrgDataRec>> _dicNewsReportInfoByBlock;// 按照小类存储新闻类研报结构（returnType=1）
+        private Dictionary<String, List<ResearchReportItem>> _dicEmratingReportInfoByBlock;// 按照小类存储评估类研报结构（returnType=2）
 
         /// <summary>
         /// 内码
@@ -9808,7 +9808,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的新闻结构列表)
         /// </summary>
-        public Dictionary<string, List<OneInfoMineOrgDataRec>> DicNewsInfoByBlock
+        public Dictionary<String, List<OneInfoMineOrgDataRec>> DicNewsInfoByBlock
         {
             get { return _dicNewsInfoByBlock; }
             set { _dicNewsInfoByBlock = value; }
@@ -9816,7 +9816,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的新闻类研报列表)
         /// </summary>
-        public Dictionary<string, List<OneInfoMineOrgDataRec>> DicNewsReportInfoByBlock
+        public Dictionary<String, List<OneInfoMineOrgDataRec>> DicNewsReportInfoByBlock
         {
             get { return _dicNewsReportInfoByBlock; }
             set { _dicNewsReportInfoByBlock = value; }
@@ -9824,7 +9824,7 @@ namespace OwLib
         /// <summary>
         /// 按照小类存储新闻结构(key: 小类代码(板块代码)； value：对应的评估类研报结构列表)
         /// </summary>
-        public Dictionary<string, List<ResearchReportItem>> DicEmratingReportInfoByBlock
+        public Dictionary<String, List<ResearchReportItem>> DicEmratingReportInfoByBlock
         {
             get { return _dicEmratingReportInfoByBlock; }
             set { _dicEmratingReportInfoByBlock = value; }
@@ -9836,9 +9836,9 @@ namespace OwLib
         public ResInfoOrgByIdsDataPacket()
         {
             Codes = new List<int>();
-            DicNewsInfoByBlock = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
-            DicNewsReportInfoByBlock = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
-            DicEmratingReportInfoByBlock = new Dictionary<string, List<ResearchReportItem>>();
+            DicNewsInfoByBlock = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
+            DicNewsReportInfoByBlock = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
+            DicEmratingReportInfoByBlock = new Dictionary<String, List<ResearchReportItem>>();
         }
 
         /// <summary>
@@ -9891,10 +9891,10 @@ namespace OwLib
             return success;
         }
 
-        private bool TryFillNewsReport(string _typeLevel2, ushort num,
-            BinaryReader br, out Dictionary<string, List<OneInfoMineOrgDataRec>> dic)
+        private bool TryFillNewsReport(String _typeLevel2, ushort num,
+            BinaryReader br, out Dictionary<String, List<OneInfoMineOrgDataRec>> dic)
         {
-            dic = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
+            dic = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
             try
             {
                 List<OneInfoMineOrgDataRec> recs = new List<OneInfoMineOrgDataRec>(num);
@@ -9909,13 +9909,13 @@ namespace OwLib
 
                     short lenInfoCode = br.ReadInt16();
                     if (lenInfoCode == 0)
-                        oneInfoMineData.InfoCode = string.Empty;
+                        oneInfoMineData.InfoCode = String.Empty;
                     else
                         oneInfoMineData.InfoCode = Encoding.UTF8.GetString(br.ReadBytes(lenInfoCode));
 
                     short lenTitle = br.ReadInt16();
                     if (lenTitle == 0)
-                        oneInfoMineData.Title = string.Empty;
+                        oneInfoMineData.Title = String.Empty;
                     else
                         oneInfoMineData.Title = Encoding.UTF8.GetString(br.ReadBytes(lenTitle));
 
@@ -9925,9 +9925,9 @@ namespace OwLib
                     oneInfoMineData.InfoType = (InfoMineOrg)br.ReadByte();//InfoMineOrg.Report;
 
                     short lenInsSName = br.ReadInt16();
-                    string insSName = Encoding.UTF8.GetString(br.ReadBytes(lenInsSName));
+                    String insSName = Encoding.UTF8.GetString(br.ReadBytes(lenInsSName));
                     //if (insSName == null)
-                    //    oneInfoMineData.InsSName = string.Empty;
+                    //    oneInfoMineData.InsSName = String.Empty;
                     //else
                     //    oneInfoMineData.InsSName = insSName;
 
@@ -9960,10 +9960,10 @@ namespace OwLib
             }
         }
 
-        private bool TryFillEmratingReport(string _typeLevel2, ushort count,
-            BinaryReader br, out Dictionary<string, List<ResearchReportItem>> dic)
+        private bool TryFillEmratingReport(String _typeLevel2, ushort count,
+            BinaryReader br, out Dictionary<String, List<ResearchReportItem>> dic)
         {
-            dic = new Dictionary<string, List<ResearchReportItem>>();
+            dic = new Dictionary<String, List<ResearchReportItem>>();
             try
             {
                 List<ResearchReportItem> recs = new List<ResearchReportItem>(count);
@@ -10005,10 +10005,10 @@ namespace OwLib
             }
         }
 
-        private bool TryFillNews(string _typeLevel2, int num,
-            BinaryReader br, out  Dictionary<string, List<OneInfoMineOrgDataRec>> dic)
+        private bool TryFillNews(String _typeLevel2, int num,
+            BinaryReader br, out  Dictionary<String, List<OneInfoMineOrgDataRec>> dic)
         {
-            dic = new Dictionary<string, List<OneInfoMineOrgDataRec>>();
+            dic = new Dictionary<String, List<OneInfoMineOrgDataRec>>();
             try
             {
                 List<OneInfoMineOrgDataRec> recs = new List<OneInfoMineOrgDataRec>(num);
@@ -10021,13 +10021,13 @@ namespace OwLib
 
                     short lenInfoCode = br.ReadInt16();
                     if (lenInfoCode == 0)
-                        oneInfoMineData.InfoCode = string.Empty;
+                        oneInfoMineData.InfoCode = String.Empty;
                     else
                         oneInfoMineData.InfoCode = Encoding.UTF8.GetString(br.ReadBytes(lenInfoCode));
 
                     short lenTitle = br.ReadInt16();
                     if (lenTitle == 0)
-                        oneInfoMineData.Title = string.Empty;
+                        oneInfoMineData.Title = String.Empty;
                     else
                         oneInfoMineData.Title = Encoding.UTF8.GetString(br.ReadBytes(lenTitle));
 
@@ -10035,9 +10035,9 @@ namespace OwLib
                     oneInfoMineData.PublishTime = br.ReadInt32();
 
                     short lenMediaName = br.ReadInt16();
-                    string mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
+                    String mediaNameStr = Encoding.UTF8.GetString(br.ReadBytes(lenMediaName));
                     if (mediaNameStr == null)
-                        oneInfoMineData.MediaName = string.Empty;
+                        oneInfoMineData.MediaName = String.Empty;
                     else
                         oneInfoMineData.MediaName = mediaNameStr;
 
@@ -10083,7 +10083,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ResIndicatorsReportDataPacket(string tableKeyCode)
+        public ResIndicatorsReportDataPacket(String tableKeyCode)
         {
             this.TableKeyCode = tableKeyCode;
         }
@@ -10186,20 +10186,20 @@ namespace OwLib
         /// <summary>
         /// 指标值(key: 指标Id; value: 指标的date-value值序列) 
         /// </summary>
-        public Dictionary<string, SortedList<int, double>> DicIndicatorValues;
+        public Dictionary<String, SortedList<int, double>> DicIndicatorValues;
 
         /// <summary>
         /// 
         /// </summary>
         public ResIndicatorValuesDataPacket()
         {
-            DicIndicatorValues = new Dictionary<string, SortedList<int, double>>();
+            DicIndicatorValues = new Dictionary<String, SortedList<int, double>>();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public ResIndicatorValuesDataPacket(string macroId)
+        public ResIndicatorValuesDataPacket(String macroId)
             : this()
         {
             this.TableKeyCode = macroId;
@@ -10222,7 +10222,7 @@ namespace OwLib
             return true;
         }
 
-        private Dictionary<string, SortedList<int, double>> GetIndicatorValues(DataTable dt)
+        private Dictionary<String, SortedList<int, double>> GetIndicatorValues(DataTable dt)
         {
             throw new Exception("The method or operation is not implemented.");
         }

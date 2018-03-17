@@ -21,7 +21,7 @@ namespace OwLib
             /// 获取或设置列的日期
             /// </summary>
             [XmlAttribute]
-            public string DateFromColumn { get; set; }
+            public String DateFromColumn { get; set; }
 
             /// <summary>
             /// 获取或设置过滤条件
@@ -33,7 +33,7 @@ namespace OwLib
             /// 获取或设置值
             /// </summary>
             [XmlAttribute]
-            public string Value { get; set; }
+            public String Value { get; set; }
 
             internal void Deserialize(XmlNode n)
             {
@@ -124,24 +124,24 @@ namespace OwLib
         /// 获取或设置日期过滤值格式化字符串
         /// </summary>
         [XmlAttribute]
-        public string FilterDateValueFormat { get; set; }
+        public String FilterDateValueFormat { get; set; }
 
         /// <summary>
         /// 显示字符串格式化输出样式
         /// </summary>
-        public string FormatString { get; set; }
+        public String FormatString { get; set; }
 
 
         
         /// <summary>
         /// url标题显示名称
         /// </summary>
-        public string UrlShowName { get; set; }
+        public String UrlShowName { get; set; }
 
         /// <summary>
         /// url标题指向列名
         /// </summary>
-        public string UrlCaptionCol { get; set; }
+        public String UrlCaptionCol { get; set; }
 
         #region 响应过滤栏的过滤
 
@@ -200,7 +200,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置绑定下拉框项的Key
         /// </summary>
-        public string BindFilterKey { get; set; }
+        public String BindFilterKey { get; set; }
 
         #region 行列转置设置
 
@@ -222,12 +222,12 @@ namespace OwLib
         /// <summary>
         /// 获取或设置列名扩展
         /// </summary>
-        public string StrCaptionExpress { get; set; }
+        public String StrCaptionExpress { get; set; }
 
         /// <summary>
         /// 获取或设置五星标记列名
         /// </summary>
-        public string StrStarName { get; set; }
+        public String StrStarName { get; set; }
 
         #endregion
 
@@ -300,24 +300,24 @@ namespace OwLib
         /// <summary>
         /// 获取或设置链接显示文字
         /// </summary>
-        public string WebColShowCaption { get; set; }
+        public String WebColShowCaption { get; set; }
 
         /// <summary>
         /// 获取或设置保存链接的列的列名
         /// </summary>
-        public string SaveUrlColumnName { get; set; }
+        public String SaveUrlColumnName { get; set; }
 
         /// <summary>
         /// 显示字符串格式化输出样式
         /// </summary>
-        public string CaptionFilterName { get; set; }
-        private string _CaptionFormat;
+        public String CaptionFilterName { get; set; }
+        private String _CaptionFormat;
 
         
         /// <summary>
         /// 显示字符串格式化输出样式
         /// </summary>
-        public string CaptionFormat
+        public String CaptionFormat
         {
             get { return _CaptionFormat; }
             set
@@ -335,12 +335,12 @@ namespace OwLib
         /// <summary>
         /// 显示字符串格式化输出样式
         /// </summary>
-        public string BandCaptionFilterName { get; set; }
-        private string _BandCaptionFormat;
+        public String BandCaptionFilterName { get; set; }
+        private String _BandCaptionFormat;
         /// <summary>
         /// 显示字符串格式化输出样式
         /// </summary>
-        public string BandCaptionFormat
+        public String BandCaptionFormat
         {
             get { return _BandCaptionFormat; }
             set
@@ -362,7 +362,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置汇总的列名
         /// </summary>
-        public string TotalCaption { get; set; }
+        public String TotalCaption { get; set; }
 
         private int _postion = 0;
 
@@ -378,7 +378,7 @@ namespace OwLib
         /// <summary>
         /// 获取或设置绑定过滤源名
         /// </summary>
-        public string BindingDynamicName { get; set; }
+        public String BindingDynamicName { get; set; }
 
         #endregion
 

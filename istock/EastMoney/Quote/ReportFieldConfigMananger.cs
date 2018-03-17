@@ -14,154 +14,154 @@ namespace OwLib
         /// <summary>
         /// 沪深股票（A股、B股）: AStock
         /// </summary>
-        public static readonly string ST_AStock = "AStock";
+        public static readonly String ST_AStock = "AStock";
         /// <summary>
         /// 指数: Index
         /// </summary>
-        public static readonly string ST_Index = "Index";
+        public static readonly String ST_Index = "Index";
         /// <summary>
         /// 封闭式基金: CloseFund
         /// </summary>
-        public static readonly string ST_CloseFund = "CloseFund";
+        public static readonly String ST_CloseFund = "CloseFund";
         /// <summary>
         /// 开放式基金: OpenFund
         /// </summary>
-        public static readonly string ST_OpenFund = "OpenFund";
+        public static readonly String ST_OpenFund = "OpenFund";
         /// <summary>
         /// 理财: FinancialManager
         /// </summary>
-        public static readonly string ST_FinancialManager = "FinancialManager";
+        public static readonly String ST_FinancialManager = "FinancialManager";
         /// <summary>
         /// 债券: Bond
         /// </summary>
-        public static readonly string ST_Bond = "Bond";
+        public static readonly String ST_Bond = "Bond";
         /// <summary>
         /// 港股: HK
         /// </summary>
-        public static readonly string ST_HKStock = "HKStock";
+        public static readonly String ST_HKStock = "HKStock";
         /// <summary>
         /// 美股: USA
         /// </summary>
-        public static readonly string ST_USAStock = "USAStock";
+        public static readonly String ST_USAStock = "USAStock";
         /// <summary>
         /// 股指期货: IndexFuture
         /// </summary>
-        public static readonly string ST_IndexFutures = "IndexFutures";
+        public static readonly String ST_IndexFutures = "IndexFutures";
         /// <summary>
         /// 商品期货: Future
         /// </summary>
-        public static readonly string ST_Futures = "Futures";
+        public static readonly String ST_Futures = "Futures";
         /// <summary>
         /// 海外期货: OverSeaFuture
         /// </summary>
-        public static readonly string ST_OverSeaFutures = "OverSeaFutures";
+        public static readonly String ST_OverSeaFutures = "OverSeaFutures";
         /// <summary>
         /// 利率: InterestRate
         /// </summary>
-        public static readonly string ST_InterestRate = "InterestRate";
+        public static readonly String ST_InterestRate = "InterestRate";
         /// <summary>
         /// 外汇: Exchange
         /// </summary>
-        public static readonly string ST_Exchange = "Exchange";
+        public static readonly String ST_Exchange = "Exchange";
         /// <summary>
         /// 基金相关: FundHeave
         /// </summary>
-        public static readonly string ST_FundHeave = "FundHeave";
+        public static readonly String ST_FundHeave = "FundHeave";
         #endregion
 
         #region Report模板定义常量
         /// <summary>
         /// 行情报价
         /// </summary>
-        public static readonly string Rep_MarketQuote = "MarketQuote";
+        public static readonly String Rep_MarketQuote = "MarketQuote";
         /// <summary>
         /// 行情报价（简览）
         /// </summary>
-        public static readonly string Rep_MarketQuoteSimple = "MarketQuoteSimple";
+        public static readonly String Rep_MarketQuoteSimple = "MarketQuoteSimple";
         /// <summary>
         /// 行情报价（全景图-简览）
         /// </summary>
-        public static readonly string Rep_MarketQuoteZHP_Simple = "MarketQuoteZHP_Simple";
+        public static readonly String Rep_MarketQuoteZHP_Simple = "MarketQuoteZHP_Simple";
         /// <summary>
         /// 行情报价（全景图-自选股栏目报价）
         /// </summary>
-        public static readonly string Rep_MarketQuoteZHP_Cust = "MarketQuoteZHP_Cust";
+        public static readonly String Rep_MarketQuoteZHP_Cust = "MarketQuoteZHP_Cust";
         /// <summary>
         /// 行情报价（监控屏）
         /// </summary>
-        public static readonly string Rep_MarketQuoteMonitor = "MarketQuoteMonitor";
+        public static readonly String Rep_MarketQuoteMonitor = "MarketQuoteMonitor";
         /// <summary>
         /// 行情报价（全景图1）
         /// </summary>
-        public static readonly string Rep_ZHP_MarketQuote_1 = "ZHP_MarketQuote_1";
+        public static readonly String Rep_ZHP_MarketQuote_1 = "ZHP_MarketQuote_1";
         /// <summary>
         /// 行情报价（全景图2）
         /// </summary>
-        public static readonly string Rep_ZHP_MarketQuote_2 = "ZHP_MarketQuote_2";
+        public static readonly String Rep_ZHP_MarketQuote_2 = "ZHP_MarketQuote_2";
         /// <summary>
         /// 行情报价（全景图3）
         /// </summary>
-        public static readonly string Rep_ZHP_MarketQuote_3 = "ZHP_MarketQuote_3";
+        public static readonly String Rep_ZHP_MarketQuote_3 = "ZHP_MarketQuote_3";
         /// <summary>
         /// 行情报价（全景图4）
         /// </summary>
-        public static readonly string Rep_ZHP_MarketQuote_4 = "ZHP_MarketQuote_4";
+        public static readonly String Rep_ZHP_MarketQuote_4 = "ZHP_MarketQuote_4";
         /// <summary>
         /// 可转债分析
         /// </summary>
-        public static readonly string Rep_EBondAnalysis = "EBondAnalysis";
+        public static readonly String Rep_EBondAnalysis = "EBondAnalysis";
         /// <summary>
         /// 指数管理页报价
         /// </summary>
-        public static readonly string Rep_IndexManangerQuote = "IndexManangerQuote";
+        public static readonly String Rep_IndexManangerQuote = "IndexManangerQuote";
         /// <summary>
         /// 增仓排名
         /// </summary>
-        public static readonly string Rep_PositionChange = "PositionChange";
+        public static readonly String Rep_PositionChange = "PositionChange";
         /// <summary>
         /// 资金流向
         /// </summary>
-        public static readonly string Rep_MoneyFlow = "MoneyFlow";
+        public static readonly String Rep_MoneyFlow = "MoneyFlow";
         /// <summary>
         /// DDE决策
         /// </summary>
-        public static readonly string Rep_DDEDecision = "DDEDecision";
+        public static readonly String Rep_DDEDecision = "DDEDecision";
         /// <summary>
         /// 盈利预测
         /// </summary>
-        public static readonly string Rep_ProfitForecast = "ProfitForecast";
+        public static readonly String Rep_ProfitForecast = "ProfitForecast";
         /// <summary>
         /// 研究报告
         /// </summary>
-        public static readonly string Rep_ResearchReport = "ResearchReport";
+        public static readonly String Rep_ResearchReport = "ResearchReport";
         /// <summary>
         /// 财务数据
         /// </summary>
-        public static readonly string Rep_FinancialData = "FinancialData";
+        public static readonly String Rep_FinancialData = "FinancialData";
         /// <summary>
         /// 重仓持股
         /// </summary>
-        public static readonly string Rep_HeaveStock = "HeaveStock";
+        public static readonly String Rep_HeaveStock = "HeaveStock";
         /// <summary>
         /// 重仓行业
         /// </summary>
-        public static readonly string Rep_HeaveIndustry = "HeaveIndustry";
+        public static readonly String Rep_HeaveIndustry = "HeaveIndustry";
         /// <summary>
         /// 重仓债券
         /// </summary>
-        public static readonly string Rep_HeaveBond = "HeaveBond";
+        public static readonly String Rep_HeaveBond = "HeaveBond";
         /// <summary>
         /// 重仓基金
         /// </summary>
-        public static readonly string Rep_HeaveFund = "HeaveFund";
+        public static readonly String Rep_HeaveFund = "HeaveFund";
         /// <summary>
         /// 基金经理
         /// </summary>
-        public static readonly string Rep_FundManager = "FundManager";
+        public static readonly String Rep_FundManager = "FundManager";
         /// <summary>
         /// 国债期货公开市场操作
         /// </summary>
-        public static readonly string Rep_BondFuturePublicOperate = "BondFuturePublicOperate";
+        public static readonly String Rep_BondFuturePublicOperate = "BondFuturePublicOperate";
         #endregion
     }
     /// <summary>
@@ -173,7 +173,7 @@ namespace OwLib
         private ReportFileCollection _ReportFiles;
         private ReportColumnFormatCollection _ReportColumnFormatCollection;
         private ReportCustomerConfigCollection _ReportCustomerConfigCollection;
-        private Dictionary<string, Dictionary<string, ReportGridConfigAdapter>> _ReportGridConfigs;
+        private Dictionary<String, Dictionary<String, ReportGridConfigAdapter>> _ReportGridConfigs;
 
         private ReportConfigMananger()
         {
@@ -181,7 +181,7 @@ namespace OwLib
             _ReportColumnFormatCollection = ReportColumnFormatCollection.GetInstance();
             _ReportCustomerConfigCollection = ReportCustomerConfigCollection.GetInstance();
 
-            _ReportGridConfigs = new Dictionary<string, Dictionary<string, ReportGridConfigAdapter>>();
+            _ReportGridConfigs = new Dictionary<String, Dictionary<String, ReportGridConfigAdapter>>();
         }
         /// <summary>
         /// 获取实例
@@ -209,7 +209,7 @@ namespace OwLib
         /// <summary>
         /// 获取指定板块类别下的指定报价列表（系统定义）
         /// </summary>
-        public ReportGridConfigAdapter GetSystemReportConfig(string sectoryType, string reportType)
+        public ReportGridConfigAdapter GetSystemReportConfig(String sectoryType, String reportType)
         {
             ReportFile repFile = null;
             ReportConfig repCfg = null;
@@ -261,12 +261,12 @@ namespace OwLib
         /// <summary>
         /// 重置指定板块类别下的指定报价列表
         /// </summary>
-        public ReportGridConfigAdapter ResetReportConfig(string sectoryType, string reportType)
+        public ReportGridConfigAdapter ResetReportConfig(String sectoryType, String reportType)
         {
             ReportFile repFile = null;
             ReportConfig repCfg = null;
 
-            Dictionary<string, ReportGridConfigAdapter> temp = null;
+            Dictionary<String, ReportGridConfigAdapter> temp = null;
             ReportGridConfigAdapter result = null;
 
             if (_ReportFiles.ReportFiles.TryGetValue(sectoryType, out repFile)
@@ -274,7 +274,7 @@ namespace OwLib
             {
                 if (!_ReportGridConfigs.TryGetValue(sectoryType, out temp))
                 {
-                    temp = new Dictionary<string, ReportGridConfigAdapter>();
+                    temp = new Dictionary<String, ReportGridConfigAdapter>();
 
                     _ReportGridConfigs[sectoryType] = temp;
                 }
@@ -331,14 +331,14 @@ namespace OwLib
         /// <summary>
         /// 获取指定板块类别下的指定报价列表
         /// </summary>
-        public ReportGridConfigAdapter GetReportConfig(string sectoryType, string reportType)
+        public ReportGridConfigAdapter GetReportConfig(String sectoryType, String reportType)
         {
             ReportFile repFile = null;
             ReportConfig repCfg = null;
-            Dictionary<string, ReportCustomerConfig> custCfgPool = null;
+            Dictionary<String, ReportCustomerConfig> custCfgPool = null;
             ReportCustomerConfig custCfg = null;
 
-            Dictionary<string, ReportGridConfigAdapter> temp = null;
+            Dictionary<String, ReportGridConfigAdapter> temp = null;
             ReportGridConfigAdapter result = null;
 
             if (_ReportFiles.ReportFiles.TryGetValue(sectoryType, out repFile)
@@ -346,7 +346,7 @@ namespace OwLib
             {
                 if (!_ReportGridConfigs.TryGetValue(sectoryType, out temp))
                 {
-                    temp = new Dictionary<string, ReportGridConfigAdapter>();
+                    temp = new Dictionary<String, ReportGridConfigAdapter>();
 
                     _ReportGridConfigs[sectoryType] = temp;
                 }
@@ -421,7 +421,7 @@ namespace OwLib
                             }
                         }
                         #region 用户自定义字段
-                        foreach (string columnStr in custCfg.ShowColumns.Keys)
+                        foreach (String columnStr in custCfg.ShowColumns.Keys)
                         {
                             ReportField rf = GetReportFieldFromPool(rfPool, columnStr);
 
@@ -456,10 +456,10 @@ namespace OwLib
         /// <summary>
         /// 获取指定列在特定市场的格式化配置
         /// </summary>
-        public ReportColumnFormat GetReportColumnFormat(MarketType marketType, string formatName)
+        public ReportColumnFormat GetReportColumnFormat(MarketType marketType, String formatName)
         {
             ReportColumnFormat result = null;
-            Dictionary<string, ReportColumnFormat> colFormatCollection;
+            Dictionary<String, ReportColumnFormat> colFormatCollection;
             if (_ReportColumnFormatCollection.ColFormatCollection.TryGetValue(marketType, out colFormatCollection))
             {
                 colFormatCollection.TryGetValue(formatName, out result);
@@ -472,19 +472,19 @@ namespace OwLib
         /// </summary>
         public void SaveCustomerConfig()
         {
-            foreach (string sectorType in _ReportGridConfigs.Keys)
+            foreach (String sectorType in _ReportGridConfigs.Keys)
             {
-                foreach (string reportType in _ReportGridConfigs[sectorType].Keys)
+                foreach (String reportType in _ReportGridConfigs[sectorType].Keys)
                 {
                     ReportGridConfigAdapter reportConfig = _ReportGridConfigs[sectorType][reportType];
 
                     if (reportConfig.Localized)
                     {
-                        Dictionary<string, ReportCustomerConfig> custCfgPool = null;
+                        Dictionary<String, ReportCustomerConfig> custCfgPool = null;
                         ReportCustomerConfig custCfg = null;
                         if (!_ReportCustomerConfigCollection.CustomerConfig.TryGetValue(sectorType, out custCfgPool))
                         {
-                            custCfgPool = new Dictionary<string, ReportCustomerConfig>();
+                            custCfgPool = new Dictionary<String, ReportCustomerConfig>();
                             _ReportCustomerConfigCollection.CustomerConfig[sectorType] = custCfgPool;
                         }
 
@@ -515,7 +515,7 @@ namespace OwLib
             _ReportCustomerConfigCollection.SaveCustomerConfig();
         }
 
-        private ReportField GetReportFieldFromPool(List<ReportField> rfPool, string colName)
+        private ReportField GetReportFieldFromPool(List<ReportField> rfPool, String colName)
         {
             ReportField result = null;
 
@@ -597,31 +597,31 @@ namespace OwLib
         private List<RGridColumn> _ColSelected;
         private List<RGridColumn> _ColExpand;
 
-        private string _reportName;
+        private String _reportName;
         /// <summary>
         /// Report名称（与配置文件中的ReportConfig[Name]相对应，例如：AStock，Index）
         /// </summary>
-        public string ReportName
+        public String ReportName
         {
             get { return _reportName; }
             set { this._reportName = value; }
         }
 
-        private string _reportType;
+        private String _reportType;
         /// <summary>
         /// Report类别（与配置文件中的ReportConfig->Report[Name]相对应，例如AStock中的：MarketQuote，MarketQuoteSimple，MarketQuoteZHP）
         /// </summary>
-        public string ReportType
+        public String ReportType
         {
             get { return _reportType; }
             set { this._reportType = value; }
         }
 
-        private string _reportCaption;
+        private String _reportCaption;
         /// <summary>
         /// 报表描述（与配置文件中的ReportConfig->Report[Caption]相对应，例如：行情报价，增仓排名，资金流向）
         /// </summary>
-        public string ReportCaption
+        public String ReportCaption
         {
             get { return _reportCaption; }
             set { this._reportCaption = value; }
@@ -630,13 +630,13 @@ namespace OwLib
         /// <summary>
         /// ReportGridConfig的唯一标识，由ReportName和ReportType联合组成
         /// </summary>
-        public string ReportIdentity { get { return ReportName + "_" + ReportType; } }
+        public String ReportIdentity { get { return ReportName + "_" + ReportType; } }
 
-        private string _sortCol;
+        private String _sortCol;
         /// <summary>
         /// 排序列（默认：StockCode）
         /// </summary>
-        public string SortCol
+        public String SortCol
         {
             get { return _sortCol; }
             set { this._sortCol = value; }
@@ -689,7 +689,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReportGridConfigAdapter(string reportName, string reportType)
+        public ReportGridConfigAdapter(String reportName, String reportType)
         {
             ReportName = reportName;
             ReportType = reportType;
@@ -754,14 +754,14 @@ namespace OwLib
     /// </summary>
     public class ReportFieldCollection : PersistableObject
     {
-        private static readonly string _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFieldCollection-new.xml";
+        private static readonly String _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFieldCollection-new.xml";
         private static ReportFieldCollection _Instance;
 
-        private Dictionary<string, ReportField> _reportfields;
+        private Dictionary<String, ReportField> _reportfields;
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<string, ReportField> ReportFields
+        public Dictionary<String, ReportField> ReportFields
         {
             get { return _reportfields; }
             private set { this._reportfields = value; }
@@ -769,7 +769,7 @@ namespace OwLib
 
         private ReportFieldCollection()
         {
-            _reportfields = new Dictionary<string, ReportField>();
+            _reportfields = new Dictionary<String, ReportField>();
         }
         /// <summary>
         /// 获取实例
@@ -817,21 +817,21 @@ namespace OwLib
     /// </summary>
     public class ReportField : PersistableObject
     {
-        private string _name;
+        private String _name;
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { this._name = value; }
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
         /// 
         /// </summary>
-        public string Caption
+        public String Caption
         {
             get { return _caption; }
             set { this._caption = value; }
@@ -907,41 +907,41 @@ namespace OwLib
             set { this._isShowTip = value; }
         }
 
-        private string _tipId;
+        private String _tipId;
         /// <summary>
         /// 需要展示的TipID
         /// </summary>
-        public string TipID
+        public String TipID
         {
             get { return _tipId; }
             set { this._tipId = value; }
         }
 
-        private string _helpButtonId;
+        private String _helpButtonId;
         /// <summary>
         /// 需要展示的HelpButtonID
         /// </summary>
-        public string HelpButtonID
+        public String HelpButtonID
         {
             get { return _helpButtonId; }
             set { this._helpButtonId = value; }
         }
 
-        private string _format;
+        private String _format;
         /// <summary>
         /// 
         /// </summary>
-        public string Format
+        public String Format
         {
             get { return _format; }
             set { this._format = value; }
         }
 
-        private string _dataTypeStr;
+        private String _dataTypeStr;
         /// <summary>
         /// 
         /// </summary>
-        public string DataTypeStr
+        public String DataTypeStr
         {
             get { return _dataTypeStr; }
             set { this._dataTypeStr = value; }
@@ -972,11 +972,11 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        private string _exportTypeStr;
+        private String _exportTypeStr;
         /// <summary>
         /// 
         /// </summary>
-        public string ExportTypeStr
+        public String ExportTypeStr
         {
             get { return _exportTypeStr; }
             set { _exportTypeStr = value; }
@@ -1031,9 +1031,9 @@ namespace OwLib
                 CheckNull = memento.GetBoolean("CheckNull");
                 CanSort = memento.GetBoolean("CanSort");
                 CanWidthChange = memento.GetBoolean("CanWidthChange");
-                TipID = memento.GetString("TipID") ?? string.Empty;
-                ShowTip = !string.IsNullOrEmpty(TipID);
-                HelpButtonID = memento.GetString("HelpButtonID") ?? string.Empty;
+                TipID = memento.GetString("TipID") ?? String.Empty;
+                ShowTip = !String.IsNullOrEmpty(TipID);
+                HelpButtonID = memento.GetString("HelpButtonID") ?? String.Empty;
                 Format = memento.GetString("Format");
                 DataTypeStr = memento.GetString("DataType");
                 DataType = GetType(DataTypeStr);
@@ -1048,7 +1048,7 @@ namespace OwLib
                         ReportField subField = new ReportField();
                         subField.LoadState(memento.GetChild(index));
 
-                        if (string.IsNullOrEmpty(subField.ExportTypeStr))
+                        if (String.IsNullOrEmpty(subField.ExportTypeStr))
                         {
                             subField.ExportTypeStr = subField.DataTypeStr;
                             subField.ExportType = GetType(subField.ExportTypeStr);
@@ -1060,7 +1060,7 @@ namespace OwLib
             }
             catch (Exception e)
             {
-                string err = e.ToString();
+                String err = e.ToString();
 
                 LogUtilities.LogMessage("报价字段配置文件读取出错，error: " + err);
             }
@@ -1106,9 +1106,9 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public Type GetType(string objTypeStr)
+        public Type GetType(String objTypeStr)
         {
-            if (string.IsNullOrEmpty(objTypeStr))
+            if (String.IsNullOrEmpty(objTypeStr))
                 return null;
 
             switch (objTypeStr)
@@ -1135,15 +1135,15 @@ namespace OwLib
     /// </summary>
     public class ReportFileCollection : PersistableObject
     {
-        private static readonly string _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFile.xml";
-        private static readonly string _ReportDir = PathUtilities.CfgPath + @"Report\";
+        private static readonly String _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFile.xml";
+        private static readonly String _ReportDir = PathUtilities.CfgPath + @"Report\";
         private static ReportFileCollection _Instance;
 
-        private Dictionary<string, ReportFile> _reportFiles;
+        private Dictionary<String, ReportFile> _reportFiles;
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<string, ReportFile> ReportFiles
+        public Dictionary<String, ReportFile> ReportFiles
         {
             get { return _reportFiles; }
             set { this._reportFiles = value; }
@@ -1151,7 +1151,7 @@ namespace OwLib
 
         private ReportFileCollection()
         {
-            ReportFiles = new Dictionary<string, ReportFile>();
+            ReportFiles = new Dictionary<String, ReportFile>();
         }
         /// <summary>
         /// 获取实例
@@ -1181,7 +1181,7 @@ namespace OwLib
             {
                 IMemento childMemento = memento.GetChild(index);
 
-                string fileName = childMemento.GetString("Name");
+                String fileName = childMemento.GetString("Name");
 
                 ReportFile reportFile = new ReportFile();
                 new XmlFileSerializer(_ReportDir + fileName).Deserialization(reportFile);
@@ -1189,7 +1189,7 @@ namespace OwLib
                 for (int subIndex = 0; subIndex < childMemento.ChildCount; subIndex++)
                 {
                     IMemento subChildMemento = childMemento.GetChild(subIndex);
-                    string report = subChildMemento.GetString("Name");
+                    String report = subChildMemento.GetString("Name");
                     ReportFiles[report] = reportFile;
                 }
             }
@@ -1207,31 +1207,31 @@ namespace OwLib
     /// </summary>
     public class ReportFile : PersistableObject
     {
-        private string _name;
+        private String _name;
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             private set { this._name = value; }
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
         /// 
         /// </summary>
-        public string Caption
+        public String Caption
         {
             get { return _caption; }
             private set { _caption = value; }
         }
 
-        private Dictionary<string, ReportConfig> _reportConfigs;
+        private Dictionary<String, ReportConfig> _reportConfigs;
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<string, ReportConfig> ReportConfigs
+        public Dictionary<String, ReportConfig> ReportConfigs
         {
             get { return _reportConfigs; }
             private set { _reportConfigs = value; }
@@ -1242,7 +1242,7 @@ namespace OwLib
         /// </summary>
         public ReportFile()
         {
-            _reportConfigs = new Dictionary<string, ReportConfig>();
+            _reportConfigs = new Dictionary<String, ReportConfig>();
         }
 
         /// <summary>
@@ -1264,7 +1264,7 @@ namespace OwLib
             for (int index = 0; index < memento.ChildCount; index++)
             {
                 IMemento childMemento = memento.GetChild(index);
-                string reportName = childMemento.GetString("Name");
+                String reportName = childMemento.GetString("Name");
 
                 ReportConfig rc = new ReportConfig();
                 rc.LoadState(childMemento);
@@ -1278,43 +1278,43 @@ namespace OwLib
     /// </summary>
     public class ReportConfig : PersistableObject
     {
-        private Dictionary<string, ReportField> _ReportFieldCollection;
+        private Dictionary<String, ReportField> _ReportFieldCollection;
 
-        private string _controlId;
+        private String _controlId;
         /// <summary>
         /// 
         /// </summary>
-        public string ControlID
+        public String ControlID
         {
             get { return _controlId; }
             private set { this._controlId = value; }
         }
 
-        private string _name;
+        private String _name;
         /// <summary>
         /// 
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             private set { _name = value; }
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
         /// 
         /// </summary>
-        public string Caption
+        public String Caption
         {
             get { return _caption; }
             private set { _caption = value; }
         }
 
-        private string _sortCol;
+        private String _sortCol;
         /// <summary>
         /// 
         /// </summary>
-        public string SortCol
+        public String SortCol
         {
             get { return _sortCol; }
             private set { this._sortCol = value; }
@@ -1436,7 +1436,7 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        public ReportField GetField(string fieldName)
+        public ReportField GetField(String fieldName)
         {
             ReportField result = null;
 
@@ -1545,8 +1545,8 @@ namespace OwLib
 
                     if (memento.ContainsAttribute("TipID"))
                     {
-                        field.TipID = memento.GetString("TipID") ?? string.Empty;
-                        field.ShowTip = !string.IsNullOrEmpty(field.TipID);
+                        field.TipID = memento.GetString("TipID") ?? String.Empty;
+                        field.ShowTip = !String.IsNullOrEmpty(field.TipID);
                     }
                     else
                     {
@@ -1555,7 +1555,7 @@ namespace OwLib
                     }
                     if (memento.ContainsAttribute("HelpButtonID"))
                     {
-                        field.HelpButtonID = memento.GetString("HelpButtonID") ?? string.Empty;
+                        field.HelpButtonID = memento.GetString("HelpButtonID") ?? String.Empty;
                     }
                     else
                     {
@@ -1624,15 +1624,15 @@ namespace OwLib
     /// </summary>
     public class ReportColumnFormatCollection : PersistableObject
     {
-        private static readonly string _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFieldFormat.xml";
+        private static readonly String _ConfigFile = PathUtilities.CfgPath + @"Report\" + "ReportFieldFormat.xml";
         private static ReportColumnFormatCollection _Instance;
 
         /// <summary>
         /// 
         /// </summary>
-        private Dictionary<MarketType, Dictionary<string, ReportColumnFormat>> _colFormatCollection;
+        private Dictionary<MarketType, Dictionary<String, ReportColumnFormat>> _colFormatCollection;
 
-        public Dictionary<MarketType, Dictionary<string, ReportColumnFormat>> ColFormatCollection
+        public Dictionary<MarketType, Dictionary<String, ReportColumnFormat>> ColFormatCollection
         {
             get { return _colFormatCollection; }
             set { _colFormatCollection = value; }
@@ -1640,7 +1640,7 @@ namespace OwLib
 
         private ReportColumnFormatCollection()
         {
-            ColFormatCollection = new Dictionary<MarketType, Dictionary<string, ReportColumnFormat>>();
+            ColFormatCollection = new Dictionary<MarketType, Dictionary<String, ReportColumnFormat>>();
         }
         /// <summary>
         /// 获取实例
@@ -1670,11 +1670,11 @@ namespace OwLib
             for (int index = 0; index < memento.ChildCount; index++)
             {
                 IMemento childMemento = memento.GetChild(index);
-                string[] marketTypes = childMemento.GetString("Name").Split(',');
+                String[] marketTypes = childMemento.GetString("Name").Split(',');
 
                 //MarketType market = (MarketType)childMemento.GetEnumValue("Name", typeof(MarketType));
 
-                Dictionary<string, ReportColumnFormat> colFormatCollection = new Dictionary<string, ReportColumnFormat>();
+                Dictionary<String, ReportColumnFormat> colFormatCollection = new Dictionary<String, ReportColumnFormat>();
 
                 for (int subIndex = 0; subIndex < childMemento.ChildCount; subIndex++)
                 {
@@ -1715,31 +1715,31 @@ namespace OwLib
     /// </summary>
     public class ReportColumnFormat : PersistableObject
     {
-        private string _name;
+        private String _name;
         /// <summary>
         /// 
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return _name; }
             set { this._name = value; }
         }
 
-        private string _caption;
+        private String _caption;
         /// <summary>
         /// 
         /// </summary>
-        public string Caption
+        public String Caption
         {
             get { return _caption; }
             set { this._caption = value; }
         }
 
-        private string _format;
+        private String _format;
         /// <summary>
         /// 
         /// </summary>
-        public string Format
+        public String Format
         {
             get { return _format; }
             set { this._format = value; }
@@ -1748,16 +1748,16 @@ namespace OwLib
         /// <summary>
         /// 
         /// </summary>
-        private string _exportFormat;
+        private String _exportFormat;
         /// <summary>
         /// 
         /// </summary>
-        public string ExportFormat
+        public String ExportFormat
         {
             get { return _exportFormat; }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.Equals("None"))
+                if (String.IsNullOrEmpty(value) || value.Equals("None"))
                 {
                     _exportFormat = null;
                 }
@@ -1768,61 +1768,61 @@ namespace OwLib
             }
         }
 
-        private string _suffix;
+        private String _suffix;
         /// <summary>
         /// 
         /// </summary>
-        public string Suffix
+        public String Suffix
         {
             get { return _suffix; }
             set { this._suffix = value; }
         }
 
-        private string _compareTo;
+        private String _compareTo;
         /// <summary>
         /// 
         /// </summary>
-        public string CompareTo
+        public String CompareTo
         {
             get { return _compareTo; }
             set { this._compareTo = value; }
         }
 
-        private string _defColor;
+        private String _defColor;
         /// <summary>
         /// 
         /// </summary>
-        public string DefColor
+        public String DefColor
         {
             get { return _defColor; }
             set { this._defColor = value; }
         }
 
-        private string _gtColor;
+        private String _gtColor;
         /// <summary>
         /// 
         /// </summary>
-        public string GtColor
+        public String GtColor
         {
             get { return _gtColor; }
             set { this._gtColor = value; }
         }
 
-        private string _ltColor;
+        private String _ltColor;
         /// <summary>
         /// 
         /// </summary>
-        public string LtColor
+        public String LtColor
         {
             get { return _ltColor; }
             set { this._ltColor = value; }
         }
 
-        private string _eqColor;
+        private String _eqColor;
         /// <summary>
         /// 
         /// </summary>
-        public string EqColor
+        public String EqColor
         {
             get { return _eqColor; }
             set { this._eqColor = value; }
@@ -1856,15 +1856,15 @@ namespace OwLib
     /// </summary>
     public class ReportCustomerConfigCollection : PersistableObject
     {
-        private static readonly string _CustomerConfigFile = PathUtilities.UserPath + @"Report\" + "ReportColumnConfig.xml";
+        private static readonly String _CustomerConfigFile = PathUtilities.UserPath + @"Report\" + "ReportColumnConfig.xml";
         private static ReportCustomerConfigCollection _Instance;
 
         /// <summary>
         /// key1=SectorType，key2=ReportType，例如：key1=AStock，key2=MarketQuote
         /// </summary>
-        private Dictionary<string, Dictionary<string, ReportCustomerConfig>> _customerConfig;
+        private Dictionary<String, Dictionary<String, ReportCustomerConfig>> _customerConfig;
 
-        public Dictionary<string, Dictionary<string, ReportCustomerConfig>> CustomerConfig
+        public Dictionary<String, Dictionary<String, ReportCustomerConfig>> CustomerConfig
         {
             get { return _customerConfig; }
             private set { _customerConfig = value; }
@@ -1872,7 +1872,7 @@ namespace OwLib
 
         private ReportCustomerConfigCollection()
         {
-            CustomerConfig = new Dictionary<string, Dictionary<string, ReportCustomerConfig>>();
+            CustomerConfig = new Dictionary<String, Dictionary<String, ReportCustomerConfig>>();
         }
         /// <summary>
         /// 获取实例
@@ -1906,14 +1906,14 @@ namespace OwLib
             //memento.Name = this.GetType().Name;
             memento.Name = "ReportColumnConfig";
 
-            foreach (string sectorType in CustomerConfig.Keys)
+            foreach (String sectorType in CustomerConfig.Keys)
             {
                 if (CustomerConfig[sectorType].Values.Count > 0)
                 {
                     IMemento childMemento = memento.CreateChild("ConfigFile");
                     childMemento.SetString("Name", sectorType);
 
-                    foreach (string reportType in CustomerConfig[sectorType].Keys)
+                    foreach (String reportType in CustomerConfig[sectorType].Keys)
                     {
                         ReportCustomerConfig custCfg = CustomerConfig[sectorType][reportType];
 
@@ -1937,12 +1937,12 @@ namespace OwLib
             {
                 IMemento childMemento = memento.GetChild(index);
 
-                string sectorName = childMemento.GetString("Name");
-                Dictionary<string, ReportCustomerConfig> cfgPool = null;
+                String sectorName = childMemento.GetString("Name");
+                Dictionary<String, ReportCustomerConfig> cfgPool = null;
 
                 if (!CustomerConfig.TryGetValue(sectorName, out cfgPool))
                 {
-                    cfgPool = new Dictionary<string, ReportCustomerConfig>();
+                    cfgPool = new Dictionary<String, ReportCustomerConfig>();
                     CustomerConfig[sectorName] = cfgPool;
                 }
 
@@ -1963,41 +1963,41 @@ namespace OwLib
     /// </summary>
     public class ReportCustomerConfig : PersistableObject
     {
-        private string _reportName;
+        private String _reportName;
         /// <summary>
         /// 名称
         /// </summary>
-        public string ReprotName
+        public String ReprotName
         {
             get { return _reportName; }
             set { this._reportName = value; }
         }
 
-        private string _reportType;
+        private String _reportType;
         /// <summary>
         /// 类型
         /// </summary>
-        public string ReportType
+        public String ReportType
         {
             get { return _reportType; }
             set { this._reportType = value; }
         }
 
-        private Dictionary<string, int> _showColumns;
+        private Dictionary<String, int> _showColumns;
         /// <summary>
         /// 显示的列
         /// </summary>
-        public Dictionary<string, int> ShowColumns
+        public Dictionary<String, int> ShowColumns
         {
             get { return _showColumns; }
             set { this._showColumns = value; }
         }//<columnName, width>
 
-        private string _sortColumn;
+        private String _sortColumn;
         /// <summary>
         /// 排序列
         /// </summary>
-        public string SortColumn
+        public String SortColumn
         {
             get { return _sortColumn; }
             set { this._sortColumn = value; }
@@ -2015,11 +2015,11 @@ namespace OwLib
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ReportCustomerConfig(string reportName)
+        public ReportCustomerConfig(String reportName)
         {
             ReprotName = reportName;
 
-            ShowColumns = new Dictionary<string, int>();
+            ShowColumns = new Dictionary<String, int>();
         }
         /// <summary>
         /// 保存配置
@@ -2036,27 +2036,27 @@ namespace OwLib
 
             ReportType = memento.GetString("Report");
 
-            string strShowColumns = memento.GetString("ShowColumns");
-            if (!string.IsNullOrEmpty(strShowColumns))
+            String strShowColumns = memento.GetString("ShowColumns");
+            if (!String.IsNullOrEmpty(strShowColumns))
             {
-                string[] showColumns = strShowColumns.Split(',');
-                foreach (string showColumn in showColumns)
+                String[] showColumns = strShowColumns.Split(',');
+                foreach (String showColumn in showColumns)
                 {
                     if (showColumn.Contains(":"))
                     {
-                        string[] columnAndWidth = showColumn.Split(':');
+                        String[] columnAndWidth = showColumn.Split(':');
 
                         ShowColumns[columnAndWidth[0]] = Convert.ToInt32(columnAndWidth[1]);
                     }
                 }
             }
 
-            string strSortColumn = memento.GetString("SortColumn");
-            if (!string.IsNullOrEmpty(strSortColumn))
+            String strSortColumn = memento.GetString("SortColumn");
+            if (!String.IsNullOrEmpty(strSortColumn))
             {
                 if (strSortColumn.Contains(":"))
                 {
-                    string[] sortCfg = strSortColumn.Split(':');
+                    String[] sortCfg = strSortColumn.Split(':');
                     SortColumn = sortCfg[0];
                     StorType = (EStorType)Enum.Parse(typeof(EStorType), sortCfg[1]);
                 }
@@ -2065,11 +2065,11 @@ namespace OwLib
         /// <summary>
         /// 获取显示的列
         /// </summary>
-        public string GetShowColumns()
+        public String GetShowColumns()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (string columnName in ShowColumns.Keys)
+            foreach (String columnName in ShowColumns.Keys)
             {
                 sb.AppendFormat("{0}:{1},", columnName, ShowColumns[columnName]);
             }
@@ -2084,7 +2084,7 @@ namespace OwLib
         /// <summary>
         /// 获取排序列
         /// </summary>
-        public string GetSortColumn()
+        public String GetSortColumn()
         {
             return SortColumn + ":" + StorType.ToString();
         }

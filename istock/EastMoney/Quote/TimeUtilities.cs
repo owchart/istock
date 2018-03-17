@@ -1902,7 +1902,7 @@ namespace OwLib
             }
         }
 
-        public static string StrNowTime
+        public static String StrNowTime
         {
             get
             {

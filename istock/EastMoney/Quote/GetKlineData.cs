@@ -357,7 +357,7 @@ namespace OwLib
             Marshal.Copy(capitalArr, 0, pcapitalArr, capitalArr.Length);
             paraArr[3].pValue = pcapitalArr;
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
             try
             {
@@ -441,7 +441,7 @@ namespace OwLib
             Marshal.Copy(Order2, 0, pOrder2, Order2.Length);
             paraArr[5].pValue = pOrder2;
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
             try
             {
@@ -505,7 +505,7 @@ namespace OwLib
             Marshal.Copy(Order2, 0, pOrder2, Order2.Length);
             paraArr[4].pValue = pOrder2;
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
             try
             {
@@ -537,7 +537,7 @@ namespace OwLib
             Marshal.Copy(bigAmount, 0, pbigAmount, bigAmount.Length);
             paraArr[0].pValue = pbigAmount;
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
             try
             {
@@ -644,7 +644,7 @@ namespace OwLib
             Marshal.Copy(BigOrder10, 0, pBigOrder10, BigOrder10.Length);
             paraArr[8].pValue = pBigOrder10;
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
             try
             {
@@ -1017,10 +1017,10 @@ namespace OwLib
             }
             #endregion
 
-            string errmsg = string.Empty;
+            String errmsg = String.Empty;
             FmFormulaOutput output = new FmFormulaOutput();
 
-            string emcode = string.Empty;
+            String emcode = String.Empty;
             if (DetailData.FieldIndexDataString.ContainsKey(Code))
                 DetailData.FieldIndexDataString[Code].TryGetValue(FieldIndex.EMCode, out emcode);
 
@@ -1053,7 +1053,7 @@ namespace OwLib
         {
             using (QuoteDataStru quoteDataStru = new QuoteDataStru())
             {
-                string nameTemp = output.fmOutput[index].name.Trim('\0');
+                String nameTemp = output.fmOutput[index].name.Trim('\0');
                 quoteDataStru.QuoteName = nameTemp;
                 try
                 {
@@ -1450,7 +1450,7 @@ namespace OwLib
             int dataCount, int index, int selectIndex,
             MarketType Market, KLineCycle KLineCycle)
         {
-            string nameTemp = output.fmOutput[index].name.Trim('\0');
+            String nameTemp = output.fmOutput[index].name.Trim('\0');
             List<float> outputList = new List<float>(0);
             double[] tempOutput = new double[1];
             for (int j = 0; j < dataCount; j++)

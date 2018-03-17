@@ -15,7 +15,7 @@ namespace OwLib
         /// <summary>
         /// 新通道-左侧菜单
         /// </summary>
-        public static object GetLeftTree(string cid)
+        public static object GetLeftTree(String cid)
         {
             try
             {
@@ -34,12 +34,12 @@ namespace OwLib
         /// <summary>
         /// 新通道-根据id获取今日公告列表
         /// </summary>
-        public static object GetDailyNotice(string id, string pageIndex, string limit, string order, string sort)
+        public static object GetDailyNotice(String id, String pageIndex, String limit, String order, String sort)
         {
             try
             {
-                string date = CommDao.SafeToDateString(DateTime.Now.ToShortDateString(), "yyyy-MM-dd");
-                string terms = "datetime: " + date + "T00:00:00Z TO " + date + "T99:99:99Z";
+                String date = CommDao.SafeToDateString(DateTime.Now.ToShortDateString(), "yyyy-MM-dd");
+                String terms = "datetime: " + date + "T00:00:00Z TO " + date + "T99:99:99Z";
                 return GetNoticeByParam(id, "", terms, pageIndex, limit, order, sort);
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace OwLib
         /// <summary>
         /// 新通道-根据id获取公告列表
         /// </summary>
-        public static object GetNoticeById(string id, string pageIndex, string limit, string order, string sort)
+        public static object GetNoticeById(String id, String pageIndex, String limit, String order, String sort)
         {
             try
             {
@@ -72,16 +72,16 @@ namespace OwLib
         /// <summary>
         /// 新通道-简单搜索
         /// </summary>
-        public static object GetNoticeByParam(string id, string securityCodes, string terms, string pageIndex, string limit, string order, string sort)
+        public static object GetNoticeByParam(String id, String securityCodes, String terms, String pageIndex, String limit, String order, String sort)
         {
             try
             {
                 SktSrhModel<NoticeSktSrhQryModel> queryModel = new SktSrhModel<NoticeSktSrhQryModel>("H2", new NoticeSktSrhQryModel());
                 queryModel.comm.pageno = pageIndex;
                 queryModel.comm.pagesize = limit;
-                if (!string.IsNullOrEmpty(id))
-                    queryModel.query.types = new string[1] { id };
-                if (!string.IsNullOrEmpty(securityCodes))
+                if (!String.IsNullOrEmpty(id))
+                    queryModel.query.types = new String[1] { id };
+                if (!String.IsNullOrEmpty(securityCodes))
                     queryModel.query.securitycodes = securityCodes.Split(',');
                 queryModel.query.terms = terms;
                 object objRs = DataAccess.QueryIndex(JsonConvert.SerializeObject(queryModel));
@@ -99,7 +99,7 @@ namespace OwLib
         /// </summary>
         /// <param name="infocodes"></param>
         /// <returns></returns>
-        public string GetDetailList(string infocodes)
+        public String GetDetailList(String infocodes)
         {
             String result = String.Empty;
             SktByIdsModel queryModel = new SktByIdsModel("H2", infocodes.Split(','));
@@ -128,9 +128,9 @@ namespace OwLib
         /// <param name="pageIndex">页码</param>
         /// <param name="limit">记录数</param>
         /// <returns></returns>
-        public object GetNoticeBySearch(string types, string securitycodes,
-                                string date, string title,
-                                string text, string columnType, string pageIndex, string limit)
+        public object GetNoticeBySearch(String types, String securitycodes,
+                                String date, String title,
+                                String text, String columnType, String pageIndex, String limit)
         {
             String terms = String.Empty;
             if (!String.IsNullOrEmpty(date))
@@ -139,8 +139,8 @@ namespace OwLib
                 try
                 {
                     date = date.Replace("99:99:99", "23:59:59");
-                    string startdate = string.Empty;
-                    string enddate = string.Empty;
+                    String startdate = String.Empty;
+                    String enddate = String.Empty;
                     startdate = Convert.ToDateTime(date.Substring(0, date.IndexOf(" TO ")).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T00:00:00Z";
                     enddate = Convert.ToDateTime(date.Substring(date.IndexOf(" TO ") + 4).Split(new char[] { 'T' })[0]).ToString("yyyy-MM-dd") + "T23:59:59Z";
                     date = startdate + " TO " + enddate;
@@ -195,9 +195,9 @@ namespace OwLib
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        private string[] GetParams(string param)
+        private String[] GetParams(String param)
         {
-            string[] result = new string[0];
+            String[] result = new String[0];
             if (!String.IsNullOrEmpty(param))
             {
                 result = param.Split(',');
@@ -208,9 +208,9 @@ namespace OwLib
         /// <summary>
         /// 获取实时资讯详细信息
         /// </summary>
-        public static string GetRealTimeInfoByCode(string infoCode)
+        public static String GetRealTimeInfoByCode(String infoCode)
         {
-            string content = "";
+            String content = "";
             try
             {
                 String url = "http://mainbody.jg.eastmoney.com/nrsweb/service.action?token=&serviceType=C&dataType=json&h=H2";

@@ -5,7 +5,7 @@ using OwLib;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace OwLibSV
+namespace OwLib
 {
     /// <summary>
     /// 选股的外部方法
@@ -39,7 +39,7 @@ namespace OwLibSV
         /// <param name="text">脚本</param>
         /// <param name="parameters">参数</param>
         /// <returns>指标ID</returns>
-        public static int CreateIndicatorExtern(String text, String parameters, StringBuilder fields)
+        public static int CreateIndicatorExtern(String text, String parameters)
         {
             try
             {
@@ -63,17 +63,6 @@ namespace OwLibSV
                 CIndicator indicator = SecurityDataHelper.CreateIndicator(m_chart, dataSource, text, parameters);
                 m_indicators[m_serialNumber] = indicator;
                 indicator.OnCalculate(0);
-                int pos = 0;
-                int variablesSize = indicator.MainVariables.Count;
-                foreach (String field in indicator.MainVariables.Keys)
-                {
-                    fields.Append(field);
-                    if (pos != variablesSize - 1)
-                    {
-                        fields.Append(",");
-                    }
-                    pos++;
-                }
             }
             catch (Exception ex)
             {
@@ -88,9 +77,12 @@ namespace OwLibSV
         /// <param name="id">指标ID</param>
         /// <param name="code">代码</param>
         /// <returns>返回数据</returns>
-        public static double[] CalculateIndicatorExtern(int id, String code)
+        public static Dictionary<String, double> CalculateIndicatorExtern(int id, String code)
         {
-            if (m_indicators.ContainsKey(id))
+            Dictionary<String, double> list = new Dictionary<String, double>();
+            if (m_indicators.ContainsKey(id) 
+                && SecurityService.m_historyDatas.ContainsKey(code)
+                && SecurityService.m_latestDatas.ContainsKey(code))
             {
                 CIndicator indicator = m_indicators[id];
                 List<CIndicator> indicators = new List<CIndicator>();
@@ -112,25 +104,18 @@ namespace OwLibSV
                 datas.Clear();
                 int rowsCount = dataSource.RowsCount;
                 int variablesSize = indicator.MainVariables.Count;
-                double[] list = new double[variablesSize];
                 if (rowsCount > 0)
                 {
-                    int pos = 0;
                     foreach (String name in indicator.MainVariables.Keys)
                     {
                         int field = indicator.MainVariables[name];
                         double value = dataSource.Get2(rowsCount - 1, field);
-                        list[pos] = value;
-                        pos++;
+                        list[name] = value;
                     }
                 }
                 dataSource.Clear();
-                return list;
             }
-            else
-            {
-                return null;
-            }
+            return list;
         }
 
         /// <summary>

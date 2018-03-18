@@ -140,6 +140,76 @@ namespace OwLib
         }
 
         /// <summary>
+        /// MACD金叉或死叉个股
+        /// </summary>
+        /// <param name="codes"></param>
+        /// <param name="goldOrDeal"></param>
+        /// <returns></returns>
+        public static int GetMacdGoldDead(List<String> codes, bool goldOrDeal)
+        {
+            LoadHistoryDatas();
+            String str = "DIF:EMA(CLOSE,SHORT)-EMA(CLOSE,LONG);DEA:EMA(DIF,MID);MACD:(DIF-DEA)*2;IC:CROSS(DIF,DEA);";
+            if (!goldOrDeal)
+            {
+                str = "DIF:EMA(CLOSE,SHORT)-EMA(CLOSE,LONG);DEA:EMA(DIF,MID);MACD:(DIF-DEA)*2;IC:CROSS(DEA,DIF);";
+            }
+            int id = SecurityFilterExternFunc.CreateIndicatorExtern(str, "SHORT,0,1000,12;LONG,0,1000,26;MID,0,1000,9;");
+            List<String> tradedCodes = new List<String>();
+            GetTradedCodes(tradedCodes);
+            int tradedCodesSize = tradedCodes.Count;
+            for (int i = 0; i < tradedCodesSize; i++)
+            {
+                String tradedCode = tradedCodes[i];
+                if(m_historyDatas.ContainsKey(tradedCode) && m_historyDatas[tradedCode].Count > 200)
+                {
+                    Dictionary<String, double> values = SecurityFilterExternFunc.CalculateIndicatorExtern(id, tradedCode);
+                    if (values.ContainsKey("IC"))
+                    {
+                        if (values["IC"] == 1)
+                        {
+                            codes.Add(tradedCode);
+                        }
+                    }
+                }
+            }
+            SecurityFilterExternFunc.DeleteIndicatorExtern(id);
+            return 1;
+        }
+
+        /// <summary>
+        /// 获取MACD背离个股
+        /// </summary>
+        /// <param name="codes"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        public static int GetMacdDeviationCodes(List<String> codes)
+        {
+            LoadHistoryDatas();
+            int id = SecurityFilterExternFunc.CreateIndicatorExtern("DIF:EMA(CLOSE,SHORT)-EMA(CLOSE,LONG);DEA:EMA(DIF,MID);MACD:(DIF-DEA)*2;REFCLOSE:REF(CLOSE,20);REFMACD:REF(MACD,20);NOWCLOSE:CLOSE;", "SHORT,0,1000,12;LONG,0,1000,26;MID,0,1000,9;");
+            List<String> tradedCodes = new List<String>();
+            GetTradedCodes(tradedCodes);
+            int tradedCodesSize = tradedCodes.Count;
+            for (int i = 0; i < tradedCodesSize; i++)
+            {
+                String tradedCode = tradedCodes[i];
+                if (m_historyDatas.ContainsKey(tradedCode) && m_historyDatas[tradedCode].Count > 200)
+                {
+                    Dictionary<String, double> values = SecurityFilterExternFunc.CalculateIndicatorExtern(id, tradedCode);
+                    double nowClose = values["NOWCLOSE"];
+                    double refClose = values["REFCLOSE"];
+                    double macd = values["MACD"];
+                    double refMacd = values["REFMACD"];
+                    if ((nowClose - refClose > 0 && macd < refMacd) || (nowClose - refClose < 0 && macd > refMacd))
+                    {
+                        codes.Add(tradedCode);
+                    }
+                }
+            }
+            SecurityFilterExternFunc.DeleteIndicatorExtern(id);
+            return 1;
+        }
+
+        /// <summary>
         /// 获取前一天下跌的股票
         /// </summary>
         public static List<String> GetLastDayCodes(int type)

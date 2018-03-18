@@ -245,8 +245,6 @@ namespace OwLib
                     cells[i].AllowEdit = true;
                 }
             }
-            m_gridUserSecurities.Update();
-            m_gridUserSecurities.Invalidate();
         }
 
         private void ChartInvoke(object sender, object args)
@@ -393,6 +391,8 @@ namespace OwLib
                         userSecurity.m_state = 1;
                         DataCenter.UserSecurityService.Add(userSecurity);
                         AddUserSecurity(userSecurity);
+                        m_gridUserSecurities.Update();
+                        m_gridUserSecurities.Invalidate();
                     }
                 }
                 else if (name == "btnAddUserSecurity")
@@ -407,6 +407,8 @@ namespace OwLib
                         DataCenter.UserSecurityService.Add(userSecurity);
                         AddUserSecurity(userSecurity);
                         m_gridUserSecurities.OnRowEditEnd();
+                        m_gridUserSecurities.Update();
+                        m_gridUserSecurities.Invalidate();
                     }
                 }
                 else if (name == "btnDeleteSecurity")
@@ -432,6 +434,8 @@ namespace OwLib
                         DataCenter.UserSecurityService.Delete(userSecurity);
                         AddUserSecurity(userSecurity);
                         m_gridUserSecurities.OnRowEditEnd();
+                        m_gridUserSecurities.Update();
+                        m_gridUserSecurities.Invalidate();
                     }
                 }
                 else if (name == "btnMergeHistoryDatas")
@@ -447,7 +451,8 @@ namespace OwLib
                     || name == "btnUpperLimitStock" || name == "btnDownLimitStock"
                     || name == "btnUnTradeStock" || name == "btnSwingStock"
                     || name == "btnLowPriceStock" || name == "btnAmountsStock"
-                    || name == "btnVolumessStock")
+                    || name == "btnVolumesStock" || name == "btnMACDGold"
+                    || name == "btnMACDDead" || name == "btnMACDDeviation")
                 {
                     m_gridUserSecurities.ClearRows();
                     List<String> codes = new List<String>();
@@ -487,14 +492,28 @@ namespace OwLib
                     {
                         SecurityService.GetCodesByVolume(codes, 50);
                     }
+                    else if (name == "btnMACDGold")
+                    {
+                        SecurityService.GetMacdGoldDead(codes, true);
+                    }
+                    else if (name == "btnMACDDead")
+                    {
+                        SecurityService.GetMacdGoldDead(codes, false);
+                    }
+                    else if (name == "btnMACDDeviation")
+                    {
+                        SecurityService.GetMacdDeviationCodes(codes);
+                    }
                     int codesSize = codes.Count;
+                    m_gridUserSecurities.BeginUpdate();
                     for (int i = 0; i < codesSize; i++)
                     {
                         UserSecurity userSecurity = new UserSecurity();
                         userSecurity.m_code = codes[i];
                         AddUserSecurity(userSecurity);
                     }
-                    Native.Invalidate();
+                    m_gridUserSecurities.EndUpdate();
+                    m_gridUserSecurities.Invalidate();
                 }
                 else if (name == "btnExport")
                 {
@@ -516,6 +535,7 @@ namespace OwLib
                 }
                 else if (name == "btnUserSecurity")
                 {
+                    m_gridUserSecurities.BeginUpdate();
                     m_gridUserSecurities.ClearRows();
                     List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
                     int codesSize = codes.Count;
@@ -526,7 +546,8 @@ namespace OwLib
                             AddUserSecurity(codes[i]);
                         }
                     }
-                    Native.Invalidate();
+                    m_gridUserSecurities.EndUpdate();
+                    m_gridUserSecurities.Invalidate();
                 }
                 else if (name == "btnSpecial")
                 {
@@ -792,6 +813,7 @@ namespace OwLib
             m_indicatorBrowser = new IndicatorBrowser(this);
             (FindControl("divIndex") as IndexDiv).MainFrame = this;
             List<UserSecurity> codes = DataCenter.UserSecurityService.m_codes;
+            m_gridUserSecurities.BeginUpdate();
             int codesSize = codes.Count;
             if (codesSize > 0)
             {
@@ -804,6 +826,8 @@ namespace OwLib
                 m_klineDiv.SearchSecurity(security);
                 m_stockNews.Code = codes[0].m_code;
             }
+            m_gridUserSecurities.EndUpdate();
+            m_gridUserSecurities.Invalidate();
             m_klineDiv.Chart.RegisterEvent(new ControlInvokeEvent(ChartInvoke), EVENTID.INVOKE);
             if (m_newStocks.NewStockList.Count > 0)
             {
@@ -1078,24 +1102,30 @@ namespace OwLib
             {
                 List<GridRow> rows = m_gridUserSecurities.m_rows;
                 int rowsSize = rows.Count;
+                int columnsSize = m_gridUserSecurities.m_columns.Count;
                 for (int i = 0; i < rowsSize; i++)
                 {
                     GridRow row = rows[i];
-                    String code = row.GetCell("colP1").GetString();
+                    Dictionary<String, GridCell> cellsMap = new Dictionary<string, GridCell>();
+                    foreach (GridColumn column in m_gridUserSecurities.m_columns)
+                    {
+                        cellsMap[column.Name] = row.GetCell(column.Name);
+                    }
+                    String code = cellsMap["colP1"].GetString();
                     GSecurity security = new GSecurity();
-                    row.GetCell("colP1").Style.ForeColor = COLOR.ARGB(255, 255, 255);
+                    cellsMap["colP1"].Style.ForeColor = COLOR.ARGB(255, 255, 255);
                     SecurityLatestData latestData = new SecurityLatestData();
                     SecurityService.GetSecurityByCode(code, ref security);
                     SecurityService.GetLatestData(code, ref latestData);
-                    row.GetCell("colP2").SetString(security.m_name);
+                    cellsMap["colP2"].SetString(security.m_name);
                     UserSecurity userSecurity = row.Tag as UserSecurity;
                     if (userSecurity.m_state == 1)
                     {
-                        row.GetCell("colP2").Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                        cellsMap["colP2"].Style.ForeColor = COLOR.ARGB(255, 80, 255);
                     }
                     else
                     {
-                        row.GetCell("colP2").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                        cellsMap["colP2"].Style.ForeColor = COLOR.ARGB(255, 255, 80);
                     }
                     double diff = 0, diffRange = 0;
                     if (latestData.m_lastClose != 0)
@@ -1103,25 +1133,25 @@ namespace OwLib
                         diff = latestData.m_close - latestData.m_lastClose;
                         diffRange = 100 * (latestData.m_close - latestData.m_lastClose) / latestData.m_lastClose;
                     }
-                    row.GetCell("colP3").SetDouble(latestData.m_close);
-                    row.GetCell("colP3").Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
-                    row.GetCell("colP4").SetDouble(diff);
-                    row.GetCell("colP4").Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
-                    row.GetCell("colP5").SetDouble(diffRange);
-                    row.GetCell("colP5").Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
-                    row.GetCell("colP6").SetDouble(latestData.m_high);
-                    row.GetCell("colP6").Style.ForeColor = CDraw.GetPriceColor(latestData.m_high, latestData.m_lastClose);
-                    row.GetCell("colP7").SetDouble(latestData.m_low);
-                    row.GetCell("colP7").Style.ForeColor = CDraw.GetPriceColor(latestData.m_low, latestData.m_lastClose);
-                    row.GetCell("colP8").SetDouble(latestData.m_open);
-                    row.GetCell("colP8").Style.ForeColor = CDraw.GetPriceColor(latestData.m_open, latestData.m_lastClose);
-                    row.GetCell("colP9").SetDouble(latestData.m_volume);
-                    row.GetCell("colP9").Style.ForeColor = COLOR.ARGB(80, 255, 255);
-                    row.GetCell("colP10").SetDouble(latestData.m_amount);
-                    row.GetCell("colP10").Style.ForeColor = COLOR.ARGB(80, 255, 255);
-                    row.GetCell("colP11").Style.ForeColor = COLOR.ARGB(255, 80, 80);
-                    row.GetCell("colP12").Style.ForeColor = COLOR.ARGB(80, 255, 80);
-                    row.GetCell("colP13").Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                    cellsMap["colP3"].SetDouble(latestData.m_close);
+                    cellsMap["colP3"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
+                    cellsMap["colP4"].SetDouble(diff);
+                    cellsMap["colP4"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
+                    cellsMap["colP5"].SetDouble(diffRange);
+                    cellsMap["colP5"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_close, latestData.m_lastClose);
+                    cellsMap["colP6"].SetDouble(latestData.m_high);
+                    cellsMap["colP6"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_high, latestData.m_lastClose);
+                    cellsMap["colP7"].SetDouble(latestData.m_low);
+                    cellsMap["colP7"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_low, latestData.m_lastClose);
+                    cellsMap["colP8"].SetDouble(latestData.m_open);
+                    cellsMap["colP8"].Style.ForeColor = CDraw.GetPriceColor(latestData.m_open, latestData.m_lastClose);
+                    cellsMap["colP9"].SetDouble(latestData.m_volume);
+                    cellsMap["colP9"].Style.ForeColor = COLOR.ARGB(80, 255, 255);
+                    cellsMap["colP10"].SetDouble(latestData.m_amount);
+                    cellsMap["colP10"].Style.ForeColor = COLOR.ARGB(80, 255, 255);
+                    cellsMap["colP11"].Style.ForeColor = COLOR.ARGB(255, 80, 80);
+                    cellsMap["colP12"].Style.ForeColor = COLOR.ARGB(80, 255, 80);
+                    cellsMap["colP13"].Style.ForeColor = COLOR.ARGB(255, 255, 80);
                     int isAlarm = 0;
                     if (latestData.m_close > 0)
                     {

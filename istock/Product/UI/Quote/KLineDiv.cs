@@ -56,7 +56,7 @@ namespace OwLib
             Indicator ma = new Indicator();
             SecurityDataHelper.GetIndicatorByName("BOLL", ma);
             Indicator macd = new Indicator();
-            SecurityDataHelper.GetIndicatorByName("KDJ", macd);
+            SecurityDataHelper.GetIndicatorByName("MACD", macd);
             AddMainIndicator(ma.m_name, ma.m_name, ma.m_text, ma.m_parameters, m_candleDiv, true);
             AddMainIndicator(macd.m_name, macd.m_name, macd.m_text, macd.m_parameters, m_divs[2], true);
         }
@@ -132,11 +132,6 @@ namespace OwLib
         public double m_preClosePrice;
 
         /// <summary>
-        /// 刷新K线的标识
-        /// </summary>
-        public bool m_refreshKLineFlag;
-
-        /// <summary>
         /// 是否反转纵坐标
         /// </summary>
         private bool m_reverseVScale = false;
@@ -150,11 +145,6 @@ namespace OwLib
         /// 正在查询的证券代码
         /// </summary>
         private GSecurity m_searchSecurity;
-
-        /// <summary>
-        /// 行情数据
-        /// </summary>
-        private List<SecurityLatestData> m_securityDatas = new List<SecurityLatestData>();
 
         /// <summary>
         /// 成交量层
@@ -1208,19 +1198,6 @@ namespace OwLib
             {
                 return;
             }
-            if (!m_refreshKLineFlag)
-            {
-                for (int i = 0; i < dataSize; i++)
-                {
-                    SecurityLatestData newData = new SecurityLatestData();
-                    newData.Copy(datas[i]);
-                    if (newData.m_close > 0)
-                    {
-                        m_securityDatas.Add(newData);
-                    }
-                }
-                return;
-            }
             SecurityLatestData data = datas[0];
             int[] fields = new int[7];
             fields[0] = KeyFields.CLOSE_INDEX;
@@ -1269,18 +1246,10 @@ namespace OwLib
                 SecurityDataHelper.CalculateMinuteKLineDate(minuteKLineDate, 0, m_cycle);
                 if (m_cycle == SecurityDataHelper.CYCLE_DAY)
                 {
-                    if (hour >= 0 && hour <= 5)
-                    {
-                        day = day - 1;
-                    }
                     date = CStrA.M129(year, month, day, 0, 0, 0, 0);
                 }
                 else if (m_cycle == SecurityDataHelper.CYCLE_WEEK)
                 {
-                    if (hour >= 0 && hour <= 5)
-                    {
-                        day = day - 1;
-                    }
                     int dayOfWeek = SecurityDataHelper.DayOfWeek(year, month, day);
                     if (dayOfWeek >= 5)
                     {
@@ -1523,7 +1492,6 @@ namespace OwLib
                 }
                 dataInfo.m_cycle = cycle;
             }
-            m_refreshKLineFlag = false;
             dataInfo.m_pushData = true;
             dataInfo.m_subscription = m_subscription;
             dataInfo.m_type = security.m_type;

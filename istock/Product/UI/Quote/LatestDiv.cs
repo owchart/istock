@@ -86,7 +86,6 @@ namespace OwLib
                 {
                     List<SecurityLatestData> datas = new List<SecurityLatestData>();
                     datas.Add(value);
-                    m_chart.m_refreshKLineFlag = true;
                     m_chart.RefreshKLineData(datas);
                 }
                 Invalidate();

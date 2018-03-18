@@ -6,7 +6,7 @@
   </head>
   <body>
     <div type="splitlayout" layoutstyle="bottomtotop" size="400,400" splitterposition="0,375,400,375" name="divMain" dock="fill" location="0,0">
-      <input type="usercontrol" cid="indexdiv" name="divIndex"/>
+      <input type="usercontrol" cid="indexdiv" name="divIndex" />
       <div type="tabcontrol" name="tabMain" dock="fill" selectedindex="0">
         <div name="TabPage" text="报价列表" type="tabpage">
           <div type="splitlayout" layoutstyle="toptobottom" size="200,200" splitterposition="0,50,200,50" name="SplitLayoutDiv" text="SplitLayoutDiv" dock="Fill">
@@ -16,39 +16,39 @@
               <input type="usercontrol" cid="ribbonbutton" name="btnAdd" text="添加到自选股" location="219,12" size="120,20" />
               <input type="usercontrol" cid="ribbonbutton" name="btnExport" text="导出结果" location="360,12" size="100,20" />
             </div>
-             <div type="splitlayout" layoutstyle="bottomtotop" size="200,200" splitterposition="0,160,200,160" name="SplitLayoutDiv22">
-             <div type="layout" name="divFunc" style="lefttoright" showhscrollbar="true" allowpreviewsevent="true" allowdragscroll="true">
-         <input type="usercontrol" cid="ribbonbutton" name="btnUserSecurity" text="我的自选股" location="8,62" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="140,45" />
-           <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="140,45" />
-           <input type="usercontrol" cid="ribbonbutton" name="btnVolumesStock" text="成交量排名(前50位)" location="436,115" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="140,45" />
-          <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="140,45" />
-             </div>
+            <div type="splitlayout" layoutstyle="bottomtotop" size="200,200" splitterposition="0,160,200,160" name="SplitLayoutDiv22">
+              <div type="layout" name="divFunc" style="lefttoright" showhscrollbar="true" allowpreviewsevent="true" allowdragscroll="true">
+                <input type="usercontrol" cid="ribbonbutton" name="btnUserSecurity" text="我的自选股" location="8,62" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnUpperLimitStock" text="涨停个股" location="8,62" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnDownLimitStock" text="跌停个股" location="222,62" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnSwingStock" text="振幅排名(前50位)" location="8,114" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnVolumesStock" text="成交量排名(前50位)" location="436,115" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnAmountsStock" text="成交额排名(前50位)" location="436,115" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnActiveStock" text="活跃排名(前50位)" location="7,8" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnLowPriceStock" text="低价排名(前50位)" location="223,115" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnSecondNewStock" text="次新股" location="221,8" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnUnTradeStock" text="停牌个股" location="435,62" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnContract" text="K线对比" location="434,8" size="140,45" />
+                <input type="usercontrol" cid="ribbonbutton" name="btnMergeHistoryDatas" text="日线落地" location="9,165" size="140,45" />
+              </div>
               <table name="gridUserSecurities">
-              <tr>
-                <th name="colP1" text="股票代码" width="100" allowdrag="true" allowresize="true" />
-                <th name="colP2" text="股票名称" width="100" allowdrag="true" allowresize="true" />
-                <th name="colP3" text="最新价" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP4" text="涨跌额" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP5" text="涨跌幅" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP6" text="最高价" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP7" text="最低价" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP8" text="开盘价" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP9" text="成交量" width="100" allowdrag="true" allowresize="true" />
-                <th name="colP10" text="成交额" width="100" allowdrag="true" allowresize="true" />
-                <th name="colP11" text="止盈位" width="80" allowdrag="true" allowresize="true" />
-                <th name="colP12" text="止损位" width="80" allowdrag="true" allowresize="true" />
-                 <th name="colP13" text="提示" width="100" allowdrag="true" allowresize="true" />
-              </tr>
-            </table>
-             </div>
+                <tr>
+                  <th name="colP1" text="股票代码" width="100" allowdrag="true" allowresize="true" />
+                  <th name="colP2" text="股票名称" width="100" allowdrag="true" allowresize="true" />
+                  <th name="colP3" text="最新价" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP4" text="涨跌额" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP5" text="涨跌幅" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP6" text="最高价" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP7" text="最低价" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP8" text="开盘价" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP9" text="成交量" width="100" allowdrag="true" allowresize="true" />
+                  <th name="colP10" text="成交额" width="100" allowdrag="true" allowresize="true" />
+                  <th name="colP11" text="止盈位" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP12" text="止损位" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP13" text="提示" width="100" allowdrag="true" allowresize="true" />
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
         <div name="TabPage2" text="分时/K线" type="tabpage">
@@ -74,11 +74,11 @@
               <div type="splitlayout" name="divAllStockNews" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockNews" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" allowsort="false"/>
-                    <th name="colT2" width="20" allowsort="false"/>
-                    <th name="colT3" width="20" allowsort="false"/>
-                    <th name="colT4" width="20" allowsort="false"/>
-                    <th name="colT5" width="120" allowsort="false"/>
+                    <th name="colT1" width="20" allowsort="false" />
+                    <th name="colT2" width="20" allowsort="false" />
+                    <th name="colT3" width="20" allowsort="false" />
+                    <th name="colT4" width="20" allowsort="false" />
+                    <th name="colT5" width="120" allowsort="false" />
                   </tr>
                 </tree>
                 <table name="gridAllStockNews" dock="fill">
@@ -95,11 +95,11 @@
               <div type="splitlayout" name="divAllStockNotices" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockNotices" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" allowsort="false"/>
-                    <th name="colT2" width="20" allowsort="false"/>
-                    <th name="colT3" width="20" allowsort="false"/>
-                    <th name="colT4" width="20" allowsort="false"/>
-                    <th name="colT5" width="120" allowsort="false"/>
+                    <th name="colT1" width="20" allowsort="false" />
+                    <th name="colT2" width="20" allowsort="false" />
+                    <th name="colT3" width="20" allowsort="false" />
+                    <th name="colT4" width="20" allowsort="false" />
+                    <th name="colT5" width="120" allowsort="false" />
                   </tr>
                 </tree>
                 <table name="gridAllStockNotices" dock="fill">
@@ -116,11 +116,11 @@
               <div type="splitlayout" name="divAllReports" dock="fill" size="400,400" splitterposition="200,0,200,400">
                 <tree name="tvAllStockReports" headerheight="0">
                   <tr>
-                    <th name="colT1" width="20" allowsort="false"/>
-                    <th name="colT2" width="20" allowsort="false"/>
-                    <th name="colT3" width="20" allowsort="false"/>
-                    <th name="colT4" width="20" allowsort="false"/>
-                    <th name="colT5" width="120" allowsort="false"/>
+                    <th name="colT1" width="20" allowsort="false" />
+                    <th name="colT2" width="20" allowsort="false" />
+                    <th name="colT3" width="20" allowsort="false" />
+                    <th name="colT4" width="20" allowsort="false" />
+                    <th name="colT5" width="120" allowsort="false" />
                   </tr>
                 </tree>
                 <table name="gridAllStockReports" dock="fill">
@@ -158,34 +158,34 @@
               </div>
               <tree name="tvMacIndustry" headerheight="0">
                 <tr>
-                  <th name="colT1" width="20" allowsort="false"/>
-                  <th name="colT2" width="20" allowsort="false"/>
-                  <th name="colT3" width="20" allowsort="false"/>
-                  <th name="colT4" width="20" allowsort="false"/>
-                  <th name="colT5" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT7" width="200" allowsort="false"/>
+                  <th name="colT1" width="20" allowsort="false" />
+                  <th name="colT2" width="20" allowsort="false" />
+                  <th name="colT3" width="20" allowsort="false" />
+                  <th name="colT4" width="20" allowsort="false" />
+                  <th name="colT5" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT7" width="200" allowsort="false" />
                 </tr>
               </tree>
             </div>
-             <div type="splitlayout" name="divMacIndustryRight" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="250,0,250,400">
+            <div type="splitlayout" name="divMacIndustryRight" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="250,0,250,400">
               <table name="gridMacIndustry">
-              <tr>
-                <th name="colN1" text="日期" allowdrag="true" allowresize="true" width="100">
-                </th>
-                <th name="colN2" text="数据" allowdrag="true" allowresize="true" width="150">
-                </th>
-              </tr>
-            </table>
-            <input type="usercontrol" cid="graph" name="graphMacIndustry" />
-              </div>
+                <tr>
+                  <th name="colN1" text="日期" allowdrag="true" allowresize="true" width="100">
+                  </th>
+                  <th name="colN2" text="数据" allowdrag="true" allowresize="true" width="150">
+                  </th>
+                </tr>
+              </table>
+              <input type="usercontrol" cid="graph" name="graphMacIndustry" />
+            </div>
           </div>
         </div>
-          <div name="TabPage8" text="数据浏览器" type="tabpage">
+        <div name="TabPage8" text="数据浏览器" type="tabpage">
           <div type="splitlayout" name="divIndicatorBrowser" layoutstyle="lefttoright" candragsplitter="true" dock="fill" size="400,400" splitterposition="400,0,400,400">
             <div type="splitlayout" name="divIndicatorBrowserLeft" layoutstyle="toptobottom" candragsplitter="true" dock="fill" size="400,400" splitterposition="0,50,400,51">
               <div name="divIndicatorBrowserTop">
@@ -194,27 +194,27 @@
               </div>
               <tree name="tvIndicatorBrowser" headerheight="0">
                 <tr>
-                  <th name="colT1" width="20" allowsort="false"/>
-                  <th name="colT2" width="20" allowsort="false"/>
-                  <th name="colT3" width="20" allowsort="false"/>
-                  <th name="colT4" width="20" allowsort="false"/>
-                  <th name="colT5" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT6" width="20" allowsort="false"/>
-                  <th name="colT7" width="200" allowsort="false"/>
+                  <th name="colT1" width="20" allowsort="false" />
+                  <th name="colT2" width="20" allowsort="false" />
+                  <th name="colT3" width="20" allowsort="false" />
+                  <th name="colT4" width="20" allowsort="false" />
+                  <th name="colT5" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT6" width="20" allowsort="false" />
+                  <th name="colT7" width="200" allowsort="false" />
                 </tr>
               </tree>
             </div>
-              <table name="gridIndicatorBrowser">
+            <table name="gridIndicatorBrowser">
               <tr>
                 <th name="colN1" text="股票名称" allowdrag="true" allowresize="true" width="100">
                 </th>
                 <th name="colN2" text="股票代码" allowdrag="true" allowresize="true" width="100">
                 </th>
-                 <th name="colN3" text="股票数据" allowdrag="true" allowresize="true" width="400">
+                <th name="colN3" text="股票数据" allowdrag="true" allowresize="true" width="400">
                 </th>
               </tr>
             </table>

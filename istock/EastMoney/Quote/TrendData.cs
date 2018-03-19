@@ -22,7 +22,10 @@
         /// </summary>
         public TrendData()
         {
-            Date = Dc.GetTradeDate(Code);
+            double shData = SecurityService.m_shTradeTime;
+            int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0, ms = 0;;
+            CStrA.M130(shData, ref year, ref month, ref day, ref hour, ref minute, ref second, ref ms);
+            Date = year * 10000 + month * 100 + day;
         }
 
         /// <summary>

@@ -1192,7 +1192,6 @@ namespace OwLib
 
         public void RefreshKLineData(List<SecurityLatestData> datas)
         {
-            return;
             int dataSize = datas.Count;
             if (dataSize == 0)
             {

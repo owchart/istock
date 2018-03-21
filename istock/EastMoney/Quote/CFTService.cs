@@ -220,6 +220,7 @@ namespace OwLib
                 KwItem item = EMSecurityService.KwItems[code];
                 int innerCode = item.Innercode;
                 OneStockDetailData detailDate = new OneStockDetailData();
+                detailDate.IsPush = true;
                 detailDate.Code = innerCode;
                 detailDate.Start();
             }

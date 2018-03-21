@@ -995,6 +995,44 @@ namespace OwLib
                         DeleteSelectedPlot();
                     }
                 }
+                else if (name.StartsWith("MAININDICATOR_"))
+                {
+                    String type = name.Replace("MAININDICATOR_", "");
+                    Indicator newIndicator = new Indicator();
+                    SecurityDataHelper.GetIndicatorByName(type, newIndicator);
+                    int indicatorsSize = m_indicators.Count;
+                    for (int i = 0; i < indicatorsSize; i++)
+                    {
+                        CIndicator indicator = m_indicators[i];
+                        if (indicator.Div == m_candleDiv)
+                        {
+                            indicator.Clear();
+                            indicator.Dispose();
+                            m_indicators.Remove(indicator);
+                            break;
+                        }
+                    }
+                    AddMainIndicator(newIndicator.m_name, newIndicator.m_name, newIndicator.m_text, newIndicator.m_parameters, m_candleDiv, true);
+                }
+                else if (name.StartsWith("SUBINDICATOR_"))
+                {
+                    String type = name.Replace("SUBINDICATOR_", "");
+                    Indicator newIndicator = new Indicator();
+                    SecurityDataHelper.GetIndicatorByName(type, newIndicator);
+                    int indicatorsSize = m_indicators.Count;
+                    for (int i = 0; i < indicatorsSize; i++)
+                    {
+                        CIndicator indicator = m_indicators[i];
+                        if (indicator.Div == m_divs[2])
+                        {
+                            indicator.Clear();
+                            indicator.Dispose();
+                            m_indicators.Remove(indicator);
+                            break;
+                        }
+                    }
+                    AddMainIndicator(newIndicator.m_name, newIndicator.m_name, newIndicator.m_text, newIndicator.m_parameters, m_divs[2], true);
+                }
                 if (setChecked)
                 {
                     List<MenuItemA> items = item.ParentItem.GetItems();

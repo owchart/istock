@@ -18,49 +18,6 @@ namespace OwLib
             m_gridPositionAccount = m_mainFrame.GetGrid("gridPositionAccount");
             // 成交表格
             m_gridTradeAccount = m_mainFrame.GetGrid("gridTradeAccount");
-
-            // 获取区间交易策略
-            ReloadStrategySetting();
-            AutoTradeService.InitSysTreeView32Handle();
-
-            DataCenter.ThsDealService.RegisterListener(5, ThsDealCallBack);
-            DataCenter.ThsDealService.RegisterListener(6, ThsDealCallBack);
-            DataCenter.ThsDealService.RegisterListener(7, ThsDealCallBack);
-            DataCenter.ThsDealService.RegisterListener(8, ThsDealCallBack);
-
-            ButtonA btnStart = m_mainFrame.GetButton("btnStart");
-            if (btnStart == null)
-            {
-                return;
-            }
-
-            if (!m_isStart)
-            {
-                THSDealInfo req = new THSDealInfo();
-                //req.m_operateType = 5;
-                //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                //DataCenter.ThsDealService.AddTHSDealReq(req);
-                //req = new THSDealInfo();
-                //req.m_operateType = 6;
-                //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                //DataCenter.ThsDealService.AddTHSDealReq(req);
-                //req = new THSDealInfo();
-                req.m_operateType = 7;
-                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                DataCenter.ThsDealService.AddTHSDealReq(req);
-                //req = new THSDealInfo();
-                //req.m_operateType = 8;
-                //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                //DataCenter.ThsDealService.AddTHSDealReq(req);
-                DataCenter.ThsDealService.StartTHSDealService();
-                m_isStart = true;
-                btnStart.Text = "停止";
-            }
-            else
-            {
-                m_isStart = false;
-                btnStart.Text = "启动";
-            }
         }
 
         // 持仓字典
@@ -86,10 +43,62 @@ namespace OwLib
 
         private MainFrame m_mainFrame;
 
+        /// <summary>
+        /// 获取或设置主框架
+        /// </summary>
         public MainFrame MainFrame
         {
             get { return m_mainFrame; }
             set { m_mainFrame = value; }
+        }
+
+        /// <summary>
+        /// 连接到同花顺
+        /// </summary>
+        public void Attach()
+        {
+            // 获取区间交易策略
+            ReloadStrategySetting();
+            AutoTradeService.InitSysTreeView32Handle();
+
+            DataCenter.ThsDealService.RegisterListener(5, ThsDealCallBack);
+            DataCenter.ThsDealService.RegisterListener(6, ThsDealCallBack);
+            DataCenter.ThsDealService.RegisterListener(7, ThsDealCallBack);
+            DataCenter.ThsDealService.RegisterListener(8, ThsDealCallBack);
+
+            ButtonA btnStart = m_mainFrame.GetButton("btnStart");
+            if (btnStart == null)
+            {
+                return;
+            }
+
+            if (!m_isStart)
+            {
+                THSDealInfo req = new THSDealInfo();
+                req.m_operateType = 5;
+                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                DataCenter.ThsDealService.AddTHSDealReq(req);
+                req = new THSDealInfo();
+                req.m_operateType = 6;
+                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                DataCenter.ThsDealService.AddTHSDealReq(req);
+                req = new THSDealInfo();
+                req.m_operateType = 7;
+                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                DataCenter.ThsDealService.AddTHSDealReq(req);
+                req = new THSDealInfo();
+                req.m_operateType = 8;
+                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                DataCenter.ThsDealService.AddTHSDealReq(req);
+                DataCenter.ThsDealService.StartTHSDealService();
+                m_isStart = true;
+                btnStart.Text = "停止";
+            }
+            else
+            {
+                m_isStart = false;
+                btnStart.Text = "启动";
+            }
         }
 
         /// <summary>

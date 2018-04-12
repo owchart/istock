@@ -521,7 +521,7 @@ namespace OwLib
                 }
                 else if (name == "btnStart")
                 {
-                    LoadData();
+                    m_orderTrade.Attach();
                 }
                 else if (name == "btnSetStrategy")
                 {
@@ -803,7 +803,7 @@ namespace OwLib
             m_gridUserSecurities.RegisterEvent(new GridCellEvent(GridCellEditEnd), EVENTID.GRIDCELLEDITEND);
             m_klineDiv = new KLineDiv(this);
             DataCenter.MainUI = this;
-            //m_tradePlugIn = new TradePlugIn(this);
+            m_orderTrade = new OwLib.OrderTrade(this);
             m_stockNews = new StockNews(this);
             m_allStockNews = new AllStockNews(this);
             m_allStockNotices = new AllStockNotices(this);
@@ -888,7 +888,7 @@ namespace OwLib
         {
             GSecurity security = new GSecurity();
             SecurityService.GetSecurityByCode(code, ref security);
-            if(security.m_type == 1 || security.m_type==2)
+            //if(security.m_type == 1 || security.m_type==2)
             {
                 m_klineDiv.SearchSecurity(security);
                 GetTabControl("tabMain").SelectedIndex = 1;

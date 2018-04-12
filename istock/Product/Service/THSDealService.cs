@@ -110,6 +110,7 @@ namespace OwLib
     {
         public THSDealService()
         {
+            StartTHSDealService();
         }
         
         /// <summary>

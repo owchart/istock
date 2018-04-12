@@ -238,33 +238,29 @@
               <label name="lblStockValue" text="" location="466,6" size="100,20" />
               <label name="Labe11" text="总资产:" location="406,32" size="51,20" />
               <label name="lblTotalCapital" text="" location="467,32" size="100,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="682,5" size="100,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnSetStrategy" text="设置策略" location="682,31" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnSetStrategy" text="设置策略" location="720,31" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="720,5" size="100,20" />
             </div>
             <!--下层-->
             <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,360,400,361">
-              <div type="splitlayout" name="chartdiv" dock="fill" layoutstyle="righttoleft" size="400,378" splitterposition="150,0,150,378">
-                <!--实时报价-->
-                <input type="usercontrol" cid="latestdiv" name="divLatest" text="实时报价" />
-                <div type="tabcontrol" name="tabTradeAccount">
-                  <div type="tabpage" name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
-                    <!--成交表格-->
-                    <table name="gridTradeAccount" dock="fill" location="0,0" size="544,340">
-                      <tr>
-                        <th name="colTF1" text="成交时间" width="80" />
-                        <th name="colTF2" text="证券代码" width="80" />
-                        <th name="colTF3" text="证券名称" width="80" />
-                        <th name="colTF4" text="操作" width="80" />
-                        <th name="colTF6" text="成交数量" width="80" />
-                        <th name="colTF7" text="成交均价" width="80" />
-                        <th name="colTF8" text="成交金额" width="80" />
-                        <th name="colTF9" text="合同编号" width="80" />
-                        <th name="colTF10" text="成交编号" width="80" />
-                        <th name="colTF11" text="撤单数量" width="80" />
-                        <th name="colTF12" text="股票余额" width="80" />
-                      </tr>
-                    </table>
-                  </div>
+              <div type="tabcontrol" name="tabTradeAccount">
+                <div type="tabpage" name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
+                  <!--成交表格-->
+                  <table name="gridTradeAccount" dock="fill" location="0,0" size="794,340">
+                    <tr>
+                      <th name="colTF1" text="成交时间" width="80" />
+                      <th name="colTF2" text="证券代码" width="80" />
+                      <th name="colTF3" text="证券名称" width="80" />
+                      <th name="colTF4" text="操作" width="80" />
+                      <th name="colTF6" text="成交数量" width="80" />
+                      <th name="colTF7" text="成交均价" width="80" />
+                      <th name="colTF8" text="成交金额" width="80" />
+                      <th name="colTF9" text="合同编号" width="80" />
+                      <th name="colTF10" text="成交编号" width="80" />
+                      <th name="colTF11" text="撤单数量" width="80" />
+                      <th name="colTF12" text="股票余额" width="80" />
+                    </tr>
+                  </table>
                 </div>
               </div>
               <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,120,400,121">
@@ -343,20 +339,20 @@
       </item>
       <item text="指标分析">
         <item text="主图指标">
-            <item name="MAININDICATOR_MA" text="均线" />
-            <item name="MAININDICATOR_BOLL" text="布林带" />
+          <item name="MAININDICATOR_MA" text="均线" />
+          <item name="MAININDICATOR_BOLL" text="布林带" />
         </item>
         <item text="副图指标">
-            <item name="SUBINDICATOR_MACD" text="指数平滑移动平均" />
-            <item name="SUBINDICATOR_KDJ" text="随机指标" />
-            <item name="SUBINDICATOR_RSI" text="相对强弱指标" />
-            <item name="SUBINDICATOR_ROC" text="变动率指标" />
-            <item name="SUBINDICATOR_BIAS" text="乖离率" />
-            <item name="SUBINDICATOR_CCI" text="商品路径指标" />
-            <item name="SUBINDICATOR_WR" text="威廉指标" />
-            <item name="SUBINDICATOR_BBI" text="多空指标" />
-            <item name="SUBINDICATOR_TRIX" text="三重指数平均线" />
-            <item name="SUBINDICATOR_DMA" text="平均差" />
+          <item name="SUBINDICATOR_MACD" text="指数平滑移动平均" />
+          <item name="SUBINDICATOR_KDJ" text="随机指标" />
+          <item name="SUBINDICATOR_RSI" text="相对强弱指标" />
+          <item name="SUBINDICATOR_ROC" text="变动率指标" />
+          <item name="SUBINDICATOR_BIAS" text="乖离率" />
+          <item name="SUBINDICATOR_CCI" text="商品路径指标" />
+          <item name="SUBINDICATOR_WR" text="威廉指标" />
+          <item name="SUBINDICATOR_BBI" text="多空指标" />
+          <item name="SUBINDICATOR_TRIX" text="三重指数平均线" />
+          <item name="SUBINDICATOR_DMA" text="平均差" />
         </item>
       </item>
       <item text="分析周期">

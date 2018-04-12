@@ -1184,9 +1184,12 @@ namespace OwLib
                                     PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
                                     Thread.Sleep(200);
                                     IDataObject iData = Clipboard.GetDataObject();
-                                    if (iData.GetDataPresent(DataFormats.Text))
+                                    if (iData != null)
                                     {
-                                        sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        if (iData.GetDataPresent(DataFormats.Text))
+                                        {
+                                            sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        }
                                     }
                                     return sbResult.ToString();
                                 }

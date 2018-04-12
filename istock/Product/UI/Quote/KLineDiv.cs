@@ -162,7 +162,7 @@ namespace OwLib
             set { m_chart = value; }
         }
 
-        private int m_cycle = 0;
+        private int m_cycle = 1440;
 
         /// <summary>
         /// 获取或设置周期
@@ -256,7 +256,7 @@ namespace OwLib
             set { m_searchDiv = value; }
         }
 
-        private bool m_showMinuteLine = true;
+        private bool m_showMinuteLine = false;
 
         /// <summary>
         /// 获取或设置是否分时图
@@ -1230,7 +1230,10 @@ namespace OwLib
 
         public void RefreshKLineData(List<SecurityLatestData> datas)
         {
-            return;
+            if (m_cycle != 1440)
+            {
+                return;
+            }
             int dataSize = datas.Count;
             if (dataSize == 0)
             {
@@ -1591,7 +1594,7 @@ namespace OwLib
             }
             if (m_cycle == 0)
             {
-                CFTService.QueryTrendLine(dataInfo.m_code);
+                //CFTService.QueryTrendLine(dataInfo.m_code);
             }
             else
             {

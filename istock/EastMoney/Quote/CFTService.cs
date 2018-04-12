@@ -116,6 +116,7 @@ namespace OwLib
         {
             if (code != null && m_queryHistoryDatas.ContainsKey(code))
             {
+                m_queryHistoryDatas[code].IsPush = false;
                 m_queryHistoryDatas[code].Quit();
                 m_queryHistoryDatas.Remove(code);
             }
@@ -164,6 +165,7 @@ namespace OwLib
         {
             if (code != null && m_queryTrendLines.ContainsKey(code))
             {
+                m_queryTrendLines[code].IsPush = false;
                 m_queryTrendLines[code].Quit();
                 m_queryTrendLines.Remove(code);
             }
@@ -250,6 +252,7 @@ namespace OwLib
         {
             if (code != null && m_queryLv2s.ContainsKey(code))
             {
+                m_queryLv2s[code].IsPush = false;
                 m_queryLv2s[code].Quit();
                 m_queryLv2s.Remove(code);
             }

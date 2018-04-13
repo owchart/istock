@@ -148,16 +148,6 @@ namespace OwLib
             set { DataCenter.quoteSequencService = value; }
         }
 
-        private static StrategySettingService m_strategySettingService = new StrategySettingService();
-
-        /// <summary>
-        /// 获取策略服务
-        /// </summary>
-        public static StrategySettingService StrategySettingService
-        {
-            get { return DataCenter.m_strategySettingService; }
-        }
-
         private static THSDealService m_thsDealService = new THSDealService();
 
         /// <summary>

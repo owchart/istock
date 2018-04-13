@@ -1090,16 +1090,22 @@ namespace OwLib
                             {
                                 if (afxWnd42sIndex + 2 == j)
                                 {
-                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 20);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 0);
                                     MouseEvent("RIGHTDOWN", 0, 0, 0);
                                     MouseEvent("RIGHTUP", 0, 0, 0);
                                     Thread.Sleep(200);
-                                    PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
+                                    //PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 60, childWindowInfo.m_rect.Top + 100, 0);
+                                    MouseEvent("LEFTDOWN", 0, 0, 0);
+                                    MouseEvent("LEFTUP", 0, 0, 0);
                                     Thread.Sleep(200);
                                     IDataObject iData = Clipboard.GetDataObject();
-                                    if (iData.GetDataPresent(DataFormats.Text))
+                                    if (iData != null)
                                     {
-                                        sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        if (iData.GetDataPresent(DataFormats.Text))
+                                        {
+                                            sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        }
                                     }
                                     return sbResult.ToString();
                                 }
@@ -1177,11 +1183,14 @@ namespace OwLib
                             {
                                 if (afxWnd42sIndex + 2 == j)
                                 {
-                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 20);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 0);
                                     MouseEvent("RIGHTDOWN", 0, 0, 0);
                                     MouseEvent("RIGHTUP", 0, 0, 0);
                                     Thread.Sleep(200);
-                                    PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
+                                    //PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 60, childWindowInfo.m_rect.Top + 100, 0);
+                                    MouseEvent("LEFTDOWN", 0, 0, 0);
+                                    MouseEvent("LEFTUP", 0, 0, 0);
                                     Thread.Sleep(200);
                                     IDataObject iData = Clipboard.GetDataObject();
                                     if (iData != null)
@@ -1268,16 +1277,22 @@ namespace OwLib
                             {
                                 if (afxWnd42sIndex + 2 == j)
                                 {
-                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 20);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 20, childWindowInfo.m_rect.Top + 40, 0);
                                     MouseEvent("RIGHTDOWN", 0, 0, 0);
                                     MouseEvent("RIGHTUP", 0, 0, 0);
                                     Thread.Sleep(200);
-                                    PostMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
+                                    MouseEvent("SETCURSOR", childWindowInfo.m_rect.Left + 60, childWindowInfo.m_rect.Top + 100, 0);
+                                    MouseEvent("LEFTDOWN", 0, 0, 0);
+                                    MouseEvent("LEFTUP", 0, 0, 0);
+                                    //SendMessage(childWindowInfo.m_hWnd, WM_KEYDOWN, 0x00000043, 0x102E0001);
                                     Thread.Sleep(200);
                                     IDataObject iData = Clipboard.GetDataObject();
-                                    if (iData.GetDataPresent(DataFormats.Text))
+                                    if (iData != null)
                                     {
-                                        sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        if (iData.GetDataPresent(DataFormats.Text))
+                                        {
+                                            sbResult.AppendLine((String)iData.GetData(DataFormats.Text));
+                                        }
                                     }
                                     return sbResult.ToString();
                                 }

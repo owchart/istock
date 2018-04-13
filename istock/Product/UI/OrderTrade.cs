@@ -18,6 +18,27 @@ namespace OwLib
             m_gridPositionAccount = m_mainFrame.GetGrid("gridPositionAccount");
             // 成交表格
             m_gridTradeAccount = m_mainFrame.GetGrid("gridTradeAccount");
+            List<GridA> grids = new List<GridA>();
+            grids.Add(m_gridCommissionAccount);
+            grids.Add(m_gridPositionAccount);
+            grids.Add(m_gridTradeAccount);
+            int gridsSize = grids.Count;
+            for (int i = 0; i < gridsSize; i++)
+            {
+                GridA grid = grids[i];
+                grid.GridLineColor = COLOR.CONTROLBORDER;
+                grid.RowStyle.HoveredBackColor = CDraw.PCOLORS_HOVEREDROWCOLOR;
+                grid.RowStyle.SelectedBackColor = CDraw.PCOLORS_SELECTEDROWCOLOR;
+                grid.RowStyle.SelectedForeColor = CDraw.PCOLORS_FORECOLOR4;
+                grid.RowStyle.Font = new FONT("微软雅黑", 12, false, false, false);
+                GridRowStyle alternateRowStyle = new GridRowStyle();
+                alternateRowStyle.BackColor = CDraw.PCOLORS_ALTERNATEROWCOLOR;
+                alternateRowStyle.HoveredBackColor = CDraw.PCOLORS_HOVEREDROWCOLOR;
+                alternateRowStyle.SelectedBackColor = CDraw.PCOLORS_SELECTEDROWCOLOR;
+                alternateRowStyle.SelectedForeColor = CDraw.PCOLORS_FORECOLOR4;
+                alternateRowStyle.Font = new FONT("微软雅黑", 12, false, false, false);
+                grid.AlternateRowStyle = alternateRowStyle;
+            }
         }
 
         // 持仓字典
@@ -57,8 +78,6 @@ namespace OwLib
         /// </summary>
         public void Attach()
         {
-            // 获取区间交易策略
-            ReloadStrategySetting();
             AutoTradeService.InitSysTreeView32Handle();
 
             DataCenter.ThsDealService.RegisterListener(5, ThsDealCallBack);
@@ -90,7 +109,6 @@ namespace OwLib
                 req.m_operateType = 8;
                 req.m_reqID = DataCenter.ThsDealService.GetRequestID();
                 DataCenter.ThsDealService.AddTHSDealReq(req);
-                DataCenter.ThsDealService.StartTHSDealService();
                 m_isStart = true;
                 btnStart.Text = "停止";
             }
@@ -99,22 +117,6 @@ namespace OwLib
                 m_isStart = false;
                 btnStart.Text = "启动";
             }
-        }
-
-        /// <summary>
-        /// 执行策略
-        /// </summary>
-        /// <param name="latestData">最新数据</param>
-        public void DealStrategy(SecurityLatestData latestData)
-        {
-            if (!m_isStart)
-            {
-                return;
-            }
-
-            Thread deadThread = new Thread(new ParameterizedThreadStart(DealStrategyThread));
-            deadThread.IsBackground = true;
-            deadThread.Start(latestData);
         }
 
         /// <summary>
@@ -279,23 +281,6 @@ namespace OwLib
             }
             else
             {
-            }
-        }
-
-        /// <summary>
-        /// 重新加载交易策略
-        /// </summary>
-        public void ReloadStrategySetting()
-        {
-            // 获取区间交易策略
-            DataCenter.StrategySettingService.GetSecurityStrategySettings(0, m_securityStrategySettings);
-            GSecurity security = null;
-            if (m_securityStrategySettings != null && m_securityStrategySettings.Count > 0)
-            {
-                m_securityStrategySettingCurrnet = m_securityStrategySettings[0];
-                security = new GSecurity();
-                security.m_code = m_securityStrategySettingCurrnet.m_securityCode;
-                security.m_name = m_securityStrategySettingCurrnet.m_securityName;
             }
         }
 
@@ -519,22 +504,6 @@ namespace OwLib
 
             DivA divCapital = m_mainFrame.GetDiv("divCapital");
             divCapital.Invalidate();
-        }
-
-        /// <summary>
-        /// 显示设置策略窗体
-        /// </summary>
-        public void ShowStrategySettingWindow()
-        {
-            SecurityStrategySetting securityStrategySetting = null;
-            if (m_securityStrategySettings.Count > 0)
-            {
-                securityStrategySetting = m_securityStrategySettings[0];
-            }
-            RTCWindow strategySettingWindow = new RTCWindow(m_mainFrame.Native);
-            strategySettingWindow.MainFrame = m_mainFrame;
-            strategySettingWindow.SecurityStrategySetting = securityStrategySetting;
-            strategySettingWindow.Show();
         }
 
         /// <summary>

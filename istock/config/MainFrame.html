@@ -46,9 +46,10 @@
                   <th name="colP8" text="开盘价" width="80" allowdrag="true" allowresize="true" />
                   <th name="colP9" text="成交量" width="100" allowdrag="true" allowresize="true" />
                   <th name="colP10" text="成交额" width="100" allowdrag="true" allowresize="true" />
-                  <th name="colP11" text="止盈位" width="80" allowdrag="true" allowresize="true" />
-                  <th name="colP12" text="止损位" width="80" allowdrag="true" allowresize="true" />
-                  <th name="colP13" text="提示" width="100" allowdrag="true" allowresize="true" />
+                  <th name="colP11" text="自动卖出位" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP12" text="自动买入位" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP13" text="自动止损位" width="80" allowdrag="true" allowresize="true" />
+                  <th name="colP14" text="提示" width="100" allowdrag="true" allowresize="true" />
                 </tr>
               </table>
             </div>
@@ -238,15 +239,17 @@
               <label name="lblStockValue" text="" location="466,6" size="100,20" />
               <label name="Labe11" text="总资产:" location="406,32" size="51,20" />
               <label name="lblTotalCapital" text="" location="467,32" size="100,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnSetStrategy" text="设置策略" location="720,31" size="100,20" />
-              <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="720,5" size="100,20" />
+              <input type="usercontrol" cid="ribbonbutton" name="btnStart" text="启动" location="576,5" size="100,39" />
+              <label name="Label3" text="数量：" location="689,8" size="101,17" />
+              <input type="range" name="spinVolume" location="735,4" size="87,20" value="100" textalign="Right" />
+              <input type="checkbox" name="cbAutoTrade" text="是否允许自动买卖" location="689,27" size="158,20" />
             </div>
             <!--下层-->
             <div type="splitlayout" name="divBottom" candragsplitter="true" dock="fill" layoutstyle="toptobottom" size="400,450" splitterposition="0,360,400,361">
               <div type="tabcontrol" name="tabTradeAccount">
                 <div type="tabpage" name="pageTradeAccount" text="成交" headersize="100,20" location="3,23" size="1479,179">
                   <!--成交表格-->
-                  <table name="gridTradeAccount" dock="fill" location="0,0" size="794,340">
+                  <table name="gridTradeAccount" dock="fill" location="0,0" size="963,340">
                     <tr>
                       <th name="colTF1" text="成交时间" width="80" />
                       <th name="colTF2" text="证券代码" width="80" />

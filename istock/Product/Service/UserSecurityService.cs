@@ -16,15 +16,35 @@ using Newtonsoft.Json;
 
 namespace OwLib
 {
+    /// <summary>
+    /// 自选股
+    /// </summary>
     public class UserSecurity
     {
+        /// <summary>
+        /// 代码
+        /// </summary>
         public String m_code;
 
-        public double m_down;
+        /// <summary>
+        /// 自动买入价
+        /// </summary>
+        public double m_buy;
 
+        /// <summary>
+        /// 状态
+        /// </summary>
         public int m_state;
 
-        public double m_up;
+        /// <summary>
+        /// 自动卖出价
+        /// </summary>
+        public double m_sell;
+
+        /// <summary>
+        /// 止损价
+        /// </summary>
+        public double m_stop;
     }
 
     /// <summary>

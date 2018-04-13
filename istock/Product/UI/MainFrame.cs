@@ -33,6 +33,16 @@ namespace OwLib
         }
 
         /// <summary>
+        /// 自动交易代码
+        /// </summary>
+        private Dictionary<String, int> m_autoTradeCodes = new Dictionary<String, int>();
+
+        /// <summary>
+        /// 自动买卖勾选
+        /// </summary>
+        private CheckBoxA m_cbAutoTrade;
+
+        /// <summary>
         /// 公式编辑界面
         /// </summary>
         private FormulaForm m_formulaForm;
@@ -46,6 +56,11 @@ namespace OwLib
         /// K线控件
         /// </summary>
         private KLineDiv m_klineDiv;
+
+        /// <summary>
+        /// 数量输入框
+        /// </summary>
+        private SpinA m_spinVolume;
 
         /// <summary>
         /// 秒表ID
@@ -181,8 +196,9 @@ namespace OwLib
                 if (findRow.GetCell("colP1").GetString() == userSecurity.m_code)
                 {
                     findRow.Tag = userSecurity;
-                    findRow.GetCell("colP11").SetDouble(userSecurity.m_up);
-                    findRow.GetCell("colP12").SetDouble(userSecurity.m_down);
+                    findRow.GetCell("colP11").SetDouble(userSecurity.m_sell);
+                    findRow.GetCell("colP12").SetDouble(userSecurity.m_buy);
+                    findRow.GetCell("colP13").SetDouble(userSecurity.m_stop);
                     if (findRow.EditButton != null)
                     {
                         ControlA div = findRow.EditButton as ControlA;
@@ -227,20 +243,26 @@ namespace OwLib
             row.AddCell("colP10", new GridDoubleCellEx());
             GridDoubleCellEx cellP11 = new GridDoubleCellEx();
             cellP11.Digit = 2;
-            cellP11.SetDouble(userSecurity.m_up);
+            cellP11.SetDouble(userSecurity.m_sell);
             row.AddCell("colP11", cellP11);
             GridDoubleCellEx cellP12 = new GridDoubleCellEx();
             cellP12.Digit = 2;
-            cellP12.SetDouble(userSecurity.m_down);
+            cellP12.SetDouble(userSecurity.m_buy);
             row.AddCell("colP12", cellP12);
-            row.AddCell("colP13", new GridStringCell(""));
+
+            GridDoubleCellEx cellP13 = new GridDoubleCellEx();
+            cellP13.Digit = 2;
+            cellP13.SetDouble(userSecurity.m_stop);
+            row.AddCell("colP13", cellP13);
+
+            row.AddCell("colP14", new GridStringCell(""));
             List<GridCell> cells = row.GetCells();
             int cellsSize = cells.Count;
             for (int i = 0; i < cellsSize; i++)
             {
                 cells[i].Style = new GridCellStyle();
                 cells[i].Style.Font = new FONT("微软雅黑", 14, true, false, false);
-                if (i >= 10 && i !=12)
+                if (i >= 10 && i != 13)
                 {
                     cells[i].AllowEdit = true;
                 }
@@ -420,6 +442,10 @@ namespace OwLib
                         GridRow selectedRow = selectedRows[0];
                         m_gridUserSecurities.AnimateRemoveRow(selectedRow);
                         m_gridUserSecurities.OnRowEditEnd();
+                        String dir = DataCenter.GetAppPath() + "\\TradingCodes";
+                        CFileA.RemoveFile(dir + "\\" + selectedRow.GetCell("colP1").GetString() + "-1");
+                        CFileA.RemoveFile(dir + "\\" + selectedRow.GetCell("colP1").GetString() + "-2");
+                        CFileA.RemoveFile(dir + "\\" + selectedRow.GetCell("colP1").GetString() + "-3");
                     }
                 }
                 else if (name == "btnDeleteUserSecurity")
@@ -436,6 +462,10 @@ namespace OwLib
                         m_gridUserSecurities.OnRowEditEnd();
                         m_gridUserSecurities.Update();
                         m_gridUserSecurities.Invalidate();
+                        String dir = DataCenter.GetAppPath() + "\\TradingCodes";
+                        CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-1");
+                        CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-2");
+                        CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-3");
                     }
                 }
                 else if (name == "btnMergeHistoryDatas")
@@ -522,10 +552,6 @@ namespace OwLib
                 else if (name == "btnStart")
                 {
                     m_orderTrade.Attach();
-                }
-                else if (name == "btnSetStrategy")
-                {
-                    m_orderTrade.ShowStrategySettingWindow();
                 }
                 else if (name == "btnFormula")
                 {
@@ -632,7 +658,7 @@ namespace OwLib
         {
             if (clicks == 2)
             {
-                if (cell.Column.Name != "colP11" && cell.Column.Name != "colP12")
+                if (cell.Column.Name != "colP11" && cell.Column.Name != "colP12" && cell.Column.Name != "colP13")
                 {
                     SearchSecurity(cell.Row.GetCell("colP1").GetString());
                 }
@@ -663,17 +689,27 @@ namespace OwLib
                     userSecurity.m_code = cell.Row.GetCell("colP1").GetString();
                 }
                 userSecurity.m_state = 1;
+                String dir = DataCenter.GetAppPath() + "\\TradingCodes";
                 if (colName == "colP11")
                 {
-                    userSecurity.m_up = cell.GetDouble();
+                    userSecurity.m_sell = cell.GetDouble();
                     cell.Row.Tag = userSecurity;
                     DataCenter.UserSecurityService.Add(userSecurity);
+                    CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-1");
                 }
                 else if (colName == "colP12")
                 {
-                    userSecurity.m_down = cell.GetDouble();
+                    userSecurity.m_buy = cell.GetDouble();
                     cell.Row.Tag = userSecurity;
                     DataCenter.UserSecurityService.Add(userSecurity);
+                    CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-2");
+                }
+                else if (colName == "colP13")
+                {
+                    userSecurity.m_stop = cell.GetDouble();
+                    cell.Row.Tag = userSecurity;
+                    DataCenter.UserSecurityService.Add(userSecurity);
+                    CFileA.RemoveFile(dir + "\\" + userSecurity.m_code + "-3");
                 }
             }
         }
@@ -844,6 +880,10 @@ namespace OwLib
             m_barrageDiv.Dock = DockStyleA.Fill;
             Native.AddControl(m_barrageDiv);
             CFTService.QueryShortLineStrategy();
+            m_cbAutoTrade = GetCheckBox("cbAutoTrade");
+            m_spinVolume = GetSpin("spinVolume");
+            String dir = DataCenter.GetAppPath() + "\\TradingCodes";
+            CFileA.CreateDirectory(dir);
         }
 
         /// <summary>
@@ -1100,6 +1140,10 @@ namespace OwLib
         {
             if (timerID == m_timerID)
             {
+                if (m_orderTrade != null)
+                {
+                    THSDealService.OnTimer();
+                }
                 List<GridRow> rows = m_gridUserSecurities.m_rows;
                 int rowsSize = rows.Count;
                 int columnsSize = m_gridUserSecurities.m_columns.Count;
@@ -1151,17 +1195,18 @@ namespace OwLib
                     cellsMap["colP10"].Style.ForeColor = COLOR.ARGB(80, 255, 255);
                     cellsMap["colP11"].Style.ForeColor = COLOR.ARGB(255, 80, 80);
                     cellsMap["colP12"].Style.ForeColor = COLOR.ARGB(80, 255, 80);
-                    cellsMap["colP13"].Style.ForeColor = COLOR.ARGB(255, 255, 80);
-                    int isAlarm = 0;
+                    cellsMap["colP13"].Style.ForeColor = COLOR.ARGB(255, 80, 255);
+                    cellsMap["colP14"].Style.ForeColor = COLOR.ARGB(255, 255, 80);
+                    bool alarm1 = false, alarm2 = false, alarm3 = false;
                     if (latestData.m_close > 0)
                     {
-                        double up = userSecurity.m_up, down = userSecurity.m_down;
+                        double up = userSecurity.m_sell, down = userSecurity.m_buy, stop = userSecurity.m_stop;
                         if (up != 0)
                         {
                             if (latestData.m_close > up)
                             {
                                 Sound.Play("alarm.wav");
-                                isAlarm = 1;
+                                alarm1 = true;
                             }
                         }
                         if (down != 0)
@@ -1169,22 +1214,79 @@ namespace OwLib
                             if (latestData.m_close < down)
                             {
                                 Sound.Play("alarm.wav");
-                                isAlarm = 2;
+                                alarm2 = true;
+                            }
+                        }
+                        if (stop != 0)
+                        {
+                            if (latestData.m_close < stop)
+                            {
+                                Sound.Play("alarm.wav");
+                                alarm3 = true;
                             }
                         }
                     }
                     List<GridCell> cells = row.GetCells();
                     int cellsSize = cells.Count;
+                    String dir = DataCenter.GetAppPath() + "\\TradingCodes";
                     for (int j = 0; j < cellsSize; j++)
                     {
                         GridCell cCell = cells[j];
-                        if (isAlarm == 2)
-                        {
-                            cCell.Style.BackColor = COLOR.ARGB(100, 80, 255, 80);
-                        }
-                        else if (isAlarm == 1)
+                        if (alarm1)
                         {
                             cCell.Style.BackColor = COLOR.ARGB(100, 255, 80, 80);
+                            String filePath = dir + "\\" + latestData.m_code + "-1";
+                            if (CFileA.IsFileExist(filePath))
+                            {
+                            }
+                            else
+                            {
+                                CFileA.Write(filePath, " ");
+                            }
+                            //OrderInfo info = new OrderInfo();
+                            //info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
+                            //info.m_price = (float)Math.Round(latestData.m_close, 2);
+                            //info.m_qty = (int)m_spinVolume.Value;
+                            //AutoTradeService.Sell(info);
+                            //Thread.Sleep(3000);
+                            //THSDealInfo req = new THSDealInfo();
+                            //req.m_operateType = 3;
+                            //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                            //DataCenter.ThsDealService.AddTHSDealReq(req);
+                        }
+                        if (alarm2)
+                        {
+                            cCell.Style.BackColor = COLOR.ARGB(100, 80, 255, 80);
+                            String filePath = dir + "\\" + latestData.m_code + "-2";
+                            if (CFileA.IsFileExist(filePath))
+                            {
+                            }
+                            else
+                            {
+                                CFileA.Write(filePath, " ");
+                            }
+                            //OrderInfo info = new OrderInfo();
+                            //info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
+                            //info.m_price = (float)Math.Round(latestData.m_close, 2);
+                            //info.m_qty = (int)m_spinVolume.Value;
+                            //AutoTradeService.Buy(info);
+                            //Thread.Sleep(3000);
+                            //THSDealInfo req = new THSDealInfo();
+                            //req.m_operateType = 4;
+                            //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+                            //DataCenter.ThsDealService.AddTHSDealReq(req);
+                        }
+                        if (alarm3)
+                        {
+                            cCell.Style.BackColor = COLOR.ARGB(100, 255, 80, 255);
+                            String filePath = dir + "\\" + latestData.m_code + "-3";
+                            if (CFileA.IsFileExist(filePath))
+                            {
+                            }
+                            else
+                            {
+                                CFileA.Write(filePath, " ");
+                            }
                         }
                         else
                         {

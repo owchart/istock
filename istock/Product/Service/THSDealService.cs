@@ -110,7 +110,6 @@ namespace OwLib
     {
         public THSDealService()
         {
-            StartTHSDealService();
         }
         
         /// <summary>
@@ -295,68 +294,53 @@ namespace OwLib
         }
 
         /// <summary>
-        /// 启动同花顺交易服务
-        /// </summary>
-        public void StartTHSDealService()
-        {
-            Thread sThread = new Thread(new ThreadStart(ThreadFunc));
-            sThread.IsBackground = true;
-            sThread.Start();
-        }
-
-        /// <summary>
         /// 同花顺交易线程处理函数
         /// </summary>
-        public static void ThreadFunc()
+        public static void OnTimer()
         {
-            StringBuilder str = new StringBuilder(1024 * 10);
-            while (true)
+            THSDealInfo req = DataCenter.ThsDealService.GetTHSDealRequest();
+            if (req != null)
             {
-                THSDealInfo req = DataCenter.ThsDealService.GetTHSDealRequest();
-                if (req != null)
+                String result = "";
+                // 交易类型
+                // 0:默认值
+                // 1:买入
+                // 2:卖出
+                // 3:撤销买入
+                // 4:撤销卖出
+                // 5:查询持仓
+                // 6:查询成交
+                // 7:查询资金
+                // 8:查询委托
+                switch (req.m_operateType)
                 {
-                    String result = "";
-                    // 交易类型
-                    // 0:默认值
-                    // 1:买入
-                    // 2:卖出
-                    // 3:撤销买入
-                    // 4:撤销卖出
-                    // 5:查询持仓
-                    // 6:查询成交
-                    // 7:查询资金
-                    // 8:查询委托
-                    switch (req.m_operateType)
-                    {
-                        case 0:
-                            break;
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            AutoTradeService.CancelBuy();
-                            break;
-                        case 4:
-                            AutoTradeService.CancelSell();
-                            break;
-                        case 5:
-                            result = AutoTradeService.GetSecurityPosition();
-                            break;
-                        case 6:
-                            result = AutoTradeService.GetSecurityTrade();
-                            break;
-                        case 7:
-                            result = AutoTradeService.GetSecurityCaptial();
-                            break;
-                        case 8:
-                            result = AutoTradeService.GetSecurityCommission();
-                            break;
-                    }
-                    DataCenter.ThsDealService.OnReceive(req.m_operateType, req.m_reqID, result);
-                    DataCenter.ThsDealService.RemoveThsDealRequest(req);
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        AutoTradeService.CancelBuy();
+                        break;
+                    case 4:
+                        AutoTradeService.CancelSell();
+                        break;
+                    case 5:
+                        result = AutoTradeService.GetSecurityPosition();
+                        break;
+                    case 6:
+                        result = AutoTradeService.GetSecurityTrade();
+                        break;
+                    case 7:
+                        result = AutoTradeService.GetSecurityCaptial();
+                        break;
+                    case 8:
+                        result = AutoTradeService.GetSecurityCommission();
+                        break;
                 }
-                Thread.Sleep(1);
+                DataCenter.ThsDealService.OnReceive(req.m_operateType, req.m_reqID, result);
+                DataCenter.ThsDealService.RemoveThsDealRequest(req);
             }
         }
 

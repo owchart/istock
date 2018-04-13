@@ -827,6 +827,10 @@ namespace OwLib
             ControlA control = Native.GetControls()[0];
             control.BackColor = COLOR.CONTROL;
             RegisterEvents(control);
+            m_cbAutoTrade = GetCheckBox("cbAutoTrade");
+            m_spinVolume = GetSpin("spinVolume");
+            String dir = DataCenter.GetAppPath() + "\\TradingCodes";
+            CFileA.CreateDirectory(dir);
             m_gridUserSecurities = GetGrid("gridUserSecurities");
             m_gridUserSecurities.UseAnimation = true;
             m_gridUserSecurities.GridLineColor = COLOR.EMPTY;
@@ -880,10 +884,6 @@ namespace OwLib
             m_barrageDiv.Dock = DockStyleA.Fill;
             Native.AddControl(m_barrageDiv);
             CFTService.QueryShortLineStrategy();
-            m_cbAutoTrade = GetCheckBox("cbAutoTrade");
-            m_spinVolume = GetSpin("spinVolume");
-            String dir = DataCenter.GetAppPath() + "\\TradingCodes";
-            CFileA.CreateDirectory(dir);
         }
 
         /// <summary>
@@ -1236,59 +1236,59 @@ namespace OwLib
                         {
                             cCell.Style.BackColor = COLOR.ARGB(100, 255, 80, 80);
                             String filePath = dir + "\\" + latestData.m_code + "-1";
-                            if (CFileA.IsFileExist(filePath))
+                            if (!CFileA.IsFileExist(filePath))
                             {
-                            }
-                            else
-                            {
+                                if (m_cbAutoTrade.Checked)
+                                {
+                                    OrderInfo info = new OrderInfo();
+                                    info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
+                                    info.m_price = (float)Math.Round(latestData.m_close, 2);
+                                    info.m_qty = (int)m_spinVolume.Value;
+                                    AutoTradeService.Sell(info);
+                                    Thread.Sleep(3000);
+                                    m_orderTrade.QueryAll();
+                                }
                                 CFileA.Write(filePath, " ");
-                            }
-                            //OrderInfo info = new OrderInfo();
-                            //info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
-                            //info.m_price = (float)Math.Round(latestData.m_close, 2);
-                            //info.m_qty = (int)m_spinVolume.Value;
-                            //AutoTradeService.Sell(info);
-                            //Thread.Sleep(3000);
-                            //THSDealInfo req = new THSDealInfo();
-                            //req.m_operateType = 3;
-                            //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                            //DataCenter.ThsDealService.AddTHSDealReq(req);
+                            }       
                         }
                         if (alarm2)
                         {
                             cCell.Style.BackColor = COLOR.ARGB(100, 80, 255, 80);
                             String filePath = dir + "\\" + latestData.m_code + "-2";
-                            if (CFileA.IsFileExist(filePath))
+                            if (!CFileA.IsFileExist(filePath))
                             {
-                            }
-                            else
-                            {
+                                if (m_cbAutoTrade.Checked)
+                                {
+                                    OrderInfo info = new OrderInfo();
+                                    info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
+                                    info.m_price = (float)Math.Round(latestData.m_close, 2);
+                                    info.m_qty = (int)m_spinVolume.Value;
+                                    AutoTradeService.Buy(info);
+                                    Thread.Sleep(3000);
+                                    m_orderTrade.QueryAll();
+                                }
                                 CFileA.Write(filePath, " ");
-                            }
-                            //OrderInfo info = new OrderInfo();
-                            //info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
-                            //info.m_price = (float)Math.Round(latestData.m_close, 2);
-                            //info.m_qty = (int)m_spinVolume.Value;
-                            //AutoTradeService.Buy(info);
-                            //Thread.Sleep(3000);
-                            //THSDealInfo req = new THSDealInfo();
-                            //req.m_operateType = 4;
-                            //req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                            //DataCenter.ThsDealService.AddTHSDealReq(req);
+                            }   
                         }
                         if (alarm3)
                         {
                             cCell.Style.BackColor = COLOR.ARGB(100, 255, 80, 255);
                             String filePath = dir + "\\" + latestData.m_code + "-3";
-                            if (CFileA.IsFileExist(filePath))
+                            if (!CFileA.IsFileExist(filePath))
                             {
-                            }
-                            else
-                            {
+                                if (m_cbAutoTrade.Checked)
+                                {
+                                    m_orderTrade.QueryAll();
+                                    Thread.Sleep(3000);
+                                    //查持仓进行发单
+
+                                    Thread.Sleep(3000);
+                                    m_orderTrade.QueryAll();
+                                }
                                 CFileA.Write(filePath, " ");
                             }
                         }
-                        else
+                        if (!alarm1 && !alarm2 && !alarm3)
                         {
                             cCell.Style.BackColor = COLOR.EMPTY;
                         }

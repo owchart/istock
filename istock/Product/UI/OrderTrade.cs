@@ -93,22 +93,7 @@ namespace OwLib
 
             if (!m_isStart)
             {
-                THSDealInfo req = new THSDealInfo();
-                req.m_operateType = 5;
-                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                DataCenter.ThsDealService.AddTHSDealReq(req);
-                req = new THSDealInfo();
-                req.m_operateType = 6;
-                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                DataCenter.ThsDealService.AddTHSDealReq(req);
-                req = new THSDealInfo();
-                req.m_operateType = 7;
-                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                DataCenter.ThsDealService.AddTHSDealReq(req);
-                req = new THSDealInfo();
-                req.m_operateType = 8;
-                req.m_reqID = DataCenter.ThsDealService.GetRequestID();
-                DataCenter.ThsDealService.AddTHSDealReq(req);
+                QueryAll();
                 m_isStart = true;
                 btnStart.Text = "停止";
             }
@@ -282,6 +267,29 @@ namespace OwLib
             else
             {
             }
+        }
+
+        /// <summary>
+        /// 查询所有
+        /// </summary>
+        public void QueryAll()
+        {
+            THSDealInfo req = new THSDealInfo();
+            req.m_operateType = 5;
+            req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+            DataCenter.ThsDealService.AddTHSDealReq(req);
+            req = new THSDealInfo();
+            req.m_operateType = 6;
+            req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+            DataCenter.ThsDealService.AddTHSDealReq(req);
+            req = new THSDealInfo();
+            req.m_operateType = 7;
+            req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+            DataCenter.ThsDealService.AddTHSDealReq(req);
+            req = new THSDealInfo();
+            req.m_operateType = 8;
+            req.m_reqID = DataCenter.ThsDealService.GetRequestID();
+            DataCenter.ThsDealService.AddTHSDealReq(req);
         }
 
         /// <summary>

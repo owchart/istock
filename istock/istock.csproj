@@ -371,7 +371,6 @@
     <Compile Include="Product\Service\SecurityFilterExternFunc.cs" />
     <Compile Include="Product\Service\SecurityService.cs" />
     <Compile Include="Product\Service\StockService.cs" />
-    <Compile Include="Product\Service\StrategySettingService.cs" />
     <Compile Include="Product\Service\THSDealService.cs" />
     <Compile Include="Product\Service\UserCookieService.cs" />
     <Compile Include="Product\Service\UserSecurityService.cs" />
@@ -390,7 +389,6 @@
     <Compile Include="Product\UI\Quote\SearchDiv.cs" />
     <Compile Include="Product\UI\Quote\SecurityDataHelper.cs" />
     <Compile Include="Product\UI\RibbonButton.cs" />
-    <Compile Include="Product\UI\RTCWindow.cs" />
     <Compile Include="Product\UI\StockNews.cs" />
     <Compile Include="Product\UI\OrderTrade.cs" />
     <Compile Include="Product\UI\UIXmlEx.cs" />
@@ -450,13 +448,7 @@
     <Content Include="config\Plots.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="config\RTCWindow.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="config\ServerListPort.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="config\StrategySetting.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="config\UnitType.xml">

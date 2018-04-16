@@ -1278,10 +1278,11 @@ namespace OwLib
                             {
                                 if (m_cbAutoTrade.Checked)
                                 {
-                                    m_orderTrade.QueryAll();
-                                    Thread.Sleep(3000);
-                                    //查持仓进行发单
-
+                                    OrderInfo info = new OrderInfo();
+                                    info.m_code = CStrA.ConvertDBCodeToDealCode(latestData.m_code);
+                                    info.m_price = (float)Math.Round(latestData.m_close, 2);
+                                    info.m_qty = (int)m_spinVolume.Value;
+                                    AutoTradeService.Sell(info);
                                     Thread.Sleep(3000);
                                     m_orderTrade.QueryAll();
                                 }

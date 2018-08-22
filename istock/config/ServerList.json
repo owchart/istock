@@ -2,7 +2,7 @@
 {"Type":1,"Net":11,"NetName":"南方电信一","SerName":"通道服务","Name":"TDFW","Host":"183.136.162.254","Port":1818,"ServiceGroup":"3","URL":""},
 {"Type":6,"Net":11,"NetName":"南方电信一","SerName":"行情报价服务","Name":"JGFW","Host":"183.136.163.254","Port":1818,"ServiceGroup":"1","URL":""},
 {"Type":2,"Net":11,"NetName":"南方电信一","SerName":"（财富通）实时行情服务","Name":"SSHQ","Host":"183.136.162.244","Port":1818,"ServiceGroup":"1","URL":""},
-{"Type":3,"Net":11,"NetName":"南方电信一","SerName":"（财富通）历史行情服务","Name":"LSHQ","Host":"112.74.141.180","Port":1818,"ServiceGroup":"2","URL":""},
+{"Type":3,"Net":11,"NetName":"南方电信一","SerName":"（财富通）历史行情服务","Name":"LSHQ","Host":"183.136.163.251","Port":1818,"ServiceGroup":"2","URL":""},
 {"Type":8,"Net":11,"NetName":"南方电信一","SerName":"登录验证服务","Name":"DLYZ","Host":"183.136.162.248","Port":1818,"ServiceGroup":"3","URL":""},
 {"Type":9,"Net":11,"NetName":"南方电信一","SerName":"全局数据服务","Name":"QJSJ","Host":"183.136.162.249","Port":1818,"ServiceGroup":"3","URL":""},
 {"Type":21,"Net":11,"NetName":"南方电信一","SerName":"心跳服务","Name":"XTFW","Host":"183.136.162.249","Port":1818,"ServiceGroup":"0","URL":""},

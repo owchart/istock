@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using OwLib;
+using System.Runtime.InteropServices;
 
 namespace OwLib
 {
@@ -13,6 +14,16 @@ namespace OwLib
         [STAThread]
         static void Main()
         {
+            FormulaProxy.FormulaInit();
+            IList<Formula> formulas = FormulaProxy.GetSystemFormulas();
+            int id = 0;
+            foreach (Formula la in formulas)
+            {
+                Formula formula = new Formula();
+                FormulaProxy.GetDbFormula(id, ref formula);
+                String text = Marshal.PtrToStringAnsi(formula.src);
+                id++;
+            }
             DataCenter.StartService();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -67,7 +67,7 @@ namespace OwLib
                 foreach (String key in availableItems.Keys)
                 {
                     kwItems2[availableItems[key].Innercode] = availableItems[key];
-                    sb.Append(key + "," + availableItems[key].Name + "\r\n");
+                    sb.Append(key + "," + availableItems[key].Name + "," + availableItems[key].Pingyin + "," + availableItems[key].Marketcode + "," + availableItems[key].Type.ToString() + "," + availableItems[key].State.ToString() + "\r\n");
                 }
                 CFileA.Write(Application.StartupPath + "\\codes.txt", sb.ToString());
                 EMSecurityService.KwItems = availableItems;
@@ -117,7 +117,10 @@ namespace OwLib
                     || item.Code == "399001.SZ" || item.Code == "399005.SZ" 
                     || item.Code == "399006.SZ")
                 {
-                    availableItems[item.Code] = item;
+                    if (!item.Code.StartsWith("A"))
+                    {
+                        availableItems[item.Code] = item;
+                    }
                 }
             }
             return availableItems;
